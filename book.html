@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a slot — Moto Market</title>
+<meta name="description" content="Book servicing, painting, washing or a modification build at Moto Market, Kushtia. Pick a day, pick a slot, we confirm on WhatsApp.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+
+<header class="nav is-stuck">
+  <a class="nav__brand" href="index.html" aria-label="Moto Market — home">
+    <img src="assets/logo.webp" alt="Moto Market">
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a class="nav__link" href="index.html">Home</a>
+    <a class="nav__link" href="shop.html">Shop</a>
+    <a class="nav__link" href="book.html" aria-current="page">Book</a>
+    <a class="nav__link is-optional" href="tel:+8801711154387">Call</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="section section--tight wrap" style="padding-top:clamp(7rem,14vw,10rem)">
+  <p class="label label--red" data-reveal>Booking</p>
+  <h1 class="h-1" data-split style="margin:.75rem 0 1.25rem">pick your day. the bay is yours.</h1>
+  <p class="lede" data-reveal style="--d:160ms">
+    Fill this in and it turns into a message you send us in one tap. We reply with
+    a confirmation and a price before anything is touched.
+  </p>
+</section>
+
+<section class="section wrap" style="padding-top:0">
+  <div class="chapter">
+
+    <form data-booking novalidate>
+      <fieldset style="border:0;padding:0;margin:0 0 2.5rem">
+        <legend class="label label--red" style="padding:0 0 .85rem">What do you need?</legend>
+        <div class="picks">
+          <label class="pick"><input type="checkbox" name="service" value="Servicing"><span>Servicing</span></label>
+          <label class="pick"><input type="checkbox" name="service" value="Washing"><span>Washing</span></label>
+          <label class="pick"><input type="checkbox" name="service" value="Painting"><span>Painting</span></label>
+          <label class="pick"><input type="checkbox" name="service" value="Modifications"><span>Modifications</span></label>
+          <label class="pick"><input type="checkbox" name="service" value="Tyre Fitting"><span>Tyre fitting</span></label>
+          <label class="pick"><input type="checkbox" name="service" value="Diagnosis"><span>Diagnosis</span></label>
+        </div>
+      </fieldset>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" name="phone" type="tel" required autocomplete="tel" placeholder="01XXXXXXXXX">
+        </div>
+        <div class="field field--wide">
+          <label for="f-vehicle">Bike or car — make &amp; model</label>
+          <input id="f-vehicle" name="vehicle" type="text" placeholder="e.g. Yamaha FZS V3, 2022">
+        </div>
+        <div class="field">
+          <label for="f-date">Preferred date</label>
+          <input id="f-date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label for="f-slot">Preferred slot</label>
+          <select id="f-slot" name="slot">
+            <option value="">Any time</option>
+            <option>Morning · 9:00 – 12:00</option>
+            <option>Afternoon · 12:00 – 4:00</option>
+            <option>Evening · 4:00 – 8:00</option>
+          </select>
+        </div>
+        <div class="field field--wide">
+          <label for="f-notes">What's it doing? (the more detail, the better the quote)</label>
+          <textarea id="f-notes" name="notes" placeholder="Noise when I pull the clutch, worse when cold…"></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn--red" type="submit" style="margin-top:2rem">
+        Prepare my booking <span class="btn__arrow">→</span>
+      </button>
+
+      <div data-booking-out hidden style="margin-top:2.5rem">
+        <hr class="rule" style="margin-bottom:2rem">
+        <p class="label label--red">One more tap — send it to us</p>
+        <p class="lede" style="font-size:1rem;margin:.5rem 0 1.5rem">
+          Your booking is written up and ready. Send it whichever way suits you.
+        </p>
+        <div class="hero__actions">
+          <a class="btn" data-book-wa target="_blank" rel="noopener" href="#">Send on WhatsApp <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost" data-book-mail href="#">Send by email</a>
+        </div>
+      </div>
+    </form>
+
+    <aside class="sticky-col">
+      <div class="ascii-panel" data-tag="THE BAY">
+        <pre data-ascii="wrench" aria-hidden="true"></pre>
+      </div>
+
+      <ul class="list-plain" style="margin-top:2rem">
+        <li>No deposit. We hold the slot on your word.</li>
+        <li>Quote confirmed before a single bolt moves.</li>
+        <li>Wash included with every service.</li>
+        <li>Thursday &amp; Friday fill first — book early.</li>
+      </ul>
+
+      <div style="margin-top:2rem">
+        <p class="label">Or just call the bay</p>
+        <p style="font-size:1.25rem;margin:.35rem 0 0"><a href="tel:+8801711154387" class="red">+880 1711-154387</a></p>
+        <p class="label" style="margin-top:1.25rem">Workshop</p>
+        <p style="font-size:1rem;margin:.35rem 0 0;color:var(--paper-dim)">
+          R.A. Khan Chowdhury Road<br>Kushtia 7000, Khulna Division
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer__word" aria-hidden="true">book it</p>
+    <div class="footer__bar">
+      <p class="label">© <span id="yr">2026</span> Moto Market · Kushtia, Bangladesh</p>
+      <p class="label"><a href="mailto:motolubebangladesh@gmail.com">motolubebangladesh@gmail.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="app.js" defer></script>
+</body>
+</html>
