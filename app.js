@@ -576,7 +576,7 @@
   function filters() {
     const chips = $$('[data-filter]');
     if (!chips.length) return;
-    const cards = $$('[data-cat]');
+    const cards = $$('.card[data-cat]');   // buttons also carry data-cat
     const countEl = $('[data-result-count]');
 
     const apply = key => {
