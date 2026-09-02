@@ -260,10 +260,15 @@
     }
 
     window.addEventListener('resize', resize, { passive: true });
-    window.addEventListener('mousemove', e => {
+    const track = (cx, cy) => {
       const r = canvas.getBoundingClientRect();
-      tmx = (e.clientX - r.left) / r.width;
-      tmy = (e.clientY - r.top) / r.height;
+      tmx = (cx - r.left) / r.width;
+      tmy = (cy - r.top) / r.height;
+    };
+    window.addEventListener('mousemove', e => track(e.clientX, e.clientY), { passive: true });
+    window.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      if (t) track(t.clientX, t.clientY);
     }, { passive: true });
 
     resize();
@@ -560,6 +565,97 @@
   }
 
   /* =======================================================================
+     Touch motion. A phone has no cursor, so magnetic pull and pointer tilt
+     never fire. These give the same aliveness from the finger and from
+     scroll position instead.
+     ===================================================================== */
+  const isTouch = () => window.matchMedia('(pointer: coarse)').matches;
+
+  // The rail is a native snap carousel on small screens. Drive the progress
+  // bar from its own scrollLeft, and fade the cards either side of centre.
+  function railTouch() {
+    $$('[data-rail]').forEach(root => {
+      const track = $('.rail__track', root);
+      const bar = $('.rail__bar i', root);
+      if (!track) return;
+      const cards = $$('.rail__card', track);
+
+      const update = () => {
+        if (!isTouch() && window.innerWidth > 860) return;
+        const max = track.scrollWidth - track.clientWidth;
+        const p = max > 0 ? clamp(track.scrollLeft / max, 0, 1) : 0;
+        if (bar) bar.style.transform = `scaleX(${clamp(p, 0.05, 1) * 5})`;
+        const mid = track.scrollLeft + track.clientWidth / 2;
+        cards.forEach(c => {
+          const centre = c.offsetLeft + c.offsetWidth / 2;
+          c.classList.toggle('is-off', Math.abs(centre - mid) > c.offsetWidth * 0.62);
+        });
+      };
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    });
+  }
+
+  // Scroll-linked lift: whatever sits nearest the middle of a phone screen
+  // gets the emphasis a hover would have given it on a desktop.
+  function scrollFocus() {
+    if (!isTouch() || reduced()) return;
+    const svcs = $$('.svc');
+    const tilts = $$('[data-tilt]');
+    if (!svcs.length && !tilts.length) return;
+
+    onFrame(() => {
+      const mid = window.innerHeight * 0.5;
+
+      svcs.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) {
+          el.classList.remove('is-focus');
+          return;
+        }
+        const centre = r.top + r.height / 2;
+        el.classList.toggle('is-focus', Math.abs(centre - mid) < r.height * 0.6);
+      });
+
+      tilts.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > window.innerHeight + 100) return;
+        const d = (r.top + r.height / 2 - mid) / window.innerHeight;  // -1..1
+        el.style.transform = `translate3d(0, ${(d * -7).toFixed(2)}px, 0)`;
+      });
+    });
+  }
+
+  /* =======================================================================
+     Footer wordmark. Drawn as an SVG stroke so it stays smooth at display
+     size; the viewBox is fitted to the rendered glyphs so the word always
+     spans the full width, whatever the word or the loaded font turns out
+     to be. The dash length is derived from that measurement so the draw-on
+     paces the same for a short word as a long one.
+     ===================================================================== */
+  function wordmark() {
+    const fit = () => {
+      $$('.footer__word').forEach(svg => {
+        const text = $('text', svg);
+        if (!text) return;
+        let box;
+        try { box = text.getBBox(); } catch { return; }
+        if (!box.width) return;
+        const pad = 4;
+        svg.setAttribute('viewBox',
+          `${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`);
+        const len = (box.width + box.height) * 3.2;
+        text.style.strokeDasharray = len;
+        if (!svg.classList.contains('is-in')) text.style.strokeDashoffset = len;
+      });
+    };
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    window.addEventListener('resize', fit, { passive: true });
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -780,8 +876,11 @@ ${d.get('notes') || '—'}`;
     bookingForm();
     magnetic();
     tilt();
+    railTouch();
+    scrollFocus();
     spine();
     actionBar();
+    wordmark();
     const heroCanvas = $('.hero__ascii');
     if (heroCanvas) asciiField(heroCanvas);
     document.documentElement.classList.add('js-ready');
