@@ -748,6 +748,363 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .contact-item p { margin: .35rem 0 0; font-size: 1.0625rem; line-height: 1.45; }
 
 .footer { border-top: 1px solid var(--ink-line); padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
+/* The wordmark is drawn as SVG stroke, not -webkit-text-stroke: at this size
+   the CSS property renders a hairline that stair-steps badly. A real vector
+   stroke stays smooth at any width, and can be drawn on with a dash offset. */
+.footer__word { display: block; width: 100%; margin: 0 0 2rem; overflow: visible; }
+.footer__word text {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 172px;
+  letter-spacing: -8px;
+  fill: none;
+  stroke: var(--ink-line);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-dasharray: 5200;      /* replaced at runtime from the measured glyphs */
+  stroke-dashoffset: 5200;
+  transition: stroke-dashoffset 2.6s var(--ease), stroke 1.2s var(--ease);
+}
+.footer__word.is-in text { stroke-dashoffset: 0 !important; }
+.footer__word:hover text { stroke: var(--red); }
+@media (prefers-reduced-motion: reduce) {
+  .footer__word text { stroke-dashoffset: 0; transition: none; }
+}
+
+.chapter__body p {
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--paper-dim);
+  max-width: 56ch;
+}
+.chapter__body p strong { color: var(--paper); font-weight: 600; }
+
+.sticky-col { position: sticky; top: clamp(6rem, 14vh, 9rem); }
+@media (max-width: 900px) { .sticky-col { position: static; } }
+
+/* ASCII panel */
+.ascii-panel {
+  position: relative;
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  padding: 1rem;
+  overflow: hidden;
+}
+.ascii-panel::before {
+  content: attr(data-tag);
+  position: absolute; top: .65rem; right: .85rem;
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--paper-mute);
+  z-index: 2;
+}
+.ascii-panel pre {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: clamp(5px, 1.05vw, 11px);
+  line-height: 1.08;
+  letter-spacing: .02em;
+  color: var(--paper-mute);
+  white-space: pre;
+  overflow: hidden;
+}
+.ascii-panel canvas { width: 100%; height: auto; display: block; }
+
+/* ==========================================================================
+   Stats
+   ========================================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border-top: 1px solid var(--ink-line);
+}
+.stat {
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1rem, 2vw, 2rem);
+  border-bottom: 1px solid var(--ink-line);
+  border-right: 1px solid var(--ink-line);
+}
+.stat:last-child { border-right: 0; }
+.stat__num {
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  font-weight: 800; letter-spacing: -.045em; line-height: 1;
+  margin: 0 0 .5rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat__num sup { font-size: .35em; color: var(--red); vertical-align: super; margin-left: .1em; }
+
+/* ==========================================================================
+   Services grid
+   ========================================================================== */
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  border-top: 1px solid var(--ink-line);
+  border-left: 1px solid var(--ink-line);
+}
+.svc {
+  position: relative;
+  display: flex; flex-direction: column;
+  min-height: clamp(260px, 32vw, 380px);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  overflow: hidden;
+  isolation: isolate;
+}
+.svc::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--red);
+  transform: translateY(100%);
+  transition: transform .6s var(--ease);
+}
+.svc:hover::before { transform: translateY(0); }
+.svc__no {
+  font-family: var(--mono); font-size: .6875rem;
+  letter-spacing: .2em; color: var(--paper-mute);
+  transition: color .4s var(--ease);
+}
+.svc__title {
+  margin: auto 0 .75rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-weight: 800; letter-spacing: -.03em; line-height: 1.02;
+  text-transform: lowercase;
+}
+.svc__desc {
+  margin: 0 0 1.25rem;
+  font-size: .9375rem; line-height: 1.55;
+  color: var(--paper-dim);
+  max-width: 34ch;
+  transition: color .4s var(--ease);
+}
+.svc__cta {
+  font-family: var(--mono); font-size: .6875rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: .6rem;
+  color: var(--red);
+  transition: color .4s var(--ease), gap .4s var(--ease);
+}
+.svc:hover .svc__no,
+.svc:hover .svc__desc { color: rgba(255,255,255,.86); }
+.svc:hover .svc__cta { color: #fff; gap: 1.1rem; }
+.svc__ascii {
+  position: absolute; right: 1rem; bottom: 1rem; z-index: -1;
+  font-family: var(--mono); font-size: clamp(11px, 1.4vw, 16px); line-height: 1.1;
+  color: var(--ink-line);
+  white-space: pre; pointer-events: none;
+  transition: color .5s var(--ease), transform .8s var(--ease);
+}
+.svc:hover .svc__ascii { color: rgba(255,255,255,.18); transform: translate(-6px,-6px); }
+
+/* ==========================================================================
+   Process rail (horizontal scroll)
+   ========================================================================== */
+
+.rail__viewport { position: relative; }
+.rail__track {
+  display: flex; gap: clamp(1rem, 2vw, 2rem);
+  will-change: transform;
+  padding-inline: var(--gut);
+}
+.rail__card {
+  flex: 0 0 clamp(260px, 30vw, 400px);
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  display: flex; flex-direction: column; gap: 1rem;
+  min-height: 300px;
+}
+.rail__card h3 {
+  margin: auto 0 0;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 800; letter-spacing: -.03em; text-transform: lowercase;
+}
+.rail__card p { margin: 0; font-size: .9375rem; color: var(--paper-dim); }
+.rail__bar { height: 1px; background: var(--ink-line); position: relative; margin-top: 2rem; }
+.rail__bar i {
+  position: absolute; inset: 0 auto 0 0; display: block;
+  background: var(--red); width: 20%;
+  transform-origin: 0 50%;
+}
+
+/* ==========================================================================
+   Shop
+   ========================================================================== */
+
+.shop-head {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  align-items: flex-end; justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip {
+  font-family: var(--mono); font-size: .6875rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .55rem 1rem;
+  border: 1px solid var(--ink-line);
+  color: var(--paper-dim);
+  transition: color .3s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+}
+.chip:hover { color: var(--fg); border-color: var(--paper-mute); }
+.chip[aria-pressed="true"] { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 1px;
+  background: var(--ink-line);
+  border: 1px solid var(--ink-line);
+  margin-top: 2.5rem;
+}
+
+.card {
+  background: var(--ink);
+  padding: 1.25rem;
+  display: flex; flex-direction: column; gap: .85rem;
+  position: relative;
+  transition: background .4s var(--ease);
+}
+.card:hover { background: var(--ink-soft); }
+.card.is-hidden { display: none; }
+
+.card__art {
+  aspect-ratio: 4 / 3;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(70% 70% at 50% 40%, rgba(220,18,56,.10), transparent 70%),
+    var(--ink-soft);
+  border: 1px solid var(--ink-line);
+  overflow: hidden;
+}
+.card__art pre {
+  margin: 0; font-family: var(--mono);
+  font-size: clamp(10px, 1.5vw, 15px); line-height: 1.15;
+  color: var(--paper-dim); white-space: pre;
+  transition: color .4s var(--ease), transform .6s var(--ease);
+}
+.card:hover .card__art pre { color: var(--red); transform: scale(1.06); }
+
+.card__cat { font-family: var(--mono); font-size: .625rem; letter-spacing: .2em; text-transform: uppercase; color: var(--paper-mute); }
+.card__name { margin: 0; font-size: 1.0625rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
+.card__row { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.card__price { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; }
+.card__price s { color: var(--paper-mute); font-size: .78em; margin-right: .4rem; }
+
+.badge {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  font-family: var(--mono); font-size: .5625rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .25rem .5rem; background: var(--red); color: #fff;
+}
+
+/* Cart drawer */
+.drawer {
+  position: fixed; inset: 0 0 0 auto; z-index: 100;
+  width: min(420px, 100%);
+  background: var(--ink-soft);
+  border-left: 1px solid var(--ink-line);
+  transform: translateX(101%);
+  transition: transform .55s var(--ease);
+  display: flex; flex-direction: column;
+}
+.drawer.is-open { transform: none; }
+.drawer__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem var(--gut); border-bottom: 1px solid var(--ink-line);
+}
+.drawer__body { flex: 1; overflow-y: auto; padding: 1.25rem var(--gut); }
+.drawer__foot { padding: 1.25rem var(--gut); border-top: 1px solid var(--ink-line); display: grid; gap: 1rem; }
+.drawer__line {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  padding-block: .9rem; border-bottom: 1px solid var(--ink-line);
+}
+.drawer__line h4 { margin: 0 0 .2rem; font-size: .9375rem; font-weight: 600; }
+.qty { display: inline-flex; align-items: center; gap: .5rem; margin-top: .4rem; }
+.qty button {
+  width: 24px; height: 24px; border: 1px solid var(--ink-line);
+  display: grid; place-items: center; font-family: var(--mono); font-size: .75rem;
+  transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.qty button:hover { border-color: var(--red); color: var(--red); }
+.qty span { font-family: var(--mono); font-size: .8125rem; min-width: 1.5ch; text-align: center; }
+
+.scrim {
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(3px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .45s var(--ease);
+}
+.scrim.is-open { opacity: 1; pointer-events: auto; }
+
+.cart-btn { position: relative; }
+.cart-btn__count {
+  position: absolute; top: -6px; right: -10px;
+  min-width: 16px; height: 16px; padding: 0 4px;
+  background: var(--red); color: #fff;
+  font-family: var(--mono); font-size: .5625rem;
+  display: grid; place-items: center; border-radius: 999px;
+}
+
+/* ==========================================================================
+   Forms / booking
+   ========================================================================== */
+
+.form-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.field { display: grid; gap: .5rem; }
+.field label {
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--paper-mute);
+}
+.field input, .field select, .field textarea {
+  font: inherit; font-size: .9375rem;
+  color: var(--fg); background: transparent;
+  border: 0; border-bottom: 1px solid var(--ink-line);
+  padding: .7rem 0;
+  border-radius: 0;
+  transition: border-color .35s var(--ease);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-bottom-color: var(--red);
+}
+.field select option { background: var(--ink-soft); color: var(--fg); }
+.field--wide { grid-column: 1 / -1; }
+.field textarea { resize: vertical; min-height: 100px; }
+
+.picks { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pick { position: relative; }
+.pick input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.pick span {
+  display: block;
+  font-family: var(--mono); font-size: .6875rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .6rem 1rem; border: 1px solid var(--ink-line); color: var(--paper-dim);
+  transition: all .3s var(--ease);
+}
+.pick input:checked + span { background: var(--red); border-color: var(--red); color: #fff; }
+.pick input:focus-visible + span { border-color: var(--paper); }
+
+.note {
+  border-left: 2px solid var(--red);
+  padding-left: 1rem;
+  font-size: .9375rem; color: var(--paper-dim);
+}
+
+/* ==========================================================================
+   Contact / footer
+   ========================================================================== */
+
+.contact-grid {
+  display: grid; gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.contact-item a { transition: color .3s var(--ease); }
+.contact-item a:hover { color: var(--red); }
+.contact-item p { margin: .35rem 0 0; font-size: 1.0625rem; line-height: 1.45; }
+
+.footer { border-top: 1px solid var(--ink-line); padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
 .footer__word {
   font-size: clamp(3.5rem, 19vw, 17rem);
   line-height: .78; font-weight: 800; letter-spacing: -.05em;
@@ -792,10 +1149,19 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     transform: none !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--gut);
     padding-bottom: 1rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .rail__card { scroll-snap-align: start; flex-basis: 78vw; }
+  .rail__track::-webkit-scrollbar { display: none; }
+  .rail__card {
+    scroll-snap-align: center;
+    flex-basis: 80vw;
+    transition: opacity .5s var(--ease), transform .5s var(--ease);
+  }
+  /* the card being read sits forward; its neighbours recede */
+  .rail__card.is-off { opacity: .4; transform: scale(.95); }
 }
 
 /* image plate used in the story */
@@ -858,7 +1224,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: background .45s var(--ease), transform .45s var(--ease);
 }
 .spine__dot.is-on { background: var(--red); transform: scale(1.7); }
-@media (max-width: 1180px) { .spine { display: none; } }
+@media (max-width: 1180px) {
+  .spine { left: 8px; top: 14vh; bottom: 14vh; opacity: .8; }
+}
+@media (max-width: 520px) { .spine { left: 5px; } }
 
 /* --- sticky conversion bar (mobile) ------------------------------------- */
 .actionbar {
@@ -976,3 +1345,38 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* --- a single line of Bangla, sized to sit beside the Latin type --------- */
 .bn { font-size: .95em; opacity: .92; }
+
+/* ==========================================================================
+   Touch-first motion
+   A phone has no cursor, so magnetic pull and pointer tilt have nothing to
+   react to. These give touch readers the same sense of a live page: things
+   respond to the finger, and to where the page has been scrolled.
+   ========================================================================== */
+
+@media (hover: none), (pointer: coarse) {
+  /* press feedback stands in for hover */
+  .btn:active            { transform: scale(.965); }
+  .svc:active            { background: var(--ink-soft); }
+  .svc:active::before    { transform: translateY(0); }
+  .card:active           { background: var(--ink-soft); }
+  .chip:active           { border-color: var(--red); color: var(--paper); }
+  .tier:active           { background: var(--ink-soft); }
+  .btn, .svc, .card, .chip, .tier { transition: transform .18s var(--ease), background .28s var(--ease); }
+
+  /* the service tile crossing the middle of the screen lights its own accent */
+  .svc.is-focus::before  { transform: translateY(0); }
+  .svc.is-focus .svc__no,
+  .svc.is-focus .svc__desc { color: rgba(255,255,255,.86); }
+  .svc.is-focus .svc__cta  { color: #fff; gap: 1.1rem; }
+  .svc.is-focus .svc__ascii { color: rgba(255,255,255,.18); }
+}
+
+/* scroll-linked lift: replaces pointer tilt where there is no pointer */
+@media (pointer: coarse) {
+  [data-tilt] { transition: transform .45s var(--ease), background .3s var(--ease); }
+}
+
+/* carousel position readout under the rail on touch */
+@media (max-width: 860px) {
+  .rail__bar { margin-top: 1.25rem; }
+}
