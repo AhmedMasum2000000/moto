@@ -273,10 +273,21 @@
       new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0 }).observe(canvas);
     }
 
-    let t0 = performance.now();
+    // Scroll velocity feeds the field: the wheel spins up and the glyphs run
+    // hotter while the page is moving, then settle when the reader stops.
+    let spin = 0, heat = 0, lastY = window.scrollY, vel = 0;
+    window.addEventListener('scroll', () => {
+      vel = clamp(Math.abs(window.scrollY - lastY) / 45, 0, 1);
+      lastY = window.scrollY;
+    }, { passive: true });
+
+    let t0 = performance.now(), prev = t0;
     onFrame(now => {
       if (!visible || !cols) return;
-      const t = reduced() ? 0 : (now - t0) / 1000;
+      const dt = Math.min((now - prev) / 1000, 0.05); prev = now;
+      heat = lerp(heat, vel, 0.08); vel *= 0.9;
+      spin += dt * (1 + heat * 5);
+      const t = reduced() ? 0 : (now - t0) / 1000 + spin * 2;
       mx = lerp(mx, tmx, 0.06); my = lerp(my, tmy, 0.06);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -307,10 +318,10 @@
           const chr = RAMP[idx];
           if (chr === ' ') continue;
 
-          const hot = f > 0.72;
+          const hot = f > 0.72 - heat * 0.18;
           ctx.fillStyle = hot
-            ? `rgba(225,29,46,${clamp(f * 1.15, 0, 1).toFixed(3)})`
-            : `rgba(196,194,189,${clamp(f * 0.62, 0, 1).toFixed(3)})`;
+            ? `rgba(220,18,56,${clamp(f * 1.15, 0, 1).toFixed(3)})`
+            : `rgba(198,196,204,${clamp(f * 0.62, 0, 1).toFixed(3)})`;
           ctx.fillText(chr, x * cw, y * ch);
         }
       }
@@ -444,6 +455,108 @@
     }), { threshold: 0.6 });
     els.forEach(el => io.observe(el));
     els.forEach(el => el.addEventListener('mouseenter', () => run(el)));
+  }
+
+  /* =======================================================================
+     Magnetic buttons — the primary actions lean toward the pointer, so the
+     cursor is pulled to the thing we want clicked before the reader decides.
+     ===================================================================== */
+  function magnetic() {
+    if (reduced() || window.matchMedia('(pointer: coarse)').matches) return;
+    $$('[data-magnetic]').forEach(el => {
+      let rx = 0, ry = 0, tx = 0, ty = 0, live = false, stop = null;
+      const pull = e => {
+        const r = el.getBoundingClientRect();
+        tx = (e.clientX - (r.left + r.width / 2)) * 0.3;
+        ty = (e.clientY - (r.top + r.height / 2)) * 0.4;
+      };
+      el.addEventListener('mouseenter', () => {
+        if (live) return;
+        live = true;
+        stop = onFrame(() => {
+          rx = lerp(rx, tx, 0.18); ry = lerp(ry, ty, 0.18);
+          el.style.transform = `translate3d(${rx.toFixed(2)}px, ${ry.toFixed(2)}px, 0)`;
+          if (!live && Math.abs(rx) < 0.1 && Math.abs(ry) < 0.1) {
+            el.style.transform = ''; stop && stop(); stop = null;
+          }
+        });
+      });
+      el.addEventListener('mousemove', pull);
+      el.addEventListener('mouseleave', () => { tx = 0; ty = 0; live = false; });
+    });
+  }
+
+  /* =======================================================================
+     Pointer-reactive tilt on cards
+     ===================================================================== */
+  function tilt() {
+    if (reduced() || window.matchMedia('(pointer: coarse)').matches) return;
+    $$('[data-tilt]').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform =
+          `perspective(900px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 5).toFixed(2)}deg)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.style.transition = 'transform .5s var(--ease)';
+      el.addEventListener('mouseenter', () => { el.style.transition = 'transform .12s linear'; });
+    });
+  }
+
+  /* =======================================================================
+     The spine — a red thread that fills as the reader descends, with a dot
+     per chapter that lights when that chapter is the one on screen.
+     ===================================================================== */
+  function spine() {
+    const root = $('.spine');
+    const fill = $('.spine__fill');
+    if (!root || !fill) return;
+
+    const marks = $$('[data-reveal].chapter__no, .chapter__no');
+    const dots = marks.map(() => {
+      const d = document.createElement('span');
+      d.className = 'spine__dot';
+      root.appendChild(d);
+      return d;
+    });
+
+    const place = () => {
+      const docH = document.documentElement.scrollHeight;
+      marks.forEach((m, i) => {
+        const top = m.getBoundingClientRect().top + window.scrollY;
+        dots[i].style.top = `${(top / docH) * 100}%`;
+      });
+    };
+    place();
+    window.addEventListener('resize', place, { passive: true });
+    window.addEventListener('load', place);
+
+    let cur = 0;
+    onFrame(() => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const target = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+      cur = lerp(cur, target, 0.12);
+      fill.style.transform = `scaleY(${cur.toFixed(4)})`;
+      const vh = window.innerHeight;
+      marks.forEach((m, i) => {
+        const r = m.getBoundingClientRect();
+        dots[i].classList.toggle('is-on', r.top < vh * 0.6 && r.bottom > 0);
+      });
+    });
+  }
+
+  /* =======================================================================
+     Sticky action bar — appears once the reader is past the hero, so the
+     next step is always one thumb-reach away on a phone.
+     ===================================================================== */
+  function actionBar() {
+    const bar = $('.actionbar');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+      bar.classList.toggle('is-up', window.scrollY > window.innerHeight * 0.75);
+    }, { passive: true });
   }
 
   /* =======================================================================
@@ -665,6 +778,10 @@ ${d.get('notes') || '—'}`;
     cartWiring();
     filters();
     bookingForm();
+    magnetic();
+    tilt();
+    spine();
+    actionBar();
     const heroCanvas = $('.hero__ascii');
     if (heroCanvas) asciiField(heroCanvas);
     document.documentElement.classList.add('js-ready');
