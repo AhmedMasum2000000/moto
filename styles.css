@@ -324,7 +324,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   content: ""; width: clamp(28px, 6vw, 72px); height: 1px; background: var(--red);
 }
 
-.hero__title { margin-bottom: 1.5rem; }
+.hero__title { margin-bottom: 1.5rem; text-transform: none; }
 
 .hero__foot {
   display: grid;
