@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ahmedmasum2000000.github.io/moto/sitemap.xml
