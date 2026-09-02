@@ -5,12 +5,12 @@
 
 :root {
   /* Ground and accent are lifted straight out of the logo file:
-     #242328 is 84% of its pixels, #DC1238 is its red. Every other
+     the ground is #1F1E22, #DC1238 is its red. Every other
      neutral is that same ground pushed lighter or darker, so the
      page and the mark sit in one colour world. */
-  --ink:        #242328;
-  --ink-soft:   #2c2b31;
-  --ink-line:   #3b3945;
+  --ink:        #1f1e22;
+  --ink-soft:   #27262b;
+  --ink-line:   #36343f;
   --paper:      #f4f3f6;
   --paper-dim:  #a9a7b2;
   --paper-mute: #78767f;
@@ -164,7 +164,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-bottom: 1px solid transparent;
 }
 .nav.is-stuck {
-  background: rgba(36, 35, 40, 0.82);
+  background: rgba(31, 30, 34, 0.82);
   backdrop-filter: blur(14px) saturate(140%);
   border-bottom-color: var(--ink-line);
 }
@@ -299,8 +299,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background:
     radial-gradient(120% 70% at 50% 100%, rgba(220,18,56,.16), transparent 60%),
     /* keep the text column quiet while the field stays busy on the right */
-    linear-gradient(to right, var(--ink) 0%, rgba(36,35,40,.82) 26%, rgba(36,35,40,.1) 62%, transparent 100%),
-    linear-gradient(to top, var(--ink) 2%, rgba(36,35,40,.4) 45%, rgba(36,35,40,.72) 100%);
+    linear-gradient(to right, var(--ink) 0%, rgba(31,30,34,.82) 26%, rgba(31,30,34,.1) 62%, transparent 100%),
+    linear-gradient(to top, var(--ink) 2%, rgba(31,30,34,.4) 45%, rgba(31,30,34,.72) 100%);
   pointer-events: none;
 }
 
@@ -310,7 +310,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .hero::after {
     background:
       radial-gradient(130% 60% at 50% 100%, rgba(220,18,56,.14), transparent 62%),
-      linear-gradient(to top, var(--ink) 4%, rgba(36,35,40,.7) 48%, rgba(36,35,40,.88) 100%);
+      linear-gradient(to top, var(--ink) 4%, rgba(31,30,34,.7) 48%, rgba(31,30,34,.88) 100%);
   }
 }
 
@@ -810,7 +810,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .plate figcaption {
   position: absolute; left: 0; bottom: 0; right: 0;
   padding: .75rem 1rem;
-  background: linear-gradient(to top, rgba(36,35,40,.92), transparent);
+  background: linear-gradient(to top, rgba(31,30,34,.92), transparent);
   font-family: var(--mono); font-size: .625rem;
   letter-spacing: .2em; text-transform: uppercase; color: var(--paper-dim);
 }
@@ -864,7 +864,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .actionbar {
   position: fixed; inset: auto 0 0 0; z-index: 70;
   display: grid; grid-template-columns: 1fr 1fr 1fr;
-  background: rgba(36, 35, 40, .94);
+  background: rgba(31, 30, 34, .94);
   backdrop-filter: blur(14px) saturate(140%);
   border-top: 1px solid var(--ink-line);
   transform: translateY(101%);
