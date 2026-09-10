@@ -530,8 +530,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .svc {
   position: relative;
   display: flex; flex-direction: column;
-  min-height: clamp(260px, 32vw, 380px);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  min-height: clamp(180px, 20vw, 250px);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  width: 100%;
+  text-align: left;
+  font: inherit; color: inherit;
+  cursor: pointer;
+  appearance: none;
   border-right: 1px solid var(--ink-line);
   border-bottom: 1px solid var(--ink-line);
   overflow: hidden;
@@ -543,7 +548,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: translateY(100%);
   transition: transform .6s var(--ease);
 }
-.svc:hover::before { transform: translateY(0); }
+.svc:hover::before { transform: translateY(88%); }
+.svc[aria-selected="true"]::before { transform: translateY(0); }
+.svc[aria-selected="true"] .svc__no,
+.svc[aria-selected="true"] .svc__desc { color: rgba(255,255,255,.86); }
+.svc[aria-selected="true"] .svc__cta { color: #fff; gap: 1.1rem; }
+.svc[aria-selected="true"] .svc__ascii { color: rgba(255,255,255,.18); }
+.svc:focus-visible { outline: 2px solid var(--red); outline-offset: -4px; }
 .svc__no {
   font-family: var(--mono); font-size: .6875rem;
   letter-spacing: .2em; color: var(--paper-mute);
@@ -551,9 +562,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .svc__title {
   font-family: var(--display);
-  margin: auto 0 .75rem;
-  font-size: clamp(1.3rem, 2.1vw, 1.85rem);
-  font-weight: 900; letter-spacing: -.01em; line-height: 1.04;
+  margin: auto 0 1rem;
+  font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+  font-weight: 900; letter-spacing: -.015em; line-height: 1.02;
   text-transform: uppercase;
 }
 .svc__desc {
@@ -1060,18 +1071,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   /* press feedback stands in for hover */
   .btn:active            { transform: scale(.965); }
   .svc:active            { background: var(--ink-soft); }
-  .svc:active::before    { transform: translateY(0); }
+  .svc:active::before    { transform: translateY(88%); }
   .card:active           { background: var(--ink-soft); }
   .chip:active           { border-color: var(--red); color: var(--paper); }
   .tier:active           { background: var(--ink-soft); }
   .btn, .svc, .card, .chip, .tier { transition: transform .18s var(--ease), background .28s var(--ease); }
 
-  /* the service tile crossing the middle of the screen lights its own accent */
-  .svc.is-focus::before  { transform: translateY(0); }
-  .svc.is-focus .svc__no,
-  .svc.is-focus .svc__desc { color: rgba(255,255,255,.86); }
-  .svc.is-focus .svc__cta  { color: #fff; gap: 1.1rem; }
-  .svc.is-focus .svc__ascii { color: rgba(255,255,255,.18); }
+  /* scroll focus hints at a tile; the red fill still means "selected" */
+  .svc.is-focus:not([aria-selected="true"])::before { transform: translateY(88%); }
 }
 
 /* scroll-linked lift: replaces pointer tilt where there is no pointer */
@@ -1082,4 +1089,65 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* carousel position readout under the rail on touch */
 @media (max-width: 860px) {
   .rail__bar { margin-top: 1.25rem; }
+}
+
+/* ==========================================================================
+   Service detail
+   The grid above is a set of titles; the detail for whichever one is chosen
+   opens here. Every panel stays in the document — hidden panels are still
+   read by search engines, and with JavaScript off all eight simply stack.
+   ========================================================================== */
+
+.svc-detail {
+  border: 1px solid var(--ink-line);
+  border-top: 0;
+  background: var(--ink-soft);
+}
+
+.svc-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  align-items: center;
+}
+.svc-panel + .svc-panel { border-top: 1px solid var(--ink-line); }
+.svc-panel[hidden] { display: none; }
+
+/* the panel arriving is what the eye should land on */
+.svc-panel.is-in > * {
+  animation: panel-in .55s var(--ease) both;
+}
+.svc-panel.is-in > *:nth-child(2) { animation-delay: .08s; }
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.svc-panel .list-plain li { border-bottom-color: rgba(255,255,255,.07); }
+
+.svc-panel__art {
+  display: grid; place-items: center;
+  min-height: 200px;
+  border: 1px solid var(--ink-line);
+  background:
+    radial-gradient(70% 70% at 50% 45%, rgba(220,18,56,.12), transparent 70%),
+    var(--ink);
+}
+.svc-panel__art pre {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: clamp(13px, 2.2vw, 22px);
+  line-height: 1.15;
+  color: var(--paper-mute);
+  white-space: pre;
+}
+
+@media (max-width: 860px) {
+  .svc-panel { grid-template-columns: 1fr; }
+  .svc-panel__art { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-panel.is-in > * { animation: none; }
 }

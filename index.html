@@ -260,88 +260,282 @@
     </p>
   </div>
 
-  <div class="svc-grid">
-    <a class="svc" href="book.html?service=Servicing" data-tilt>
-      <span class="svc__no">01 — Booking</span>
-      <h3 class="svc__title">bike servicing</h3>
-      <p class="svc__desc">Full mechanical service — oil, filters, valve clearance, chain, brakes. Inspected, priced, logged and handed back honest. Same day, most bikes.</p>
-      <span class="svc__cta">Book free →</span>
-      <pre class="svc__ascii" aria-hidden="true">   ___
+  <div class="svc-grid" role="tablist" aria-label="Services and shop">
+      <button class="svc" type="button" role="tab" id="svctab-servicing"
+              aria-controls="svcpanel-servicing" aria-selected="true" tabindex="0"
+              data-svc="servicing" data-tilt>
+        <span class="svc__no">01 — Booking</span>
+        <h3 class="svc__title">Bike Servicing</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">   ___
   /   \
  | (o) |
   \___/</pre>
-    </a>
-
-    <a class="svc" href="book.html?service=Modifications" data-tilt>
-      <span class="svc__no">02 — Booking</span>
-      <h3 class="svc__title">modifications</h3>
-      <p class="svc__desc">Exhaust, lighting, seat, cosmetics, performance. We tell you straight what will actually work on your machine and what will only cost you money.</p>
-      <span class="svc__cta">Plan my build →</span>
-      <pre class="svc__ascii" aria-hidden="true">  =====
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-modifications"
+              aria-controls="svcpanel-modifications" aria-selected="false" tabindex="-1"
+              data-svc="modifications" data-tilt>
+        <span class="svc__no">02 — Booking</span>
+        <h3 class="svc__title">Modifications</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">  =====
  //   \\
 =========</pre>
-    </a>
-
-    <a class="svc" href="book.html?service=Painting" data-tilt>
-      <span class="svc__no">03 — Booking</span>
-      <h3 class="svc__title">painting</h3>
-      <p class="svc__desc">Panel respray and full colour changes. Prep is 80% of a paint job — that's where our time goes, and it's why ours doesn't peel in one monsoon.</p>
-      <span class="svc__cta">Get my quote →</span>
-      <pre class="svc__ascii" aria-hidden="true">  .--.
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-painting"
+              aria-controls="svcpanel-painting" aria-selected="false" tabindex="-1"
+              data-svc="painting" data-tilt>
+        <span class="svc__no">03 — Booking</span>
+        <h3 class="svc__title">Painting</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">  .--.
  (    )
   '--'</pre>
-    </a>
-
-    <a class="svc" href="book.html?service=Washing" data-tilt>
-      <span class="svc__no">04 — Booking</span>
-      <h3 class="svc__title">washing</h3>
-      <p class="svc__desc">Foam wash, chain clean and lube, detail finish. In and out in under an hour — and free with every service we do.</p>
-      <span class="svc__cta">Book a wash →</span>
-      <pre class="svc__ascii" aria-hidden="true"> ~ ~ ~
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-washing"
+              aria-controls="svcpanel-washing" aria-selected="false" tabindex="-1"
+              data-svc="washing" data-tilt>
+        <span class="svc__no">04 — Booking</span>
+        <h3 class="svc__title">Washing</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true"> ~ ~ ~
 ~ ~ ~ ~
  ~ ~ ~</pre>
-    </a>
-
-    <a class="svc" href="shop.html?cat=oil" data-tilt>
-      <span class="svc__no">05 — Shop</span>
-      <h3 class="svc__title">engine oil</h3>
-      <p class="svc__desc">Motul, Shell, Liqui Moly — full synthetic and semi-synthetic, sealed and sourced. The one part of your engine you get to replace on purpose.</p>
-      <span class="svc__cta">Browse oil →</span>
-      <pre class="svc__ascii" aria-hidden="true">  /\
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-oil"
+              aria-controls="svcpanel-oil" aria-selected="false" tabindex="-1"
+              data-svc="oil" data-tilt>
+        <span class="svc__no">05 — Shop</span>
+        <h3 class="svc__title">Engine Oil</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">  /\
  /  \
 | () |
  \__/</pre>
-    </a>
-
-    <a class="svc" href="shop.html?cat=parts" data-tilt>
-      <span class="svc__no">06 — Shop</span>
-      <h3 class="svc__title">spare parts</h3>
-      <p class="svc__desc">Genuine components for Yamaha, Honda, Bajaj, Suzuki, TVS, Hero and Runner. If it isn't real, it isn't on our shelf.</p>
-      <span class="svc__cta">Browse parts →</span>
-      <pre class="svc__ascii" aria-hidden="true">[==]--[==]
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-parts"
+              aria-controls="svcpanel-parts" aria-selected="false" tabindex="-1"
+              data-svc="parts" data-tilt>
+        <span class="svc__no">06 — Shop</span>
+        <h3 class="svc__title">Spare Parts</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">[==]--[==]
   |    |</pre>
-    </a>
-
-    <a class="svc" href="shop.html?cat=tyres" data-tilt>
-      <span class="svc__no">07 — Shop</span>
-      <h3 class="svc__title">tyres</h3>
-      <p class="svc__desc">MRF, CEAT, Metzeler. Grip is the only thing between you and the road — fitting and balancing done here in the bay while you wait.</p>
-      <span class="svc__cta">Browse tyres →</span>
-      <pre class="svc__ascii" aria-hidden="true">  ####
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-tyres"
+              aria-controls="svcpanel-tyres" aria-selected="false" tabindex="-1"
+              data-svc="tyres" data-tilt>
+        <span class="svc__no">07 — Shop</span>
+        <h3 class="svc__title">Tyres</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true">  ####
  #    #
  #    #
   ####</pre>
-    </a>
-
-    <a class="svc" href="shop.html?cat=helmets" data-tilt>
-      <span class="svc__no">08 — Shop</span>
-      <h3 class="svc__title">helmets</h3>
-      <p class="svc__desc">Certified lids only — DOT and ECE 22.06. AGV, SMK, MT. We'd rather lose the sale than sell you a shell that won't hold.</p>
-      <span class="svc__cta">Browse helmets →</span>
-      <pre class="svc__ascii" aria-hidden="true"> .----.
+      </button>
+      <button class="svc" type="button" role="tab" id="svctab-helmets"
+              aria-controls="svcpanel-helmets" aria-selected="false" tabindex="-1"
+              data-svc="helmets" data-tilt>
+        <span class="svc__no">08 — Shop</span>
+        <h3 class="svc__title">Helmets</h3>
+        <span class="svc__cta" aria-hidden="true">View details →</span>
+        <pre class="svc__ascii" aria-hidden="true"> .----.
 (  ##  )
  '----'</pre>
-    </a>
+      </button>
+  </div>
+
+  <div class="svc-detail" data-svc-detail>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-servicing"
+             aria-labelledby="svctab-servicing" data-panel="servicing">
+      <div>
+        <p class="label label--red">01 — Booking</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Bike Servicing</h3>
+        <p class="lede" style="font-size:1.0625rem">Full mechanical service. We put the bike on the stand, go through it front to back, and show you what we found before we touch a bolt. Same day for most machines.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Engine oil and filter change</li>
+          <li>Chain, sprocket and brake inspection</li>
+          <li>Valve clearance and tuning</li>
+          <li>Written price agreed before work starts</li>
+          <li>Old parts returned on request</li>
+          <li>Free wash on handover</li>
+        </ul>
+        <a class="btn btn--red" href="book.html?service=Servicing" data-magnetic style="margin-top:1.75rem">
+          Book free <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>   ___
+  /   \
+ | (o) |
+  \___/</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-modifications"
+             aria-labelledby="svctab-modifications" data-panel="modifications">
+      <div>
+        <p class="label label--red">02 — Booking</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Modifications</h3>
+        <p class="lede" style="font-size:1.0625rem">Exhaust, lighting, seat, cosmetics, performance. We tell you straight what will actually work on your machine and what will only cost you money.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Slip-on and full exhaust systems</li>
+          <li>Lighting and electrical upgrades</li>
+          <li>Seat, grips and comfort parts</li>
+          <li>Crash guards and cosmetics</li>
+          <li>Honest advice on what is worth it</li>
+          <li>Quoted with a completion date</li>
+        </ul>
+        <a class="btn btn--red" href="book.html?service=Modifications" data-magnetic style="margin-top:1.75rem">
+          Plan my build <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>  =====
+ //   \\
+=========</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-painting"
+             aria-labelledby="svctab-painting" data-panel="painting">
+      <div>
+        <p class="label label--red">03 — Booking</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Painting</h3>
+        <p class="lede" style="font-size:1.0625rem">Panel respray and full colour changes. Prep is 80% of a paint job — that is where our time goes, and it is why ours does not peel after one monsoon.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Single panel respray</li>
+          <li>Full colour change</li>
+          <li>Strip, sand and prime before colour</li>
+          <li>Clear coat and finish</li>
+          <li>Colour matched to your tank</li>
+          <li>Completion date agreed up front</li>
+        </ul>
+        <a class="btn btn--red" href="book.html?service=Painting" data-magnetic style="margin-top:1.75rem">
+          Get my quote <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>  .--.
+ (    )
+  '--'</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-washing"
+             aria-labelledby="svctab-washing" data-panel="washing">
+      <div>
+        <p class="label label--red">04 — Booking</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Washing</h3>
+        <p class="lede" style="font-size:1.0625rem">Foam wash, chain clean and lube, detail finish. In and out in under an hour — and free with every service we do.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Foam wash, full body</li>
+          <li>Chain clean and re-lube</li>
+          <li>Detail finish and dry</li>
+          <li>Under an hour, walk-in welcome</li>
+          <li>Free with any service</li>
+        </ul>
+        <a class="btn btn--red" href="book.html?service=Washing" data-magnetic style="margin-top:1.75rem">
+          Book a wash <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre> ~ ~ ~
+~ ~ ~ ~
+ ~ ~ ~</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-oil"
+             aria-labelledby="svctab-oil" data-panel="oil">
+      <div>
+        <p class="label label--red">05 — Shop</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Engine Oil</h3>
+        <p class="lede" style="font-size:1.0625rem">Motul, Shell and Liqui Moly — full synthetic and semi-synthetic, sealed and sourced. The one part of your engine you get to replace on purpose.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Full synthetic and semi-synthetic grades</li>
+          <li>10W-40, 20W-50 and gear oil</li>
+          <li>Matching oil filters on the shelf</li>
+          <li>Sealed containers, shown before pouring</li>
+          <li>Fitted in the bay while you wait</li>
+        </ul>
+        <a class="btn btn--red" href="shop.html?cat=oil" data-magnetic style="margin-top:1.75rem">
+          Browse oil <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>  /\
+ /  \
+| () |
+ \__/</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-parts"
+             aria-labelledby="svctab-parts" data-panel="parts">
+      <div>
+        <p class="label label--red">06 — Shop</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Spare Parts</h3>
+        <p class="lede" style="font-size:1.0625rem">Genuine components for the lineups on Bangladeshi roads. If it is not real, it is not on our shelf.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner</li>
+          <li>Brake, clutch and chain components</li>
+          <li>Filters, plugs, cables and bulbs</li>
+          <li>Batteries and electricals</li>
+          <li>Sealed and boxed, shown on request</li>
+          <li>Sourced within days if not in stock</li>
+        </ul>
+        <a class="btn btn--red" href="shop.html?cat=parts" data-magnetic style="margin-top:1.75rem">
+          Browse parts <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>[==]--[==]
+  |    |</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-tyres"
+             aria-labelledby="svctab-tyres" data-panel="tyres">
+      <div>
+        <p class="label label--red">07 — Shop</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Tyres</h3>
+        <p class="lede" style="font-size:1.0625rem">Grip is the only thing between you and the road. MRF, CEAT and Metzeler, fitted and balanced here in the bay.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>MRF, CEAT and Metzeler</li>
+          <li>Front and rear sizes for common bikes</li>
+          <li>Tubes and valves</li>
+          <li>Fitting and balancing in the bay</li>
+          <li>Fitted while you wait</li>
+        </ul>
+        <a class="btn btn--red" href="shop.html?cat=tyres" data-magnetic style="margin-top:1.75rem">
+          Browse tyres <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre>  ####
+ #    #
+ #    #
+  ####</pre>
+      </div>
+    </article>
+    <article class="svc-panel" role="tabpanel" id="svcpanel-helmets"
+             aria-labelledby="svctab-helmets" data-panel="helmets">
+      <div>
+        <p class="label label--red">08 — Shop</p>
+        <h3 class="h-2" style="margin:.6rem 0 1rem">Helmets</h3>
+        <p class="lede" style="font-size:1.0625rem">Certified lids only. We would rather lose the sale than sell you a shell that will not hold when it matters.</p>
+        <ul class="list-plain" style="margin-top:1.75rem">
+          <li>DOT and ECE 22.06 certified only</li>
+          <li>AGV, SMK and MT</li>
+          <li>Full face and open face</li>
+          <li>Visors and spares</li>
+          <li>Riding gloves and gear</li>
+        </ul>
+        <a class="btn btn--red" href="shop.html?cat=helmets" data-magnetic style="margin-top:1.75rem">
+          Browse helmets <span class="btn__arrow">→</span>
+        </a>
+      </div>
+      <div class="svc-panel__art" aria-hidden="true">
+        <pre> .----.
+(  ##  )
+ '----'</pre>
+      </div>
+    </article>
   </div>
 
   <div class="brands" style="margin-top:2.5rem" data-reveal>
