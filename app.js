@@ -656,6 +656,65 @@
   }
 
   /* =======================================================================
+     Service tabs. The grid is a list of titles; choosing one opens its
+     detail below. Panels start visible in the markup and are hidden here,
+     so a reader without JavaScript still gets all eight in full.
+     ===================================================================== */
+  function serviceTabs() {
+    const detail = $('[data-svc-detail]');
+    const tabs = $$('[data-svc]');
+    if (!detail || !tabs.length) return;
+    const panels = $$('[data-panel]', detail);
+
+    const show = (id, moveFocus) => {
+      let hit = false;
+      panels.forEach(p => {
+        const on = p.dataset.panel === id;
+        p.hidden = !on;
+        p.classList.toggle('is-in', on);
+        if (on) hit = true;
+      });
+      if (!hit) return false;
+      tabs.forEach(t => {
+        const on = t.dataset.svc === id;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && moveFocus) t.focus();
+      });
+      return true;
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        show(tab.dataset.svc);
+        history.replaceState(null, '', '#' + tab.dataset.svc);
+        // on a phone the detail opens below the fold, so bring it into view
+        if (window.innerWidth <= 860) {
+          detail.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+
+      // a tablist is arrow-navigable
+      tab.addEventListener('keydown', e => {
+        const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+        const step = keys[e.key];
+        if (!step) return;
+        e.preventDefault();
+        const i = tabs.indexOf(tab);
+        show(tabs[(i + step + tabs.length) % tabs.length].dataset.svc, true);
+      });
+    });
+
+    // deep link: /#tyres opens that panel, on load and on any later hash change
+    const fromHash = () => {
+      const wanted = location.hash.replace('#', '');
+      if (!wanted || !show(wanted)) show(tabs[0].dataset.svc);
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -878,6 +937,7 @@ ${d.get('notes') || '—'}`;
     tilt();
     railTouch();
     scrollFocus();
+    serviceTabs();
     spine();
     actionBar();
     wordmark();
