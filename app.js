@@ -839,6 +839,99 @@
   }
 
   /* =======================================================================
+     Search. The index is generated from the catalogue and the page markup,
+     so it cannot drift from what is actually on the site. Matching is a
+     plain substring pass over title and category — with 70 entries that is
+     instant, and it keeps behaviour predictable for a shop's own staff.
+     ===================================================================== */
+  function search() {
+    const box = $('[data-search]');
+    const input = $('[data-search-input]');
+    const list = $('[data-search-results]');
+    if (!box || !input || !list) return;
+
+    const INDEX = window.MM_SEARCH || [];
+    let hits = [], active = -1, lastFocus = null;
+
+    const open = () => {
+      lastFocus = document.activeElement;
+      box.hidden = false;
+      document.body.classList.add('is-locked');
+      requestAnimationFrame(() => {
+        box.classList.add('is-open');
+        input.focus();
+        input.select();
+      });
+      render();
+    };
+
+    const close = () => {
+      box.classList.remove('is-open');
+      document.body.classList.remove('is-locked');
+      setTimeout(() => { box.hidden = true; }, 300);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+
+    const mark = (text, q) => {
+      const i = text.toLowerCase().indexOf(q);
+      if (!q || i < 0) return esc(text);
+      return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length)) +
+             '</mark>' + esc(text.slice(i + q.length));
+    };
+
+    const render = () => {
+      const q = input.value.trim().toLowerCase();
+      hits = !q ? INDEX.filter(e => e.g === 'Page' || e.g === 'Service')
+                : INDEX.filter(e => (e.t + ' ' + e.k).toLowerCase().includes(q));
+      hits = hits.slice(0, 24);
+      active = hits.length ? 0 : -1;
+
+      if (!hits.length) {
+        list.innerHTML = `<p class="searchbox__empty">Nothing matched “${esc(input.value.trim())}”. ` +
+          `Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> — if it exists, we can get it.</p>`;
+        return;
+      }
+
+      let html = '', group = null;
+      hits.forEach((h, i) => {
+        if (h.g !== group) { group = h.g; html += `<p class="searchbox__group">${esc(group)}</p>`; }
+        html += `<a class="searchbox__hit${i === 0 ? ' is-active' : ''}" role="option" href="${esc(h.u)}" data-hit="${i}">` +
+                `<b>${mark(h.t, q)}</b><span>${esc(h.p ? '৳' + h.p.toLocaleString('en-US') : h.k)}</span></a>`;
+      });
+      list.innerHTML = html;
+    };
+
+    const move = step => {
+      const nodes = $$('[data-hit]', list);
+      if (!nodes.length) return;
+      active = (active + step + nodes.length) % nodes.length;
+      nodes.forEach((n, i) => n.classList.toggle('is-active', i === active));
+      nodes[active].scrollIntoView({ block: 'nearest' });
+    };
+
+    $$('[data-search-open]').forEach(b => b.addEventListener('click', open));
+    $$('[data-search-close]').forEach(b => b.addEventListener('click', close));
+    input.addEventListener('input', render);
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+      else if (e.key === 'Enter') {
+        const node = $$('[data-hit]', list)[active];
+        if (node) { e.preventDefault(); window.location.href = node.getAttribute('href'); }
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !box.hidden) { close(); return; }
+      // "/" is the shortcut every shop assistant already knows from a browser
+      if (e.key === '/' && box.hidden && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+        e.preventDefault(); open();
+      }
+    });
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -1061,6 +1154,7 @@ ${d.get('notes') || '—'}`;
     tilt();
     railTouch();
     scrollFocus();
+    search();
     serviceTabs();
     fitment();
     fitBar();

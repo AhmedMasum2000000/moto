@@ -21,6 +21,13 @@
     <img src="assets/logo.png" alt="Moto Market" width="97" height="34">
   </a>
   <nav class="nav__links" aria-label="Primary">
+    <button class="nav__link nav__search" type="button" data-search-open aria-label="Search the site">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span>Search</span>
+    </button>
     <a class="nav__link" href="index.html">Home</a>
     <a class="nav__link" href="shop.html">Shop</a>
     <a class="nav__link" href="book.html" aria-current="page">Book</a>
@@ -144,6 +151,24 @@
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<div class="searchbox" data-search hidden>
+  <div class="searchbox__scrim" data-search-close></div>
+  <div class="searchbox__panel" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="searchbox__bar">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input type="search" data-search-input placeholder="Search parts, oil, tyres, services…"
+             autocomplete="off" spellcheck="false" aria-label="Search">
+      <button class="searchbox__esc" type="button" data-search-close aria-label="Close search">Esc</button>
+    </div>
+    <div class="searchbox__results" data-search-results role="listbox" aria-label="Search results"></div>
+    <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
+  </div>
+</div>
+
+<script src="search-index.js" defer></script>
 <script src="app.js" defer></script>
 </body>
 </html>
