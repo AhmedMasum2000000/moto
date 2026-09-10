@@ -715,6 +715,130 @@
   }
 
   /* =======================================================================
+     Fitment check. Type, then brand, then model — each step unlocks the next.
+     The chosen vehicle is remembered and shown on the shop page. We never
+     claim a part fits: the page narrows it down, the counter confirms it.
+     ===================================================================== */
+  const FIT_KEY = 'mm.vehicle.v1';
+
+  function vehicleData() {
+    const el = $('#vehicle-data');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch { return null; }
+  }
+
+  function readVehicle() {
+    try { return JSON.parse(localStorage.getItem(FIT_KEY)); } catch { return null; }
+  }
+
+  function fitment() {
+    const root = $('[data-fitment]');
+    const DATA = vehicleData();
+    if (!root || !DATA) return;
+
+    const brandSel = $('[data-fit-brand]', root);
+    const modelSel = $('[data-fit-model]', root);
+    const go = $('[data-fit-go]', root);
+    const count = $('[data-fit-count]', root);
+    const types = $$('input[name="fit-type"]', root);
+
+    const type = () => (types.find(t => t.checked) || types[0]).value;
+
+    const option = (v, label) => {
+      const o = document.createElement('option');
+      o.value = v; o.textContent = label;
+      return o;
+    };
+
+    const fillBrands = () => {
+      const brands = Object.keys(DATA[type()] || {});
+      brandSel.replaceChildren(option('', 'Select brand'));
+      brands.forEach(b => brandSel.appendChild(option(b, b)));
+      resetModels('Select brand first', true);
+      update();
+    };
+
+    const resetModels = (placeholder, disabled) => {
+      modelSel.replaceChildren(option('', placeholder));
+      modelSel.disabled = disabled;
+    };
+
+    const fillModels = () => {
+      const models = (DATA[type()] || {})[brandSel.value];
+      if (!models) { resetModels('Select brand first', true); update(); return; }
+      resetModels('Select model', false);
+      models.forEach(m => modelSel.appendChild(option(m, m)));
+      update();
+    };
+
+    const update = () => {
+      const ready = !!(brandSel.value && modelSel.value);
+      go.setAttribute('aria-disabled', String(!ready));
+      go.textContent = '';
+      go.append(ready ? 'Find parts for this ' + type() : 'View compatible parts', ' ');
+      const arrow = document.createElement('span');
+      arrow.className = 'btn__arrow'; arrow.textContent = '→';
+      go.appendChild(arrow);
+
+      // the index is only as big as the data actually shipped
+      const n = Object.values(DATA[type()] || {}).reduce((s, m) => s + m.length, 0);
+      if (count) count.textContent = n + ' ' + type() + ' models listed';
+    };
+
+    types.forEach(t => t.addEventListener('change', fillBrands));
+    brandSel.addEventListener('change', fillModels);
+    modelSel.addEventListener('change', update);
+
+    go.addEventListener('click', e => {
+      if (go.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
+      const v = { type: type(), brand: brandSel.value, model: modelSel.value };
+      try { localStorage.setItem(FIT_KEY, JSON.stringify(v)); } catch {}
+    });
+
+    // come back to a vehicle already chosen
+    const saved = readVehicle();
+    fillBrands();
+    if (saved && DATA[saved.type]) {
+      const t = types.find(x => x.value === saved.type);
+      if (t) { t.checked = true; fillBrands(); }
+      if (DATA[saved.type][saved.brand]) {
+        brandSel.value = saved.brand;
+        fillModels();
+        if (DATA[saved.type][saved.brand].includes(saved.model)) {
+          modelSel.value = saved.model;
+          update();
+        }
+      }
+    }
+  }
+
+  // The shop shows which vehicle the visitor picked, and offers the one thing
+  // a static page cannot do for them: have a person confirm the fit.
+  function fitBar() {
+    const bar = $('[data-fitbar]');
+    if (!bar) return;
+    const v = readVehicle();
+    if (!v || !v.brand || !v.model) { bar.hidden = true; return; }
+
+    const name = [v.brand, v.model].join(' ');
+    bar.hidden = false;
+    $('[data-fitbar-name]', bar).textContent = name;
+
+    const wa = $('[data-fitbar-wa]', bar);
+    if (wa) {
+      wa.href = 'https://wa.me/8801711154387?text=' + encodeURIComponent(
+        `Assalamu alaikum, Moto Market. I ride a ${name} (${v.type}). ` +
+        `Can you confirm which parts fit it?`);
+    }
+    const clear = $('[data-fitbar-clear]', bar);
+    if (clear) clear.addEventListener('click', () => {
+      try { localStorage.removeItem(FIT_KEY); } catch {}
+      bar.hidden = true;
+      toast('Vehicle cleared');
+    });
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -938,6 +1062,8 @@ ${d.get('notes') || '—'}`;
     railTouch();
     scrollFocus();
     serviceTabs();
+    fitment();
+    fitBar();
     spine();
     actionBar();
     wordmark();

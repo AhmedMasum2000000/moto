@@ -1151,3 +1151,113 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) {
   .svc-panel.is-in > * { animation: none; }
 }
+
+/* ==========================================================================
+   Fitment check
+   Two wheels or four: pick the type, the brand, then the model. The result
+   is a vehicle we carry through to the shop — not a promise that a given
+   part fits, which is a call the counter makes, not a web page.
+   ========================================================================== */
+
+.fit {
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.fit::before {
+  content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px;
+  width: 2px; background: var(--red);
+  transform: scaleY(0); transform-origin: 50% 0;
+  transition: transform .8s var(--ease);
+}
+.fit.is-in::before { transform: scaleY(1); }
+
+.fit__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1.25rem;
+}
+.fit__status {
+  margin: 0;
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--paper-dim);
+  display: inline-flex; align-items: center; gap: .55rem;
+}
+.fit__status i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #35c27a;
+  box-shadow: 0 0 0 0 rgba(53,194,122,.6);
+  animation: fit-pulse 2.4s var(--ease-io) infinite;
+}
+@keyframes fit-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(53,194,122,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(53,194,122,0); }
+  100% { box-shadow: 0 0 0 0 rgba(53,194,122,0); }
+}
+
+.fit__step { margin-bottom: 1.25rem; }
+.fit__no {
+  display: block; margin: 0 0 .6rem;
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--paper-mute);
+}
+
+.fit__select { position: relative; }
+.fit__select::after {
+  content: "";
+  position: absolute; right: 1rem; top: 50%;
+  width: 8px; height: 8px; margin-top: -6px;
+  border-right: 1.5px solid var(--paper-dim);
+  border-bottom: 1.5px solid var(--paper-dim);
+  transform: rotate(45deg);
+  pointer-events: none;
+  transition: border-color .3s var(--ease);
+}
+.fit__select:hover::after { border-color: var(--red); }
+.fit__select select {
+  appearance: none; -webkit-appearance: none;
+  width: 100%;
+  font-family: var(--sans); font-size: 1rem; font-weight: 600;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: 0;
+  padding: 1rem 2.75rem 1rem 1rem;
+  cursor: pointer;
+  transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.fit__select select:hover { border-color: var(--paper-mute); }
+.fit__select select:focus-visible { outline: none; border-color: var(--red); }
+.fit__select select:disabled { color: var(--paper-mute); cursor: not-allowed; opacity: .75; }
+.fit__select select option { background: var(--ink-soft); color: var(--paper); font-weight: 400; }
+
+.fit .btn[aria-disabled="true"] {
+  pointer-events: none;
+  background: var(--ink);
+  border-color: var(--ink-line);
+  color: var(--paper-mute);
+}
+
+.fit__foot {
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem;
+  justify-content: space-between;
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--ink-line);
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--paper-mute);
+}
+
+/* the chosen vehicle, carried through to the shop */
+.fitbar {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  align-items: center; justify-content: space-between;
+  border: 1px solid var(--red);
+  background: var(--ink-soft);
+  padding: 1rem clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 2rem;
+}
+.fitbar p { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem; }
+.fitbar b { font-family: var(--display); font-weight: 900; text-transform: uppercase;
+            font-size: 1.0625rem; letter-spacing: .005em; }
+.fitbar__acts { display: flex; flex-wrap: wrap; gap: .5rem; }

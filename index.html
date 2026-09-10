@@ -682,26 +682,60 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 360 SPLIT ═══════════════════════════════ -->
-<section class="section wrap">
+<!-- ══════════════════════════ 360 + FITMENT ═══════════════════════════ -->
+<section class="section wrap" id="fitment">
   <div class="duo">
     <div>
       <p class="label label--red" data-reveal>360°</p>
       <h2 class="h-1" data-split style="margin-top:.75rem">bikes. and cars.</h2>
       <p class="lede" data-reveal style="--d:180ms;margin-top:1.25rem">
         The sign says <em>more than a service center</em> for a reason. Two wheels or four,
-        the bay is the same, the standard is the same, and so is the person who hands
-        you the keys back.
+        the bay is the same and the standard is the same. Tell us what you ride and we
+        will pull the parts that match it.
       </p>
       <div class="hero__actions" style="margin-top:2rem" data-reveal>
         <a class="btn" href="book.html" data-magnetic>Book a service <span class="btn__arrow">→</span></a>
         <a class="btn btn--ghost" href="tel:+8801711154387" data-magnetic>Call the bay</a>
       </div>
     </div>
-    <figure class="plate" data-reveal="clip" style="--d:120ms;margin:0">
-      <img src="assets/banner-line.webp" alt="Moto Market services cars and motorcycles in Kushtia" loading="lazy" decoding="async" width="2000" height="1000" style="filter:invert(1) grayscale(1)">
-      <figcaption>360° — two wheels &amp; four</figcaption>
-    </figure>
+    <div class="fit" data-fitment>
+      <div class="fit__head">
+        <p class="label label--red">Fitment check</p>
+        <p class="fit__status"><i aria-hidden="true"></i> Ready</p>
+      </div>
+      <h3 class="h-2" style="margin-bottom:1.75rem">Find your ride</h3>
+
+      <div class="fit__step">
+        <p class="fit__no" id="fit-type-label">01 — Bike or car</p>
+        <div class="picks" role="radiogroup" aria-labelledby="fit-type-label">
+          <label class="pick"><input type="radio" name="fit-type" value="bike" checked><span>Bike</span></label>
+          <label class="pick"><input type="radio" name="fit-type" value="car"><span>Car</span></label>
+        </div>
+      </div>
+
+      <div class="fit__step">
+        <label class="fit__no" for="fit-brand">02 — Brand</label>
+        <div class="fit__select">
+          <select id="fit-brand" data-fit-brand><option value="">Select brand</option></select>
+        </div>
+      </div>
+
+      <div class="fit__step">
+        <label class="fit__no" for="fit-model">03 — Model</label>
+        <div class="fit__select">
+          <select id="fit-model" data-fit-model disabled><option value="">Select brand first</option></select>
+        </div>
+      </div>
+
+      <a class="btn btn--red btn--block" data-fit-go href="shop.html?cat=parts" aria-disabled="true">
+        View compatible parts <span class="btn__arrow">→</span>
+      </a>
+
+      <div class="fit__foot">
+        <span data-fit-count>&nbsp;</span>
+        <span>Fitment confirmed before you pay</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -824,6 +858,7 @@
 </nav>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script id="vehicle-data" type="application/json">{"bike":{"Yamaha":["FZS FI V3","FZ-X","R15 V4","MT-15","Fazer FI V2","Saluto 125","Ray ZR"],"Honda":["CB Hornet 160R","CBR150R","X-Blade","Livo","Shine","Dream Neo","CB Trigger"],"Bajaj":["Pulsar 150","Pulsar NS160","Pulsar N160","Discover 125","Platina 100","Avenger 160","CT100"],"Suzuki":["Gixxer 155","Gixxer SF 155","GSX-R150","Intruder 150","Hayate EP"],"TVS":["Apache RTR 160 4V","Apache RTR 165 RP","Raider 125","Metro Plus","Stryker"],"Hero":["Hunk 150R","Thriller 160R","Xtreme 160R","Glamour","Splendor+","Passion Pro"],"Runner":["Bullet 100","Knight Rider","Turbo 125","Royal Plus","Skooty"],"Lifan":["KPR 165R","KP 165R","Glint 105","K19"]},"car":{"Toyota":["Corolla","Axio","Premio","Allion","Aqua","Prius","Noah","Probox","Harrier"],"Honda":["Civic","Vezel","Fit","Grace","Freed","CR-V"],"Nissan":["X-Trail","Note","Sunny","Bluebird"],"Mitsubishi":["Pajero","Lancer","Outlander"],"Suzuki":["Swift","Alto","Wagon R","Ciaz"],"Hyundai":["Elantra","Tucson","Creta"],"Kia":["Sportage","Rio"],"BYD":["Atto 3","Song Plus"],"Mazda":["Axela","Demio"]}}</script>
 <script src="app.js" defer></script>
 </body>
 </html>
