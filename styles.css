@@ -1261,3 +1261,148 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fitbar b { font-family: var(--display); font-weight: 900; text-transform: uppercase;
             font-size: 1.0625rem; letter-spacing: .005em; }
 .fitbar__acts { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* ==========================================================================
+   Official dealer
+   ========================================================================== */
+
+.dealer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (max-width: 860px) { .dealer { grid-template-columns: 1fr; } }
+
+.dealer__seal {
+  width: clamp(140px, 17vw, 200px);
+  aspect-ratio: 1;
+  border: 1px solid var(--red);
+  border-radius: 50%;
+  display: grid; place-content: center; text-align: center;
+  gap: .35rem;
+  position: relative;
+  flex: none;
+}
+.dealer__seal::before {
+  content: "";
+  position: absolute; inset: 7px;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+}
+.dealer__seal span {
+  font-family: var(--mono); font-size: .5625rem;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--paper-mute);
+}
+.dealer__seal b {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.1rem, 1.9vw, 1.6rem); letter-spacing: -.01em; color: var(--red);
+  line-height: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dealer__seal { transition: transform 22s linear; }
+  .dealer__seal.is-in { transform: rotate(0deg); }
+}
+
+.dealer__group { margin-top: 1.75rem; }
+.dealer__group .label { margin-bottom: .75rem; }
+
+/* a dealer line reads as a credential, so give it a little more presence */
+.dealer__group .brands span {
+  font-size: .75rem;
+  padding: .6rem 1rem;
+  color: var(--paper);
+  border-color: var(--ink-line);
+}
+.dealer__group .brands span:hover { border-color: var(--red); }
+
+/* ==========================================================================
+   Search
+   ========================================================================== */
+
+.nav__search {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1px solid var(--ink-line);
+  padding: .5rem .8rem;
+  transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.nav__search::after { display: none; }
+.nav__search:hover { border-color: var(--red); color: var(--paper); }
+@media (max-width: 620px) { .nav__search span { display: none; } .nav__search { padding: .5rem .6rem; } }
+
+.searchbox { position: fixed; inset: 0; z-index: 110; }
+.searchbox[hidden] { display: none; }
+.searchbox__scrim {
+  position: absolute; inset: 0;
+  background: rgba(12, 11, 14, .78);
+  backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity .3s var(--ease);
+}
+.searchbox.is-open .searchbox__scrim { opacity: 1; }
+
+.searchbox__panel {
+  position: relative;
+  width: min(680px, calc(100% - 2rem));
+  margin: clamp(3rem, 10vh, 7rem) auto 0;
+  background: var(--ink-soft);
+  border: 1px solid var(--ink-line);
+  max-height: min(70vh, 640px);
+  display: flex; flex-direction: column;
+  transform: translateY(-12px); opacity: 0;
+  transition: transform .35s var(--ease), opacity .35s var(--ease);
+}
+.searchbox.is-open .searchbox__panel { transform: none; opacity: 1; }
+
+.searchbox__bar {
+  display: flex; align-items: center; gap: .85rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--ink-line);
+  color: var(--paper-mute);
+}
+.searchbox__bar input {
+  flex: 1; min-width: 0;
+  font: inherit; font-size: 1.0625rem;
+  background: none; border: 0; color: var(--paper);
+  padding: .25rem 0;
+}
+.searchbox__bar input:focus { outline: none; }
+.searchbox__bar input::placeholder { color: var(--paper-mute); }
+.searchbox__bar input::-webkit-search-cancel-button { display: none; }
+.searchbox__esc {
+  font-family: var(--mono); font-size: .5625rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  border: 1px solid var(--ink-line); color: var(--paper-mute);
+  padding: .3rem .5rem;
+  transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.searchbox__esc:hover { border-color: var(--red); color: var(--paper); }
+
+.searchbox__results { overflow-y: auto; flex: 1; }
+.searchbox__group {
+  font-family: var(--mono); font-size: .5625rem;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--paper-mute);
+  padding: 1rem 1.25rem .4rem;
+}
+.searchbox__hit {
+  display: flex; align-items: baseline; gap: .85rem;
+  padding: .8rem 1.25rem;
+  border-left: 2px solid transparent;
+  transition: background .2s var(--ease), border-color .2s var(--ease);
+}
+.searchbox__hit:hover,
+.searchbox__hit.is-active { background: var(--ink); border-left-color: var(--red); }
+.searchbox__hit b { font-weight: 600; font-size: .9688rem; }
+.searchbox__hit b mark { background: none; color: var(--red); }
+.searchbox__hit span {
+  margin-left: auto; flex: none;
+  font-family: var(--mono); font-size: .625rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--paper-mute);
+}
+.searchbox__empty { padding: 2rem 1.25rem; color: var(--paper-dim); font-size: .9375rem; }
+.searchbox__hint {
+  margin: 0; padding: .85rem 1.25rem;
+  border-top: 1px solid var(--ink-line);
+  font-family: var(--mono); font-size: .5625rem;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--paper-mute);
+}
+@media (max-width: 620px) { .searchbox__hint { display: none; } }
