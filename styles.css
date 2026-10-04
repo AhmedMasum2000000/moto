@@ -56,6 +56,9 @@
   /* Headings run on Archivo at its heaviest: a wide, flat-sided grotesque
      that holds its weight in all-caps where Inter starts to look thin. */
   --display: "Archivo", "Arial Black", "Helvetica Neue", Impact, sans-serif;
+  /* brand artwork ships with pure white baked in, so logo plates match it
+     exactly — --paper would leave a visible seam around tall marks */
+  --plate: #ffffff;
 
   --gut: clamp(1.25rem, 4vw, 4rem);
   --max: 1440px;
@@ -1583,7 +1586,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .partners { padding-block: clamp(2.5rem, 6vw, 4rem) 0; border-top: 1px solid var(--ink-line); }
 .partners__row {
   display: grid; gap: 1px;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
   background: var(--ink-line);
   border: 1px solid var(--ink-line);
 }
@@ -1703,4 +1706,65 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) {
   .carousel__track { scroll-behavior: auto; }
   .carousel__arrow { opacity: 1; transform: translateY(-50%); }
+}
+
+/* ==========================================================================
+   Brand marks and banners
+   Real artwork now, so the job is to give colour logos a ground they read on
+   without letting a dozen other brands' palettes loose on the page.
+   ========================================================================== */
+
+/* logo tiles: each mark sits on its own paper plate, which is the one place
+   a brand's own colour is allowed — the page around it stays black and red */
+.brandmarks { display: flex; flex-wrap: wrap; gap: .5rem; }
+.brandmarks span {
+  display: grid; place-items: center;
+  /* logos run from 0.77:1 (BP) to 7.8:1 (Eurogrip), so the plate is a fixed
+     stage and object-fit letterboxes each mark inside it */
+  width: clamp(96px, 12vw, 126px); height: clamp(62px, 7.6vw, 80px);
+  background: var(--plate);
+  border: 1px solid var(--plate);
+  padding: .7rem .85rem;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.brandmarks span:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.45); }
+.brandmarks img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+
+.partners__row span { background: var(--plate); padding: 1.4rem 1.1rem; min-height: 96px; }
+.partners__row span:hover { background: var(--plate); }
+.partners__row img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+
+/* full-width banner slider */
+.hero-slider { padding-block: clamp(1.5rem, 3vw, 2.5rem) 0; }
+.carousel--hero .carousel__track {
+  background: var(--ink-deep);
+  -webkit-mask-image: none; mask-image: none;
+  gap: 0;
+}
+.carousel--hero .slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.carousel--hero .slide img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 2 / 1; object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 1.4s var(--ease);
+}
+.carousel--hero .slide:hover img { transform: scale(1); }
+.carousel--hero .carousel__arrow { width: 52px; height: 52px; opacity: 1; transform: translateY(-50%); }
+.carousel--hero .carousel__arrow--prev { left: 14px; }
+.carousel--hero .carousel__arrow--next { right: 14px; }
+.carousel--hero .carousel__arrow:hover { background: var(--red); border-color: var(--red); }
+.carousel--hero .carousel__dots { margin-top: 1rem; }
+@media (max-width: 760px) {
+  .carousel--hero .carousel__arrow { display: none !important; }
+  .carousel--hero .slide img { aspect-ratio: 16 / 10; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel--hero .slide img { transform: none; transition: none; }
+  .brandmarks span { transition: none; }
 }

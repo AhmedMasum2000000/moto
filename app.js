@@ -956,10 +956,11 @@
       if (!track) return;
 
       const page = () => {
-        // move by whole cards, never leaving one half-cut at the edge
-        const card = $('.card', track);
-        if (!card) return track.clientWidth;
-        const step = card.getBoundingClientRect().width + 1;
+        // move by whole items, never leaving one half-cut at the edge
+        const item = track.firstElementChild;
+        if (!item) return track.clientWidth;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        const step = item.getBoundingClientRect().width + gap;
         return Math.max(step, Math.floor(track.clientWidth / step) * step);
       };
 
@@ -1005,9 +1006,43 @@
         tick = requestAnimationFrame(() => { tick = null; sync(); });
       }, { passive: true });
 
+      // Autoplay, for the banner slider only. It stops for good on any
+      // deliberate input, pauses off-screen and while the tab is hidden, so
+      // it never fights a reader or burns battery in a background tab.
+      const every = Number(root.dataset.autoplay || 0);
+      if (every && !reduced()) {
+        let timer = null, stopped = false, visible = true;
+        const tick = () => {
+          if (stopped || !visible || document.hidden) return;
+          const max = track.scrollWidth - track.clientWidth;
+          if (max <= 2) return;
+          const next = track.scrollLeft >= max - 2 ? 0 : track.scrollLeft + page();
+          track.scrollTo({ left: next, behavior: 'smooth' });
+        };
+        const start = () => { if (!timer && !stopped) timer = setInterval(tick, every); };
+        const stopForGood = () => { stopped = true; clearInterval(timer); timer = null; };
+
+        ['pointerdown', 'keydown', 'wheel'].forEach(ev =>
+          root.addEventListener(ev, stopForGood, { passive: true, once: true }));
+        root.addEventListener('mouseenter', () => { clearInterval(timer); timer = null; });
+        root.addEventListener('mouseleave', start);
+        document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) || (timer = null) : start());
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(es => {
+            visible = es[0].isIntersecting;
+            visible ? start() : (clearInterval(timer), timer = null);
+          }, { threshold: 0.3 }).observe(root);
+        } else start();
+      }
+
       window.addEventListener('resize', sync, { passive: true });
       // card widths settle after fonts land, so measure again then
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+      // images decide the track's real width, so measure again as they land
+      $$('img', track).forEach(img => {
+        if (!img.complete) img.addEventListener('load', sync, { once: true });
+      });
       sync();
       // a band revealed by the filter was zero-width while hidden
       window.addEventListener('mm:urlchange', () => requestAnimationFrame(sync));
