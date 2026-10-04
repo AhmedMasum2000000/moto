@@ -942,6 +942,79 @@
   }
 
   /* =======================================================================
+     Carousels. Native scrolling does the moving, so touch, trackpad and the
+     keyboard all behave the way the platform already does; the arrows and
+     dots just drive scrollLeft. Everything derives from measurement, so a
+     row that fits shows no controls at all.
+     ===================================================================== */
+  function carousels() {
+    $$('[data-carousel]').forEach(root => {
+      const track = $('.carousel__track', root);
+      const prev = $('[data-car="-1"]', root);
+      const next = $('[data-car="1"]', root);
+      const dots = $('[data-car-dots]', root);
+      if (!track) return;
+
+      const page = () => {
+        // move by whole cards, never leaving one half-cut at the edge
+        const card = $('.card', track);
+        if (!card) return track.clientWidth;
+        const step = card.getBoundingClientRect().width + 1;
+        return Math.max(step, Math.floor(track.clientWidth / step) * step);
+      };
+
+      const sync = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        const overflows = max > 2;
+
+        [prev, next].forEach(b => { if (b) b.hidden = !overflows; });
+        if (dots) dots.hidden = !overflows;
+        root.classList.toggle('is-start', track.scrollLeft <= 2);
+        root.classList.toggle('is-end', track.scrollLeft >= max - 2);
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= max - 2;
+
+        if (!dots || !overflows) return;
+        const pages = Math.max(1, Math.ceil(track.scrollWidth / track.clientWidth));
+        if (dots.children.length !== pages) {
+          dots.replaceChildren(...Array.from({ length: pages }, (_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', `Go to page ${i + 1}`);
+            b.addEventListener('click', () => {
+              track.scrollTo({ left: i * track.clientWidth, behavior: reduced() ? 'auto' : 'smooth' });
+            });
+            return b;
+          }));
+        }
+        const at = Math.round(track.scrollLeft / track.clientWidth);
+        [...dots.children].forEach((d, i) => d.classList.toggle('is-on', i === at));
+      };
+
+      const go = dir => track.scrollBy({ left: dir * page(), behavior: reduced() ? 'auto' : 'smooth' });
+      [prev, next].forEach(b => b && b.addEventListener('click', () => go(Number(b.dataset.car))));
+
+      track.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+      });
+
+      let tick = null;
+      track.addEventListener('scroll', () => {
+        if (tick) return;
+        tick = requestAnimationFrame(() => { tick = null; sync(); });
+      }, { passive: true });
+
+      window.addEventListener('resize', sync, { passive: true });
+      // card widths settle after fonts land, so measure again then
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+      sync();
+      // a band revealed by the filter was zero-width while hidden
+      window.addEventListener('mm:urlchange', () => requestAnimationFrame(sync));
+    });
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -1152,7 +1225,8 @@
         bands.forEach(b => {
           const on = key === 'all' || b.dataset.band === key;
           b.hidden = !on;
-          if (on) n += $$('.card', b).length;
+          // the deals row re-shows products that their own band already counts
+          if (on && !b.hasAttribute('data-nocount')) n += $$('.card', b).length;
         });
       } else {
         cards.forEach(c => {
@@ -1255,6 +1329,7 @@ ${d.get('notes') || '—'}`;
     search();
     currentNav();
     mobileMenu();
+    carousels();
     serviceTabs();
     fitment();
     fitBar();
