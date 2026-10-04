@@ -1570,7 +1570,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 760px) { .promo__no { display: none; } .promo__body { margin-left: clamp(0px, 14vw, 90px); } }
 
 .band__head {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: flex-end; justify-content: space-between;
   gap: 1rem; flex-wrap: wrap;
   padding: clamp(1.5rem, 3vw, 2.25rem) 0 1rem;
 }
@@ -1607,3 +1607,100 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .footcols ul { list-style: none; margin: .85rem 0 0; padding: 0; display: grid; gap: .6rem; }
 .footcols a { font-size: .9375rem; color: var(--paper-dim); transition: color .3s var(--ease); }
 .footcols a:hover { color: var(--red); }
+
+/* ==========================================================================
+   Product carousel
+   One row per category, paged by arrows at the left and right edges. Native
+   scroll does the moving — so a finger, a trackpad and the arrow keys all
+   work without us reimplementing momentum — and the arrows just drive it.
+   ========================================================================== */
+
+.carousel { position: relative; }
+
+.carousel__track {
+  display: flex;
+  gap: 1px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  background: var(--ink-line);
+  border: 1px solid var(--ink-line);
+  scrollbar-width: none;
+  /* the row fades out at the edges, so it reads as continuing past the frame */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__track:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.carousel.is-start .carousel__track {
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+          mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+}
+.carousel.is-end .carousel__track {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 100%);
+}
+.carousel.is-start.is-end .carousel__track { -webkit-mask-image: none; mask-image: none; }
+
+.carousel__track > .card {
+  flex: 0 0 clamp(230px, 24%, 300px);
+  scroll-snap-align: start;
+}
+@media (max-width: 900px) { .carousel__track > .card { flex-basis: clamp(210px, 62vw, 260px); } }
+
+/* arrows ride the left and right edges of the row */
+.carousel__arrow {
+  position: absolute; top: 50%; z-index: 3;
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  color: var(--paper);
+  border-radius: 50%;
+  transform: translateY(-50%) scale(.82);
+  opacity: 0;
+  transition: opacity .35s var(--ease), transform .35s var(--ease),
+              background .35s var(--ease), border-color .35s var(--ease);
+}
+.carousel__arrow[hidden] { display: none; }
+.carousel__arrow--prev { left: -10px; }
+.carousel__arrow--next { right: -10px; }
+.carousel:hover .carousel__arrow,
+.carousel:focus-within .carousel__arrow { opacity: 1; transform: translateY(-50%) scale(1); }
+.carousel__arrow:hover { background: var(--red); border-color: var(--red); }
+.carousel__arrow:active { transform: translateY(-50%) scale(.92); }
+.carousel__arrow:disabled { opacity: 0 !important; pointer-events: none; }
+.carousel__arrow:focus-visible { opacity: 1; transform: translateY(-50%) scale(1); outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* on touch the row is swiped, so the arrows stay out of the way */
+@media (hover: none), (pointer: coarse) {
+  .carousel__arrow { display: none !important; }
+  .carousel__track { -webkit-mask-image: none; mask-image: none; }
+}
+
+.carousel__dots {
+  display: flex; justify-content: center; gap: .5rem;
+  margin-top: 1.25rem;
+}
+.carousel__dots button {
+  width: 22px; height: 3px;
+  background: var(--ink-line);
+  transition: background .35s var(--ease), width .35s var(--ease);
+}
+.carousel__dots button:hover { background: var(--paper-mute); }
+.carousel__dots button.is-on { background: var(--red); width: 38px; }
+
+/* the lead deals row */
+.band--deals { padding-top: clamp(1rem, 3vw, 2rem); }
+.band--deals .band__title { color: var(--paper); }
+.badge--off {
+  left: 1.25rem; right: auto;
+  background: var(--paper); color: var(--ink);
+  font-weight: 700;
+}
+.card .badge--off ~ .badge { right: 1.25rem; left: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__track { scroll-behavior: auto; }
+  .carousel__arrow { opacity: 1; transform: translateY(-50%); }
+}
