@@ -1056,6 +1056,76 @@
     });
   }
 
+  /* =======================================================================
+     Which menu item is "current" follows the URL, not the page file: the
+     shop serves five of the six menu entries through ?cat=, so marking it
+     once in the markup would leave Shop lit while the reader is in Tyres.
+     ===================================================================== */
+  function currentNav() {
+    const links = $$('.nav__link, .menu__link');
+    if (!links.length) return;
+
+    const mark = () => {
+      const here = location.pathname.split('/').pop() || 'index.html';
+      const cat = new URL(location.href).searchParams.get('cat');
+
+      const parts = a => {
+        const url = new URL(a.getAttribute('href'), location.href);
+        return { file: url.pathname.split('/').pop() || 'index.html',
+                 cat: url.searchParams.get('cat'),
+                 hash: url.hash };
+      };
+
+      links.forEach(a => {
+        const l = parts(a);
+        // a link only counts as current when file, category and hash all agree;
+        // a link without a hash is not current while the reader sits on one
+        const on = l.file === here &&
+                   (l.cat ? l.cat === cat : !cat) &&
+                   (l.hash ? l.hash === location.hash : !location.hash);
+        if (on) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+
+      // a category or section with no menu entry of its own still belongs to
+      // its page, so fall back to that page's plain link
+      if (!links.some(a => a.hasAttribute('aria-current'))) {
+        links.forEach(a => {
+          const l = parts(a);
+          if (l.file === here && !l.cat && !l.hash) a.setAttribute('aria-current', 'page');
+        });
+      }
+    };
+    mark();
+    window.addEventListener('mm:urlchange', mark);
+    window.addEventListener('popstate', mark);
+  }
+
+  function mobileMenu() {
+    const menu = $('[data-menu]');
+    if (!menu) return;
+    const burger = $('[data-menu-open]');
+
+    const set = open => {
+      menu.hidden = !open;
+      if (open) requestAnimationFrame(() => menu.classList.add('is-open'));
+      else menu.classList.remove('is-open');
+      document.body.classList.toggle('is-locked', open);
+      if (burger) burger.setAttribute('aria-expanded', String(open));
+      if (open) { const first = $('.menu__link', menu); if (first) first.focus(); }
+      else if (burger) burger.focus();
+    };
+    // let the slide finish before the panel leaves the layout
+    const close = () => { menu.classList.remove('is-open'); setTimeout(() => { menu.hidden = true; }, 450);
+                          document.body.classList.remove('is-locked');
+                          if (burger) burger.setAttribute('aria-expanded', 'false'); };
+
+    $$('[data-menu-open]').forEach(b => b.addEventListener('click', () => set(true)));
+    $$('[data-menu-close]').forEach(b => b.addEventListener('click', close));
+    $$('.menu__link', menu).forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) close(); });
+  }
+
   function openDrawer(open) {
     const d = $('.drawer'); const s = $('.scrim');
     if (!d) return;
@@ -1097,6 +1167,7 @@
       const url = new URL(location.href);
       if (key === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', key);
       history.replaceState(null, '', url);
+      window.dispatchEvent(new Event('mm:urlchange'));
 
       // arriving from a link that names a category should land on it
       if (scroll && key !== 'all') {
@@ -1182,6 +1253,8 @@ ${d.get('notes') || '—'}`;
     railTouch();
     scrollFocus();
     search();
+    currentNav();
+    mobileMenu();
     serviceTabs();
     fitment();
     fitBar();
