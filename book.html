@@ -144,13 +144,13 @@
         <text x="0" y="158">BOOK IT</text>
       </svg>
     <div class="footer__bar">
-      <p class="label">© <span id="yr">2026</span> Moto Market · Kushtia, Bangladesh</p>
+      <p class="label">© <span class="yr">2026</span> Moto Market · Kushtia, Bangladesh</p>
       <p class="label"><a href="mailto:motolubebangladesh@gmail.com">motolubebangladesh@gmail.com</a></p>
     </div>
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>document.querySelectorAll('.yr').forEach(e => { e.textContent = new Date().getFullYear(); });</script>
 <div class="searchbox" data-search hidden>
   <div class="searchbox__scrim" data-search-close></div>
   <div class="searchbox__panel" role="dialog" aria-modal="true" aria-label="Search">

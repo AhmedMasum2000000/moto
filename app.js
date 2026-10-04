@@ -46,10 +46,20 @@
     const nav = $('.nav');
     if (!nav) return;
     let last = window.scrollY;
+
+    // Anything else that sticks to the top (the shop's category rail) has to
+    // sit below the nav while it is showing, and take its place once it hides.
+    const setOffset = hidden => document.documentElement.style.setProperty(
+      '--nav-h', hidden ? '0px' : Math.round(nav.getBoundingClientRect().height) + 'px');
+    setOffset(false);
+    window.addEventListener('resize', () => setOffset(nav.classList.contains('is-hidden')), { passive: true });
+
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       nav.classList.toggle('is-stuck', y > 24);
-      nav.classList.toggle('is-hidden', y > 400 && y > last && !document.body.classList.contains('is-locked'));
+      const hide = y > 400 && y > last && !document.body.classList.contains('is-locked');
+      nav.classList.toggle('is-hidden', hide);
+      setOffset(hide);
       last = y;
     }, { passive: true });
   }
@@ -1061,26 +1071,43 @@
   function filters() {
     const chips = $$('[data-filter]');
     if (!chips.length) return;
+    const bands = $$('[data-band]');
     const cards = $$('.card[data-cat]');   // buttons also carry data-cat
     const countEl = $('[data-result-count]');
 
-    const apply = key => {
+    const apply = (key, scroll) => {
       let n = 0;
-      cards.forEach(c => {
-        const show = key === 'all' || c.dataset.cat === key;
-        c.classList.toggle('is-hidden', !show);
-        if (show) n++;
-      });
+      if (bands.length) {
+        // the shop is organised in category bands: show the whole band
+        bands.forEach(b => {
+          const on = key === 'all' || b.dataset.band === key;
+          b.hidden = !on;
+          if (on) n += $$('.card', b).length;
+        });
+      } else {
+        cards.forEach(c => {
+          const on = key === 'all' || c.dataset.cat === key;
+          c.classList.toggle('is-hidden', !on);
+          if (on) n++;
+        });
+      }
       chips.forEach(ch => ch.setAttribute('aria-pressed', String(ch.dataset.filter === key)));
       if (countEl) countEl.textContent = String(n).padStart(2, '0');
+
       const url = new URL(location.href);
       if (key === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', key);
       history.replaceState(null, '', url);
+
+      // arriving from a link that names a category should land on it
+      if (scroll && key !== 'all') {
+        const band = $(`[data-band="${key}"]`);
+        if (band) band.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+      }
     };
 
-    chips.forEach(ch => ch.addEventListener('click', () => apply(ch.dataset.filter)));
+    chips.forEach(ch => ch.addEventListener('click', () => apply(ch.dataset.filter, true)));
     const initial = new URL(location.href).searchParams.get('cat');
-    apply(initial && chips.some(c => c.dataset.filter === initial) ? initial : 'all');
+    apply(initial && chips.some(c => c.dataset.filter === initial) ? initial : 'all', false);
   }
 
   /* =======================================================================
