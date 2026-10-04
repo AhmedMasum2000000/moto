@@ -39,548 +39,706 @@
 
 <main>
 
-<section class="section section--tight wrap" style="padding-top:clamp(7rem,14vw,10rem)">
-  <p class="label label--red" data-reveal>The shelf</p>
-  <h1 class="h-1" data-split style="margin:.75rem 0 1.25rem">real parts. no stories.</h1>
-  <p class="lede" data-reveal style="--d:160ms">
-    Everything here is sealed, sourced and sitting in the shop on R.A. Khan Chowdhury Road.
-    Reserve it online — collect it at the counter, or have us fit it while you wait.
-  </p>
+<section class="shop-hero wrap">
+  <div>
+    <p class="label label--red" data-reveal>The shelf</p>
+    <h1 class="h-1" data-split style="margin:.75rem 0 1rem">Real parts. No stories.</h1>
+    <p class="lede" data-reveal style="--d:140ms">
+      Official dealer for the tyre and oil brands we sell. Everything here is sealed,
+      sourced and sitting in the shop on R.A. Khan Chowdhury Road — reserve it online,
+      collect at the counter, or have us fit it while you wait.
+    </p>
+  </div>
+
+  <div class="fit" data-fitment data-reveal="scale">
+    <div class="fit__head">
+      <p class="label label--red">Fitment check</p>
+      <p class="fit__status"><i aria-hidden="true"></i> Ready</p>
+    </div>
+    <h2 class="h-2" style="margin-bottom:1.5rem">Find your ride</h2>
+
+    <div class="fit__step">
+      <p class="fit__no" id="fit-type-label">01 — Bike or car</p>
+      <div class="picks" role="radiogroup" aria-labelledby="fit-type-label">
+        <label class="pick"><input type="radio" name="fit-type" value="bike" checked><span>Bike</span></label>
+        <label class="pick"><input type="radio" name="fit-type" value="car"><span>Car</span></label>
+      </div>
+    </div>
+    <div class="fit__step">
+      <label class="fit__no" for="fit-brand">02 — Brand</label>
+      <div class="fit__select"><select id="fit-brand" data-fit-brand><option value="">Select brand</option></select></div>
+    </div>
+    <div class="fit__step">
+      <label class="fit__no" for="fit-model">03 — Model</label>
+      <div class="fit__select"><select id="fit-model" data-fit-model disabled><option value="">Select brand first</option></select></div>
+    </div>
+    <a class="btn btn--red btn--block" data-fit-go href="shop.html?cat=parts" aria-disabled="true">
+      View compatible parts <span class="btn__arrow">→</span>
+    </a>
+    <div class="fit__foot">
+      <span data-fit-count>&nbsp;</span>
+      <span>Fitment confirmed before you pay</span>
+    </div>
+  </div>
 </section>
 
-<div class="marquee" data-speed="0.5" data-dir="rtl">
+<div class="marquee" data-speed="0.5" data-dir="rtl" aria-hidden="true">
   <div class="marquee__track">
-    <span class="marquee__item">genuine only</span>
+    <span class="marquee__item">official dealer</span>
     <span class="marquee__item">sealed boxes</span>
     <span class="marquee__item">fitted in the bay</span>
     <span class="marquee__item">reserve online</span>
   </div>
 </div>
 
-  <div class="wrap"><div class="fitbar" data-fitbar hidden>
-    <p><span class="label label--red">Showing for</span> <b data-fitbar-name></b></p>
-    <div class="fitbar__acts">
-      <a class="btn btn--sm btn--red" data-fitbar-wa target="_blank" rel="noopener" href="https://wa.me/8801711154387">Check fitment on WhatsApp</a>
-      <button class="btn btn--ghost btn--sm" type="button" data-fitbar-clear>Clear</button>
-    </div>
-  </div></div>
-
-<section class="section wrap">
-  <div class="shop-head">
-    <div class="filters" role="group" aria-label="Filter by category">
-      <button class="chip" type="button" data-filter="all" aria-pressed="true">Everything</button>
-      <button class="chip" type="button" data-filter="oil" aria-pressed="false">Engine Oil</button>
-      <button class="chip" type="button" data-filter="parts" aria-pressed="false">Spare Parts</button>
-      <button class="chip" type="button" data-filter="after" aria-pressed="false">Aftermarket</button>
-      <button class="chip" type="button" data-filter="tyres" aria-pressed="false">Tyres</button>
-      <button class="chip" type="button" data-filter="helmets" aria-pressed="false">Helmets</button>
-    </div>
-    <p class="label"><span data-result-count>28</span> items</p>
+<div class="wrap"><div class="fitbar" data-fitbar hidden>
+  <p><span class="label label--red">Showing for</span> <b data-fitbar-name></b></p>
+  <div class="fitbar__acts">
+    <a class="btn btn--sm btn--red" data-fitbar-wa target="_blank" rel="noopener" href="https://wa.me/8801711154387">Check fitment on WhatsApp</a>
+    <button class="btn btn--ghost btn--sm" type="button" data-fitbar-clear>Clear</button>
   </div>
+</div></div>
 
-  <div class="grid-products">
-      <article class="card" data-tilt data-cat="oil">
-        <span class="badge">Best seller</span>
-        <div class="card__art"><pre aria-hidden="true">  ___
+<div class="catrail">
+  <div class="wrap catrail__inner">
+    <div class="filters" role="group" aria-label="Filter by category">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">Everything</button>
+        <button class="chip" type="button" data-filter="oil" aria-pressed="false">Engine Oil</button>
+        <button class="chip" type="button" data-filter="tyres" aria-pressed="false">Tyres</button>
+        <button class="chip" type="button" data-filter="parts" aria-pressed="false">Spare Parts</button>
+        <button class="chip" type="button" data-filter="after" aria-pressed="false">Aftermarket</button>
+        <button class="chip" type="button" data-filter="helmets" aria-pressed="false">Helmets &amp; Gear</button>
+    </div>
+    <p class="label"><span data-result-count>36</span> items</p>
+  </div>
+</div>
+
+<div class="wrap">
+    <section class="band" data-band="oil" id="cat-oil">
+      <div class="promo" data-reveal="fade">
+        <div class="promo__slash" aria-hidden="true"></div>
+        <div class="promo__body">
+          <p class="label label--red">Official dealer</p>
+          <h2 class="promo__head">Nine oil brands. One sealed box.</h2>
+          <p class="promo__sub">Mobil · BP · Castrol · Shell · Bajaj · Motul · Liqui Moly · Maxima Pro · Motorex</p>
+        </div>
+        <span class="promo__no" aria-hidden="true">01</span>
+      </div>
+
+      <div class="band__head">
+        <h3 class="band__title">Engine Oil</h3>
+        <p class="label">12 products</p>
+      </div>
+
+      <div class="grid-products">
+        <article class="card" data-tilt data-cat="oil">
+          <span class="badge">Best seller</span>
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | M |
  |___|
  10W40</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Motul 7100 4T 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price"><s>৳1,500</s>৳1,350</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-motul-7100" data-name="Motul 7100 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1350">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Motul 7100 4T 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price"><s>৳1,500</s>৳1,350</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-motul-7100" data-name="Motul 7100 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1350">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | 3 |
  |___|
  20W50</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Motul 3000 4T 20W-50 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳850</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-motul-3000" data-name="Motul 3000 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="850">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Motul 3000 4T 20W-50 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳850</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-motul-3000" data-name="Motul 3000 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="850">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |///|
  | S |
  |___|
  AX7</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Shell Advance AX7 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳980</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-shell-ax7" data-name="Shell Advance AX7 10W-40 · 1L" data-cat="Engine Oil" data-price="980">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <span class="badge">Full synth</span>
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Shell Advance AX7 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳980</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-shell-ax7" data-name="Shell Advance AX7 10W-40 · 1L" data-cat="Engine Oil" data-price="980">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <span class="badge">Full synth</span>
+          <div class="card__art"><pre aria-hidden="true">  ___
  | = |
  | L |
  |___|
  SYNTH</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Liqui Moly Street 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,450</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-liqui-street" data-name="Liqui Moly Street 10W-40 · 1L" data-cat="Engine Oil" data-price="1450">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        
-        <div class="card__art"><pre aria-hidden="true">  __
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Liqui Moly Street 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,450</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-liqui-street" data-name="Liqui Moly Street 10W-40 · 1L" data-cat="Engine Oil" data-price="1450">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  __
  |  |
  |G |
  |__|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Gear Oil 80W-90 · 500ml</h3>
-        <div class="card__row">
-          <p class="card__price">৳320</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-gear" data-name="Gear Oil 80W-90 · 500ml" data-cat="Engine Oil" data-price="320">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        
-        <div class="card__art"><pre aria-hidden="true"> .----.
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Gear Oil 80W-90 · 500ml</h3>
+          <div class="card__row">
+            <p class="card__price">৳320</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-gear" data-name="Gear Oil 80W-90 · 500ml" data-cat="Engine Oil" data-price="320">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true"> .----.
 ( ==== )
  &#x27;----&#x27;</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Oil Filter · OEM fit</h3>
-        <div class="card__row">
-          <p class="card__price">৳280</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-filter" data-name="Oil Filter · OEM fit" data-cat="Engine Oil" data-price="280">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <span class="badge">Official dealer</span>
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Oil Filter · OEM fit</h3>
+          <div class="card__row">
+            <p class="card__price">৳280</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-filter" data-name="Oil Filter · OEM fit" data-cat="Engine Oil" data-price="280">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <span class="badge">Official dealer</span>
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Castrol Power1 4T 10W-50 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,250</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-castrol-power1" data-name="Castrol Power1 4T 10W-50 · 1L" data-cat="Engine Oil" data-price="1250">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Castrol Power1 4T 10W-50 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,250</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-castrol-power1" data-name="Castrol Power1 4T 10W-50 · 1L" data-cat="Engine Oil" data-price="1250">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Mobil Super Moto 4T 20W-50 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳890</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-mobil-super" data-name="Mobil Super Moto 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="890">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Mobil Super Moto 4T 20W-50 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳890</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-mobil-super" data-name="Mobil Super Moto 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="890">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">BP Visco 4T 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳950</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-bp-visco" data-name="BP Visco 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="950">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">BP Visco 4T 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳950</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-bp-visco" data-name="BP Visco 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="950">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Bajaj DTS-i 4T 20W-50 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳780</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-bajaj-dtsi" data-name="Bajaj DTS-i 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="780">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <span class="badge">Full synth</span>
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Bajaj DTS-i 4T 20W-50 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳780</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-bajaj-dtsi" data-name="Bajaj DTS-i 4T 20W-50 · 1L" data-cat="Engine Oil" data-price="780">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <span class="badge">Full synth</span>
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Motorex Formula 4T 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,650</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-motorex" data-name="Motorex Formula 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1650">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="oil">
-        <div class="card__art"><pre aria-hidden="true">  ___
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Motorex Formula 4T 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,650</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-motorex" data-name="Motorex Formula 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1650">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="oil">
+          <div class="card__art"><pre aria-hidden="true">  ___
  |   |
  | # |
  |___|</pre></div>
-        <p class="card__cat">Engine Oil</p>
-        <h3 class="card__name">Maxima Pro Plus 4T 10W-40 · 1L</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,400</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="oil-maximapro" data-name="Maxima Pro Plus 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1400">Add</button>
+          <p class="card__cat">Engine Oil</p>
+          <h3 class="card__name">Maxima Pro Plus 4T 10W-40 · 1L</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,400</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="oil-maximapro" data-name="Maxima Pro Plus 4T 10W-40 · 1L" data-cat="Engine Oil" data-price="1400">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="band" data-band="tyres" id="cat-tyres">
+      <div class="promo" data-reveal="fade">
+        <div class="promo__slash" aria-hidden="true"></div>
+        <div class="promo__body">
+          <p class="label label--red">Official dealer</p>
+          <h2 class="promo__head">Grip is the whole job.</h2>
+          <p class="promo__sub">MRF · CEAT · Pirelli · CST · Eurogrip — fitted and balanced here in the bay</p>
         </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        <span class="badge">Genuine</span>
-        <div class="card__art"><pre aria-hidden="true">[o]-[o]-[o]
- | | | |
-[o]-[o]-[o]</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">D.I.D Chain &amp; Sprocket Kit</h3>
-        <div class="card__row">
-          <p class="card__price"><s>৳4,800</s>৳4,200</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-chain-did" data-name="D.I.D Chain &amp; Sprocket Kit" data-cat="Spare Parts" data-price="4200">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true"> ______
-|######|
-|______|</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">Brake Pads · Front Set</h3>
-        <div class="card__row">
-          <p class="card__price">৳750</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-brake-pad" data-name="Brake Pads · Front Set" data-cat="Spare Parts" data-price="750">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true">  ____
- (    )
- ( () )
- (____)</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">Clutch Plate Set</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,650</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-clutch" data-name="Clutch Plate Set" data-cat="Spare Parts" data-price="1650">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true">|||||||
-|||||||
-|||||||</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">Air Filter · Washable</h3>
-        <div class="card__row">
-          <p class="card__price">৳620</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-airfilter" data-name="Air Filter · Washable" data-cat="Spare Parts" data-price="620">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        <span class="badge">Genuine</span>
-        <div class="card__art"><pre aria-hidden="true">  |
- [#]
-  |
-  &#x27;</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">NGK Spark Plug · Iridium</h3>
-        <div class="card__row">
-          <p class="card__price">৳540</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-spark" data-name="NGK Spark Plug · Iridium" data-cat="Spare Parts" data-price="540">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true">o=========o</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">Clutch &amp; Throttle Cable</h3>
-        <div class="card__row">
-          <p class="card__price">৳290</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-cable" data-name="Clutch &amp; Throttle Cable" data-cat="Spare Parts" data-price="290">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true"> +------+
- | +  - |
- |______|</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">Sealed Battery 12V 7Ah</h3>
-        <div class="card__row">
-          <p class="card__price"><s>৳3,200</s>৳2,900</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-battery" data-name="Sealed Battery 12V 7Ah" data-cat="Spare Parts" data-price="2900">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="parts">
-        
-        <div class="card__art"><pre aria-hidden="true">   \|/
-  -(O)-
-   /|\</pre></div>
-        <p class="card__cat">Spare Parts</p>
-        <h3 class="card__name">LED Headlight Bulb H4</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,250</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="part-bulb" data-name="LED Headlight Bulb H4" data-cat="Spare Parts" data-price="1250">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        <span class="badge">Popular</span>
-        <div class="card__art"><pre aria-hidden="true">  ______
-=(______)==&gt;</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Slip-On Exhaust · Stainless</h3>
-        <div class="card__row">
-          <p class="card__price">৳6,500</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-exhaust" data-name="Slip-On Exhaust · Stainless" data-cat="Aftermarket" data-price="6500">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        
-        <div class="card__art"><pre aria-hidden="true"> /----\
-|      |
- \----/</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Crash Guard · Powder Coated</h3>
-        <div class="card__row">
-          <p class="card__price">৳2,400</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-crash" data-name="Crash Guard · Powder Coated" data-cat="Aftermarket" data-price="2400">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        
-        <div class="card__art"><pre aria-hidden="true">[=====]  [=====]</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Anti-Vibration Grips</h3>
-        <div class="card__row">
-          <p class="card__price">৳680</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-grips" data-name="Anti-Vibration Grips" data-cat="Aftermarket" data-price="680">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        
-        <div class="card__art"><pre aria-hidden="true">  (o)
-   |
-  _|_</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Bar-End Mirrors · Pair</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,900</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-mirror" data-name="Bar-End Mirrors · Pair" data-cat="Aftermarket" data-price="1900">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        
-        <div class="card__art"><pre aria-hidden="true"> .------.
-(________)</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Gel Comfort Seat Cover</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,450</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-seat" data-name="Gel Comfort Seat Cover" data-cat="Aftermarket" data-price="1450">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="after">
-        
-        <div class="card__art"><pre aria-hidden="true"> .------.
-| \\\\ |
- &#x27;------&#x27;</pre></div>
-        <p class="card__cat">Aftermarket</p>
-        <h3 class="card__name">Tank Pad · Carbon Look</h3>
-        <div class="card__row">
-          <p class="card__price">৳550</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="mod-tank" data-name="Tank Pad · Carbon Look" data-cat="Aftermarket" data-price="550">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        <span class="badge">Best seller</span>
-        <div class="card__art"><pre aria-hidden="true">  ####
+        <span class="promo__no" aria-hidden="true">02</span>
+      </div>
+
+      <div class="band__head">
+        <h3 class="band__title">Tyres</h3>
+        <p class="label">06 products</p>
+      </div>
+
+      <div class="grid-products">
+        <article class="card" data-tilt data-cat="tyres">
+          <span class="badge">Best seller</span>
+          <div class="card__art"><pre aria-hidden="true">  ####
  #    #
  #    #
   ####</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">MRF Nylogrip Zapper 100/90-17</h3>
-        <div class="card__row">
-          <p class="card__price">৳3,400</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-mrf-nylo" data-name="MRF Nylogrip Zapper 100/90-17" data-cat="Tyres" data-price="3400">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        <span class="badge">Premium</span>
-        <div class="card__art"><pre aria-hidden="true">  ####
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">MRF Nylogrip Zapper 100/90-17</h3>
+          <div class="card__row">
+            <p class="card__price">৳3,400</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-mrf-nylo" data-name="MRF Nylogrip Zapper 100/90-17" data-cat="Tyres" data-price="3400">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="tyres">
+          <span class="badge">Premium</span>
+          <div class="card__art"><pre aria-hidden="true">  ####
  #\\\\#
  #////#
   ####</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">Pirelli Angel City 110/70-17</h3>
-        <div class="card__row">
-          <p class="card__price">৳9,800</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-pirelli-angel" data-name="Pirelli Angel City 110/70-17" data-cat="Tyres" data-price="9800">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        
-        <div class="card__art"><pre aria-hidden="true">  ####
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">Pirelli Angel City 110/70-17</h3>
+          <div class="card__row">
+            <p class="card__price">৳9,800</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-pirelli-angel" data-name="Pirelli Angel City 110/70-17" data-cat="Tyres" data-price="9800">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="tyres">
+          <div class="card__art"><pre aria-hidden="true">  ####
  # XX #
  # XX #
   ####</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">CEAT Gripp X3 90/90-17</h3>
-        <div class="card__row">
-          <p class="card__price"><s>৳2,900</s>৳2,600</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-ceat" data-name="CEAT Gripp X3 90/90-17" data-cat="Tyres" data-price="2600">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        
-        <div class="card__art"><pre aria-hidden="true">  ,---.
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">CEAT Gripp X3 90/90-17</h3>
+          <div class="card__row">
+            <p class="card__price"><s>৳2,900</s>৳2,600</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-ceat" data-name="CEAT Gripp X3 90/90-17" data-cat="Tyres" data-price="2600">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="tyres">
+          <div class="card__art"><pre aria-hidden="true">  ,---.
  (     )
   &#x27;---&#x27;</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">Butyl Tube · 17 inch</h3>
-        <div class="card__row">
-          <p class="card__price">৳480</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-tube" data-name="Butyl Tube · 17 inch" data-cat="Tyres" data-price="480">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        <span class="badge">Official dealer</span>
-        <div class="card__art"><pre aria-hidden="true">  ####
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">Butyl Tube · 17 inch</h3>
+          <div class="card__row">
+            <p class="card__price">৳480</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-tube" data-name="Butyl Tube · 17 inch" data-cat="Tyres" data-price="480">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="tyres">
+          <span class="badge">Official dealer</span>
+          <div class="card__art"><pre aria-hidden="true">  ####
  #    #
  #    #
   ####</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">CST Rock Hawk 100/90-17</h3>
-        <div class="card__row">
-          <p class="card__price">৳3,100</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-cst" data-name="CST Rock Hawk 100/90-17" data-cat="Tyres" data-price="3100">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="tyres">
-        <div class="card__art"><pre aria-hidden="true">  ####
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">CST Rock Hawk 100/90-17</h3>
+          <div class="card__row">
+            <p class="card__price">৳3,100</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-cst" data-name="CST Rock Hawk 100/90-17" data-cat="Tyres" data-price="3100">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="tyres">
+          <div class="card__art"><pre aria-hidden="true">  ####
  #    #
  #    #
   ####</pre></div>
-        <p class="card__cat">Tyres</p>
-        <h3 class="card__name">Eurogrip Protorq Extreme 110/80-17</h3>
-        <div class="card__row">
-          <p class="card__price">৳4,600</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="tyre-eurogrip" data-name="Eurogrip Protorq Extreme 110/80-17" data-cat="Tyres" data-price="4600">Add</button>
+          <p class="card__cat">Tyres</p>
+          <h3 class="card__name">Eurogrip Protorq Extreme 110/80-17</h3>
+          <div class="card__row">
+            <p class="card__price">৳4,600</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="tyre-eurogrip" data-name="Eurogrip Protorq Extreme 110/80-17" data-cat="Tyres" data-price="4600">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="band" data-band="parts" id="cat-parts">
+      <div class="promo" data-reveal="fade">
+        <div class="promo__slash" aria-hidden="true"></div>
+        <div class="promo__body">
+          <p class="label label--red">Genuine only</p>
+          <h2 class="promo__head">Sealed. Boxed. Shown on request.</h2>
+          <p class="promo__sub">Your old parts handed back, so you can see exactly what was replaced</p>
         </div>
-      </article>
-      <article class="card" data-tilt data-cat="helmets">
-        <span class="badge">ECE 22.06</span>
-        <div class="card__art"><pre aria-hidden="true"> .-----.
+        <span class="promo__no" aria-hidden="true">03</span>
+      </div>
+
+      <div class="band__head">
+        <h3 class="band__title">Spare Parts</h3>
+        <p class="label">08 products</p>
+      </div>
+
+      <div class="grid-products">
+        <article class="card" data-tilt data-cat="parts">
+          <span class="badge">Genuine</span>
+          <div class="card__art"><pre aria-hidden="true">[o]-[o]-[o]
+ | | | |
+[o]-[o]-[o]</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">D.I.D Chain &amp; Sprocket Kit</h3>
+          <div class="card__row">
+            <p class="card__price"><s>৳4,800</s>৳4,200</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-chain-did" data-name="D.I.D Chain &amp; Sprocket Kit" data-cat="Spare Parts" data-price="4200">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true"> ______
+|######|
+|______|</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">Brake Pads · Front Set</h3>
+          <div class="card__row">
+            <p class="card__price">৳750</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-brake-pad" data-name="Brake Pads · Front Set" data-cat="Spare Parts" data-price="750">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true">  ____
+ (    )
+ ( () )
+ (____)</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">Clutch Plate Set</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,650</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-clutch" data-name="Clutch Plate Set" data-cat="Spare Parts" data-price="1650">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true">|||||||
+|||||||
+|||||||</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">Air Filter · Washable</h3>
+          <div class="card__row">
+            <p class="card__price">৳620</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-airfilter" data-name="Air Filter · Washable" data-cat="Spare Parts" data-price="620">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <span class="badge">Genuine</span>
+          <div class="card__art"><pre aria-hidden="true">  |
+ [#]
+  |
+  &#x27;</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">NGK Spark Plug · Iridium</h3>
+          <div class="card__row">
+            <p class="card__price">৳540</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-spark" data-name="NGK Spark Plug · Iridium" data-cat="Spare Parts" data-price="540">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true">o=========o</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">Clutch &amp; Throttle Cable</h3>
+          <div class="card__row">
+            <p class="card__price">৳290</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-cable" data-name="Clutch &amp; Throttle Cable" data-cat="Spare Parts" data-price="290">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true"> +------+
+ | +  - |
+ |______|</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">Sealed Battery 12V 7Ah</h3>
+          <div class="card__row">
+            <p class="card__price"><s>৳3,200</s>৳2,900</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-battery" data-name="Sealed Battery 12V 7Ah" data-cat="Spare Parts" data-price="2900">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="parts">
+          <div class="card__art"><pre aria-hidden="true">   \|/
+  -(O)-
+   /|\</pre></div>
+          <p class="card__cat">Spare Parts</p>
+          <h3 class="card__name">LED Headlight Bulb H4</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,250</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="part-bulb" data-name="LED Headlight Bulb H4" data-cat="Spare Parts" data-price="1250">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="band" data-band="after" id="cat-after">
+      <div class="promo" data-reveal="fade">
+        <div class="promo__slash" aria-hidden="true"></div>
+        <div class="promo__body">
+          <p class="label label--red">Build it right</p>
+          <h2 class="promo__head">We tell you what actually works.</h2>
+          <p class="promo__sub">Exhaust, lighting, comfort and cosmetics — fitted while you wait</p>
+        </div>
+        <span class="promo__no" aria-hidden="true">04</span>
+      </div>
+
+      <div class="band__head">
+        <h3 class="band__title">Aftermarket</h3>
+        <p class="label">06 products</p>
+      </div>
+
+      <div class="grid-products">
+        <article class="card" data-tilt data-cat="after">
+          <span class="badge">Popular</span>
+          <div class="card__art"><pre aria-hidden="true">  ______
+=(______)==&gt;</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Slip-On Exhaust · Stainless</h3>
+          <div class="card__row">
+            <p class="card__price">৳6,500</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-exhaust" data-name="Slip-On Exhaust · Stainless" data-cat="Aftermarket" data-price="6500">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="after">
+          <div class="card__art"><pre aria-hidden="true"> /----\
+|      |
+ \----/</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Crash Guard · Powder Coated</h3>
+          <div class="card__row">
+            <p class="card__price">৳2,400</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-crash" data-name="Crash Guard · Powder Coated" data-cat="Aftermarket" data-price="2400">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="after">
+          <div class="card__art"><pre aria-hidden="true">[=====]  [=====]</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Anti-Vibration Grips</h3>
+          <div class="card__row">
+            <p class="card__price">৳680</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-grips" data-name="Anti-Vibration Grips" data-cat="Aftermarket" data-price="680">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="after">
+          <div class="card__art"><pre aria-hidden="true">  (o)
+   |
+  _|_</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Bar-End Mirrors · Pair</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,900</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-mirror" data-name="Bar-End Mirrors · Pair" data-cat="Aftermarket" data-price="1900">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="after">
+          <div class="card__art"><pre aria-hidden="true"> .------.
+(________)</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Gel Comfort Seat Cover</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,450</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-seat" data-name="Gel Comfort Seat Cover" data-cat="Aftermarket" data-price="1450">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="after">
+          <div class="card__art"><pre aria-hidden="true"> .------.
+| \\\\ |
+ &#x27;------&#x27;</pre></div>
+          <p class="card__cat">Aftermarket</p>
+          <h3 class="card__name">Tank Pad · Carbon Look</h3>
+          <div class="card__row">
+            <p class="card__price">৳550</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="mod-tank" data-name="Tank Pad · Carbon Look" data-cat="Aftermarket" data-price="550">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="band" data-band="helmets" id="cat-helmets">
+      <div class="promo" data-reveal="fade">
+        <div class="promo__slash" aria-hidden="true"></div>
+        <div class="promo__body">
+          <p class="label label--red">Certified only</p>
+          <h2 class="promo__head">DOT and ECE 22.06. Nothing else.</h2>
+          <p class="promo__sub">We would rather lose the sale than sell you a shell that will not hold</p>
+        </div>
+        <span class="promo__no" aria-hidden="true">05</span>
+      </div>
+
+      <div class="band__head">
+        <h3 class="band__title">Helmets &amp; Gear</h3>
+        <p class="label">04 products</p>
+      </div>
+
+      <div class="grid-products">
+        <article class="card" data-tilt data-cat="helmets">
+          <span class="badge">ECE 22.06</span>
+          <div class="card__art"><pre aria-hidden="true"> .-----.
 (  ___  )
  | |_| |
   &#x27;---&#x27;</pre></div>
-        <p class="card__cat">Helmets</p>
-        <h3 class="card__name">AGV K1 S · Full Face</h3>
-        <div class="card__row">
-          <p class="card__price">৳21,500</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="hel-agv-k1" data-name="AGV K1 S · Full Face" data-cat="Helmets" data-price="21500">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="helmets">
-        <span class="badge">DOT</span>
-        <div class="card__art"><pre aria-hidden="true"> .-----.
+          <p class="card__cat">Helmets</p>
+          <h3 class="card__name">AGV K1 S · Full Face</h3>
+          <div class="card__row">
+            <p class="card__price">৳21,500</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="hel-agv-k1" data-name="AGV K1 S · Full Face" data-cat="Helmets" data-price="21500">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="helmets">
+          <span class="badge">DOT</span>
+          <div class="card__art"><pre aria-hidden="true"> .-----.
 ( ##### )
  | |_| |
   &#x27;---&#x27;</pre></div>
-        <p class="card__cat">Helmets</p>
-        <h3 class="card__name">SMK Twister · Full Face</h3>
-        <div class="card__row">
-          <p class="card__price"><s>৳8,600</s>৳7,900</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="hel-smk" data-name="SMK Twister · Full Face" data-cat="Helmets" data-price="7900">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="helmets">
-        
-        <div class="card__art"><pre aria-hidden="true"> .-----.
+          <p class="card__cat">Helmets</p>
+          <h3 class="card__name">SMK Twister · Full Face</h3>
+          <div class="card__row">
+            <p class="card__price"><s>৳8,600</s>৳7,900</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="hel-smk" data-name="SMK Twister · Full Face" data-cat="Helmets" data-price="7900">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="helmets">
+          <div class="card__art"><pre aria-hidden="true"> .-----.
 (  ///  )
  | |_| |
   &#x27;---&#x27;</pre></div>
-        <p class="card__cat">Helmets</p>
-        <h3 class="card__name">MT Thunder 4 SV</h3>
-        <div class="card__row">
-          <p class="card__price">৳9,400</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="hel-mt-thunder" data-name="MT Thunder 4 SV" data-cat="Helmets" data-price="9400">Add</button>
-        </div>
-      </article>
-      <article class="card" data-tilt data-cat="helmets">
-        
-        <div class="card__art"><pre aria-hidden="true">  __ __
+          <p class="card__cat">Helmets</p>
+          <h3 class="card__name">MT Thunder 4 SV</h3>
+          <div class="card__row">
+            <p class="card__price">৳9,400</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="hel-mt-thunder" data-name="MT Thunder 4 SV" data-cat="Helmets" data-price="9400">Add</button>
+          </div>
+        </article>
+        <article class="card" data-tilt data-cat="helmets">
+          <div class="card__art"><pre aria-hidden="true">  __ __
  |  |  |
  |_____|
   |___|</pre></div>
-        <p class="card__cat">Helmets</p>
-        <h3 class="card__name">Riding Gloves · Knuckle Guard</h3>
-        <div class="card__row">
-          <p class="card__price">৳1,800</p>
-          <button class="btn btn--ghost btn--sm" type="button"
-                  data-add="hel-gloves" data-name="Riding Gloves · Knuckle Guard" data-cat="Helmets" data-price="1800">Add</button>
-        </div>
-      </article>
-  </div>
+          <p class="card__cat">Helmets</p>
+          <h3 class="card__name">Riding Gloves · Knuckle Guard</h3>
+          <div class="card__row">
+            <p class="card__price">৳1,800</p>
+            <button class="btn btn--ghost btn--sm" type="button"
+                    data-add="hel-gloves" data-name="Riding Gloves · Knuckle Guard" data-cat="Helmets" data-price="1800">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  <section class="partners">
+    <p class="label label--red" data-reveal>Brand partners</p>
+    <h2 class="h-2" data-split style="margin:.6rem 0 1.75rem">The names on our shelf</h2>
+    <div class="partners__row" data-reveal><span>MRF</span><span>CEAT</span><span>Pirelli</span><span>CST</span><span>Eurogrip</span><span>Mobil</span><span>BP</span><span>Castrol</span><span>Shell</span><span>Bajaj</span><span>Motul</span><span>Liqui Moly</span><span>Maxima Pro</span><span>Motorex</span><span>NGK</span><span>D.I.D</span><span>AGV</span><span>SMK</span><span>MT</span></div>
+  </section>
 
   <p class="note" style="margin-top:2.5rem" data-reveal>
     Prices are indicative and include VAT. Fitting is charged separately and quoted before work starts.
     Don't see your model? Call <a href="tel:+8801711154387" class="red">+880 1711-154387</a> — most parts
     are in the back or here within 48 hours.
   </p>
-</section>
+</div>
 
 </main>
 
 <footer class="footer">
   <div class="wrap">
-      <svg class="footer__word" viewBox="0 0 1120 200" role="img" aria-label="Moto Market" data-reveal="fade">
-        <text x="0" y="158">MOTO MARKET</text>
-      </svg>
+    <div class="footcols">
+      <div>
+        <p class="label label--red">Shop</p>
+        <ul>
+          <li><a href="shop.html?cat=oil">Engine oil</a></li>
+          <li><a href="shop.html?cat=tyres">Tyres</a></li>
+          <li><a href="shop.html?cat=parts">Spare parts</a></li>
+          <li><a href="shop.html?cat=after">Aftermarket</a></li>
+          <li><a href="shop.html?cat=helmets">Helmets &amp; gear</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label label--red">Services</p>
+        <ul>
+          <li><a href="book.html?service=Servicing">Bike servicing</a></li>
+          <li><a href="book.html?service=Washing">Washing</a></li>
+          <li><a href="book.html?service=Painting">Painting</a></li>
+          <li><a href="book.html?service=Modifications">Modifications</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label label--red">Moto Market</p>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#dealer">Official dealer</a></li>
+          <li><a href="index.html#fitment">Find your ride</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label label--red">Come by the bay</p>
+        <ul>
+          <li><a href="tel:+8801711154387">+880 1711-154387</a></li>
+          <li><a href="mailto:motolubebangladesh@gmail.com">motolubebangladesh@gmail.com</a></li>
+          <li><a href="https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000" target="_blank" rel="noopener">R.A. Khan Chowdhury Road<br>Kushtia 7000, Khulna</a></li>
+          <li><a href="https://www.facebook.com/share/1MLq6PjxjY/" target="_blank" rel="noopener">Facebook →</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <svg class="footer__word" viewBox="0 0 1120 200" role="img" aria-label="Moto Market" data-reveal="fade">
+      <text x="0" y="158">MOTO MARKET</text>
+    </svg>
     <div class="footer__bar">
-      <p class="label">© <span id="yr">2026</span> Moto Market · Kushtia, Bangladesh</p>
-      <p class="label"><a href="mailto:motolubebangladesh@gmail.com">motolubebangladesh@gmail.com</a></p>
+      <p class="label">© <span class="yr">2026</span> Moto Market · Kushtia, Bangladesh</p>
+      <p class="label">Cash · bKash · Nagad</p>
     </div>
   </div>
 </footer>
@@ -604,7 +762,7 @@
   </div>
 </aside>
 
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>document.querySelectorAll('.yr').forEach(e => { e.textContent = new Date().getFullYear(); });</script>
 <script id="vehicle-data" type="application/json">{"bike":{"Yamaha":["FZS FI V3","FZ-X","R15 V4","MT-15","Fazer FI V2","Saluto 125","Ray ZR"],"Honda":["CB Hornet 160R","CBR150R","X-Blade","Livo","Shine","Dream Neo","CB Trigger"],"Bajaj":["Pulsar 150","Pulsar NS160","Pulsar N160","Discover 125","Platina 100","Avenger 160","CT100"],"Suzuki":["Gixxer 155","Gixxer SF 155","GSX-R150","Intruder 150","Hayate EP"],"TVS":["Apache RTR 160 4V","Apache RTR 165 RP","Raider 125","Metro Plus","Stryker"],"Hero":["Hunk 150R","Thriller 160R","Xtreme 160R","Glamour","Splendor+","Passion Pro"],"Runner":["Bullet 100","Knight Rider","Turbo 125","Royal Plus","Skooty"],"Lifan":["KPR 165R","KP 165R","Glint 105","K19"]},"car":{"Toyota":["Corolla","Axio","Premio","Allion","Aqua","Prius","Noah","Probox","Harrier"],"Honda":["Civic","Vezel","Fit","Grace","Freed","CR-V"],"Nissan":["X-Trail","Note","Sunny","Bluebird"],"Mitsubishi":["Pajero","Lancer","Outlander"],"Suzuki":["Swift","Alto","Wagon R","Ciaz"],"Hyundai":["Elantra","Tucson","Creta"],"Kia":["Sportage","Rio"],"BYD":["Atto 3","Song Plus"],"Mazda":["Axela","Demio"]}}</script>
 <div class="searchbox" data-search hidden>
   <div class="searchbox__scrim" data-search-close></div>
