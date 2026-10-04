@@ -1050,6 +1050,51 @@
   }
 
   /* =======================================================================
+     Sort the flat catalogue. Featured is the authored order, kept so the
+     sort can always be undone; the rest re-append the same nodes.
+     ===================================================================== */
+  function sorting() {
+    const sel = $('[data-sort]');
+    const grid = $('[data-grid]');
+    if (!sel || !grid) return;
+    const cards = $$('.card', grid);
+    cards.forEach((c, i) => { c.dataset.order = i; });
+    const by = {
+      featured: (a, b) => a.dataset.order - b.dataset.order,
+      save:     (a, b) => b.dataset.save - a.dataset.save || a.dataset.order - b.dataset.order,
+      low:      (a, b) => a.dataset.price - b.dataset.price,
+      high:     (a, b) => b.dataset.price - a.dataset.price,
+      dealer:   (a, b) => b.dataset.dealer - a.dataset.dealer || a.dataset.order - b.dataset.order,
+    };
+    sel.addEventListener('change', () => {
+      cards.slice().sort(by[sel.value] || by.featured).forEach(c => grid.appendChild(c));
+    });
+  }
+
+  /* =======================================================================
+     Brand marks on cards. Any product whose name starts with a dealer brand
+     gets that brand's real mark in the corner of its art — the same chip the
+     reference shows on every card, here only where the brand is genuine.
+     ===================================================================== */
+  function brandChips() {
+    const MARKS = [['Liqui Moly','liqui-moly'],['Eurogrip','eurogrip'],['Castrol','castrol'],['Motorex','motorex'],
+      ['Pirelli','pirelli'],['Maxima','maxima'],['Mobil','mobil'],['Motul','motul'],['Shell','shell'],
+      ['Bajaj','bajaj'],['CEAT','ceat'],['MRF','mrf'],['CST','cst'],['BP','bp']];
+    $$('.card').forEach(card => {
+      const name = ($('.card__name', card) || {}).textContent || '';
+      const hit = MARKS.find(([b]) => name.startsWith(b + ' '));
+      const art = $('.card__art', card);
+      if (!hit || !art || $('.card__brand', art)) return;
+      const img = document.createElement('img');
+      img.className = 'card__brand';
+      img.src = `assets/brands/${hit[1]}.webp`;
+      img.alt = hit[0];
+      img.loading = 'lazy'; img.decoding = 'async';
+      art.appendChild(img);
+    });
+  }
+
+  /* =======================================================================
      Toast
      ===================================================================== */
   let toastTimer;
@@ -1142,6 +1187,20 @@
     cart.render();
 
     document.addEventListener('click', e => {
+      const kit = e.target.closest('[data-kit]');
+      if (kit) {
+        let list = [];
+        try { list = JSON.parse(kit.dataset.kit); } catch {}
+        const items = cart.read();
+        list.forEach(it => {
+          const hit = items.find(i => i.id === it.id);
+          if (hit) hit.qty += 1; else items.push({ ...it, qty: 1 });
+        });
+        cart.write(items);
+        toast(`${list.length} items added`);
+        openDrawer(true);
+        return;
+      }
       const add = e.target.closest('[data-add]');
       if (add) {
         cart.add({
@@ -1272,6 +1331,8 @@
       }
       chips.forEach(ch => ch.setAttribute('aria-pressed', String(ch.dataset.filter === key)));
       if (countEl) countEl.textContent = String(n).padStart(2, '0');
+      const empty = $('[data-empty]');
+      if (empty) empty.hidden = n > 0;
 
       const url = new URL(location.href);
       if (key === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', key);
@@ -1364,6 +1425,8 @@ ${d.get('notes') || '—'}`;
     search();
     currentNav();
     mobileMenu();
+    brandChips();
+    sorting();
     carousels();
     serviceTabs();
     fitment();
