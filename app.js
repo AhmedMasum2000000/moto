@@ -730,6 +730,8 @@
      claim a part fits: the page narrows it down, the counter confirms it.
      ===================================================================== */
   const FIT_KEY = 'mm.vehicle.v1';
+  const SITE = 'https://ahmedmasum2000000.github.io/moto/';
+  const PHONE = '8801711154387';
 
   function vehicleData() {
     const el = $('#vehicle-data');
@@ -738,114 +740,480 @@
   }
 
   function readVehicle() {
-    try { return JSON.parse(localStorage.getItem(FIT_KEY)); } catch { return null; }
+    try {
+      const v = JSON.parse(localStorage.getItem(FIT_KEY));
+      return v && v.brand && v.model && (v.type === 'bike' || v.type === 'car') ? v : null;
+    } catch { return null; }
   }
 
+  // Saving or forgetting the ride tells every listener on the page at once,
+  // so the garage bar under the slider updates without a reload.
+  function saveVehicle(v) {
+    try { localStorage.setItem(FIT_KEY, JSON.stringify(v)); } catch {}
+    window.dispatchEvent(new CustomEvent('mm:vehicle', { detail: v }));
+  }
+  function forgetVehicle() {
+    try { localStorage.removeItem(FIT_KEY); } catch {}
+    window.dispatchEvent(new CustomEvent('mm:vehicle', { detail: null }));
+  }
+
+  const ICONS = {
+    drop:   '<path d="M12 3s-6 6.2-6 10.6a6 6 0 0 0 12 0C18 9.2 12 3 12 3z"/><path d="M9.6 14.4a2.5 2.5 0 0 0 2.4 2.4"/>',
+    tyre:   '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/>',
+    wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.7 5.7a1.9 1.9 0 0 0 2.7 2.7l5.7-5.7a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.4-.4-2.4z"/>',
+    chat:   '<path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5z"/><path d="M9 10.5h6M9 13.5h4"/>',
+    helmet: '<path d="M3.5 16a8.5 8.5 0 0 1 17 0v2.5h-17z"/><path d="M12 7.5V13h8.4"/>',
+    bell:   '<path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+    phone:  '<path d="M5 3.5h3l1.5 4-2 1.2a11 11 0 0 0 5 5l1.2-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3 5.7 2 2 0 0 1 5 3.5z"/>',
+    pin:    '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    wash:   '<path d="M7 4s-3 3.2-3 5.5a3 3 0 0 0 6 0C10 7.2 7 4 7 4zM17 9s-3.5 3.7-3.5 6.4a3.5 3.5 0 0 0 7 0C20.5 12.7 17 9 17 9z"/>',
+    spray:  '<path d="M8.5 9h7v11.5h-7z"/><path d="M10.5 9V6h3v3M16 5h2.5M16 2.8l2-1M16 7.2l2 1"/>',
+  };
+  const ico = name => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+  const wa = text => `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+
+  /* =======================================================================
+     Fitment scanner. Type the model and jump straight to it, or tap through
+     bike-or-car, brand, model. The ride is saved to the visitor's garage and
+     every page reads it back: the shop names it, the booking form fills it
+     in, and this widget greets it on the next visit. Fit itself is confirmed
+     at the counter — nothing here claims a part fits.
+     ===================================================================== */
   function fitment() {
     const root = $('[data-fitment]');
     const DATA = vehicleData();
     if (!root || !DATA) return;
 
-    const brandSel = $('[data-fit-brand]', root);
-    const modelSel = $('[data-fit-model]', root);
-    const go = $('[data-fit-go]', root);
-    const count = $('[data-fit-count]', root);
-    const types = $$('input[name="fit-type"]', root);
+    const picker   = $('[data-fit-picker]', root);
+    const result   = $('[data-fit-result]', root);
+    const status   = $('[data-fit-status]', root);
+    const live     = $('[data-fit-live]', root);
+    const brandsEl = $('[data-fit-brands]', root);
+    const modelsEl = $('[data-fit-models]', root);
+    const stepEls  = $$('[data-step]', root);
+    const segs     = $$('[data-fit-seg]', root);
+    const stepNote = $('[data-fit-stepcount]', root);
+    const q        = $('[data-fit-q]', root);
+    const suggest  = $('[data-fit-suggest]', root);
+    const remind   = $('[data-fit-remind]', root);
 
-    const type = () => (types.find(t => t.checked) || types[0]).value;
+    const has = (t, b, m) => !!(DATA[t] && (!b || (DATA[t][b] && (!m || DATA[t][b].includes(m)))));
+    const count = t => Object.values(DATA[t] || {}).reduce((s, m) => s + m.length, 0);
 
-    const option = (v, label) => {
-      const o = document.createElement('option');
-      o.value = v; o.textContent = label;
-      return o;
-    };
+    // every number on the widget is counted from the data it ships with
+    $$('[data-type-count]', root).forEach(el => { el.textContent = `${count(el.dataset.typeCount)} models`; });
+    const makers = new Set([...Object.keys(DATA.bike || {}), ...Object.keys(DATA.car || {})]).size;
+    const countEl = $('[data-fit-count]', root);
+    if (countEl) countEl.textContent = `${count('bike') + count('car')} models · ${makers} makers · bike & car`;
 
-    const fillBrands = () => {
-      const brands = Object.keys(DATA[type()] || {});
-      brandSel.replaceChildren(option('', 'Select brand'));
-      brands.forEach(b => brandSel.appendChild(option(b, b)));
-      resetModels('Select brand first', true);
-      update();
-    };
+    const state = { type: null, brand: null, model: null };
+    let shownBrands, shownModels, current = null, scanT = 0;
 
-    const resetModels = (placeholder, disabled) => {
-      modelSel.replaceChildren(option('', placeholder));
-      modelSel.disabled = disabled;
-    };
+    const say = msg => { if (live) live.textContent = msg; };
+    const setStatus = (s, label) => { status.dataset.state = s; $('span', status).textContent = label; };
+    const chip = (v, n, i, on) =>
+      `<button type="button" class="fit__chip" data-v="${esc(v)}" aria-pressed="${on}" style="--i:${i}">` +
+      `${esc(v)}${n != null ? `<small>${n}</small>` : ''}</button>`;
 
-    const fillModels = () => {
-      const models = (DATA[type()] || {})[brandSel.value];
-      if (!models) { resetModels('Select brand first', true); update(); return; }
-      resetModels('Select model', false);
-      models.forEach(m => modelSel.appendChild(option(m, m)));
-      update();
-    };
+    function render() {
+      $$('[data-fit-type]', root).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.fitType === state.type)));
 
-    const update = () => {
-      const ready = !!(brandSel.value && modelSel.value);
-      go.setAttribute('aria-disabled', String(!ready));
-      go.textContent = '';
-      go.append(ready ? 'Find parts for this ' + type() : 'View compatible parts', ' ');
-      const arrow = document.createElement('span');
-      arrow.className = 'btn__arrow'; arrow.textContent = '→';
-      go.appendChild(arrow);
+      // lists are rebuilt only when what they list changes, so picking a chip
+      // does not replay the entry animation of the row it sits in
+      if (shownBrands !== state.type) {
+        shownBrands = state.type;
+        const brands = state.type ? Object.keys(DATA[state.type]) : [];
+        brandsEl.innerHTML = brands.map((b, i) => chip(b, DATA[state.type][b].length, i, b === state.brand)).join('');
+      } else {
+        $$('.fit__chip', brandsEl).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.v === state.brand)));
+      }
+      const key = `${state.type}|${state.brand}`;
+      if (shownModels !== key) {
+        shownModels = key;
+        const models = state.type && state.brand ? DATA[state.type][state.brand] : [];
+        modelsEl.innerHTML = models.map((m, i) => chip(m, null, i, m === state.model)).join('');
+      } else {
+        $$('.fit__chip', modelsEl).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.v === state.model)));
+      }
 
-      // the index is only as big as the data actually shipped
-      const n = Object.values(DATA[type()] || {}).reduce((s, m) => s + m.length, 0);
-      if (count) count.textContent = n + ' ' + type() + ' models listed';
-    };
+      stepEls[1].toggleAttribute('data-locked', !state.type);
+      stepEls[2].toggleAttribute('data-locked', !state.brand);
 
-    types.forEach(t => t.addEventListener('change', fillBrands));
-    brandSel.addEventListener('change', fillModels);
-    modelSel.addEventListener('change', update);
+      const done = [state.type, state.brand, state.model].filter(Boolean).length;
+      segs.forEach((s, i) => s.classList.toggle('is-on', i < done));
+      stepNote.textContent = done >= 3 ? 'Locked in' : `Step ${done + 1} of 3`;
+      if (!state.model) setStatus(done ? 'scanning' : 'ready', done ? 'Scanning' : 'Ready');
+    }
 
-    go.addEventListener('click', e => {
-      if (go.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
-      const v = { type: type(), brand: brandSel.value, model: modelSel.value };
-      try { localStorage.setItem(FIT_KEY, JSON.stringify(v)); } catch {}
-    });
+    // a choice higher up the chain clears everything below it
+    function pick(next, fromKeyboard) {
+      if (!has(next.type, next.brand, next.model)) return;
+      clearTimeout(scanT);
+      state.type = next.type || null;
+      state.brand = next.brand || null;
+      state.model = next.model || null;
+      render();
 
-    // come back to a vehicle already chosen
-    const saved = readVehicle();
-    fillBrands();
-    if (saved && DATA[saved.type]) {
-      const t = types.find(x => x.value === saved.type);
-      if (t) { t.checked = true; fillBrands(); }
-      if (DATA[saved.type][saved.brand]) {
-        brandSel.value = saved.brand;
-        fillModels();
-        if (DATA[saved.type][saved.brand].includes(saved.model)) {
-          modelSel.value = saved.model;
-          update();
-        }
+      if (state.model) { lock(); return; }
+      if (state.brand) {
+        say(`${state.brand}: ${DATA[state.type][state.brand].length} models. Pick yours.`);
+        if (fromKeyboard) { const c = $('.fit__chip', modelsEl); if (c) c.focus(); }
+      } else if (state.type) {
+        say(`${Object.keys(DATA[state.type]).length} ${state.type} makers. Pick the badge.`);
+        if (fromKeyboard) { const c = $('.fit__chip', brandsEl); if (c) c.focus(); }
       }
     }
+
+    function lock() {
+      const v = { type: state.type, brand: state.brand, model: state.model, savedAt: Date.now() };
+      saveVehicle(v);
+      setStatus('scanning', 'Scanning');
+      root.classList.add('is-scanning');
+      picker.inert = true;
+      clearTimeout(scanT);
+      scanT = setTimeout(() => {
+        picker.inert = false;
+        root.classList.remove('is-scanning');
+        showResult(v, false);
+      }, reduced() ? 0 : 680);
+    }
+
+    function actionsFor(v) {
+      const name = `${v.brand} ${v.model}`;
+      const book = s => `book.html?service=${encodeURIComponent(s)}&vehicle=${encodeURIComponent(name)}`;
+      // the catalogue is motorcycle stock, so a car never gets sent to it
+      if (v.type === 'car') return {
+        primary: { href: book('Servicing'), label: `Book a service for my ${v.model}` },
+        tiles: [
+          { i: 'chat',  t: 'Ask about parts', s: 'WhatsApp the bay', ext: 1,
+            href: wa(`Assalamu alaikum, Moto Market. I drive a ${name}. Which parts and engine oil can you get for it?`) },
+          { i: 'wash',  t: 'Wash it',         s: 'Foam wash & detail',   href: book('Washing') },
+          { i: 'spray', t: 'Paint work',      s: 'Panel or full respray', href: book('Painting') },
+          { i: 'bell',  t: 'Service reminder', s: 'Add it to your calendar', remind: 1 },
+          { i: 'phone', t: 'Call the bay',    s: '+880 1711-154387', href: 'tel:+8801711154387' },
+          { i: 'pin',   t: 'Directions',      s: 'R.A. Khan Chowdhury Rd', ext: 1,
+            href: 'https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000' },
+        ],
+      };
+      return {
+        primary: { href: wa(`Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`),
+                   label: `Check what fits my ${v.model}`, ext: 1 },
+        tiles: [
+          { i: 'drop',   t: 'Engine oil',      s: 'Dealer brands, sealed',  href: 'shop.html?cat=oil' },
+          { i: 'tyre',   t: 'Tyres',           s: 'Fitted while you wait',  href: 'shop.html?cat=tyres' },
+          { i: 'wrench', t: 'Book a service',  s: 'Price agreed first',     href: book('Servicing') },
+          { i: 'wrench', t: 'Spare parts',     s: 'Genuine & aftermarket', href: 'shop.html?cat=parts' },
+          { i: 'helmet', t: 'Riding gear',     s: 'Certified lids only',    href: 'shop.html?cat=helmets' },
+          { i: 'bell',   t: 'Service reminder', s: 'Add it to your calendar', remind: 1 },
+        ],
+      };
+    }
+
+    function showResult(v, returning) {
+      const plan = actionsFor(v);
+      current = v;
+      picker.hidden = true;
+      result.hidden = false;
+      root.classList.add('is-matched');
+      setStatus('matched', 'Saved');
+
+      $('[data-fit-welcome]', result).textContent = returning ? 'Welcome back — still riding this?' : 'Locked in';
+      $('[data-fit-ride-brand]', result).textContent = v.brand;
+      $('[data-fit-ride-model]', result).textContent = v.model;
+      const cta = $('[data-fit-primary]', result);
+      cta.href = plan.primary.href;
+      if (plan.primary.ext) { cta.target = '_blank'; cta.rel = 'noopener'; } else { cta.removeAttribute('target'); cta.removeAttribute('rel'); }
+      $('[data-fit-primary-l]', cta).textContent = plan.primary.label;
+
+      $('[data-fit-actions]', result).innerHTML = plan.tiles.map(a => a.remind
+        ? `<button type="button" class="fit__act" data-remind-toggle aria-expanded="false" aria-controls="fit-remind">${ico(a.i)}<b>${esc(a.t)}</b><small>${esc(a.s)}</small></button>`
+        : `<a class="fit__act" href="${esc(a.href)}"${a.ext ? ' target="_blank" rel="noopener"' : ''}>${ico(a.i)}<b>${esc(a.t)}</b><small>${esc(a.s)}</small></a>`
+      ).join('');
+
+      remind.hidden = true;
+      $('[data-remind-name]', remind).textContent = `${v.brand} ${v.model}`;
+      setReminder(2);
+
+      say(returning ? `Welcome back. Your saved ride is the ${v.brand} ${v.model}.`
+                    : `Matched: ${v.brand} ${v.model}. Saved to your garage.`);
+      if (!returning) { result.focus({ preventScroll: true }); bringIntoView(); }
+    }
+
+    function bringIntoView() {
+      if (root.getBoundingClientRect().top < 0) root.scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' });
+    }
+
+    function backToPicker(keep) {
+      clearTimeout(scanT);
+      picker.inert = false;
+      root.classList.remove('is-scanning');
+      current = null;
+      result.hidden = true;
+      picker.hidden = false;
+      root.classList.remove('is-matched');
+      state.type = keep ? keep.type : null;
+      state.brand = keep ? keep.brand : null;
+      state.model = null;
+      render();
+    }
+
+    /* -- service reminder: a real calendar event, nothing stored by us ---- */
+    let icsUrl = null, months = 2;
+    const pad = n => String(n).padStart(2, '0');
+    const ymd = d => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+    function addMonths(n) {
+      const d = new Date();
+      const day = d.getDate();
+      d.setDate(1);
+      d.setMonth(d.getMonth() + n);
+      // 31 January plus one month is the end of February, not 3 March
+      d.setDate(Math.min(day, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()));
+      return d;
+    }
+    // RFC 5545 text escaping and 75-octet line folding
+    const icsText = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+    const fold = line => line.length <= 73 ? line : line.match(/.{1,73}/g).join('\r\n ');
+
+    function setReminder(n) {
+      months = n;
+      const v = current;
+      if (!v) return;
+      const name = `${v.brand} ${v.model}`;
+      const day = addMonths(n);
+      const next = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1);
+      const bookUrl = `${SITE}book.html?service=Servicing&vehicle=${encodeURIComponent(name)}`;
+      const title = `Service my ${name} - Moto Market`;
+      const details = `Time to service your ${name}.\nBook a slot: ${bookUrl}\nCall: +880 1711-154387`;
+      const place = 'Moto Market, R.A. Khan Chowdhury Road, Kushtia 7000';
+
+      $$('[data-remind-months]', remind).forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.remindMonths) === n)));
+      $('[data-remind-date]', remind).textContent =
+        day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+
+      $('[data-remind-google]', remind).href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+        `&text=${encodeURIComponent(title)}&dates=${ymd(day)}/${ymd(next)}` +
+        `&details=${encodeURIComponent(details)}&location=${encodeURIComponent(place)}`;
+
+      const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+      const ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Moto Market//Service reminder//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${ymd(day)}-${Math.random().toString(36).slice(2, 10)}@moto-market`,
+        `DTSTAMP:${stamp}`,
+        `DTSTART;VALUE=DATE:${ymd(day)}`,
+        `DTEND;VALUE=DATE:${ymd(next)}`,
+        `SUMMARY:${icsText(title)}`,
+        `DESCRIPTION:${icsText(details)}`,
+        `LOCATION:${icsText(place)}`,
+        'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsText(`Time to service your ${name}`)}`, 'TRIGGER:PT9H', 'END:VALARM',
+        'END:VEVENT', 'END:VCALENDAR',
+      ].map(fold).join('\r\n') + '\r\n';
+      if (icsUrl) URL.revokeObjectURL(icsUrl);
+      icsUrl = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+      $('[data-remind-ics]', remind).href = icsUrl;
+    }
+
+    /* -- type-it search ------------------------------------------------ */
+    const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+    const INDEX = [];
+    ['bike', 'car'].forEach(type => Object.entries(DATA[type] || {}).forEach(([brand, models]) =>
+      models.forEach(model => INDEX.push({ type, brand, model, m: norm(model), k: norm(brand + model) }))));
+    let hits = [], active = -1;
+
+    const closeSuggest = () => {
+      suggest.hidden = true;
+      q.setAttribute('aria-expanded', 'false');
+      q.removeAttribute('aria-activedescendant');
+      active = -1;
+    };
+    const setActive = i => {
+      const opts = $$('[data-hit]', suggest);
+      if (!opts.length) return;
+      active = (i + opts.length) % opts.length;
+      opts.forEach((o, j) => { o.classList.toggle('is-active', j === active); o.setAttribute('aria-selected', String(j === active)); });
+      q.setAttribute('aria-activedescendant', opts[active].id);
+      opts[active].scrollIntoView({ block: 'nearest' });
+    };
+    const markIn = (text, n) => {
+      // highlight the typed run inside the model name, ignoring spacing
+      let i = 0, start = -1, end = -1, seen = '';
+      const plain = text.toLowerCase();
+      for (; i < plain.length; i++) {
+        if (!/[a-z0-9]/.test(plain[i])) continue;
+        if (start < 0 && n.startsWith(plain[i]) && norm(plain.slice(i)).startsWith(n)) { start = i; seen = ''; }
+        if (start >= 0) { seen += plain[i]; if (seen.length === n.length) { end = i + 1; break; } }
+      }
+      return start < 0 || end < 0 ? esc(text)
+        : esc(text.slice(0, start)) + '<mark>' + esc(text.slice(start, end)) + '</mark>' + esc(text.slice(end));
+    };
+
+    function renderSuggest() {
+      const n = norm(q.value);
+      if (!n) { closeSuggest(); return; }
+      hits = INDEX
+        .map(e => ({ e, s: e.m.startsWith(n) ? 0 : e.k.startsWith(n) ? 1 : e.m.includes(n) ? 2 : e.k.includes(n) ? 3 : -1 }))
+        .filter(x => x.s >= 0)
+        .sort((a, b) => a.s - b.s || a.e.k.localeCompare(b.e.k))
+        .slice(0, 8)
+        .map(x => x.e);
+
+      suggest.innerHTML = hits.length
+        ? hits.map((h, i) =>
+            `<li class="fit__opt" role="option" id="fit-opt-${i}" aria-selected="false" data-hit="${i}">` +
+            `<span class="fit__opt-tag">${h.type}</span><span>${esc(h.brand)} <b>${markIn(h.model, n)}</b></span></li>`).join('')
+        : `<li class="fit__opt fit__opt--none" role="option" aria-selected="false" aria-disabled="true">` +
+            `<a href="${esc(wa(`Assalamu alaikum, Moto Market. I ride a ${q.value.trim()}. Can you check parts for it?`))}" target="_blank" rel="noopener">` +
+            `Not listed? Send “${esc(q.value.trim())}” to the bay on <b>WhatsApp →</b></a></li>`;
+      suggest.hidden = false;
+      q.setAttribute('aria-expanded', 'true');
+      if (hits.length) setActive(0); else { active = -1; q.removeAttribute('aria-activedescendant'); }
+    }
+
+    function choose(h) {
+      q.value = '';
+      closeSuggest();
+      pick({ type: h.type, brand: h.brand, model: h.model });
+    }
+
+    q.addEventListener('input', renderSuggest);
+    q.addEventListener('focus', () => { if (q.value) renderSuggest(); });
+    q.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (suggest.hidden) renderSuggest(); else setActive(active + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (suggest.hidden) renderSuggest(); else setActive(active - 1); }
+      else if (e.key === 'Enter') { if (!suggest.hidden && active >= 0 && hits[active]) { e.preventDefault(); choose(hits[active]); } }
+      else if (e.key === 'Escape') { if (!suggest.hidden) { e.preventDefault(); e.stopPropagation(); closeSuggest(); } }
+    });
+    // keep focus in the input while an option is pressed, so blur cannot close the list first
+    suggest.addEventListener('mousedown', e => { if (e.target.closest('.fit__opt')) e.preventDefault(); });
+    suggest.addEventListener('click', e => {
+      const o = e.target.closest('[data-hit]');
+      if (o && hits[o.dataset.hit]) choose(hits[o.dataset.hit]);
+    });
+    q.addEventListener('blur', e => {
+      if (e.relatedTarget && suggest.contains(e.relatedTarget)) return;
+      setTimeout(() => { if (!suggest.contains(document.activeElement)) closeSuggest(); }, 150);
+    });
+    suggest.addEventListener('focusout', e => { if (!suggest.contains(e.relatedTarget) && e.relatedTarget !== q) closeSuggest(); });
+
+    /* -- quick picks: common machines, labelled as picks, not as rankings -- */
+    const QUICK = [['bike', 'Yamaha', 'FZS FI V3'], ['bike', 'Bajaj', 'Pulsar NS160'], ['bike', 'Suzuki', 'Gixxer SF 155'],
+                   ['bike', 'TVS', 'Apache RTR 160 4V'], ['bike', 'Honda', 'CB Hornet 160R'], ['car', 'Toyota', 'Axio']];
+    $('[data-fit-quick]', root).innerHTML = QUICK.filter(([t, b, m]) => has(t, b, m))
+      .map(([t, b, m]) => `<button type="button" class="fit__qp" data-quick="${t}|${esc(b)}|${esc(m)}" aria-label="${esc(`${b} ${m}`)}">${esc(m)}</button>`)
+      .join('');
+
+    /* -- one delegated click handler for everything inside the card ------- */
+    root.addEventListener('click', e => {
+      const kb = e.detail === 0;   // a click raised by Enter or Space
+      const t = e.target.closest('[data-fit-type]');
+      if (t) { pick({ type: t.dataset.fitType }, kb); return; }
+      const c = e.target.closest('.fit__chip');
+      if (c && brandsEl.contains(c)) { pick({ type: state.type, brand: c.dataset.v }, kb); return; }
+      if (c && modelsEl.contains(c)) { pick({ type: state.type, brand: state.brand, model: c.dataset.v }, kb); return; }
+      const qp = e.target.closest('[data-quick]');
+      if (qp) { const [type, brand, model] = qp.dataset.quick.split('|'); pick({ type, brand, model }, kb); return; }
+      if (e.target.closest('[data-fit-change]')) {
+        backToPicker(current || readVehicle());
+        say('Pick a different model, or start over with bike or car.');
+        const first = $('.fit__chip', modelsEl) || $('[data-fit-type]', root);
+        if (first) first.focus({ preventScroll: true });
+        return;
+      }
+      if (e.target.closest('[data-fit-forget]')) {
+        forgetVehicle();
+        backToPicker(null);
+        bringIntoView();
+        say('Ride forgotten.');
+        toast('Ride forgotten');
+        const first = $('[data-fit-type]', root);
+        if (first) first.focus({ preventScroll: true });
+        return;
+      }
+      const tog = e.target.closest('[data-remind-toggle]');
+      if (tog) {
+        const open = remind.hidden;
+        remind.hidden = !open;
+        tog.setAttribute('aria-expanded', String(open));
+        if (open) { setReminder(months); remind.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
+        return;
+      }
+      const mo = e.target.closest('[data-remind-months]');
+      if (mo) { setReminder(Number(mo.dataset.remindMonths)); return; }
+      if (e.target.closest('[data-remind-google], [data-remind-ics]')) toast('Reminder ready — save it in your calendar');
+    });
+
+    // the garage bar elsewhere on the page can forget the ride too
+    window.addEventListener('mm:vehicle', e => {
+      if (!e.detail && (!result.hidden || root.classList.contains('is-scanning'))) backToPicker(null);
+    });
+
+    // the garage bar's Change link lands here and opens the picker on the saved ride
+    function changeFromHash() {
+      if (location.hash !== '#fitment-change') return;
+      history.replaceState(null, '', '#fitment');
+      backToPicker(readVehicle());
+      root.scrollIntoView({ block: 'start' });
+      const first = $('.fit__chip', modelsEl) || $('[data-fit-type]', root);
+      if (first) first.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', changeFromHash);
+
+    // returning visitor: open straight onto their saved ride
+    const saved = readVehicle();
+    if (saved && has(saved.type, saved.brand, saved.model)) {
+      Object.assign(state, { type: saved.type, brand: saved.brand, model: saved.model });
+      render();
+      showResult(saved, true);
+    } else {
+      render();
+    }
+    changeFromHash();
   }
 
-  // The shop shows which vehicle the visitor picked, and offers the one thing
-  // a static page cannot do for them: have a person confirm the fit.
+  // The garage bar names the saved ride on other parts of the site, offers a
+  // person to confirm the fit, and — on the shop — invites a visitor who has
+  // not saved one yet to do it.
   function fitBar() {
     const bar = $('[data-fitbar]');
     if (!bar) return;
-    const v = readVehicle();
-    if (!v || !v.brand || !v.model) { bar.hidden = true; return; }
-
-    const name = [v.brand, v.model].join(' ');
-    bar.hidden = false;
-    $('[data-fitbar-name]', bar).textContent = name;
-
-    const wa = $('[data-fitbar-wa]', bar);
-    if (wa) {
-      wa.href = 'https://wa.me/8801711154387?text=' + encodeURIComponent(
-        `Assalamu alaikum, Moto Market. I ride a ${name} (${v.type}). ` +
-        `Can you confirm which parts fit it?`);
-    }
+    const prompt = bar.hasAttribute('data-fitbar-prompt');
+    const label = $('[data-fitbar-label]', bar);
+    const nameEl = $('[data-fitbar-name]', bar);
+    const waEl = $('[data-fitbar-wa]', bar);
+    const change = $('[data-fitbar-change]', bar);
     const clear = $('[data-fitbar-clear]', bar);
-    if (clear) clear.addEventListener('click', () => {
-      try { localStorage.removeItem(FIT_KEY); } catch {}
-      bar.hidden = true;
-      toast('Vehicle cleared');
-    });
+
+    const draw = e => {
+      const v = e && e.detail !== undefined ? e.detail : readVehicle();
+      bar.classList.toggle('is-empty', !v);
+      if (!v) {
+        bar.hidden = !prompt;
+        if (label) label.textContent = 'No ride saved';
+        nameEl.textContent = 'What do you ride?';
+        if (waEl) waEl.hidden = true;
+        if (clear) clear.hidden = true;
+        if (change) change.textContent = 'Save my ride →';
+        return;
+      }
+      const name = `${v.brand} ${v.model}`;
+      bar.hidden = false;
+      if (label) label.textContent = 'Your ride';
+      nameEl.textContent = name;
+      if (waEl) {
+        waEl.hidden = false;
+        waEl.textContent = v.type === 'car' ? 'Ask about parts on WhatsApp' : 'Check the fit on WhatsApp';
+        waEl.href = wa(v.type === 'car'
+          ? `Assalamu alaikum, Moto Market. I drive a ${name}. Which parts and engine oil can you get for it?`
+          : `Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`);
+      }
+      if (clear) clear.hidden = false;
+      if (change) change.textContent = 'Change';
+    };
+
+    if (clear) clear.addEventListener('click', () => { forgetVehicle(); toast('Ride forgotten');
+      const f = change || $('[data-fit-type]'); if (f) f.focus(); });
+    window.addEventListener('mm:vehicle', draw);
+    draw();
   }
 
   /* =======================================================================
@@ -1331,7 +1699,7 @@
       }
       chips.forEach(ch => ch.setAttribute('aria-pressed', String(ch.dataset.filter === key)));
       if (countEl) countEl.textContent = String(n).padStart(2, '0');
-      const empty = $('[data-empty]');
+      const empty = $('[data-catalog-empty]');
       if (empty) empty.hidden = n > 0;
 
       const url = new URL(location.href);
@@ -1365,9 +1733,21 @@
       if (hit) hit.checked = true;
     }
 
-    // don't let someone book yesterday
+    // a ride saved in the fitment scanner, or passed in the link, fills itself in
+    const veh = form.querySelector('[name="vehicle"]');
+    if (veh && !veh.value) {
+      const fromLink = new URL(location.href).searchParams.get('vehicle');
+      const saved = readVehicle();
+      veh.value = fromLink || (saved ? `${saved.brand} ${saved.model}` : '');
+    }
+
+    // don't let someone book yesterday — local date, since toISOString is UTC
+    // and would still be on yesterday in Dhaka until 6am
     const date = form.querySelector('input[type="date"]');
-    if (date) date.min = new Date().toISOString().slice(0, 10);
+    if (date) {
+      const t = new Date();
+      date.min = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    }
 
     form.addEventListener('submit', e => {
       e.preventDefault();
