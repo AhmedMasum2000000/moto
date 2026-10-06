@@ -56,10 +56,6 @@
   /* Headings run on Archivo at its heaviest: a wide, flat-sided grotesque
      that holds its weight in all-caps where Inter starts to look thin. */
   --display: "Archivo", "Arial Black", "Helvetica Neue", Impact, sans-serif;
-  /* brand artwork ships with pure white baked in, so logo plates match it
-     exactly — --paper would leave a visible seam around tall marks */
-  --plate: #ffffff;
-
   --gut: clamp(1.25rem, 4vw, 4rem);
   --max: 1440px;
 
@@ -1585,21 +1581,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* brand partners */
 .partners { padding-block: clamp(2.5rem, 6vw, 4rem) 0; border-top: 1px solid var(--ink-line); }
 .partners__row {
-  display: grid; gap: 1px;
+  display: grid; gap: .5rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
-  background: var(--ink-line);
-  border: 1px solid var(--ink-line);
 }
 .partners__row span {
-  background: var(--ink-deep);
   display: grid; place-items: center;
   padding: 1.5rem 1rem; min-height: 86px;
   font-family: var(--display); font-weight: 900; text-transform: uppercase;
   font-size: .8125rem; letter-spacing: .02em; color: var(--paper-dim);
   text-align: center;
-  transition: color .35s var(--ease), background .35s var(--ease);
+  transition: transform .35s var(--ease);
 }
-.partners__row span:hover { color: var(--paper); background: var(--ink-soft); }
+.partners__row span:hover { transform: translateY(-3px); }
 
 /* footer columns */
 .footcols {
@@ -1710,29 +1703,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ==========================================================================
    Brand marks and banners
-   Real artwork now, so the job is to give colour logos a ground they read on
-   without letting a dozen other brands' palettes loose on the page.
+   Transparent artwork lets each mark sit directly on the page.
    ========================================================================== */
 
-/* logo tiles: each mark sits on its own paper plate, which is the one place
-   a brand's own colour is allowed — the page around it stays black and red */
+/* Keep a consistent layout for wide and tall marks without visible tiles. */
 .brandmarks { display: flex; flex-wrap: wrap; gap: .5rem; }
 .brandmarks span {
   display: grid; place-items: center;
-  /* logos run from 0.77:1 (BP) to 7.8:1 (Eurogrip), so the plate is a fixed
-     stage and object-fit letterboxes each mark inside it */
+  /* Object-fit keeps each mark's original proportions. */
   width: clamp(96px, 12vw, 126px); height: clamp(62px, 7.6vw, 80px);
-  background: var(--plate);
-  border: 1px solid var(--plate);
   padding: .7rem .85rem;
-  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+  transition: transform .4s var(--ease);
 }
-.brandmarks span:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.45); }
+.brandmarks span:hover { transform: translateY(-3px); }
 .brandmarks img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
 
-.partners__row span { background: var(--plate); padding: 1.4rem 1.1rem; min-height: 96px; }
-.partners__row span:hover { background: var(--plate); }
-.partners__row img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.partners__row span { padding: 1.4rem 1.1rem; min-height: 96px; }
+.partners__row img { width: 100%; height: 64px; min-height: 0; object-fit: contain; }
 
 /* full-width banner slider: edge to edge, and the artwork is shown whole —
    no object-fit crop, no resting scale, the frame takes the banner's own 2:1 */
@@ -1822,7 +1809,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .card__cat b { font-weight: 500; }
 .card__art { position: relative; }
 .card__brand { position: absolute; left: .6rem; bottom: .6rem; height: 26px; width: auto; max-width: 46%;
-  background: var(--plate); padding: 4px 7px; object-fit: contain; }
+  object-fit: contain; }
 
 .empty { padding: 3rem 0; color: var(--paper-dim); }
 

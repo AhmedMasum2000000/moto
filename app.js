@@ -1087,7 +1087,7 @@
       if (!hit || !art || $('.card__brand', art)) return;
       const img = document.createElement('img');
       img.className = 'card__brand';
-      img.src = `assets/brands/${hit[1]}.webp`;
+      img.src = `assets/brands/${hit[1]}-transparent.webp`;
       img.alt = hit[0];
       img.loading = 'lazy'; img.decoding = 'async';
       art.appendChild(img);
