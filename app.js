@@ -807,7 +807,7 @@
     if (countEl) countEl.textContent = `${count('bike') + count('car')} models · ${makers} makers · bike & car`;
 
     const state = { type: null, brand: null, model: null };
-    let shownBrands, shownModels;
+    let shownBrands, shownModels, current = null, scanT = 0;
 
     const say = msg => { if (live) live.textContent = msg; };
     const setStatus = (s, label) => { status.dataset.state = s; $('span', status).textContent = label; };
@@ -848,6 +848,7 @@
     // a choice higher up the chain clears everything below it
     function pick(next, fromKeyboard) {
       if (!has(next.type, next.brand, next.model)) return;
+      clearTimeout(scanT);
       state.type = next.type || null;
       state.brand = next.brand || null;
       state.model = next.model || null;
@@ -868,7 +869,10 @@
       saveVehicle(v);
       setStatus('scanning', 'Scanning');
       root.classList.add('is-scanning');
-      setTimeout(() => {
+      picker.inert = true;
+      clearTimeout(scanT);
+      scanT = setTimeout(() => {
+        picker.inert = false;
         root.classList.remove('is-scanning');
         showResult(v, false);
       }, reduced() ? 0 : 680);
@@ -892,13 +896,13 @@
         ],
       };
       return {
-        primary: { href: 'shop.html?cat=parts', label: `Shop parts for my ${v.model}` },
+        primary: { href: wa(`Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`),
+                   label: `Check what fits my ${v.model}`, ext: 1 },
         tiles: [
           { i: 'drop',   t: 'Engine oil',      s: 'Dealer brands, sealed',  href: 'shop.html?cat=oil' },
           { i: 'tyre',   t: 'Tyres',           s: 'Fitted while you wait',  href: 'shop.html?cat=tyres' },
           { i: 'wrench', t: 'Book a service',  s: 'Price agreed first',     href: book('Servicing') },
-          { i: 'chat',   t: 'Check the fit',   s: 'WhatsApp the bay', ext: 1,
-            href: wa(`Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`) },
+          { i: 'wrench', t: 'Spare parts',     s: 'Genuine & aftermarket', href: 'shop.html?cat=parts' },
           { i: 'helmet', t: 'Riding gear',     s: 'Certified lids only',    href: 'shop.html?cat=helmets' },
           { i: 'bell',   t: 'Service reminder', s: 'Add it to your calendar', remind: 1 },
         ],
@@ -907,16 +911,18 @@
 
     function showResult(v, returning) {
       const plan = actionsFor(v);
+      current = v;
       picker.hidden = true;
       result.hidden = false;
       root.classList.add('is-matched');
-      setStatus('matched', 'Matched');
+      setStatus('matched', 'Saved');
 
       $('[data-fit-welcome]', result).textContent = returning ? 'Welcome back — still riding this?' : 'Locked in';
       $('[data-fit-ride-brand]', result).textContent = v.brand;
       $('[data-fit-ride-model]', result).textContent = v.model;
       const cta = $('[data-fit-primary]', result);
       cta.href = plan.primary.href;
+      if (plan.primary.ext) { cta.target = '_blank'; cta.rel = 'noopener'; } else { cta.removeAttribute('target'); cta.removeAttribute('rel'); }
       $('[data-fit-primary-l]', cta).textContent = plan.primary.label;
 
       $('[data-fit-actions]', result).innerHTML = plan.tiles.map(a => a.remind
@@ -930,10 +936,18 @@
 
       say(returning ? `Welcome back. Your saved ride is the ${v.brand} ${v.model}.`
                     : `Matched: ${v.brand} ${v.model}. Saved to your garage.`);
-      if (!returning) result.focus({ preventScroll: true });
+      if (!returning) { result.focus({ preventScroll: true }); bringIntoView(); }
+    }
+
+    function bringIntoView() {
+      if (root.getBoundingClientRect().top < 0) root.scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' });
     }
 
     function backToPicker(keep) {
+      clearTimeout(scanT);
+      picker.inert = false;
+      root.classList.remove('is-scanning');
+      current = null;
       result.hidden = true;
       picker.hidden = false;
       root.classList.remove('is-matched');
@@ -957,12 +971,12 @@
       return d;
     }
     // RFC 5545 text escaping and 75-octet line folding
-    const icsText = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+    const icsText = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
     const fold = line => line.length <= 73 ? line : line.match(/.{1,73}/g).join('\r\n ');
 
     function setReminder(n) {
       months = n;
-      const v = readVehicle();
+      const v = current;
       if (!v) return;
       const name = `${v.brand} ${v.model}`;
       const day = addMonths(n);
@@ -1065,17 +1079,21 @@
     q.addEventListener('focus', () => { if (q.value) renderSuggest(); });
     q.addEventListener('keydown', e => {
       if (e.key === 'ArrowDown') { e.preventDefault(); if (suggest.hidden) renderSuggest(); else setActive(active + 1); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
-      else if (e.key === 'Enter') { if (active >= 0 && hits[active]) { e.preventDefault(); choose(hits[active]); } }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (suggest.hidden) renderSuggest(); else setActive(active - 1); }
+      else if (e.key === 'Enter') { if (!suggest.hidden && active >= 0 && hits[active]) { e.preventDefault(); choose(hits[active]); } }
       else if (e.key === 'Escape') { if (!suggest.hidden) { e.preventDefault(); e.stopPropagation(); closeSuggest(); } }
     });
     // keep focus in the input while an option is pressed, so blur cannot close the list first
-    suggest.addEventListener('mousedown', e => { if (e.target.closest('[data-hit]')) e.preventDefault(); });
+    suggest.addEventListener('mousedown', e => { if (e.target.closest('.fit__opt')) e.preventDefault(); });
     suggest.addEventListener('click', e => {
       const o = e.target.closest('[data-hit]');
       if (o && hits[o.dataset.hit]) choose(hits[o.dataset.hit]);
     });
-    q.addEventListener('blur', () => setTimeout(closeSuggest, 150));
+    q.addEventListener('blur', e => {
+      if (e.relatedTarget && suggest.contains(e.relatedTarget)) return;
+      setTimeout(() => { if (!suggest.contains(document.activeElement)) closeSuggest(); }, 150);
+    });
+    suggest.addEventListener('focusout', e => { if (!suggest.contains(e.relatedTarget) && e.relatedTarget !== q) closeSuggest(); });
 
     /* -- quick picks: common machines, labelled as picks, not as rankings -- */
     const QUICK = [['bike', 'Yamaha', 'FZS FI V3'], ['bike', 'Bajaj', 'Pulsar NS160'], ['bike', 'Suzuki', 'Gixxer SF 155'],
@@ -1095,7 +1113,7 @@
       const qp = e.target.closest('[data-quick]');
       if (qp) { const [type, brand, model] = qp.dataset.quick.split('|'); pick({ type, brand, model }, kb); return; }
       if (e.target.closest('[data-fit-change]')) {
-        backToPicker(readVehicle());
+        backToPicker(current || readVehicle());
         say('Pick a different model, or start over with bike or car.');
         const first = $('.fit__chip', modelsEl) || $('[data-fit-type]', root);
         if (first) first.focus({ preventScroll: true });
@@ -1104,6 +1122,7 @@
       if (e.target.closest('[data-fit-forget]')) {
         forgetVehicle();
         backToPicker(null);
+        bringIntoView();
         say('Ride forgotten.');
         toast('Ride forgotten');
         const first = $('[data-fit-type]', root);
@@ -1125,8 +1144,19 @@
 
     // the garage bar elsewhere on the page can forget the ride too
     window.addEventListener('mm:vehicle', e => {
-      if (!e.detail && !result.hidden) backToPicker(null);
+      if (!e.detail && (!result.hidden || root.classList.contains('is-scanning'))) backToPicker(null);
     });
+
+    // the garage bar's Change link lands here and opens the picker on the saved ride
+    function changeFromHash() {
+      if (location.hash !== '#fitment-change') return;
+      history.replaceState(null, '', '#fitment');
+      backToPicker(readVehicle());
+      root.scrollIntoView({ block: 'start' });
+      const first = $('.fit__chip', modelsEl) || $('[data-fit-type]', root);
+      if (first) first.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', changeFromHash);
 
     // returning visitor: open straight onto their saved ride
     const saved = readVehicle();
@@ -1137,6 +1167,7 @@
     } else {
       render();
     }
+    changeFromHash();
   }
 
   // The garage bar names the saved ride on other parts of the site, offers a
@@ -1152,8 +1183,8 @@
     const change = $('[data-fitbar-change]', bar);
     const clear = $('[data-fitbar-clear]', bar);
 
-    const draw = () => {
-      const v = readVehicle();
+    const draw = e => {
+      const v = e && e.detail !== undefined ? e.detail : readVehicle();
       bar.classList.toggle('is-empty', !v);
       if (!v) {
         bar.hidden = !prompt;
@@ -1170,13 +1201,17 @@
       nameEl.textContent = name;
       if (waEl) {
         waEl.hidden = false;
-        waEl.href = wa(`Assalamu alaikum, Moto Market. I ride a ${name} (${v.type}). Can you confirm which parts fit it?`);
+        waEl.textContent = v.type === 'car' ? 'Ask about parts on WhatsApp' : 'Check the fit on WhatsApp';
+        waEl.href = wa(v.type === 'car'
+          ? `Assalamu alaikum, Moto Market. I drive a ${name}. Which parts and engine oil can you get for it?`
+          : `Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`);
       }
       if (clear) clear.hidden = false;
       if (change) change.textContent = 'Change';
     };
 
-    if (clear) clear.addEventListener('click', () => { forgetVehicle(); toast('Ride forgotten'); });
+    if (clear) clear.addEventListener('click', () => { forgetVehicle(); toast('Ride forgotten');
+      const f = change || $('[data-fit-type]'); if (f) f.focus(); });
     window.addEventListener('mm:vehicle', draw);
     draw();
   }

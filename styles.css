@@ -1248,6 +1248,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 :root {
   --red-hot:  #ff1f48;
+  --red-hot-text: #ff5470;
   --red-glow: rgba(255, 31, 72, .42);
   --lamp-ok:  #35c27a;
 }
@@ -1513,7 +1514,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
   transform: skewX(-18deg); animation: fit-shine 3.6s 1s var(--ease-io) infinite; pointer-events: none;
 }
-@keyframes fit-shine { 0% { left: -60%; } 40%, 100% { left: 130%; } }
+@keyframes fit-shine { 0% { transform: translateX(0) skewX(-18deg); } 40%, 100% { transform: translateX(475%) skewX(-18deg); } }
 
 .fit__actions {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px;
@@ -2114,3 +2115,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .kit__total { margin: 0; font-family: var(--mono); font-size: 1.25rem; display: grid; }
 .kit__total small { font-size: .5625rem; letter-spacing: .18em; text-transform: uppercase; color: var(--paper-mute); }
 .kit__save { margin: 0; font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+
+/* fitment review fixes */
+.fit { scroll-margin-top: 84px; }
+.fit__eyebrow, .fit__opt-tag, .fit__no b, .fit__welcome, .fit__remind-q b { color: var(--red-hot-text); }
+.fit__seg button[aria-pressed="true"] { background: var(--red); }
