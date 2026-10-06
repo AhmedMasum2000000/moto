@@ -339,34 +339,119 @@
   </div>
 
 <div class="fit" data-fitment data-reveal="scale">
-    <div class="fit__head">
-      <p class="label label--red">Fitment check</p>
-      <p class="fit__status"><i aria-hidden="true"></i> Ready</p>
-    </div>
-    <h2 class="h-2" style="margin-bottom:1.5rem">Find your ride</h2>
+    <div class="fit__scan" aria-hidden="true"></div>
 
-    <div class="fit__step">
-      <p class="fit__no" id="fit-type-label">01 — Bike or car</p>
-      <div class="picks" role="radiogroup" aria-labelledby="fit-type-label">
-        <label class="pick"><input type="radio" name="fit-type" value="bike" checked><span>Bike</span></label>
-        <label class="pick"><input type="radio" name="fit-type" value="car"><span>Car</span></label>
+    <div class="fit__head">
+      <p class="fit__eyebrow">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg>
+        Fitment scanner
+      </p>
+      <p class="fit__status" data-fit-status data-state="ready"><i aria-hidden="true"></i><span>Ready</span></p>
+    </div>
+
+    <!-- picker: type it, or tap through three steps -->
+    <div class="fit__picker" data-fit-picker>
+      <h2 class="fit__title">What do you <em>ride?</em></h2>
+      <p class="fit__sub">Three taps. We pull every part that fits your machine — and remember it for next time.</p>
+
+      <div class="fit__search">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+        <input type="text" data-fit-q role="combobox" aria-expanded="false" aria-controls="fit-suggest"
+               aria-autocomplete="list" autocomplete="off" spellcheck="false"
+               aria-label="Type your bike or car model" placeholder="Type your model — Pulsar, FZS, Gixxer, Axio…">
+        <ul class="fit__suggest" id="fit-suggest" role="listbox" aria-label="Matching models" data-fit-suggest hidden></ul>
+      </div>
+
+      <p class="fit__or"><span>or pick it in three taps</span></p>
+
+      <div class="fit__progress" aria-hidden="true"><i data-fit-seg></i><i data-fit-seg></i><i data-fit-seg></i></div>
+      <p class="fit__stepcount" data-fit-stepcount>Step 1 of 3</p>
+
+      <div class="fit__step" data-step="1">
+        <p class="fit__no"><b>01</b> Two wheels or four?</p>
+        <div class="fit__types" role="group" aria-label="Vehicle type">
+          <button type="button" class="fit__type" data-fit-type="bike" aria-pressed="false">
+            <svg class="fit__vehicle" viewBox="0 0 56 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <g class="wheel"><circle cx="12" cy="25" r="8"/><path d="M12 19v12M6 25h12M7.8 20.8l8.4 8.4M16.2 20.8l-8.4 8.4" stroke-width="1"/></g>
+              <g class="wheel"><circle cx="44" cy="25" r="8"/><path d="M44 19v12M38 25h12M39.8 20.8l8.4 8.4M48.2 20.8l-8.4 8.4" stroke-width="1"/></g>
+              <path d="M12 25l9-10h12l11 10M33 15l3-7h6M38 8l6 17M14 13h8M22 19h9v5h-9z"/>
+            </svg>
+            <span><b>Bike</b><small data-type-count="bike">&nbsp;</small></span>
+          </button>
+          <button type="button" class="fit__type" data-fit-type="car" aria-pressed="false">
+            <svg class="fit__vehicle" viewBox="0 0 56 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 25v-6l6-8h24l9 8h6a2 2 0 0 1 2 2v4M5 25h4M20 25h15M46 25h6M14 11l-2 8h31M27 11v8"/>
+              <g class="wheel"><circle cx="14.5" cy="25.5" r="5.5"/><path d="M14.5 21v9M10 25.5h9" stroke-width="1"/></g>
+              <g class="wheel"><circle cx="40.5" cy="25.5" r="5.5"/><path d="M40.5 21v9M36 25.5h9" stroke-width="1"/></g>
+            </svg>
+            <span><b>Car</b><small data-type-count="car">&nbsp;</small></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="fit__step" data-step="2" data-locked>
+        <p class="fit__no"><b>02</b> Pick the badge</p>
+        <div class="fit__chips" role="group" aria-label="Brand" data-fit-brands data-placeholder="Choose bike or car first"></div>
+      </div>
+
+      <div class="fit__step" data-step="3" data-locked>
+        <p class="fit__no"><b>03</b> Lock in your model</p>
+        <div class="fit__chips" role="group" aria-label="Model" data-fit-models data-placeholder="Pick a brand to see its models"></div>
+      </div>
+
+      <div class="fit__quick">
+        <span class="fit__quick-l">Quick picks</span>
+        <div class="fit__quick-row" data-fit-quick></div>
       </div>
     </div>
-    <div class="fit__step">
-      <label class="fit__no" for="fit-brand">02 — Brand</label>
-      <div class="fit__select"><select id="fit-brand" data-fit-brand><option value="">Select brand</option></select></div>
+
+    <!-- result: the saved ride, and everything we can do for it -->
+    <div class="fit__result" data-fit-result tabindex="-1" hidden>
+      <div class="fit__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <p class="fit__welcome" data-fit-welcome>Locked in</p>
+      <h2 class="fit__ride"><span data-fit-ride-brand></span><b data-fit-ride-model></b></h2>
+      <p class="fit__saved">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3.5L7 20z"/></svg>
+        Saved to your garage. The shop and booking form already know it.
+      </p>
+      <a class="btn btn--red btn--block fit__cta" data-fit-primary href="shop.html?cat=parts"><span data-fit-primary-l>Shop parts</span> <span class="btn__arrow">→</span></a>
+      <div class="fit__actions" data-fit-actions></div>
+
+      <div class="fit__remind" id="fit-remind" data-fit-remind hidden>
+        <p class="fit__remind-q">Nudge me to service my <b data-remind-name></b> in</p>
+        <div class="fit__seg" role="group" aria-label="Reminder interval">
+          <button type="button" data-remind-months="1" aria-pressed="false">1 month</button>
+          <button type="button" data-remind-months="2" aria-pressed="true">2 months</button>
+          <button type="button" data-remind-months="3" aria-pressed="false">3 months</button>
+        </div>
+        <p class="fit__remind-date">Reminder on <b data-remind-date></b></p>
+        <div class="fit__remind-acts">
+          <a class="btn btn--red btn--sm" data-remind-google target="_blank" rel="noopener" href="#">Google Calendar</a>
+          <a class="btn btn--ghost btn--sm" data-remind-ics href="#" download="moto-market-service-reminder.ics">Apple / Outlook (.ics)</a>
+        </div>
+      </div>
+
+      <div class="fit__again">
+        <button type="button" class="fit__link" data-fit-change>
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+          Change ride
+        </button>
+        <button type="button" class="fit__link fit__link--quiet" data-fit-forget>Forget it</button>
+      </div>
     </div>
-    <div class="fit__step">
-      <label class="fit__no" for="fit-model">03 — Model</label>
-      <div class="fit__select"><select id="fit-model" data-fit-model disabled><option value="">Select brand first</option></select></div>
-    </div>
-    <a class="btn btn--red btn--block" data-fit-go href="shop.html?cat=parts" aria-disabled="true">
-      View compatible parts <span class="btn__arrow">→</span>
-    </a>
+
+    <noscript><p class="fit__sub">The scanner needs JavaScript. Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> with your model and we will tell you what fits.</p></noscript>
+
     <div class="fit__foot">
       <span data-fit-count>&nbsp;</span>
-      <span>Fitment confirmed before you pay</span>
+      <span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        Fit confirmed at the counter — before you pay
+      </span>
     </div>
+    <p class="sr-only" aria-live="polite" data-fit-live></p>
   </div>
 </section>
 
@@ -456,9 +541,10 @@
 </section>
 
 <div class="wrap"><div class="fitbar" data-fitbar hidden>
-  <p><span class="label label--red">Showing for</span> <b data-fitbar-name></b></p>
+  <p><span class="label label--red" data-fitbar-label>Your ride</span> <b data-fitbar-name></b></p>
   <div class="fitbar__acts">
-    <a class="btn btn--sm btn--red" data-fitbar-wa target="_blank" rel="noopener" href="https://wa.me/8801711154387">Check fitment on WhatsApp</a>
+    <a class="btn btn--sm btn--red" data-fitbar-wa target="_blank" rel="noopener" href="https://wa.me/8801711154387">Check the fit on WhatsApp</a>
+    <a class="btn btn--ghost btn--sm" data-fitbar-change href="index.html#fitment">Change</a>
     <button class="btn btn--ghost btn--sm" type="button" data-fitbar-clear>Clear</button>
   </div>
 </div></div>
