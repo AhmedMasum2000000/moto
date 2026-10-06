@@ -371,18 +371,30 @@
         <p class="fit__no"><b>01</b> Two wheels or four?</p>
         <div class="fit__types" role="group" aria-label="Vehicle type">
           <button type="button" class="fit__type" data-fit-type="bike" aria-pressed="false">
-            <svg class="fit__vehicle" viewBox="0 0 56 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <g class="wheel"><circle cx="12" cy="25" r="8"/><path d="M12 19v12M6 25h12M7.8 20.8l8.4 8.4M16.2 20.8l-8.4 8.4" stroke-width="1"/></g>
-              <g class="wheel"><circle cx="44" cy="25" r="8"/><path d="M44 19v12M38 25h12M39.8 20.8l8.4 8.4M48.2 20.8l-8.4 8.4" stroke-width="1"/></g>
-              <path d="M12 25l9-10h12l11 10M33 15l3-7h6M38 8l6 17M14 13h8M22 19h9v5h-9z"/>
+            <svg class="fit__vehicle fit__vehicle--bike" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <g class="fit__motion"><path d="M4 16h32M10 24h20M2 48h16"/><path d="M8 68h51m12 0h15m12 0h38"/></g>
+              <g class="fit__machine">
+                <path class="fit__body" d="m18 30 28 3 18-16 22 2 14 11-10 23H58L42 44 21 40 12 33z"/>
+                <path class="fit__detail" d="m60 19 12 14-14 10 9 10h20l12-22-15-10z"/>
+                <path d="M23 45 47 33m10 20-18 0m1-19 12 16m0-17 18 3m28-5 14 26M86 18l7-11h13M68 15 60 8h17l9 11M30 26h18M22 40l-9 6m71 13h20"/>
+                <path class="fit__headlight" d="m99 29 10 3-9 3"/>
+                <g class="fit__wheel"><circle cx="30" cy="55" r="14"/><circle cx="30" cy="55" r="5"/><path d="M30 42v8m12 12-7-4m-17 4 7-4"/></g>
+                <g class="fit__wheel"><circle cx="112" cy="55" r="14"/><circle cx="112" cy="55" r="5"/><path d="M112 42v8m12 12-7-4m-17 4 7-4"/></g>
+              </g>
             </svg>
             <span><b>Bike</b><small data-type-count="bike">&nbsp;</small></span>
           </button>
           <button type="button" class="fit__type" data-fit-type="car" aria-pressed="false">
-            <svg class="fit__vehicle" viewBox="0 0 56 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 25v-6l6-8h24l9 8h6a2 2 0 0 1 2 2v4M5 25h4M20 25h15M46 25h6M14 11l-2 8h31M27 11v8"/>
-              <g class="wheel"><circle cx="14.5" cy="25.5" r="5.5"/><path d="M14.5 21v9M10 25.5h9" stroke-width="1"/></g>
-              <g class="wheel"><circle cx="40.5" cy="25.5" r="5.5"/><path d="M40.5 21v9M36 25.5h9" stroke-width="1"/></g>
+            <svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <g class="fit__motion"><path d="M4 18h30M9 26h20M2 43h14"/><path d="M8 68h49m13 0h17m10 0h40"/></g>
+              <g class="fit__machine">
+                <path class="fit__body" d="m9 47 5-16 21-4 18-13h33l22 15 24 7 4 17h-13a15 15 0 0 0-30 0H51a15 15 0 0 0-30 0H9z"/>
+                <path class="fit__glass" d="m44 28 13-10h26l17 12z"/>
+                <path d="m68 18 3 11M12 41l19-5m18 6h10m61-7h13M9 53h12m30 0h42m30 0h13M36 29h71m-4 17 19 1"/>
+                <path class="fit__headlight" d="m113 35 14 4-12 3"/>
+                <g class="fit__wheel"><circle cx="36" cy="55" r="11"/><circle cx="36" cy="55" r="4"/><path d="M36 44v7m10 10-6-3m-14 3 6-3"/></g>
+                <g class="fit__wheel"><circle cx="108" cy="55" r="11"/><circle cx="108" cy="55" r="4"/><path d="M108 44v7m10 10-6-3m-14 3 6-3"/></g>
+              </g>
             </svg>
             <span><b>Car</b><small data-type-count="car">&nbsp;</small></span>
           </button>
