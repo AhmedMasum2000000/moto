@@ -615,7 +615,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .svc {
   position: relative;
   display: flex; flex-direction: column;
-  min-height: clamp(180px, 20vw, 250px);
+  min-height: clamp(220px, 22vw, 270px);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   width: 100%;
   text-align: left;
@@ -638,7 +638,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .svc[aria-selected="true"] .svc__no,
 .svc[aria-selected="true"] .svc__desc { color: rgba(255,255,255,.86); }
 .svc[aria-selected="true"] .svc__cta { color: #fff; gap: 1.1rem; }
-.svc[aria-selected="true"] .svc__ascii { color: rgba(255,255,255,.18); }
+.svc[aria-selected="true"] .svc__icon { filter: brightness(0) invert(1); }
 .svc:focus-visible { outline: 2px solid var(--red); outline-offset: -4px; }
 .svc__no {
   font-family: var(--mono); font-size: .6875rem;
@@ -669,14 +669,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .svc:hover .svc__no,
 .svc:hover .svc__desc { color: rgba(255,255,255,.86); }
 .svc:hover .svc__cta { color: #fff; gap: 1.1rem; }
-.svc__ascii {
-  position: absolute; right: 1rem; bottom: 1rem; z-index: -1;
-  font-family: var(--mono); font-size: clamp(11px, 1.4vw, 16px); line-height: 1.1;
-  color: var(--ink-line);
-  white-space: pre; pointer-events: none;
-  transition: color .5s var(--ease), transform .8s var(--ease);
+.svc__icon {
+  position: absolute; top: clamp(2.75rem, 4vw, 3.5rem); right: clamp(1.5rem, 3vw, 2.25rem);
+  width: clamp(100px, 9vw, 130px); height: clamp(92px, 9vw, 118px);
+  object-fit: contain; pointer-events: none;
+  transition: transform .45s var(--ease), filter .35s var(--ease);
 }
-.svc:hover .svc__ascii { color: rgba(255,255,255,.18); transform: translate(-6px,-6px); }
+.svc:hover .svc__icon, .svc:focus-visible .svc__icon { transform: translate(-5px, -5px) scale(1.07); }
+@media (prefers-reduced-motion: reduce) {
+  .svc__icon { transition: none; }
+  .svc:hover .svc__icon, .svc:focus-visible .svc__icon { transform: none; }
+}
 
 /* ==========================================================================
    Process rail (horizontal scroll)
@@ -1219,14 +1222,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     radial-gradient(70% 70% at 50% 45%, rgba(220,18,56,.12), transparent 70%),
     var(--ink);
 }
-.svc-panel__art pre {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: clamp(13px, 2.2vw, 22px);
-  line-height: 1.15;
-  color: var(--paper-mute);
-  white-space: pre;
-}
+.svc-panel__icon { width: min(65%, 190px); height: 180px; object-fit: contain; }
 
 @media (max-width: 860px) {
   .svc-panel { grid-template-columns: 1fr; }
