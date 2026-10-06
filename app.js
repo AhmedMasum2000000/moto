@@ -57,7 +57,8 @@
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       nav.classList.toggle('is-stuck', y > 24);
-      const hide = y > 400 && y > last && !document.body.classList.contains('is-locked');
+      const hide = y > 400 && y > last && !document.body.classList.contains('is-locked') &&
+        !nav.classList.contains('has-submenu') && !nav.contains(document.activeElement);
       nav.classList.toggle('is-hidden', hide);
       setOffset(hide);
       last = y;
@@ -1224,22 +1225,24 @@
   }
 
   /* =======================================================================
-     Which menu item is "current" follows the URL, not the page file: the
-     shop serves five of the six menu entries through ?cat=, so marking it
-     once in the markup would leave Shop lit while the reader is in Tyres.
+     Highlight the category, accessory subcategory, or service in the URL.
      ===================================================================== */
   function currentNav() {
-    const links = $$('.nav__link, .menu__link');
+    const links = $$('.nav__link[href], .menu__link[href], .nav__dropdown-link, .menu__sub-link');
     if (!links.length) return;
 
     const mark = () => {
       const here = location.pathname.split('/').pop() || 'index.html';
-      const cat = new URL(location.href).searchParams.get('cat');
+      const catalog = here === 'shop.html' || here === 'index.html';
+      const params = new URL(location.href).searchParams;
+      const cat = params.get('cat');
 
       const parts = a => {
         const url = new URL(a.getAttribute('href'), location.href);
         return { file: url.pathname.split('/').pop() || 'index.html',
                  cat: url.searchParams.get('cat'),
+                 sub: url.searchParams.get('sub'),
+                 service: url.searchParams.get('service'),
                  hash: url.hash };
       };
 
@@ -1247,33 +1250,80 @@
         const l = parts(a);
         // a link only counts as current when file, category and hash all agree;
         // a link without a hash is not current while the reader sits on one
-        const on = l.file === here &&
-                   (l.cat ? l.cat === cat : !cat) &&
+        const on = (l.file === here || (catalog && l.file === 'shop.html' && !!l.cat)) &&
+                   l.cat === cat && l.sub === params.get('sub') &&
+                   l.service === params.get('service') &&
                    (l.hash ? l.hash === location.hash : !location.hash);
         if (on) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
       });
 
-      // a category or section with no menu entry of its own still belongs to
-      // its page, so fall back to that page's plain link
-      if (!links.some(a => a.hasAttribute('aria-current'))) {
-        links.forEach(a => {
-          const l = parts(a);
-          if (l.file === here && !l.cat && !l.hash) a.setAttribute('aria-current', 'page');
-        });
-      }
+      $$('[data-nav-section]').forEach(group => {
+        const on = group.dataset.navSection === 'accessories'
+          ? catalog && cat === 'accessories' : here === 'book.html';
+        const summary = $('summary', group);
+        if (on) summary.setAttribute('aria-current', 'page');
+        else summary.removeAttribute('aria-current');
+      });
     };
     mark();
     window.addEventListener('mm:urlchange', mark);
     window.addEventListener('popstate', mark);
   }
 
+  function navigationDropdowns() {
+    const groups = $$('[data-nav-dropdown]');
+    const nav = $('.nav');
+    const sync = () => {
+      groups.forEach(group => $('summary', group).setAttribute('aria-expanded', String(group.open)));
+      if (nav) nav.classList.toggle('has-submenu', groups.some(g => g.classList.contains('nav__item') && g.open));
+    };
+    groups.forEach(group => {
+      const summary = $('summary', group);
+      group.addEventListener('toggle', sync);
+      if (group.classList.contains('nav__item')) {
+        group.addEventListener('mouseenter', () => {
+          if (!matchMedia('(hover: hover)').matches) return;
+          groups.filter(g => g.classList.contains('nav__item') && g !== group).forEach(g => { g.open = false; });
+          group.open = true; sync();
+        });
+        group.addEventListener('mouseleave', () => {
+          if (!group.contains(document.activeElement)) { group.open = false; sync(); }
+        });
+        group.addEventListener('focusout', () => setTimeout(() => {
+          if (!group.contains(document.activeElement)) { group.open = false; sync(); }
+        }, 0));
+      }
+      group.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && group.open) {
+          e.preventDefault(); e.stopPropagation(); group.open = false; sync(); summary.focus();
+        } else if (e.target === summary && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+          e.preventDefault(); group.open = true; sync();
+          const links = $$('a', group);
+          const next = e.key === 'ArrowDown' ? links[0] : links[links.length - 1];
+          if (next) next.focus();
+        }
+      });
+    });
+    document.addEventListener('pointerdown', e => {
+      groups.filter(g => g.classList.contains('nav__item') && !g.contains(e.target)).forEach(g => { g.open = false; });
+      sync();
+    });
+    window.addEventListener('resize', () => {
+      groups.filter(g => g.classList.contains('nav__item')).forEach(g => { g.open = false; });
+      sync();
+    }, { passive: true });
+    sync();
+  }
+
   function mobileMenu() {
     const menu = $('[data-menu]');
     if (!menu) return;
     const burger = $('[data-menu-open]');
+    let closing = null;
 
     const set = open => {
+      clearTimeout(closing);
       menu.hidden = !open;
       if (open) requestAnimationFrame(() => menu.classList.add('is-open'));
       else menu.classList.remove('is-open');
@@ -1283,14 +1333,23 @@
       else if (burger) burger.focus();
     };
     // let the slide finish before the panel leaves the layout
-    const close = () => { menu.classList.remove('is-open'); setTimeout(() => { menu.hidden = true; }, 450);
+    const close = () => { menu.classList.remove('is-open'); closing = setTimeout(() => { menu.hidden = true; }, 450);
                           document.body.classList.remove('is-locked');
-                          if (burger) burger.setAttribute('aria-expanded', 'false'); };
+                          $$('details', menu).forEach(g => { g.open = false; });
+                          if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.focus(); } };
 
     $$('[data-menu-open]').forEach(b => b.addEventListener('click', () => set(true)));
     $$('[data-menu-close]').forEach(b => b.addEventListener('click', close));
-    $$('.menu__link', menu).forEach(a => a.addEventListener('click', close));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) close(); });
+    $$('a.menu__link, .menu__sub-link', menu).forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => {
+      if (menu.hidden || !menu.classList.contains('is-open') || e.defaultPrevented) return;
+      if (e.key === 'Escape') close();
+      if (e.key !== 'Tab') return;
+      const focusable = $$('a[href], button, summary', menu).filter(el => el.getClientRects().length);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
   }
 
   function openDrawer(open) {
@@ -1311,20 +1370,34 @@
     const bands = $$('[data-band]');
     const cards = $$('.card[data-cat]');   // buttons also carry data-cat
     const countEl = $('[data-result-count]');
+    const categories = new Map($$('[data-accessory-option]').map(a => [a.dataset.accessoryOption, a.textContent.trim()]));
+    const bandCounts = new Map(bands.map(b => {
+      const label = $('.band__head > .label', b);
+      return [b, label ? label.textContent : ''];
+    }));
 
-    const apply = (key, scroll) => {
+    const apply = (key, scroll, sub = null) => {
+      if (key !== 'accessories' || !categories.has(sub)) sub = null;
+      const matches = card => key === 'all' || (key === 'accessories'
+        ? !!card.dataset.accessory && (!sub || card.dataset.accessory === sub)
+        : card.dataset.cat === key);
       let n = 0;
       if (bands.length) {
-        // the shop is organised in category bands: show the whole band
         bands.forEach(b => {
-          const on = key === 'all' || b.dataset.band === key;
+          const items = $$('.card', b);
+          const on = key === 'all' || (key === 'accessories'
+            ? !b.hasAttribute('data-nocount') && items.some(matches) : b.dataset.band === key);
           b.hidden = !on;
+          items.forEach(card => card.classList.toggle('is-hidden', !matches(card)));
+          const label = $('.band__head > .label', b);
+          if (label && !b.hasAttribute('data-nocount')) label.textContent = key === 'accessories'
+            ? `${String(items.filter(matches).length).padStart(2, '0')} products` : bandCounts.get(b);
           // the deals row re-shows products that their own band already counts
-          if (on && !b.hasAttribute('data-nocount')) n += $$('.card', b).length;
+          if (on && !b.hasAttribute('data-nocount')) n += items.filter(matches).length;
         });
       } else {
         cards.forEach(c => {
-          const on = key === 'all' || c.dataset.cat === key;
+          const on = matches(c);
           c.classList.toggle('is-hidden', !on);
           if (on) n++;
         });
@@ -1333,22 +1406,32 @@
       if (countEl) countEl.textContent = String(n).padStart(2, '0');
       const empty = $('[data-empty]');
       if (empty) empty.hidden = n > 0;
+      const context = $('[data-catalog-context]');
+      if (context) {
+        context.hidden = key !== 'accessories';
+        $('[data-catalog-title]', context).textContent = categories.get(sub) || 'All Accessories';
+      }
+      const kits = $('.kits');
+      if (kits) kits.hidden = key !== 'all';
 
       const url = new URL(location.href);
       if (key === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', key);
+      if (sub) url.searchParams.set('sub', sub); else url.searchParams.delete('sub');
       history.replaceState(null, '', url);
       window.dispatchEvent(new Event('mm:urlchange'));
 
       // arriving from a link that names a category should land on it
       if (scroll && key !== 'all') {
-        const band = $(`[data-band="${key}"]`);
+        const band = key === 'accessories' ? context : $(`[data-band="${key}"]`);
         if (band) band.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
       }
     };
 
     chips.forEach(ch => ch.addEventListener('click', () => apply(ch.dataset.filter, true)));
-    const initial = new URL(location.href).searchParams.get('cat');
-    apply(initial && chips.some(c => c.dataset.filter === initial) ? initial : 'all', false);
+    const params = new URL(location.href).searchParams;
+    const initial = params.get('cat') === 'helmets' ? 'accessories' : params.get('cat');
+    apply(initial && chips.some(c => c.dataset.filter === initial) ? initial : 'all', false,
+      params.get('cat') === 'helmets' ? 'helmets' : params.get('sub'));
   }
 
   /* =======================================================================
@@ -1424,6 +1507,7 @@ ${d.get('notes') || '—'}`;
     scrollFocus();
     search();
     currentNav();
+    navigationDropdowns();
     mobileMenu();
     brandChips();
     sorting();
