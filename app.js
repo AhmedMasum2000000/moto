@@ -1632,7 +1632,7 @@
       const cat = new URL(location.href).searchParams.get('cat');
 
       const parts = a => {
-        const url = new URL(a.getAttribute('href'), location.href);
+        const url = new URL(a.getAttribute("href"), document.baseURI);
         return { file: url.pathname.split('/').pop() || 'index.html',
                  cat: url.searchParams.get('cat'),
                  hash: url.hash };
