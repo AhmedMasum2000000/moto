@@ -9,7 +9,7 @@
    password is what unlocks publishing and nothing secret is stored in clear.
 
    Two roles:
-   - Access Administrator: manages accounts, roles and passwords. Nothing else.
+   - Administrator: everything — content plus accounts, roles and passwords.
    - Content Editor: images, products, pages and journal posts. No accounts.
    Everyone can change their own password. */
 (() => {
@@ -25,7 +25,7 @@
   const MIN_PW = 10;
 
   const ROLES = {
-    admin:  { title: 'Access Administrator', can: ['team', 'account'] },
+    admin:  { title: 'Administrator', can: ['images', 'products', 'pages', 'posts', 'team', 'account'] },
     editor: { title: 'Content Editor',       can: ['images', 'products', 'pages', 'posts', 'account'] },
   };
   const SECTIONS = {
@@ -235,7 +235,7 @@
       DB = await loadUsers(false);
       const u = DB.users.find(x => x.username === username);
       if (!u) return 'Wrong username or password.';
-      if (u.active === false) return 'This account is switched off. Ask the Access Administrator.';
+      if (u.active === false) return 'This account is switched off. Ask an Administrator.';
       let token;
       try { token = await unseal(u.vault, f.password.value); } catch { return 'Wrong username or password.'; }
       TOKEN = token;
@@ -267,7 +267,7 @@
       DB = { version: 1, users: [{ username, name: f.name.value.trim(), role: 'admin', active: true,
         vault: await seal(token, f.password.value), created: now, updated: now }] };
       ME = { username, name: DB.users[0].name, role: 'admin' };
-      await commit([{ path: USERS, content: json(DB) }], 'Studio: create the first Access Administrator');
+      await commit([{ path: USERS, content: json(DB) }], 'Studio: create the first Administrator');
       sessionStorage.setItem(SKEY, JSON.stringify({ username, token }));
       return null;
     });
@@ -355,13 +355,13 @@
   });
 
   /* =====================================================================
-     TEAM & ACCESS (Access Administrator only)
+     TEAM & ACCESS (Administrator only)
      ===================================================================== */
   VIEWS.team = async main => {
     DB = await loadUsers(true);
     const admins = DB.users.filter(u => u.role === 'admin' && u.active !== false).length;
     main.innerHTML = head('Team & Access',
-      'Add people, choose what they can do, switch accounts off and reset passwords. <b>Access Administrators</b> manage accounts only; <b>Content Editors</b> change images, products, pages and posts.',
+      'Add people, choose what they can do, switch accounts off and reset passwords. <b>Administrators</b> can do everything, including accounts; <b>Content Editors</b> change images, products, pages and posts.',
       '<button class="btn btn--red" type="button" data-add-user>+ Add person</button>') +
       `<div class="wrapx"><table class="table"><thead><tr><th>Person</th><th>Username</th><th>Role</th><th>Status</th><th>Last change</th><th></th></tr></thead><tbody>` +
       DB.users.map(u => `<tr>
@@ -461,7 +461,7 @@
           <div class="row"><button class="btn" type="button" data-cancel>Cancel</button><button class="btn btn--red" type="submit">Save</button></div>`,
           async f => {
             const role = f.role.value, active = f.active.value === '1';
-            if (lastAdmin(u) && (role !== 'admin' || !active)) return 'This is the last active Access Administrator. Make someone else an administrator first.';
+            if (lastAdmin(u) && (role !== 'admin' || !active)) return 'This is the last active Administrator. Make someone else an administrator first.';
             const r = await task('Saving…', () => saveUsers(`Studio: update access for ${u.username}`, async d => {
               const x = d.users.find(y => y.username === u.username);
               if (!x) return 'That account no longer exists.';
@@ -501,7 +501,7 @@
       }
       if (rm && !rm.disabled) {
         const u = DB.users.find(x => x.username === rm.dataset.remove);
-        if (lastAdmin(u)) { toast('That is the last active Access Administrator.', true); return; }
+        if (lastAdmin(u)) { toast('That is the last active Administrator.', true); return; }
         if (!(await confirmBox(`Remove ${u.name}?`, `<b>${esc(u.username)}</b> will no longer be able to sign in. This cannot be undone, but you can add them again.`, 'Remove'))) return;
         const r = await task('Removing…', () => saveUsers(`Studio: remove ${u.username}`, async d => {
           d.users = d.users.filter(y => y.username !== u.username);
