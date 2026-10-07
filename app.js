@@ -808,6 +808,7 @@
 
     const state = { type: null, brand: null, model: null };
     let shownBrands, shownModels, current = null, scanT = 0;
+    const launchTimers = new WeakMap();
 
     const say = msg => { if (live) live.textContent = msg; };
     const setStatus = (s, label) => { status.dataset.state = s; $('span', status).textContent = label; };
@@ -1102,11 +1103,37 @@
       .map(([t, b, m]) => `<button type="button" class="fit__qp" data-quick="${t}|${esc(b)}|${esc(m)}" aria-label="${esc(`${b} ${m}`)}">${esc(m)}</button>`)
       .join('');
 
+    // The card's red highlight follows a mouse or stylus. Touch and keyboard
+    // selection still get the same visible pressed state and motion cues.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced()) {
+      $$('[data-fit-type]', root).forEach(button => {
+        button.addEventListener('pointermove', e => {
+          const box = button.getBoundingClientRect();
+          button.style.setProperty('--fit-x', `${e.clientX - box.left}px`);
+          button.style.setProperty('--fit-y', `${e.clientY - box.top}px`);
+        }, { passive: true });
+        button.addEventListener('pointerleave', () => {
+          button.style.removeProperty('--fit-x');
+          button.style.removeProperty('--fit-y');
+        });
+      });
+    }
+
     /* -- one delegated click handler for everything inside the card ------- */
     root.addEventListener('click', e => {
       const kb = e.detail === 0;   // a click raised by Enter or Space
       const t = e.target.closest('[data-fit-type]');
-      if (t) { pick({ type: t.dataset.fitType }, kb); return; }
+      if (t) {
+        if (!reduced()) {
+          clearTimeout(launchTimers.get(t));
+          t.classList.remove('is-launching');
+          void t.offsetWidth; // replay the short launch on repeat taps
+          t.classList.add('is-launching');
+          launchTimers.set(t, setTimeout(() => t.classList.remove('is-launching'), 550));
+        }
+        pick({ type: t.dataset.fitType }, kb);
+        return;
+      }
       const c = e.target.closest('.fit__chip');
       if (c && brandsEl.contains(c)) { pick({ type: state.type, brand: c.dataset.v }, kb); return; }
       if (c && modelsEl.contains(c)) { pick({ type: state.type, brand: state.brand, model: c.dataset.v }, kb); return; }
