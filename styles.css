@@ -2151,3 +2151,51 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fit { scroll-margin-top: 84px; }
 .fit__eyebrow, .fit__opt-tag, .fit__no b, .fit__welcome, .fit__remind-q b { color: var(--red-hot-text); }
 .fit__seg button[aria-pressed="true"] { background: var(--red); }
+
+/* =========================================================================
+   CMS output: pages built from code, journal posts and their listing.
+   Everything the admin publishes renders through these rules, so a new
+   page or post always looks like the rest of the site.
+   ========================================================================= */
+.card__art .card__photo { width: 100%; height: 100%; object-fit: contain; padding: 8%; }
+
+.cms-page { padding: clamp(7rem, 12vw, 9rem) 0 clamp(4rem, 8vw, 6rem); }
+
+.prose { max-width: 70ch; color: var(--paper-dim); font-size: 1.0625rem; line-height: 1.75; }
+.prose > * + * { margin-top: 1.1em; }
+.prose h2, .prose h3 { color: var(--paper); font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin-top: 1.8em; }
+.prose h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.prose h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); }
+.prose strong { color: var(--paper); }
+.prose a { color: var(--red-hot-text, #ff5470); text-decoration: underline; text-underline-offset: .2em; }
+.prose ul, .prose ol { padding-left: 1.25em; }
+.prose li + li { margin-top: .4em; }
+.prose blockquote { margin-left: 0; padding-left: 1.1em; border-left: 3px solid var(--red); color: var(--paper); font-style: italic; }
+.prose img { max-width: 100%; height: auto; border: 1px solid var(--ink-line); }
+
+.post { padding: clamp(7rem, 12vw, 9rem) 0 clamp(4rem, 8vw, 6rem); }
+.post__crumbs { font-family: var(--mono); font-size: .6875rem; letter-spacing: .2em; text-transform: uppercase; color: var(--paper-mute); margin-bottom: 1.5rem; }
+.post__crumbs a { color: var(--paper-dim); }
+.post__crumbs a:hover { color: var(--red); }
+.post__title { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: .95; margin: .6rem 0 1rem; max-width: 18ch; }
+.post__meta { font-family: var(--mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-mute); }
+.post__excerpt { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--paper); max-width: 52ch; margin: 1.25rem 0 0; }
+.post__cover { margin: 2.25rem 0; border: 1px solid var(--ink-line); background: var(--ink-soft); }
+.post__cover img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: cover; }
+.post__cta { margin-top: 3.5rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--ink-line); background: radial-gradient(80% 120% at 0% 0%, rgba(220,18,56,.16), transparent 60%), var(--ink-soft); display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; justify-content: space-between; }
+.post__cta h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(1.3rem, 3vw, 1.9rem); margin: .3rem 0 0; }
+.post__cta div:last-child { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+.journal { padding: clamp(7rem, 12vw, 9rem) 0 clamp(4rem, 8vw, 6rem); }
+.journal__head h1 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.6rem, 8vw, 6rem); line-height: .9; margin: .6rem 0 1rem; }
+.journal__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1px; margin-top: 2.5rem; background: var(--ink-line); border: 1px solid var(--ink-line); }
+.journal__card { display: flex; flex-direction: column; background: var(--ink); color: inherit; text-decoration: none; transition: background .3s var(--ease); }
+.journal__card:hover { background: var(--ink-soft); }
+.journal__card figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ink-soft); }
+.journal__card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.journal__card:hover img { transform: scale(1.04); }
+.journal__card div { padding: 1.25rem 1.25rem 1.5rem; display: grid; gap: .5rem; }
+.journal__card h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 1.35rem; line-height: 1.05; margin: 0; }
+.journal__card p { margin: 0; color: var(--paper-dim); font-size: .95rem; }
+.journal__card .label { color: var(--paper-mute); }
+.journal__empty { margin-top: 2.5rem; color: var(--paper-dim); }
