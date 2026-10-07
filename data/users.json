@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "users": [
+    {
+      "username": "motomarketbest2000_26",
+      "name": "motomarket er admin",
+      "role": "admin",
+      "active": true,
+      "vault": {
+        "kdf": "PBKDF2-SHA256",
+        "iter": 600000,
+        "salt": "P+YnEPbfJJB5mq9t/GxgLw==",
+        "iv": "4Z1sW1XhuJdJ70IX",
+        "ct": "nizAyVBmmXjatxjJGQyveAn0i6I6ZTUEH0gPt4R62amaDCBZp4nBwxqyRRAq63mfPwhxmzufvX6gsY2xsPz93XYrA1HKaBVSI1qxkgI5cEM7ih9acpgNhEqrdQxMXd0fSnyHO4wf2b+hcnWwTA=="
+      },
+      "created": "2026-10-07T13:49:20.423Z",
+      "updated": "2026-10-07T13:49:20.423Z"
+    }
+  ]
+}
