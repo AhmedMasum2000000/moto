@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "slug": "new-arrival",
+      "title": "New Arrival",
+      "date": "2026-10-09",
+      "category": "Yamaha",
+      "excerpt": "PFF POLY",
+      "cover": "assets/uploads/posts/black-mv0m80lr.webp",
+      "coverAlt": "hello",
+      "body": "jhdsbcjdsbdsb",
+      "status": "published",
+      "author": "motomarket er admin",
+      "updated": "2026-10-09T06:59:48.115Z",
+      "created": "2026-10-09T06:59:48.115Z"
+    }
+  ]
+}
