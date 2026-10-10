@@ -1,4 +1,4 @@
-import {homeCards} from './home-cards.js?v=1';
+import {homeCards} from './home-cards.js?v=2';
 import {catalogFinder} from './finder.js?v=category-services-1';
 import {cookieCard} from './cookies.js?v=cookie-cover-2';
 import {ridePreferences} from './preferences.mjs';
