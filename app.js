@@ -729,7 +729,6 @@
      The chosen vehicle is remembered and shown on the shop page. We never
      claim a part fits: the page narrows it down, the counter confirms it.
      ===================================================================== */
-  const FIT_KEY = 'mm.vehicle.v1';
   const SITE = 'https://ahmedmasum2000000.github.io/moto/';
   const PHONE = (window.MM_CONTENT?.settings.whatsapp||'8801711154387').replace(/\D/g,'');
 
@@ -741,7 +740,7 @@
 
   function readVehicle() {
     try {
-      const v = JSON.parse(localStorage.getItem(FIT_KEY));
+      const v = window.MM_RIDE_STORAGE?.readRide();
       return v && v.brand && v.model && (v.type === 'bike' || v.type === 'car') ? v : null;
     } catch { return null; }
   }
@@ -749,11 +748,11 @@
   // Saving or forgetting the ride tells every listener on the page at once,
   // so the garage bar under the slider updates without a reload.
   function saveVehicle(v) {
-    try { localStorage.setItem(FIT_KEY, JSON.stringify(v)); } catch {}
+    try { window.MM_RIDE_STORAGE?.saveRide(v); } catch {}
     window.dispatchEvent(new CustomEvent('mm:vehicle', { detail: v }));
   }
   function forgetVehicle() {
-    try { localStorage.removeItem(FIT_KEY); } catch {}
+    try { window.MM_RIDE_STORAGE?.forgetRide(); } catch {}
     window.dispatchEvent(new CustomEvent('mm:vehicle', { detail: null }));
   }
 
@@ -909,13 +908,22 @@
       };
     }
 
+    function updateSavedNotice() {
+      if (!current) return;
+      const remembered = window.MM_RIDE_STORAGE?.getChoice()?.rememberRide === true;
+      setStatus('matched', remembered ? 'Saved' : 'This visit');
+      const note = $('[data-fit-memory]', root);
+      if (note) note.textContent = remembered ? 'Saved to your garage. The shop and booking form already know it.' : 'Ready for this visit. Accept cookies to remember your ride next time.';
+    }
+    window.addEventListener('mm:preferences', updateSavedNotice);
+
     function showResult(v, returning) {
       const plan = actionsFor(v);
       current = v;
       picker.hidden = true;
       result.hidden = false;
       root.classList.add('is-matched');
-      setStatus('matched', 'Saved');
+      updateSavedNotice();
 
       $('[data-fit-welcome]', result).textContent = returning ? 'Welcome back — still riding this?' : 'Locked in';
       $('[data-fit-ride-brand]', result).textContent = v.brand;
@@ -935,7 +943,7 @@
       setReminder(2);
 
       say(returning ? `Welcome back. Your saved ride is the ${v.brand} ${v.model}.`
-                    : `Matched: ${v.brand} ${v.model}. Saved to your garage.`);
+                    : `Matched: ${v.brand} ${v.model}. Your ride is ready.`);
       if (!returning) { result.focus({ preventScroll: true }); bringIntoView(); }
     }
 
