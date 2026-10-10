@@ -1910,4 +1910,3 @@ ${d.get('notes') || '—'}`;
     document.addEventListener('DOMContentLoaded', boot);
   } else boot();
 })();
-
