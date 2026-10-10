@@ -15,7 +15,7 @@ export function cookieCard(content,imageUrl){
  const section=content?.content?.find(s=>s.id===cookieSection.id);
  const values=new Map((section?.fields||cookieSection.fields).map(f=>[f.id,f.value]));
  const value=id=>values.get(id)??cookieSection.fields.find(f=>f.id===id)?.value??'';
- const style=document.createElement('link');style.rel='stylesheet';style.href='cms/cookies.css';
+ const style=document.createElement('link');style.rel='stylesheet';style.href='cms/cookies.css?v=cookie-cover-2';
  document.head.append(style);
  const panel=document.createElement('aside');panel.className='cookie-card';panel.hidden=true;
  panel.setAttribute('aria-labelledby','cookie-joke');panel.setAttribute('aria-describedby','cookie-help');
@@ -51,7 +51,7 @@ export function cookieCard(content,imageUrl){
  panel.addEventListener('keydown',event=>{if(event.key==='Escape'&&openedFromSettings){event.preventDefault();hide();}});
  window.addEventListener('storage',event=>{if(event.key===CHOICE_KEY){ridePreferences.sync();if(ridePreferences.getChoice())hide();}});
  // Keep the first page impression clear; never take focus away from the rider.
- if(!ridePreferences.getChoice()){
+ if(!ridePreferences.getChoice()&&(!content||section)){
   let ready=false;const reveal=()=>{if(ready)return;ready=true;setTimeout(()=>{if(!ridePreferences.getChoice())show();},1400);};
   style.addEventListener('load',reveal,{once:true});style.addEventListener('error',reveal,{once:true});if(style.sheet)reveal();
  }
