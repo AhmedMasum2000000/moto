@@ -2199,3 +2199,115 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .journal__card p { margin: 0; color: var(--paper-dim); font-size: .95rem; }
 .journal__card .label { color: var(--paper-mute); }
 .journal__empty { margin-top: 2.5rem; color: var(--paper-dim); }
+/* Live navigation — the existing type and red, with hard, illuminated edges. */
+.nav__menu {
+  position: relative;
+  isolation: isolate;
+  gap: clamp(.15rem, .7vw, .75rem);
+  padding-block: 8px;
+}
+.nav__menu::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 3px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 25%, #dc123826 42%, #dc1238b0 50%, #dc123826 58%, transparent 75%);
+  background-size: 250% 100%;
+  animation: nav-current 7s linear infinite;
+}
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 42px;
+  padding: .8rem clamp(.55rem, .75vw, .85rem);
+  border: 1px solid transparent;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color .22s ease, border-color .25s ease, text-shadow .25s ease;
+}
+.nav__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at var(--pointer-x, 50%) 110%, #dc123846, transparent 75%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.nav__link::after {
+  height: 2px;
+  background: linear-gradient(90deg, #dc1238, #ff4a6b, #dc1238);
+  box-shadow: 0 0 12px #dc123890;
+  transform-origin: center;
+  transition: transform .3s cubic-bezier(.2,.85,.2,1);
+}
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__link[aria-current="page"] {
+  color: var(--paper);
+  border-color: #dc12384d;
+  text-shadow: 0 0 16px #ffffff35;
+}
+.nav__link:hover::before,
+.nav__link:focus-visible::before,
+.nav__link[aria-current="page"]::before { opacity: 1; }
+.nav__link:focus-visible::after { transform: scaleX(1); }
+.nav__link[aria-current="page"]::before { animation: nav-breathe 3.5s ease-in-out infinite; }
+.nav__link:active { background: #dc123833; }
+.nav__signal {
+  position: relative;
+  flex: 0 0 4px;
+  width: 4px;
+  height: 4px;
+  background: var(--red);
+  opacity: .5;
+  animation: nav-signal 4s ease-in-out infinite;
+  animation-delay: var(--signal-delay, 0s);
+  transition: transform .25s, box-shadow .25s;
+}
+.nav__link:hover .nav__signal,
+.nav__link:focus-visible .nav__signal,
+.nav__link[aria-current="page"] .nav__signal {
+  opacity: 1;
+  box-shadow: 0 0 10px #dc1238;
+  transform: rotate(45deg) scale(1.2);
+}
+.nav__highlight {
+  position: absolute;
+  left: 0;
+  transform: translateX(var(--highlight-x, 0px));
+  background: linear-gradient(180deg, #dc12380a, #dc12381c);
+  border-top: 1px solid #dc123840;
+  border-bottom: 1px solid #dc1238;
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.22,.8,.22,1), width .35s cubic-bezier(.22,.8,.22,1), opacity .2s;
+}
+.nav__highlight.is-on { opacity: 1; }
+.nav__link.nav__enter { animation: nav-arrive .55s both; animation-delay: var(--nav-delay, 0ms); }
+.nav__menu.is-paused::after,
+.nav__menu.is-paused .nav__link::before,
+.nav__menu.is-paused .nav__signal { animation-play-state: paused; }
+.menu__link { border-left: 2px solid transparent; transition: color .25s, padding-left .25s, background .25s, border-color .25s; }
+.menu__link:hover,.menu__link:focus-visible,.menu__link[aria-current="page"] {
+  padding-left: 1rem;
+  border-left-color: var(--red);
+  background: linear-gradient(90deg, #dc123822, transparent);
+  color: var(--paper);
+}
+@keyframes nav-current { from { background-position: 160% 0; } to { background-position: -80% 0; } }
+@keyframes nav-breathe { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+@keyframes nav-signal { 0%,100% { opacity: .3; } 45%,65% { opacity: 1; } }
+@keyframes nav-arrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .nav__menu::after,.nav__link,.nav__link::before,.nav__link::after,.nav__signal,.nav__highlight,.menu__link {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
