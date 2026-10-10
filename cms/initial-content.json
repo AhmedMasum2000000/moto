@@ -1,0 +1,4192 @@
+{
+  "schemaVersion": 1,
+  "products": [
+    {
+      "id": "oil-motul-7100",
+      "name": "Motul 7100 4T 10W-40 · 1L",
+      "brand": "Motul",
+      "category": "oil",
+      "subcategory": "",
+      "price": 1500,
+      "sale": 1350,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Best seller",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-motul-3000",
+      "name": "Motul 3000 4T 20W-50 · 1L",
+      "brand": "Motul",
+      "category": "oil",
+      "subcategory": "",
+      "price": 850,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-shell-ax7",
+      "name": "Shell Advance AX7 10W-40 · 1L",
+      "brand": "Shell",
+      "category": "oil",
+      "subcategory": "",
+      "price": 980,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-liqui-street",
+      "name": "Liqui Moly Street 10W-40 · 1L",
+      "brand": "Liqui Moly",
+      "category": "oil",
+      "subcategory": "",
+      "price": 1450,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Full synth",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-gear",
+      "name": "Gear Oil 80W-90 · 500ml",
+      "brand": "",
+      "category": "oil",
+      "subcategory": "",
+      "price": 320,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-filter",
+      "name": "Oil Filter · OEM fit",
+      "brand": "",
+      "category": "oil",
+      "subcategory": "",
+      "price": 280,
+      "sale": null,
+      "description": "Genuine · OEM fit",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-castrol-power1",
+      "name": "Castrol Power1 4T 10W-50 · 1L",
+      "brand": "Castrol",
+      "category": "oil",
+      "subcategory": "",
+      "price": 1250,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Official dealer",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-mobil-super",
+      "name": "Mobil Super Moto 4T 20W-50 · 1L",
+      "brand": "Mobil",
+      "category": "oil",
+      "subcategory": "",
+      "price": 890,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-bp-visco",
+      "name": "BP Visco 4T 10W-40 · 1L",
+      "brand": "BP",
+      "category": "oil",
+      "subcategory": "",
+      "price": 950,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-bajaj-dtsi",
+      "name": "Bajaj DTS-i 4T 20W-50 · 1L",
+      "brand": "Bajaj",
+      "category": "oil",
+      "subcategory": "",
+      "price": 780,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-motorex",
+      "name": "Motorex Formula 4T 10W-40 · 1L",
+      "brand": "Motorex",
+      "category": "oil",
+      "subcategory": "",
+      "price": 1650,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Full synth",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "oil-maximapro",
+      "name": "Maxima Pro Plus 4T 10W-40 · 1L",
+      "brand": "Maxima Pro",
+      "category": "oil",
+      "subcategory": "",
+      "price": 1400,
+      "sale": null,
+      "description": "Sealed · poured in front of you",
+      "image": "assets/icons/engine-oil.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-mrf-nylo",
+      "name": "MRF Nylogrip Zapper 100/90-17",
+      "brand": "MRF",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 3400,
+      "sale": null,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Best seller",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-pirelli-angel",
+      "name": "Pirelli Angel City 110/70-17",
+      "brand": "Pirelli",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 9800,
+      "sale": null,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Premium",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-ceat",
+      "name": "CEAT Gripp X3 90/90-17",
+      "brand": "CEAT",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 2900,
+      "sale": 2600,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-tube",
+      "name": "Butyl Tube · 17 inch",
+      "brand": "",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 480,
+      "sale": null,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-cst",
+      "name": "CST Rock Hawk 100/90-17",
+      "brand": "CST",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 3100,
+      "sale": null,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Official dealer",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "tyre-eurogrip",
+      "name": "Eurogrip Protorq Extreme 110/80-17",
+      "brand": "Eurogrip",
+      "category": "tyres",
+      "subcategory": "",
+      "price": 4600,
+      "sale": null,
+      "description": "Fitted & balanced in the bay",
+      "image": "assets/icons/tyres.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": true,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-chain-did",
+      "name": "D.I.D Chain & Sprocket Kit",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 4800,
+      "sale": 4200,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Genuine",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-brake-pad",
+      "name": "Brake Pads · Front Set",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 750,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-clutch",
+      "name": "Clutch Plate Set",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 1650,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-airfilter",
+      "name": "Air Filter · Washable",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 620,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-spark",
+      "name": "NGK Spark Plug · Iridium",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 540,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Genuine",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-cable",
+      "name": "Clutch & Throttle Cable",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 290,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-battery",
+      "name": "Sealed Battery 12V 7Ah",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 3200,
+      "sale": 2900,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "part-bulb",
+      "name": "LED Headlight Bulb H4",
+      "brand": "",
+      "category": "parts",
+      "subcategory": "",
+      "price": 1250,
+      "sale": null,
+      "description": "Genuine · old part returned",
+      "image": "assets/icons/spare-parts.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-exhaust",
+      "name": "Slip-On Exhaust · Stainless",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 6500,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Popular",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-crash",
+      "name": "Crash Guard · Powder Coated",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 2400,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-grips",
+      "name": "Anti-Vibration Grips",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 680,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-mirror",
+      "name": "Bar-End Mirrors · Pair",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 1900,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-seat",
+      "name": "Gel Comfort Seat Cover",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 1450,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "mod-tank",
+      "name": "Tank Pad · Carbon Look",
+      "brand": "",
+      "category": "after",
+      "subcategory": "",
+      "price": 550,
+      "sale": null,
+      "description": "Fitting quoted up front",
+      "image": "assets/icons/modifications.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "hel-agv-k1",
+      "name": "AGV K1 S · Full Face",
+      "brand": "",
+      "category": "helmets",
+      "subcategory": "Helmets",
+      "price": 21500,
+      "sale": null,
+      "description": "Certified · try before you buy",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "ECE 22.06",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "hel-smk",
+      "name": "SMK Twister · Full Face",
+      "brand": "",
+      "category": "helmets",
+      "subcategory": "Helmets",
+      "price": 8600,
+      "sale": 7900,
+      "description": "Certified · try before you buy",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "DOT",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "hel-mt-thunder",
+      "name": "MT Thunder 4 SV",
+      "brand": "",
+      "category": "helmets",
+      "subcategory": "Helmets",
+      "price": 9400,
+      "sale": null,
+      "description": "Certified · try before you buy",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "hel-gloves",
+      "name": "Riding Gloves · Knuckle Guard",
+      "brand": "",
+      "category": "helmets",
+      "subcategory": "Hand Gloves",
+      "price": 1800,
+      "sale": null,
+      "description": "Certified · try before you buy",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": false,
+      "badge": "",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "maximapro-10w40-ultra-mv0lz87v",
+      "name": "Maximapro 10W40 Ultra",
+      "brand": "Maxima Pro",
+      "category": "helmets",
+      "subcategory": "Helmets",
+      "price": 2500,
+      "sale": 2300,
+      "description": "Online",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Premium",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    },
+    {
+      "id": "maximapro-10w40-ultra-mv0lz0pf",
+      "name": "Maximapro 10W40 Ultra",
+      "brand": "Maxima Pro",
+      "category": "helmets",
+      "subcategory": "Helmets",
+      "price": 2500,
+      "sale": 2300,
+      "description": "Online",
+      "image": "assets/icons/helmets.png",
+      "gallery": [],
+      "stock": "In stock",
+      "visible": true,
+      "featured": true,
+      "badge": "Premium",
+      "dealer": false,
+      "specifications": "",
+      "fitment": "Ask us to confirm",
+      "vehicleIds": [],
+      "colors": [],
+      "vehicleTypes": []
+    }
+  ],
+  "categories": [
+    {
+      "id": "tyres",
+      "name": "TYRE",
+      "children": [],
+      "visible": true,
+      "image": "assets/icons/tyres.png",
+      "description": ""
+    },
+    {
+      "id": "oil",
+      "name": "ENGINE OIL",
+      "children": [],
+      "visible": true,
+      "image": "assets/icons/engine-oil.png",
+      "description": ""
+    },
+    {
+      "id": "parts",
+      "name": "STOCK PARTS",
+      "children": [],
+      "visible": true,
+      "image": "assets/icons/spare-parts.png",
+      "description": ""
+    },
+    {
+      "id": "after",
+      "name": "AFTER MARKET PARTS",
+      "children": [],
+      "visible": true,
+      "image": "assets/icons/modifications.png",
+      "description": ""
+    },
+    {
+      "id": "helmets",
+      "name": "Accessories",
+      "children": [
+        "Fog Light",
+        "Windbreaker",
+        "Led",
+        "Hand Gloves",
+        "Rider Jacket",
+        "Helmet Accessories",
+        "Raincoat",
+        "Intercom",
+        "Disc Lock",
+        "Light",
+        "Helmets",
+        "Safety Item"
+      ],
+      "visible": true,
+      "image": "assets/icons/helmets.png",
+      "description": ""
+    }
+  ],
+  "banners": [
+    {
+      "id": "banner-0",
+      "name": "RCB brake master cylinder",
+      "alt": "RCB brake master cylinder",
+      "image": "assets/banners/rcb-brake-master.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    },
+    {
+      "id": "banner-1",
+      "name": "Frando high performance brake systems",
+      "alt": "Frando high performance brake systems",
+      "image": "assets/banners/frando-brakes.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    },
+    {
+      "id": "banner-2",
+      "name": "Adelin premium motorcycle master cylinder",
+      "alt": "Adelin premium motorcycle master cylinder",
+      "image": "assets/banners/adelin-master.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    },
+    {
+      "id": "banner-3",
+      "name": "RPD performance brake disc",
+      "alt": "RPD performance brake disc",
+      "image": "assets/banners/rpd-disc.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "parts",
+      "visible": true
+    },
+    {
+      "id": "banner-4",
+      "name": "Faito Street Sport brake pads and hoses",
+      "alt": "Faito Street Sport brake pads and hoses",
+      "image": "assets/banners/faito-brake.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "parts",
+      "visible": true
+    },
+    {
+      "id": "banner-5",
+      "name": "Jomthai chain and sprocket sets",
+      "alt": "Jomthai chain and sprocket sets",
+      "image": "assets/banners/jomthai-chain.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "parts",
+      "visible": true
+    },
+    {
+      "id": "banner-6",
+      "name": "Tobaki Racing plug coils and spark plugs",
+      "alt": "Tobaki Racing plug coils and spark plugs",
+      "image": "assets/banners/tobaki-ignition.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "parts",
+      "visible": true
+    },
+    {
+      "id": "banner-7",
+      "name": "NLK Performance racing throttle body and ECU",
+      "alt": "NLK Performance racing throttle body and ECU",
+      "image": "assets/banners/nlk-ecu.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    },
+    {
+      "id": "banner-8",
+      "name": "FNM plug and play LED lights",
+      "alt": "FNM plug and play LED lights",
+      "image": "assets/banners/fnm-lights.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    },
+    {
+      "id": "banner-9",
+      "name": "Fakie CNC machined footrest set",
+      "alt": "Fakie CNC machined footrest set",
+      "image": "assets/banners/fakie-footrest.webp",
+      "mobileImage": "",
+      "focalX": 50,
+      "focalY": 50,
+      "destination": "after",
+      "visible": true
+    }
+  ],
+  "services": [
+    {
+      "id": "servicing",
+      "name": "Bike Servicing",
+      "image": "assets/icons/servicing.png",
+      "description": "Full mechanical service. We put the bike on the stand, go through it front to back, and show you what we found before we touch a bolt. Same day for most machines.",
+      "included": [
+        "Engine oil and filter change",
+        "Chain, sprocket and brake inspection",
+        "Valve clearance and tuning",
+        "Written price agreed before work starts",
+        "Old parts returned on request",
+        "Free wash on handover"
+      ],
+      "category": "Mastet Service",
+      "mode": "Quote after inspection",
+      "price": null,
+      "duration": "Confirmed after inspection",
+      "visible": true,
+      "booking": true
+    },
+    {
+      "id": "modifications",
+      "name": "Modifications",
+      "image": "assets/icons/modifications.png",
+      "description": "Exhaust, lighting, seat, cosmetics, performance. We tell you straight what will actually work on your machine and what will only cost you money.",
+      "included": [
+        "Slip-on and full exhaust systems",
+        "Lighting and electrical upgrades",
+        "Seat, grips and comfort parts",
+        "Crash guards and cosmetics",
+        "Honest advice on what is worth it",
+        "Quoted with a completion date"
+      ],
+      "category": "Mastet Service",
+      "mode": "Quote after inspection",
+      "price": null,
+      "duration": "Confirmed after inspection",
+      "visible": true,
+      "booking": true
+    },
+    {
+      "id": "painting",
+      "name": "Painting",
+      "image": "assets/icons/painting.png",
+      "description": "Panel respray and full colour changes. Prep is 80% of a paint job — that is where our time goes, and it is why ours does not peel after one monsoon.",
+      "included": [
+        "Single panel respray",
+        "Full colour change",
+        "Strip, sand and prime before colour",
+        "Clear coat and finish",
+        "Colour matched to your tank",
+        "Completion date agreed up front"
+      ],
+      "category": "Painting",
+      "mode": "Quote after inspection",
+      "price": null,
+      "duration": "Confirmed after inspection",
+      "visible": true,
+      "booking": true
+    },
+    {
+      "id": "washing",
+      "name": "Washing",
+      "image": "assets/icons/washing.png",
+      "description": "Foam wash, chain clean and lube, detail finish. In and out in under an hour — and free with every service we do.",
+      "included": [
+        "Foam wash, full body",
+        "Chain clean and re-lube",
+        "Detail finish and dry",
+        "Under an hour, walk-in welcome",
+        "Free with any service"
+      ],
+      "category": "Mastet Service",
+      "mode": "Quote after inspection",
+      "price": null,
+      "duration": "Under 1 hour",
+      "visible": true,
+      "booking": true
+    }
+  ],
+  "blocks": [
+    {
+      "id": "servicing",
+      "name": "Bike Servicing",
+      "image": "assets/icons/servicing.png",
+      "description": "Full mechanical service. We put the bike on the stand, go through it front to back, and show you what we found before we touch a bolt. Same day for most machines.",
+      "included": [
+        "Engine oil and filter change",
+        "Chain, sprocket and brake inspection",
+        "Valve clearance and tuning",
+        "Written price agreed before work starts",
+        "Old parts returned on request",
+        "Free wash on handover"
+      ],
+      "target": "servicing",
+      "kind": "service",
+      "button": "Book free →",
+      "visible": true
+    },
+    {
+      "id": "modifications",
+      "name": "Modifications",
+      "image": "assets/icons/modifications.png",
+      "description": "Exhaust, lighting, seat, cosmetics, performance. We tell you straight what will actually work on your machine and what will only cost you money.",
+      "included": [
+        "Slip-on and full exhaust systems",
+        "Lighting and electrical upgrades",
+        "Seat, grips and comfort parts",
+        "Crash guards and cosmetics",
+        "Honest advice on what is worth it",
+        "Quoted with a completion date"
+      ],
+      "target": "modifications",
+      "kind": "service",
+      "button": "Plan my build →",
+      "visible": true
+    },
+    {
+      "id": "painting",
+      "name": "Painting",
+      "image": "assets/icons/painting.png",
+      "description": "Panel respray and full colour changes. Prep is 80% of a paint job — that is where our time goes, and it is why ours does not peel after one monsoon.",
+      "included": [
+        "Single panel respray",
+        "Full colour change",
+        "Strip, sand and prime before colour",
+        "Clear coat and finish",
+        "Colour matched to your tank",
+        "Completion date agreed up front"
+      ],
+      "target": "painting",
+      "kind": "service",
+      "button": "Get my quote →",
+      "visible": true
+    },
+    {
+      "id": "washing",
+      "name": "Washing",
+      "image": "assets/icons/washing.png",
+      "description": "Foam wash, chain clean and lube, detail finish. In and out in under an hour — and free with every service we do.",
+      "included": [
+        "Foam wash, full body",
+        "Chain clean and re-lube",
+        "Detail finish and dry",
+        "Under an hour, walk-in welcome",
+        "Free with any service"
+      ],
+      "target": "washing",
+      "kind": "service",
+      "button": "Book a wash →",
+      "visible": true
+    },
+    {
+      "id": "oil",
+      "name": "Engine Oil",
+      "image": "assets/icons/engine-oil.png",
+      "description": "Official dealer for Mobil, BP, Castrol, Shell, Bajaj, Motul, Liqui Moly, Maxima Pro and Motorex. Full synthetic and semi-synthetic, sealed and bought direct.",
+      "included": [
+        "Full synthetic and semi-synthetic grades",
+        "10W-40, 20W-50 and gear oil",
+        "Matching oil filters on the shelf",
+        "Sealed containers, shown before pouring",
+        "Fitted in the bay while you wait"
+      ],
+      "target": "oil",
+      "kind": "category",
+      "button": "Browse oil →",
+      "visible": true
+    },
+    {
+      "id": "parts",
+      "name": "Spare Parts",
+      "image": "assets/icons/spare-parts.png",
+      "description": "Genuine components for the lineups on Bangladeshi roads. If it is not real, it is not on our shelf.",
+      "included": [
+        "Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner",
+        "Brake, clutch and chain components",
+        "Filters, plugs, cables and bulbs",
+        "Batteries and electricals",
+        "Sealed and boxed, shown on request",
+        "Sourced within days if not in stock"
+      ],
+      "target": "parts",
+      "kind": "category",
+      "button": "Browse parts →",
+      "visible": true
+    },
+    {
+      "id": "tyres",
+      "name": "Tyres",
+      "image": "assets/icons/tyres.png",
+      "description": "Official dealer for MRF, CEAT, Pirelli, CST and Eurogrip. Grip is the only thing between you and the road, so we fit and balance it here in the bay.",
+      "included": [
+        "MRF, CEAT, Pirelli, CST and Eurogrip",
+        "Front and rear sizes for common bikes",
+        "Tubes and valves",
+        "Fitting and balancing in the bay",
+        "Fitted while you wait"
+      ],
+      "target": "tyres",
+      "kind": "category",
+      "button": "Browse tyres →",
+      "visible": true
+    },
+    {
+      "id": "helmets",
+      "name": "Helmets",
+      "image": "assets/icons/helmets.png",
+      "description": "Certified lids only. We would rather lose the sale than sell you a shell that will not hold when it matters.",
+      "included": [
+        "DOT and ECE 22.06 certified only",
+        "AGV, SMK and MT",
+        "Full face and open face",
+        "Visors and spares",
+        "Riding gloves and gear"
+      ],
+      "target": "helmets",
+      "kind": "category",
+      "button": "Browse helmets →",
+      "visible": true
+    }
+  ],
+  "kits": [
+    {
+      "id": "kit-0",
+      "name": "Oil change kit",
+      "description": "Everything for a proper oil service on a commuter bike.",
+      "productIds": [
+        "oil-motul-7100",
+        "oil-filter"
+      ],
+      "visible": true
+    },
+    {
+      "id": "kit-1",
+      "name": "Stop-right kit",
+      "description": "Pads, a fresh cable and plugs — the parts that decide how you stop.",
+      "productIds": [
+        "part-brake-pad",
+        "part-cable",
+        "part-spark"
+      ],
+      "visible": true
+    },
+    {
+      "id": "kit-2",
+      "name": "Drive kit",
+      "description": "Chain, sprockets and a gear-oil top-up, done in one visit.",
+      "productIds": [
+        "part-chain-did",
+        "oil-gear"
+      ],
+      "visible": true
+    },
+    {
+      "id": "kit-3",
+      "name": "Ride-out kit",
+      "description": "A certified lid and gloves before the first long ride.",
+      "productIds": [
+        "hel-smk",
+        "hel-gloves"
+      ],
+      "visible": true
+    }
+  ],
+  "brands": [
+    {
+      "id": "bajaj",
+      "name": "Bajaj",
+      "image": "assets/brands/bajaj.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Bajaj"
+    },
+    {
+      "id": "bp",
+      "name": "BP",
+      "image": "assets/brands/bp.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "BP"
+    },
+    {
+      "id": "castrol",
+      "name": "Castrol",
+      "image": "assets/brands/castrol.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Castrol"
+    },
+    {
+      "id": "ceat",
+      "name": "CEAT",
+      "image": "assets/brands/ceat.webp",
+      "group": "tyres",
+      "visible": true,
+      "alt": "𝖼𝖾𝖺𝗍"
+    },
+    {
+      "id": "cst",
+      "name": "CST",
+      "image": "assets/brands/cst.webp",
+      "group": "tyres",
+      "visible": true,
+      "alt": "CST"
+    },
+    {
+      "id": "eurogrip",
+      "name": "Eurogrip",
+      "image": "assets/brands/eurogrip.webp",
+      "group": "tyres",
+      "visible": true,
+      "alt": "Eurogrip"
+    },
+    {
+      "id": "liqui-moly",
+      "name": "Liqui Moly",
+      "image": "assets/brands/liqui-moly.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Liqui Moly"
+    },
+    {
+      "id": "maxima",
+      "name": "Maxima Pro",
+      "image": "assets/brands/maxima.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Maxima Pro"
+    },
+    {
+      "id": "mobil",
+      "name": "Mobil",
+      "image": "assets/brands/mobil.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Mobil"
+    },
+    {
+      "id": "motorex",
+      "name": "Motorex",
+      "image": "assets/brands/motorex.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Motorex"
+    },
+    {
+      "id": "motul",
+      "name": "Motul",
+      "image": "assets/brands/motul.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Motul"
+    },
+    {
+      "id": "mrf",
+      "name": "MRF",
+      "image": "assets/brands/mrf.webp",
+      "group": "tyres",
+      "visible": true,
+      "alt": "MRF"
+    },
+    {
+      "id": "pirelli",
+      "name": "Pirelli",
+      "image": "assets/brands/pirelli.webp",
+      "group": "tyres",
+      "visible": true,
+      "alt": "Pirelli"
+    },
+    {
+      "id": "shell",
+      "name": "Shell",
+      "image": "assets/brands/shell.webp",
+      "group": "oil",
+      "visible": true,
+      "alt": "Shell"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "bike-yamaha-0",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "FZS FI V3",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-1",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "FZ-X",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-2",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "R15 V4",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-3",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "MT-15",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-4",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "Fazer FI V2",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-5",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "Saluto 125",
+      "visible": true
+    },
+    {
+      "id": "bike-yamaha-6",
+      "type": "bike",
+      "brand": "Yamaha",
+      "name": "Ray ZR",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-0",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "CB Hornet 160R",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-1",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "CBR150R",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-2",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "X-Blade",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-3",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "Livo",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-4",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "Shine",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-5",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "Dream Neo",
+      "visible": true
+    },
+    {
+      "id": "bike-honda-6",
+      "type": "bike",
+      "brand": "Honda",
+      "name": "CB Trigger",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-0",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Pulsar 150",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-1",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Pulsar NS160",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-2",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Pulsar N160",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-3",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Discover 125",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-4",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Platina 100",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-5",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "Avenger 160",
+      "visible": true
+    },
+    {
+      "id": "bike-bajaj-6",
+      "type": "bike",
+      "brand": "Bajaj",
+      "name": "CT100",
+      "visible": true
+    },
+    {
+      "id": "bike-suzuki-0",
+      "type": "bike",
+      "brand": "Suzuki",
+      "name": "Gixxer 155",
+      "visible": true
+    },
+    {
+      "id": "bike-suzuki-1",
+      "type": "bike",
+      "brand": "Suzuki",
+      "name": "Gixxer SF 155",
+      "visible": true
+    },
+    {
+      "id": "bike-suzuki-2",
+      "type": "bike",
+      "brand": "Suzuki",
+      "name": "GSX-R150",
+      "visible": true
+    },
+    {
+      "id": "bike-suzuki-3",
+      "type": "bike",
+      "brand": "Suzuki",
+      "name": "Intruder 150",
+      "visible": true
+    },
+    {
+      "id": "bike-suzuki-4",
+      "type": "bike",
+      "brand": "Suzuki",
+      "name": "Hayate EP",
+      "visible": true
+    },
+    {
+      "id": "bike-tvs-0",
+      "type": "bike",
+      "brand": "TVS",
+      "name": "Apache RTR 160 4V",
+      "visible": true
+    },
+    {
+      "id": "bike-tvs-1",
+      "type": "bike",
+      "brand": "TVS",
+      "name": "Apache RTR 165 RP",
+      "visible": true
+    },
+    {
+      "id": "bike-tvs-2",
+      "type": "bike",
+      "brand": "TVS",
+      "name": "Raider 125",
+      "visible": true
+    },
+    {
+      "id": "bike-tvs-3",
+      "type": "bike",
+      "brand": "TVS",
+      "name": "Metro Plus",
+      "visible": true
+    },
+    {
+      "id": "bike-tvs-4",
+      "type": "bike",
+      "brand": "TVS",
+      "name": "Stryker",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-0",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Hunk 150R",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-1",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Thriller 160R",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-2",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Xtreme 160R",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-3",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Glamour",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-4",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Splendor+",
+      "visible": true
+    },
+    {
+      "id": "bike-hero-5",
+      "type": "bike",
+      "brand": "Hero",
+      "name": "Passion Pro",
+      "visible": true
+    },
+    {
+      "id": "bike-runner-0",
+      "type": "bike",
+      "brand": "Runner",
+      "name": "Bullet 100",
+      "visible": true
+    },
+    {
+      "id": "bike-runner-1",
+      "type": "bike",
+      "brand": "Runner",
+      "name": "Knight Rider",
+      "visible": true
+    },
+    {
+      "id": "bike-runner-2",
+      "type": "bike",
+      "brand": "Runner",
+      "name": "Turbo 125",
+      "visible": true
+    },
+    {
+      "id": "bike-runner-3",
+      "type": "bike",
+      "brand": "Runner",
+      "name": "Royal Plus",
+      "visible": true
+    },
+    {
+      "id": "bike-runner-4",
+      "type": "bike",
+      "brand": "Runner",
+      "name": "Skooty",
+      "visible": true
+    },
+    {
+      "id": "bike-lifan-0",
+      "type": "bike",
+      "brand": "Lifan",
+      "name": "KPR 165R",
+      "visible": true
+    },
+    {
+      "id": "bike-lifan-1",
+      "type": "bike",
+      "brand": "Lifan",
+      "name": "KP 165R",
+      "visible": true
+    },
+    {
+      "id": "bike-lifan-2",
+      "type": "bike",
+      "brand": "Lifan",
+      "name": "Glint 105",
+      "visible": true
+    },
+    {
+      "id": "bike-lifan-3",
+      "type": "bike",
+      "brand": "Lifan",
+      "name": "K19",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-0",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Corolla",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-1",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Axio",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-2",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Premio",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-3",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Allion",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-4",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Aqua",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-5",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Prius",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-6",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Noah",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-7",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Probox",
+      "visible": true
+    },
+    {
+      "id": "car-toyota-8",
+      "type": "car",
+      "brand": "Toyota",
+      "name": "Harrier",
+      "visible": true
+    },
+    {
+      "id": "car-honda-0",
+      "type": "car",
+      "brand": "Honda",
+      "name": "Civic",
+      "visible": true
+    },
+    {
+      "id": "car-honda-1",
+      "type": "car",
+      "brand": "Honda",
+      "name": "Vezel",
+      "visible": true
+    },
+    {
+      "id": "car-honda-2",
+      "type": "car",
+      "brand": "Honda",
+      "name": "Fit",
+      "visible": true
+    },
+    {
+      "id": "car-honda-3",
+      "type": "car",
+      "brand": "Honda",
+      "name": "Grace",
+      "visible": true
+    },
+    {
+      "id": "car-honda-4",
+      "type": "car",
+      "brand": "Honda",
+      "name": "Freed",
+      "visible": true
+    },
+    {
+      "id": "car-honda-5",
+      "type": "car",
+      "brand": "Honda",
+      "name": "CR-V",
+      "visible": true
+    },
+    {
+      "id": "car-nissan-0",
+      "type": "car",
+      "brand": "Nissan",
+      "name": "X-Trail",
+      "visible": true
+    },
+    {
+      "id": "car-nissan-1",
+      "type": "car",
+      "brand": "Nissan",
+      "name": "Note",
+      "visible": true
+    },
+    {
+      "id": "car-nissan-2",
+      "type": "car",
+      "brand": "Nissan",
+      "name": "Sunny",
+      "visible": true
+    },
+    {
+      "id": "car-nissan-3",
+      "type": "car",
+      "brand": "Nissan",
+      "name": "Bluebird",
+      "visible": true
+    },
+    {
+      "id": "car-mitsubishi-0",
+      "type": "car",
+      "brand": "Mitsubishi",
+      "name": "Pajero",
+      "visible": true
+    },
+    {
+      "id": "car-mitsubishi-1",
+      "type": "car",
+      "brand": "Mitsubishi",
+      "name": "Lancer",
+      "visible": true
+    },
+    {
+      "id": "car-mitsubishi-2",
+      "type": "car",
+      "brand": "Mitsubishi",
+      "name": "Outlander",
+      "visible": true
+    },
+    {
+      "id": "car-suzuki-0",
+      "type": "car",
+      "brand": "Suzuki",
+      "name": "Swift",
+      "visible": true
+    },
+    {
+      "id": "car-suzuki-1",
+      "type": "car",
+      "brand": "Suzuki",
+      "name": "Alto",
+      "visible": true
+    },
+    {
+      "id": "car-suzuki-2",
+      "type": "car",
+      "brand": "Suzuki",
+      "name": "Wagon R",
+      "visible": true
+    },
+    {
+      "id": "car-suzuki-3",
+      "type": "car",
+      "brand": "Suzuki",
+      "name": "Ciaz",
+      "visible": true
+    },
+    {
+      "id": "car-hyundai-0",
+      "type": "car",
+      "brand": "Hyundai",
+      "name": "Elantra",
+      "visible": true
+    },
+    {
+      "id": "car-hyundai-1",
+      "type": "car",
+      "brand": "Hyundai",
+      "name": "Tucson",
+      "visible": true
+    },
+    {
+      "id": "car-hyundai-2",
+      "type": "car",
+      "brand": "Hyundai",
+      "name": "Creta",
+      "visible": true
+    },
+    {
+      "id": "car-kia-0",
+      "type": "car",
+      "brand": "Kia",
+      "name": "Sportage",
+      "visible": true
+    },
+    {
+      "id": "car-kia-1",
+      "type": "car",
+      "brand": "Kia",
+      "name": "Rio",
+      "visible": true
+    },
+    {
+      "id": "car-byd-0",
+      "type": "car",
+      "brand": "BYD",
+      "name": "Atto 3",
+      "visible": true
+    },
+    {
+      "id": "car-byd-1",
+      "type": "car",
+      "brand": "BYD",
+      "name": "Song Plus",
+      "visible": true
+    },
+    {
+      "id": "car-mazda-0",
+      "type": "car",
+      "brand": "Mazda",
+      "name": "Axela",
+      "visible": true
+    },
+    {
+      "id": "car-mazda-1",
+      "type": "car",
+      "brand": "Mazda",
+      "name": "Demio",
+      "visible": true
+    }
+  ],
+  "content": [
+    {
+      "id": "index-fitment",
+      "page": "index",
+      "name": "Bike & car model search",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-finder-label",
+          "kind": "text",
+          "label": "Search label",
+          "value": "FIND YOUR FIT"
+        },
+        {
+          "id": "index-finder-title",
+          "kind": "text",
+          "label": "Search heading",
+          "value": "Search your bike or car model."
+        }
+      ]
+    },
+    {
+      "id": "index-section-2",
+      "page": "index",
+      "name": "Extra website text",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t4",
+          "kind": "text",
+          "label": "Text",
+          "value": "official dealer"
+        },
+        {
+          "id": "index-t5",
+          "kind": "text",
+          "label": "Text",
+          "value": "sealed boxes"
+        },
+        {
+          "id": "index-t6",
+          "kind": "text",
+          "label": "Text",
+          "value": "fitted in the bay"
+        },
+        {
+          "id": "index-t7",
+          "kind": "text",
+          "label": "Text",
+          "value": "reserve online"
+        }
+      ],
+      "hint": "4 editable text, picture and link fields",
+      "order": 1
+    },
+    {
+      "id": "index-section-3",
+      "page": "index",
+      "name": "Extra website text",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t8",
+          "kind": "text",
+          "label": "Text",
+          "value": "Fixed price, in writing"
+        },
+        {
+          "id": "index-t9",
+          "kind": "text",
+          "label": "Text",
+          "value": "You see the number before we start. It does not move later."
+        },
+        {
+          "id": "index-t10",
+          "kind": "text",
+          "label": "Text",
+          "value": "100% genuine parts"
+        },
+        {
+          "id": "index-t11",
+          "kind": "text",
+          "label": "Text",
+          "value": "Sealed, boxed, and shown to you on request. Old parts returned."
+        },
+        {
+          "id": "index-t12",
+          "kind": "text",
+          "label": "Text",
+          "value": "৳0 to book"
+        },
+        {
+          "id": "index-t13",
+          "kind": "text",
+          "label": "Text",
+          "value": "No deposit, no card. Reserve your slot on your word alone."
+        },
+        {
+          "id": "index-t14",
+          "kind": "text",
+          "label": "Text",
+          "value": "Free wash, every service"
+        },
+        {
+          "id": "index-t15",
+          "kind": "text",
+          "label": "Text",
+          "value": "Your bike leaves cleaner than it came in. Always."
+        }
+      ],
+      "hint": "8 editable text, picture and link fields",
+      "order": 2
+    },
+    {
+      "id": "index-brands",
+      "page": "index",
+      "name": "Performance brands",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t16",
+          "kind": "text",
+          "label": "Text",
+          "value": "Performance lines"
+        },
+        {
+          "id": "index-t17",
+          "kind": "text",
+          "label": "Heading",
+          "value": "The brands we build with"
+        },
+        {
+          "id": "index-t18",
+          "kind": "text",
+          "label": "Description",
+          "value": "Ten performance lines we fit and sell out of the Kushtia bay. Tap one to see what we stock for it — or send us your model and we will tell you what fits."
+        },
+        {
+          "id": "index-t19",
+          "kind": "text",
+          "label": "Text",
+          "value": "RCB"
+        },
+        {
+          "id": "index-t20",
+          "kind": "text",
+          "label": "Text",
+          "value": "Brake master cylinder"
+        },
+        {
+          "id": "index-t21",
+          "kind": "text",
+          "label": "Text",
+          "value": "Frando"
+        },
+        {
+          "id": "index-t22",
+          "kind": "text",
+          "label": "Text",
+          "value": "High-performance brake systems"
+        },
+        {
+          "id": "index-t23",
+          "kind": "text",
+          "label": "Text",
+          "value": "Adelin"
+        },
+        {
+          "id": "index-t24",
+          "kind": "text",
+          "label": "Text",
+          "value": "Master cylinder, CNC machined"
+        },
+        {
+          "id": "index-t25",
+          "kind": "text",
+          "label": "Text",
+          "value": "NLK Performance"
+        },
+        {
+          "id": "index-t26",
+          "kind": "text",
+          "label": "Text",
+          "value": "Racing throttle body & ECU"
+        },
+        {
+          "id": "index-t27",
+          "kind": "text",
+          "label": "Text",
+          "value": "FNM"
+        },
+        {
+          "id": "index-t28",
+          "kind": "text",
+          "label": "Text",
+          "value": "Plug & play LED lighting"
+        },
+        {
+          "id": "index-t29",
+          "kind": "text",
+          "label": "Text",
+          "value": "Fakie"
+        },
+        {
+          "id": "index-t30",
+          "kind": "text",
+          "label": "Text",
+          "value": "Adjustable footrest sets"
+        },
+        {
+          "id": "index-t31",
+          "kind": "text",
+          "label": "Text",
+          "value": "RPD"
+        },
+        {
+          "id": "index-t32",
+          "kind": "text",
+          "label": "Text",
+          "value": "Performance brake discs"
+        },
+        {
+          "id": "index-t33",
+          "kind": "text",
+          "label": "Text",
+          "value": "Faito"
+        },
+        {
+          "id": "index-t34",
+          "kind": "text",
+          "label": "Text",
+          "value": "Street Sport pads & hoses"
+        },
+        {
+          "id": "index-t35",
+          "kind": "text",
+          "label": "Text",
+          "value": "Jomthai"
+        },
+        {
+          "id": "index-t36",
+          "kind": "text",
+          "label": "Text",
+          "value": "Chain & sprocket sets"
+        },
+        {
+          "id": "index-t37",
+          "kind": "text",
+          "label": "Text",
+          "value": "Tobaki Racing"
+        },
+        {
+          "id": "index-t38",
+          "kind": "text",
+          "label": "Text",
+          "value": "Plug coils & spark plugs"
+        },
+        {
+          "id": "index-i39",
+          "kind": "image",
+          "label": "RCB — Brake master cylinder",
+          "value": "assets/banners/rcb-brake-master.webp"
+        },
+        {
+          "id": "index-i40",
+          "kind": "image",
+          "label": "Frando — High-performance brake systems",
+          "value": "assets/banners/frando-brakes.webp"
+        },
+        {
+          "id": "index-i41",
+          "kind": "image",
+          "label": "Adelin — Master cylinder, CNC machined",
+          "value": "assets/banners/adelin-master.webp"
+        },
+        {
+          "id": "index-i42",
+          "kind": "image",
+          "label": "NLK Performance — Racing throttle body and ECU",
+          "value": "assets/banners/nlk-ecu.webp"
+        },
+        {
+          "id": "index-i43",
+          "kind": "image",
+          "label": "FNM — Plug and play LED lighting",
+          "value": "assets/banners/fnm-lights.webp"
+        },
+        {
+          "id": "index-i44",
+          "kind": "image",
+          "label": "Fakie — Adjustable footrest sets",
+          "value": "assets/banners/fakie-footrest.webp"
+        },
+        {
+          "id": "index-i45",
+          "kind": "image",
+          "label": "RPD — Performance brake discs",
+          "value": "assets/banners/rpd-disc.webp"
+        },
+        {
+          "id": "index-i46",
+          "kind": "image",
+          "label": "Faito — Street Sport pads and hoses",
+          "value": "assets/banners/faito-brake.webp"
+        },
+        {
+          "id": "index-i47",
+          "kind": "image",
+          "label": "Jomthai — Chain and sprocket sets",
+          "value": "assets/banners/jomthai-chain.webp"
+        },
+        {
+          "id": "index-i48",
+          "kind": "image",
+          "label": "Tobaki Racing — Plug coils and spark plugs",
+          "value": "assets/banners/tobaki-ignition.webp"
+        },
+        {
+          "id": "index-l49",
+          "kind": "link",
+          "label": "Destination: RCBBrake master cylinder",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l50",
+          "kind": "link",
+          "label": "Destination: FrandoHigh-performance brake systems",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l51",
+          "kind": "link",
+          "label": "Destination: AdelinMaster cylinder, CNC machined",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l52",
+          "kind": "link",
+          "label": "Destination: NLK PerformanceRacing throttle body & ECU",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l53",
+          "kind": "link",
+          "label": "Destination: FNMPlug & play LED lighting",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l54",
+          "kind": "link",
+          "label": "Destination: FakieAdjustable footrest sets",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l55",
+          "kind": "link",
+          "label": "Destination: RPDPerformance brake discs",
+          "value": "shop.html?cat=parts"
+        },
+        {
+          "id": "index-l56",
+          "kind": "link",
+          "label": "Destination: FaitoStreet Sport pads & hoses",
+          "value": "shop.html?cat=parts"
+        },
+        {
+          "id": "index-l57",
+          "kind": "link",
+          "label": "Destination: JomthaiChain & sprocket sets",
+          "value": "shop.html?cat=parts"
+        },
+        {
+          "id": "index-l58",
+          "kind": "link",
+          "label": "Destination: Tobaki RacingPlug coils & spark plugs",
+          "value": "shop.html?cat=parts"
+        }
+      ],
+      "hint": "43 editable text, picture and link fields",
+      "order": 3
+    },
+    {
+      "id": "index-dealer",
+      "page": "index",
+      "name": "Official dealer",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t59",
+          "kind": "text",
+          "label": "Text",
+          "value": "Official"
+        },
+        {
+          "id": "index-t60",
+          "kind": "text",
+          "label": "Text",
+          "value": "Dealer"
+        },
+        {
+          "id": "index-t61",
+          "kind": "text",
+          "label": "Text",
+          "value": "Kushtia"
+        },
+        {
+          "id": "index-t62",
+          "kind": "text",
+          "label": "Text",
+          "value": "Authorised"
+        },
+        {
+          "id": "index-t63",
+          "kind": "text",
+          "label": "Heading",
+          "value": "Official dealer"
+        },
+        {
+          "id": "index-t64",
+          "kind": "text",
+          "label": "Description",
+          "value": "We buy direct from the brands we sell. That is why the box is sealed when it\n        reaches you, why the price is the real price, and why a warranty claim is\n        something we handle rather than something you chase."
+        },
+        {
+          "id": "index-t65",
+          "kind": "text",
+          "label": "Text",
+          "value": "Tyres"
+        },
+        {
+          "id": "index-t66",
+          "kind": "text",
+          "label": "Text",
+          "value": "Engine oil"
+        },
+        {
+          "id": "index-t67",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Shop tyres"
+        },
+        {
+          "id": "index-t68",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Shop engine oil"
+        },
+        {
+          "id": "index-l69",
+          "kind": "link",
+          "label": "Destination: Shop tyres →",
+          "value": "shop.html?cat=tyres"
+        },
+        {
+          "id": "index-l70",
+          "kind": "link",
+          "label": "Destination: Shop engine oil",
+          "value": "shop.html?cat=oil"
+        }
+      ],
+      "hint": "12 editable text, picture and link fields",
+      "order": 4
+    },
+    {
+      "id": "index-services",
+      "page": "index",
+      "name": "Services & shop introduction",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t71",
+          "kind": "text",
+          "label": "Text",
+          "value": "Services & shop"
+        },
+        {
+          "id": "index-t72",
+          "kind": "text",
+          "label": "Heading",
+          "value": "everything your bike needs, one address"
+        },
+        {
+          "id": "index-t73",
+          "kind": "text",
+          "label": "Description",
+          "value": "Book the work, buy the parts, same counter, same people, same standard.\n      Motorcycle servicing, painting, washing and custom builds — with genuine oil,\n      spares, tyres and certified helmets on the shelf behind you while you wait."
+        },
+        {
+          "id": "index-t74",
+          "kind": "text",
+          "label": "Text",
+          "value": "Machines we service"
+        },
+        {
+          "id": "index-t75",
+          "kind": "text",
+          "label": "Text",
+          "value": "Yamaha"
+        },
+        {
+          "id": "index-t76",
+          "kind": "text",
+          "label": "Text",
+          "value": "Honda"
+        },
+        {
+          "id": "index-t77",
+          "kind": "text",
+          "label": "Text",
+          "value": "Bajaj"
+        },
+        {
+          "id": "index-t78",
+          "kind": "text",
+          "label": "Text",
+          "value": "Suzuki"
+        },
+        {
+          "id": "index-t79",
+          "kind": "text",
+          "label": "Text",
+          "value": "TVS"
+        },
+        {
+          "id": "index-t80",
+          "kind": "text",
+          "label": "Text",
+          "value": "Hero"
+        },
+        {
+          "id": "index-t81",
+          "kind": "text",
+          "label": "Text",
+          "value": "Runner"
+        },
+        {
+          "id": "index-t82",
+          "kind": "text",
+          "label": "Text",
+          "value": "Lifan"
+        }
+      ],
+      "hint": "12 editable text, picture and link fields",
+      "order": 5
+    },
+    {
+      "id": "index-pricing",
+      "page": "index",
+      "name": "Service packages",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t83",
+          "kind": "text",
+          "label": "Text",
+          "value": "What it costs"
+        },
+        {
+          "id": "index-t84",
+          "kind": "text",
+          "label": "Heading",
+          "value": "no surprise at the counter"
+        },
+        {
+          "id": "index-t85",
+          "kind": "text",
+          "label": "Description",
+          "value": "Every job is inspected and quoted before it starts. These are the packages riders\n    ask for most — your exact price is confirmed in writing once we've seen the bike."
+        },
+        {
+          "id": "index-t86",
+          "kind": "text",
+          "label": "Heading",
+          "value": "quick wash"
+        },
+        {
+          "id": "index-t87",
+          "kind": "text",
+          "label": "Text",
+          "value": "Under 1 hour"
+        },
+        {
+          "id": "index-t88",
+          "kind": "text",
+          "label": "Text",
+          "value": "Same day, walk-in welcome"
+        },
+        {
+          "id": "index-t89",
+          "kind": "text",
+          "label": "Text",
+          "value": "Foam wash, full body"
+        },
+        {
+          "id": "index-t90",
+          "kind": "text",
+          "label": "Text",
+          "value": "Chain clean and re-lube"
+        },
+        {
+          "id": "index-t91",
+          "kind": "text",
+          "label": "Text",
+          "value": "Detail finish and dry"
+        },
+        {
+          "id": "index-t92",
+          "kind": "text",
+          "label": "Text",
+          "value": "Free with any service"
+        },
+        {
+          "id": "index-t93",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Book a wash"
+        },
+        {
+          "id": "index-t94",
+          "kind": "text",
+          "label": "Heading",
+          "value": "full service"
+        },
+        {
+          "id": "index-t95",
+          "kind": "text",
+          "label": "Text",
+          "value": "Same day"
+        },
+        {
+          "id": "index-t96",
+          "kind": "text",
+          "label": "Text",
+          "value": "Quoted before work starts"
+        },
+        {
+          "id": "index-t97",
+          "kind": "text",
+          "label": "Text",
+          "value": "Engine oil and filter change"
+        },
+        {
+          "id": "index-t98",
+          "kind": "text",
+          "label": "Text",
+          "value": "Chain, sprocket and brake check"
+        },
+        {
+          "id": "index-t99",
+          "kind": "text",
+          "label": "Text",
+          "value": "Valve clearance and tuning"
+        },
+        {
+          "id": "index-t100",
+          "kind": "text",
+          "label": "Text",
+          "value": "Free wash on handover"
+        },
+        {
+          "id": "index-t101",
+          "kind": "text",
+          "label": "Text",
+          "value": "Old parts returned on request"
+        },
+        {
+          "id": "index-t102",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Book my service"
+        },
+        {
+          "id": "index-t103",
+          "kind": "text",
+          "label": "Heading",
+          "value": "paint & build"
+        },
+        {
+          "id": "index-t104",
+          "kind": "text",
+          "label": "Text",
+          "value": "By quote"
+        },
+        {
+          "id": "index-t105",
+          "kind": "text",
+          "label": "Text",
+          "value": "Completion date agreed up front"
+        },
+        {
+          "id": "index-t106",
+          "kind": "text",
+          "label": "Text",
+          "value": "Panel respray or full colour change"
+        },
+        {
+          "id": "index-t107",
+          "kind": "text",
+          "label": "Text",
+          "value": "Exhaust, lighting and cosmetics"
+        },
+        {
+          "id": "index-t108",
+          "kind": "text",
+          "label": "Text",
+          "value": "Performance and comfort parts"
+        },
+        {
+          "id": "index-t109",
+          "kind": "text",
+          "label": "Text",
+          "value": "Honest advice on what's worth it"
+        },
+        {
+          "id": "index-t110",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Plan my build"
+        },
+        {
+          "id": "index-t111",
+          "kind": "text",
+          "label": "Text",
+          "value": "Not sure what your bike needs? Bring it in or send a voice note on"
+        },
+        {
+          "id": "index-t112",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "WhatsApp"
+        },
+        {
+          "id": "index-t113",
+          "kind": "text",
+          "label": "Description",
+          "value": "—\n    diagnosis and a quote cost you nothing, and you're free to walk away after hearing it."
+        },
+        {
+          "id": "index-l114",
+          "kind": "link",
+          "label": "Destination: Book a wash",
+          "value": "book.html?service=Washing"
+        },
+        {
+          "id": "index-l115",
+          "kind": "link",
+          "label": "Destination: Book my service →",
+          "value": "book.html?service=Servicing"
+        },
+        {
+          "id": "index-l116",
+          "kind": "link",
+          "label": "Destination: Plan my build",
+          "value": "book.html?service=Modifications"
+        }
+      ],
+      "hint": "34 editable text, picture and link fields",
+      "order": 6
+    },
+    {
+      "id": "index-process",
+      "page": "index",
+      "name": "How it works",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t117",
+          "kind": "text",
+          "label": "Text",
+          "value": "How it works"
+        },
+        {
+          "id": "index-t118",
+          "kind": "text",
+          "label": "Heading",
+          "value": "five steps, nothing skipped"
+        },
+        {
+          "id": "index-t119",
+          "kind": "text",
+          "label": "Text",
+          "value": "Step 01"
+        },
+        {
+          "id": "index-t120",
+          "kind": "text",
+          "label": "Description",
+          "value": "Call, WhatsApp, or roll in. We listen to the bike and to you — what you felt matters as much as what we measure."
+        },
+        {
+          "id": "index-t121",
+          "kind": "text",
+          "label": "Heading",
+          "value": "tell us"
+        },
+        {
+          "id": "index-t122",
+          "kind": "text",
+          "label": "Text",
+          "value": "Step 02"
+        },
+        {
+          "id": "index-t123",
+          "kind": "text",
+          "label": "Description",
+          "value": "On the stand, front to back. We show you what we found before we touch a single bolt. No invisible work, ever."
+        },
+        {
+          "id": "index-t124",
+          "kind": "text",
+          "label": "Heading",
+          "value": "we look"
+        },
+        {
+          "id": "index-t125",
+          "kind": "text",
+          "label": "Text",
+          "value": "Step 03"
+        },
+        {
+          "id": "index-t126",
+          "kind": "text",
+          "label": "Description",
+          "value": "One written number, agreed before we start. Parts listed by brand and name, so you know exactly what's going in."
+        },
+        {
+          "id": "index-t127",
+          "kind": "text",
+          "label": "Heading",
+          "value": "you approve"
+        },
+        {
+          "id": "index-t128",
+          "kind": "text",
+          "label": "Text",
+          "value": "Step 04"
+        },
+        {
+          "id": "index-t129",
+          "kind": "text",
+          "label": "Description",
+          "value": "Genuine parts, correct torque, clean bay. Your old parts come back to you in a bag if you ask for them."
+        },
+        {
+          "id": "index-t130",
+          "kind": "text",
+          "label": "Heading",
+          "value": "we work"
+        },
+        {
+          "id": "index-t131",
+          "kind": "text",
+          "label": "Text",
+          "value": "Step 05"
+        },
+        {
+          "id": "index-t132",
+          "kind": "text",
+          "label": "Description",
+          "value": "Road test, free wash, handover. Then we check in after a week — because a service isn't finished at the gate."
+        },
+        {
+          "id": "index-t133",
+          "kind": "text",
+          "label": "Heading",
+          "value": "you ride"
+        },
+        {
+          "id": "index-t134",
+          "kind": "text",
+          "label": "Text",
+          "value": "Your turn"
+        },
+        {
+          "id": "index-t135",
+          "kind": "text",
+          "label": "Description",
+          "value": "Booking costs nothing and holds your slot. Thursday and Friday fill first — pick your day while it's open."
+        },
+        {
+          "id": "index-t136",
+          "kind": "text",
+          "label": "Heading",
+          "value": "book it →"
+        },
+        {
+          "id": "index-t137",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Reserve free"
+        },
+        {
+          "id": "index-l138",
+          "kind": "link",
+          "label": "Destination: Reserve free",
+          "value": "book.html"
+        }
+      ],
+      "hint": "22 editable text, picture and link fields",
+      "order": 7
+    },
+    {
+      "id": "index-section-4",
+      "page": "index",
+      "name": "the boring promises",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t139",
+          "kind": "text",
+          "label": "Text",
+          "value": "Our promise"
+        },
+        {
+          "id": "index-t140",
+          "kind": "text",
+          "label": "Heading",
+          "value": "the boring promises"
+        },
+        {
+          "id": "index-t141",
+          "kind": "text",
+          "label": "Description",
+          "value": "Nothing here is clever. It's just what every workshop should do, written down\n        so you can hold us to it."
+        },
+        {
+          "id": "index-t142",
+          "kind": "text",
+          "label": "Description",
+          "value": "The price you're quoted is the price you pay. If it changes, we call first — always before, never after."
+        },
+        {
+          "id": "index-t143",
+          "kind": "text",
+          "label": "Description",
+          "value": "Genuine parts, sealed, with the box. Ask to see it and we'll put it in your hand."
+        },
+        {
+          "id": "index-t144",
+          "kind": "text",
+          "label": "Description",
+          "value": "Old parts returned on request. You paid for the replacement; you get the proof."
+        },
+        {
+          "id": "index-t145",
+          "kind": "text",
+          "label": "Text",
+          "value": "Your bike leaves cleaner than it arrived. Every single time, no charge."
+        },
+        {
+          "id": "index-t146",
+          "kind": "text",
+          "label": "Description",
+          "value": "If something we touched fails, bring it straight back. We fix it, and we don't argue about it."
+        },
+        {
+          "id": "index-t147",
+          "kind": "text",
+          "label": "Text",
+          "value": "Booking is free and holds your slot. No deposit, no card, no catch."
+        }
+      ],
+      "hint": "9 editable text, picture and link fields",
+      "order": 8
+    },
+    {
+      "id": "index-faq",
+      "page": "index",
+      "name": "Questions & answers",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t148",
+          "kind": "text",
+          "label": "Text",
+          "value": "Straight answers"
+        },
+        {
+          "id": "index-t149",
+          "kind": "text",
+          "label": "Heading",
+          "value": "questions riders actually ask"
+        },
+        {
+          "id": "index-t150",
+          "kind": "text",
+          "label": "Text",
+          "value": "How much does a bike service cost in Kushtia?"
+        },
+        {
+          "id": "index-t151",
+          "kind": "text",
+          "label": "Description",
+          "value": "It depends on the machine and what it needs — anyone who quotes you before seeing the bike is guessing. We inspect it first, then give you one written price before any work starts. That price is what you pay. If something changes mid-job we call you before touching it, never after."
+        },
+        {
+          "id": "index-t152",
+          "kind": "text",
+          "label": "Text",
+          "value": "Are your parts genuine?"
+        },
+        {
+          "id": "index-t153",
+          "kind": "text",
+          "label": "Description",
+          "value": "Yes. Every part we fit arrives sealed and in its box, and you're welcome to ask to see the box before it goes on the bike. We also hand back your old parts on request, so you can see exactly what was replaced and why."
+        },
+        {
+          "id": "index-t154",
+          "kind": "text",
+          "label": "Text",
+          "value": "How long will my bike be with you?"
+        },
+        {
+          "id": "index-t155",
+          "kind": "text",
+          "label": "Description",
+          "value": "Most standard services are same-day. A wash is under an hour. Paint and bigger modification work gets a completion date agreed up front, so you can plan around it instead of waiting on a phone call."
+        },
+        {
+          "id": "index-t156",
+          "kind": "text",
+          "label": "Text",
+          "value": "Do I have to pay a deposit to book?"
+        },
+        {
+          "id": "index-t157",
+          "kind": "text",
+          "label": "Description",
+          "value": "No. Booking costs nothing and we hold the slot on your word. You pay after the work is done and you've seen it. No card, no advance, no catch."
+        },
+        {
+          "id": "index-t158",
+          "kind": "text",
+          "label": "Text",
+          "value": "Which bikes do you work on?"
+        },
+        {
+          "id": "index-t159",
+          "kind": "text",
+          "label": "Description",
+          "value": "All the common lineups on Bangladeshi roads — Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner, Lifan — plus imported machines. We service cars as well, which is why the sign says 360°."
+        },
+        {
+          "id": "index-t160",
+          "kind": "text",
+          "label": "Text",
+          "value": "What if something goes wrong after the service?"
+        },
+        {
+          "id": "index-t161",
+          "kind": "text",
+          "label": "Description",
+          "value": "Bring it straight back. If it's something we touched, we fix it and we don't argue about it. We also check in about a week after a service to make sure it's still riding the way it should."
+        },
+        {
+          "id": "index-t162",
+          "kind": "text",
+          "label": "Text",
+          "value": "Can I get parts without booking a service?"
+        },
+        {
+          "id": "index-t163",
+          "kind": "text",
+          "label": "Text",
+          "value": "Of course. Reserve anything from the"
+        },
+        {
+          "id": "index-t164",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "shop"
+        },
+        {
+          "id": "index-t165",
+          "kind": "text",
+          "label": "Description",
+          "value": "and collect it at the counter, or have us fit it in the bay while you wait. Don't see your model listed? Call us — most parts are in the back or here within a couple of days."
+        },
+        {
+          "id": "index-l166",
+          "kind": "link",
+          "label": "Destination: shop",
+          "value": "shop.html"
+        }
+      ],
+      "hint": "19 editable text, picture and link fields",
+      "order": 9
+    },
+    {
+      "id": "index-contact",
+      "page": "index",
+      "name": "Contact details",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t167",
+          "kind": "text",
+          "label": "Text",
+          "value": "Find us"
+        },
+        {
+          "id": "index-t168",
+          "kind": "text",
+          "label": "Heading",
+          "value": "come by the bay"
+        },
+        {
+          "id": "index-t169",
+          "kind": "text",
+          "label": "Text",
+          "value": "Call or WhatsApp"
+        },
+        {
+          "id": "index-t170",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "+880 1711-154387"
+        },
+        {
+          "id": "index-t171",
+          "kind": "text",
+          "label": "Text",
+          "value": "Email"
+        },
+        {
+          "id": "index-t172",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "motolubebangladesh@gmail.com"
+        },
+        {
+          "id": "index-t173",
+          "kind": "text",
+          "label": "Text",
+          "value": "Workshop"
+        },
+        {
+          "id": "index-t174",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "R.A. Khan Chowdhury Road"
+        },
+        {
+          "id": "index-t175",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Kushtia 7000, Khulna Division"
+        },
+        {
+          "id": "index-t176",
+          "kind": "text",
+          "label": "Text",
+          "value": "Social"
+        },
+        {
+          "id": "index-t177",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Facebook →"
+        },
+        {
+          "id": "index-t178",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Book my slot free"
+        },
+        {
+          "id": "index-t179",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "WhatsApp us"
+        },
+        {
+          "id": "index-t180",
+          "kind": "text",
+          "label": "Description",
+          "value": "Serving riders across Kushtia, Jhenaidah, Meherpur and Chuadanga.\n    Bike servicing, motorcycle repair, engine oil, genuine spare parts, tyres,\n    helmets, painting, washing and custom modifications — all under one roof."
+        },
+        {
+          "id": "index-l181",
+          "kind": "link",
+          "label": "Destination: R.A. Khan Chowdhury RoadKushtia 7000, Khulna Divis",
+          "value": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
+        },
+        {
+          "id": "index-l182",
+          "kind": "link",
+          "label": "Destination: Facebook →",
+          "value": "https://www.facebook.com/share/1MLq6PjxjY/"
+        },
+        {
+          "id": "index-l183",
+          "kind": "link",
+          "label": "Destination: Book my slot free →",
+          "value": "book.html"
+        }
+      ],
+      "hint": "17 editable text, picture and link fields",
+      "order": 10
+    },
+    {
+      "id": "index-section-5",
+      "page": "index",
+      "name": "Footer",
+      "visible": true,
+      "fields": [
+        {
+          "id": "index-t184",
+          "kind": "text",
+          "label": "Text",
+          "value": "Shop"
+        },
+        {
+          "id": "index-t185",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Engine oil"
+        },
+        {
+          "id": "index-t186",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Tyres"
+        },
+        {
+          "id": "index-t187",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Spare parts"
+        },
+        {
+          "id": "index-t188",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Aftermarket"
+        },
+        {
+          "id": "index-t189",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Helmets & gear"
+        },
+        {
+          "id": "index-t190",
+          "kind": "text",
+          "label": "Text",
+          "value": "Services"
+        },
+        {
+          "id": "index-t191",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Bike servicing"
+        },
+        {
+          "id": "index-t192",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Washing"
+        },
+        {
+          "id": "index-t193",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Painting"
+        },
+        {
+          "id": "index-t194",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Modifications"
+        },
+        {
+          "id": "index-t195",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Pricing"
+        },
+        {
+          "id": "index-t196",
+          "kind": "text",
+          "label": "Text",
+          "value": "Moto Market"
+        },
+        {
+          "id": "index-t197",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Home"
+        },
+        {
+          "id": "index-t198",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Official dealer"
+        },
+        {
+          "id": "index-t199",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Find your ride"
+        },
+        {
+          "id": "index-t200",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Journal"
+        },
+        {
+          "id": "index-t201",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "FAQ"
+        },
+        {
+          "id": "index-t202",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Contact"
+        },
+        {
+          "id": "index-t203",
+          "kind": "text",
+          "label": "Text",
+          "value": "Come by the bay"
+        },
+        {
+          "id": "index-t204",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "+880 1711-154387"
+        },
+        {
+          "id": "index-t205",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "motolubebangladesh@gmail.com"
+        },
+        {
+          "id": "index-t206",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "R.A. Khan Chowdhury Road"
+        },
+        {
+          "id": "index-t207",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Kushtia 7000, Khulna"
+        },
+        {
+          "id": "index-t208",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Facebook →"
+        },
+        {
+          "id": "index-t209",
+          "kind": "text",
+          "label": "Text",
+          "value": "©"
+        },
+        {
+          "id": "index-t210",
+          "kind": "text",
+          "label": "Text",
+          "value": "Moto Market · Kushtia, Bangladesh"
+        },
+        {
+          "id": "index-t211",
+          "kind": "text",
+          "label": "Text",
+          "value": "Cash · bKash · Nagad"
+        },
+        {
+          "id": "index-l212",
+          "kind": "link",
+          "label": "Destination: Engine oil",
+          "value": "shop.html?cat=oil"
+        },
+        {
+          "id": "index-l213",
+          "kind": "link",
+          "label": "Destination: Tyres",
+          "value": "shop.html?cat=tyres"
+        },
+        {
+          "id": "index-l214",
+          "kind": "link",
+          "label": "Destination: Spare parts",
+          "value": "shop.html?cat=parts"
+        },
+        {
+          "id": "index-l215",
+          "kind": "link",
+          "label": "Destination: Aftermarket",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "index-l216",
+          "kind": "link",
+          "label": "Destination: Helmets & gear",
+          "value": "shop.html?cat=helmets"
+        },
+        {
+          "id": "index-l217",
+          "kind": "link",
+          "label": "Destination: Bike servicing",
+          "value": "book.html?service=Servicing"
+        },
+        {
+          "id": "index-l218",
+          "kind": "link",
+          "label": "Destination: Washing",
+          "value": "book.html?service=Washing"
+        },
+        {
+          "id": "index-l219",
+          "kind": "link",
+          "label": "Destination: Painting",
+          "value": "book.html?service=Painting"
+        },
+        {
+          "id": "index-l220",
+          "kind": "link",
+          "label": "Destination: Modifications",
+          "value": "book.html?service=Modifications"
+        },
+        {
+          "id": "index-l221",
+          "kind": "link",
+          "label": "Destination: Pricing",
+          "value": "index.html#pricing"
+        },
+        {
+          "id": "index-l222",
+          "kind": "link",
+          "label": "Destination: Home",
+          "value": "index.html"
+        },
+        {
+          "id": "index-l223",
+          "kind": "link",
+          "label": "Destination: Official dealer",
+          "value": "index.html#dealer"
+        },
+        {
+          "id": "index-l224",
+          "kind": "link",
+          "label": "Destination: Find your ride",
+          "value": "index.html#fitment"
+        },
+        {
+          "id": "index-l225",
+          "kind": "link",
+          "label": "Destination: Journal",
+          "value": "blog.html"
+        },
+        {
+          "id": "index-l226",
+          "kind": "link",
+          "label": "Destination: FAQ",
+          "value": "index.html#faq"
+        },
+        {
+          "id": "index-l227",
+          "kind": "link",
+          "label": "Destination: Contact",
+          "value": "index.html#contact"
+        },
+        {
+          "id": "index-l228",
+          "kind": "link",
+          "label": "Destination: R.A. Khan Chowdhury RoadKushtia 7000, Khulna",
+          "value": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
+        },
+        {
+          "id": "index-l229",
+          "kind": "link",
+          "label": "Destination: Facebook →",
+          "value": "https://www.facebook.com/share/1MLq6PjxjY/"
+        }
+      ],
+      "hint": "46 editable text, picture and link fields",
+      "order": 11
+    },
+    {
+      "id": "shop-section-1",
+      "page": "shop",
+      "name": "Shop",
+      "visible": true,
+      "fields": [
+        {
+          "id": "shop-t1",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Home"
+        },
+        {
+          "id": "shop-t2",
+          "kind": "text",
+          "label": "Text",
+          "value": "/"
+        },
+        {
+          "id": "shop-t3",
+          "kind": "text",
+          "label": "Text",
+          "value": "Shop"
+        },
+        {
+          "id": "shop-t4",
+          "kind": "text",
+          "label": "Heading",
+          "value": "Shop"
+        },
+        {
+          "id": "shop-t5",
+          "kind": "text",
+          "label": "Description",
+          "value": "Browse products, or search your bike or car model to find the right fit."
+        },
+        {
+          "id": "shop-t6",
+          "kind": "text",
+          "label": "Text",
+          "value": "Official dealer"
+        },
+        {
+          "id": "shop-t7",
+          "kind": "text",
+          "label": "Text",
+          "value": "Every tyre & oil brand on the shelf"
+        },
+        {
+          "id": "shop-t8",
+          "kind": "text",
+          "label": "Text",
+          "value": "Sealed & genuine"
+        },
+        {
+          "id": "shop-t9",
+          "kind": "text",
+          "label": "Text",
+          "value": "Shown to you before it is fitted"
+        },
+        {
+          "id": "shop-t10",
+          "kind": "text",
+          "label": "Text",
+          "value": "Fitted in the bay"
+        },
+        {
+          "id": "shop-t11",
+          "kind": "text",
+          "label": "Text",
+          "value": "While you wait, quoted first"
+        },
+        {
+          "id": "shop-t12",
+          "kind": "text",
+          "label": "Text",
+          "value": "৳0 to reserve"
+        },
+        {
+          "id": "shop-t13",
+          "kind": "text",
+          "label": "Text",
+          "value": "No card, no deposit"
+        },
+        {
+          "id": "shop-l14",
+          "kind": "link",
+          "label": "Destination: Home",
+          "value": "index.html"
+        }
+      ],
+      "hint": "14 editable text, picture and link fields",
+      "order": 12
+    },
+    {
+      "id": "shop-finder",
+      "page": "shop",
+      "name": "Bike & car model search",
+      "visible": true,
+      "fields": [
+        {
+          "id": "shop-finder-label",
+          "kind": "text",
+          "label": "Search label",
+          "value": "FIND YOUR FIT"
+        },
+        {
+          "id": "shop-finder-title",
+          "kind": "text",
+          "label": "Search heading",
+          "value": "Search your bike or car model."
+        }
+      ]
+    },
+    {
+      "id": "shop-section-2",
+      "page": "shop",
+      "name": "Footer",
+      "visible": true,
+      "fields": [
+        {
+          "id": "shop-t15",
+          "kind": "text",
+          "label": "Text",
+          "value": "Shop"
+        },
+        {
+          "id": "shop-t16",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Engine oil"
+        },
+        {
+          "id": "shop-t17",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Tyres"
+        },
+        {
+          "id": "shop-t18",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Spare parts"
+        },
+        {
+          "id": "shop-t19",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Aftermarket"
+        },
+        {
+          "id": "shop-t20",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Helmets & gear"
+        },
+        {
+          "id": "shop-t21",
+          "kind": "text",
+          "label": "Text",
+          "value": "Services"
+        },
+        {
+          "id": "shop-t22",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Bike servicing"
+        },
+        {
+          "id": "shop-t23",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Washing"
+        },
+        {
+          "id": "shop-t24",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Painting"
+        },
+        {
+          "id": "shop-t25",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Modifications"
+        },
+        {
+          "id": "shop-t26",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Pricing"
+        },
+        {
+          "id": "shop-t27",
+          "kind": "text",
+          "label": "Text",
+          "value": "Moto Market"
+        },
+        {
+          "id": "shop-t28",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Home"
+        },
+        {
+          "id": "shop-t29",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Official dealer"
+        },
+        {
+          "id": "shop-t30",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Find your ride"
+        },
+        {
+          "id": "shop-t31",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Journal"
+        },
+        {
+          "id": "shop-t32",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "FAQ"
+        },
+        {
+          "id": "shop-t33",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Contact"
+        },
+        {
+          "id": "shop-t34",
+          "kind": "text",
+          "label": "Text",
+          "value": "Come by the bay"
+        },
+        {
+          "id": "shop-t35",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "+880 1711-154387"
+        },
+        {
+          "id": "shop-t36",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "motolubebangladesh@gmail.com"
+        },
+        {
+          "id": "shop-t37",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "R.A. Khan Chowdhury Road"
+        },
+        {
+          "id": "shop-t38",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Kushtia 7000, Khulna"
+        },
+        {
+          "id": "shop-t39",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Facebook →"
+        },
+        {
+          "id": "shop-t40",
+          "kind": "text",
+          "label": "Text",
+          "value": "©"
+        },
+        {
+          "id": "shop-t41",
+          "kind": "text",
+          "label": "Text",
+          "value": "Moto Market · Kushtia, Bangladesh"
+        },
+        {
+          "id": "shop-t42",
+          "kind": "text",
+          "label": "Text",
+          "value": "Cash · bKash · Nagad"
+        },
+        {
+          "id": "shop-l43",
+          "kind": "link",
+          "label": "Destination: Engine oil",
+          "value": "shop.html?cat=oil"
+        },
+        {
+          "id": "shop-l44",
+          "kind": "link",
+          "label": "Destination: Tyres",
+          "value": "shop.html?cat=tyres"
+        },
+        {
+          "id": "shop-l45",
+          "kind": "link",
+          "label": "Destination: Spare parts",
+          "value": "shop.html?cat=parts"
+        },
+        {
+          "id": "shop-l46",
+          "kind": "link",
+          "label": "Destination: Aftermarket",
+          "value": "shop.html?cat=after"
+        },
+        {
+          "id": "shop-l47",
+          "kind": "link",
+          "label": "Destination: Helmets & gear",
+          "value": "shop.html?cat=helmets"
+        },
+        {
+          "id": "shop-l48",
+          "kind": "link",
+          "label": "Destination: Bike servicing",
+          "value": "book.html?service=Servicing"
+        },
+        {
+          "id": "shop-l49",
+          "kind": "link",
+          "label": "Destination: Washing",
+          "value": "book.html?service=Washing"
+        },
+        {
+          "id": "shop-l50",
+          "kind": "link",
+          "label": "Destination: Painting",
+          "value": "book.html?service=Painting"
+        },
+        {
+          "id": "shop-l51",
+          "kind": "link",
+          "label": "Destination: Modifications",
+          "value": "book.html?service=Modifications"
+        },
+        {
+          "id": "shop-l52",
+          "kind": "link",
+          "label": "Destination: Pricing",
+          "value": "index.html#pricing"
+        },
+        {
+          "id": "shop-l53",
+          "kind": "link",
+          "label": "Destination: Home",
+          "value": "index.html"
+        },
+        {
+          "id": "shop-l54",
+          "kind": "link",
+          "label": "Destination: Official dealer",
+          "value": "index.html#dealer"
+        },
+        {
+          "id": "shop-l55",
+          "kind": "link",
+          "label": "Destination: Find your ride",
+          "value": "index.html#fitment"
+        },
+        {
+          "id": "shop-l56",
+          "kind": "link",
+          "label": "Destination: Journal",
+          "value": "blog.html"
+        },
+        {
+          "id": "shop-l57",
+          "kind": "link",
+          "label": "Destination: FAQ",
+          "value": "index.html#faq"
+        },
+        {
+          "id": "shop-l58",
+          "kind": "link",
+          "label": "Destination: Contact",
+          "value": "index.html#contact"
+        },
+        {
+          "id": "shop-l59",
+          "kind": "link",
+          "label": "Destination: R.A. Khan Chowdhury RoadKushtia 7000, Khulna",
+          "value": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
+        },
+        {
+          "id": "shop-l60",
+          "kind": "link",
+          "label": "Destination: Facebook →",
+          "value": "https://www.facebook.com/share/1MLq6PjxjY/"
+        }
+      ],
+      "hint": "46 editable text, picture and link fields",
+      "order": 13
+    },
+    {
+      "id": "book-section-1",
+      "page": "book",
+      "name": "pick your day. the bay is yours.",
+      "visible": true,
+      "fields": [
+        {
+          "id": "book-t1",
+          "kind": "text",
+          "label": "Text",
+          "value": "Booking"
+        },
+        {
+          "id": "book-t2",
+          "kind": "text",
+          "label": "Heading",
+          "value": "pick your day. the bay is yours."
+        },
+        {
+          "id": "book-t3",
+          "kind": "text",
+          "label": "Description",
+          "value": "Fill this in and it turns into a message you send us in one tap. We reply with\n    a confirmation and a price before anything is touched."
+        }
+      ],
+      "hint": "3 editable text, picture and link fields",
+      "order": 14
+    },
+    {
+      "id": "book-section-2",
+      "page": "book",
+      "name": "Extra website text",
+      "visible": true,
+      "fields": [
+        {
+          "id": "book-t4",
+          "kind": "text",
+          "label": "Text",
+          "value": "What do you need?"
+        },
+        {
+          "id": "book-t5",
+          "kind": "text",
+          "label": "Text",
+          "value": "Servicing"
+        },
+        {
+          "id": "book-t6",
+          "kind": "text",
+          "label": "Text",
+          "value": "Washing"
+        },
+        {
+          "id": "book-t7",
+          "kind": "text",
+          "label": "Text",
+          "value": "Painting"
+        },
+        {
+          "id": "book-t8",
+          "kind": "text",
+          "label": "Text",
+          "value": "Modifications"
+        },
+        {
+          "id": "book-t9",
+          "kind": "text",
+          "label": "Text",
+          "value": "Tyre fitting"
+        },
+        {
+          "id": "book-t10",
+          "kind": "text",
+          "label": "Text",
+          "value": "Diagnosis"
+        },
+        {
+          "id": "book-t11",
+          "kind": "text",
+          "label": "Field label",
+          "value": "Your name"
+        },
+        {
+          "id": "book-t12",
+          "kind": "text",
+          "label": "Field label",
+          "value": "Phone"
+        },
+        {
+          "id": "book-t13",
+          "kind": "text",
+          "label": "Field label",
+          "value": "Bike or car — make & model"
+        },
+        {
+          "id": "book-t14",
+          "kind": "text",
+          "label": "Field label",
+          "value": "Preferred date"
+        },
+        {
+          "id": "book-t15",
+          "kind": "text",
+          "label": "Field label",
+          "value": "Preferred slot"
+        },
+        {
+          "id": "book-t16",
+          "kind": "text",
+          "label": "Field label",
+          "value": "What's it doing? (the more detail, the better the quote)"
+        },
+        {
+          "id": "book-t17",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Prepare my booking"
+        },
+        {
+          "id": "book-t18",
+          "kind": "text",
+          "label": "Text",
+          "value": "One more tap — send it to us"
+        },
+        {
+          "id": "book-t19",
+          "kind": "text",
+          "label": "Text",
+          "value": "Your booking is written up and ready. Send it whichever way suits you."
+        },
+        {
+          "id": "book-t20",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Send on WhatsApp"
+        },
+        {
+          "id": "book-t21",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "Send by email"
+        },
+        {
+          "id": "book-t22",
+          "kind": "text",
+          "label": "Text",
+          "value": "No deposit. We hold the slot on your word."
+        },
+        {
+          "id": "book-t23",
+          "kind": "text",
+          "label": "Text",
+          "value": "Quote confirmed before a single bolt moves."
+        },
+        {
+          "id": "book-t24",
+          "kind": "text",
+          "label": "Text",
+          "value": "Wash included with every service."
+        },
+        {
+          "id": "book-t25",
+          "kind": "text",
+          "label": "Text",
+          "value": "Thursday & Friday fill first — book early."
+        },
+        {
+          "id": "book-t26",
+          "kind": "text",
+          "label": "Text",
+          "value": "Or just call the bay"
+        },
+        {
+          "id": "book-t27",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "+880 1711-154387"
+        },
+        {
+          "id": "book-t28",
+          "kind": "text",
+          "label": "Text",
+          "value": "Workshop"
+        },
+        {
+          "id": "book-t29",
+          "kind": "text",
+          "label": "Text",
+          "value": "R.A. Khan Chowdhury Road"
+        },
+        {
+          "id": "book-t30",
+          "kind": "text",
+          "label": "Text",
+          "value": "Kushtia 7000, Khulna Division"
+        },
+        {
+          "id": "book-l31",
+          "kind": "link",
+          "label": "Destination: Send on WhatsApp →",
+          "value": "#"
+        },
+        {
+          "id": "book-l32",
+          "kind": "link",
+          "label": "Destination: Send by email",
+          "value": "#"
+        }
+      ],
+      "hint": "29 editable text, picture and link fields",
+      "order": 15
+    },
+    {
+      "id": "book-section-3",
+      "page": "book",
+      "name": "Footer",
+      "visible": true,
+      "fields": [
+        {
+          "id": "book-t33",
+          "kind": "text",
+          "label": "Text",
+          "value": "©"
+        },
+        {
+          "id": "book-t34",
+          "kind": "text",
+          "label": "Text",
+          "value": "Moto Market · Kushtia, Bangladesh"
+        },
+        {
+          "id": "book-t35",
+          "kind": "text",
+          "label": "Button or link label",
+          "value": "motolubebangladesh@gmail.com"
+        }
+      ],
+      "hint": "3 editable text, picture and link fields",
+      "order": 16
+    }
+  ],
+  "pages": [
+    {
+      "id": "index",
+      "name": "Home",
+      "title": "Moto Market Kushtia — Bike Parts, Engine Oil, Tyres, Helmets & Servicing | Your Bike Our Solution",
+      "description": "Official dealer for MRF, CEAT, Pirelli, CST, Eurogrip tyres and Castrol, Mobil, BP, Shell, Motul engine oil. Genuine parts, aftermarket upgrades, helmets — plus servicing, painting and washing. R.A. Khan Chowdhury Road, Kushtia.",
+      "shareImage": "https://ahmedmasum2000000.github.io/moto/assets/banners/frando-brakes.webp"
+    },
+    {
+      "id": "shop",
+      "name": "Shop",
+      "title": "Shop Bike Parts, Engine Oil, Tyres & Helmets — Moto Market Kushtia",
+      "description": "Genuine engine oil, spare parts, aftermarket upgrades, tyres and helmets. Reserve online, collect or get it fitted at the bay in Kushtia.",
+      "shareImage": "assets/banners/frando-brakes.webp"
+    },
+    {
+      "id": "book",
+      "name": "Booking",
+      "title": "Book Bike Servicing, Painting or Washing in Kushtia — Moto Market",
+      "description": "Book servicing, painting, washing or a modification build at Moto Market, Kushtia. Pick a day, pick a slot, we confirm on WhatsApp.",
+      "shareImage": "assets/banners/frando-brakes.webp"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-new-arrival",
+      "name": "New Arrival",
+      "title": "New Arrival",
+      "slug": "new-arrival",
+      "date": "2026-10-09",
+      "category": "Yamaha",
+      "excerpt": "PFF POLY",
+      "image": "assets/uploads/posts/black-mv0m80lr.webp",
+      "imageAlt": "hello",
+      "body": "jhdsbcjdsbdsb",
+      "author": "motomarket er admin",
+      "visible": true
+    }
+  ],
+  "menu": [
+    {
+      "id": "menu-home",
+      "name": "Home",
+      "target": "Home",
+      "visible": true
+    },
+    {
+      "id": "menu-tyres",
+      "name": "TYRE",
+      "target": "tyres",
+      "visible": true
+    },
+    {
+      "id": "menu-oil",
+      "name": "ENGINE OIL",
+      "target": "oil",
+      "visible": true
+    },
+    {
+      "id": "menu-parts",
+      "name": "STOCK PARTS",
+      "target": "parts",
+      "visible": true
+    },
+    {
+      "id": "menu-after",
+      "name": "AFTER MARKET PARTS",
+      "target": "after",
+      "visible": true
+    },
+    {
+      "id": "menu-helmets",
+      "name": "Accessories",
+      "target": "helmets",
+      "visible": true
+    },
+    {
+      "id": "menu-services",
+      "name": "Services",
+      "target": "Services",
+      "visible": true
+    }
+  ],
+  "serviceCategories": [
+    "Fuel Tank",
+    "Sticker Lab",
+    "Mastet Service",
+    "Premium Master Service",
+    "Ceramic Coating",
+    "Polish",
+    "Painting",
+    "Graphic Design"
+  ],
+  "photos": [],
+  "settings": {
+    "name": "Moto Market",
+    "slogan": "Your Bike, Our Solution",
+    "phone": "+880 1711-154387",
+    "whatsapp": "+8801711154387",
+    "email": "motolubebangladesh@gmail.com",
+    "address": "R.A. Khan Chowdhury Road, Kushtia 7000",
+    "hours": "Contact the workshop for opening hours",
+    "logo": "assets/logo.png",
+    "favicon": "assets/logo.png",
+    "facebook": "https://www.facebook.com/share/1MLq6PjxjY/",
+    "map": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
+  }
+}
