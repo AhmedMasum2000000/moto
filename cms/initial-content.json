@@ -4104,6 +4104,38 @@
       ],
       "hint": "3 editable text, picture and link fields",
       "order": 16
+    },
+    {
+      "id": "index-cookie-consent",
+      "page": "index",
+      "name": "Cookie card · shown across the website",
+      "visible": true,
+      "fields": [
+        {
+          "id": "cookie-label",
+          "kind": "text",
+          "label": "Small label",
+          "value": "Pit stop · Cookie check"
+        },
+        {
+          "id": "cookie-joke",
+          "kind": "text",
+          "label": "Biker joke",
+          "value": "Cookies? Relax. Your helmet will still fit."
+        },
+        {
+          "id": "cookie-help",
+          "kind": "text",
+          "label": "Choice explanation",
+          "value": "Save your ride for next time. Your cart works either way."
+        },
+        {
+          "id": "cookie-mascot",
+          "kind": "image",
+          "label": "Biker mascot",
+          "value": "assets/mascot/cookie-rider.webp"
+        }
+      ]
     }
   ],
   "pages": [
