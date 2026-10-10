@@ -1363,12 +1363,13 @@
         if (!item) return track.clientWidth;
         const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
         const step = item.getBoundingClientRect().width + gap;
+        if (step <= 0) return track.clientWidth;
         return Math.max(step, Math.floor(track.clientWidth / step) * step);
       };
 
       const sync = () => {
         const max = track.scrollWidth - track.clientWidth;
-        const overflows = max > 2;
+        const overflows = track.clientWidth > 0 && max > 2;
 
         [prev, next].forEach(b => { if (b) b.hidden = !overflows; });
         if (dots) dots.hidden = !overflows;
