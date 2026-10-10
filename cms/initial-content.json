@@ -1958,7 +1958,7 @@
     {
       "id": "index-fitment",
       "page": "index",
-      "name": "Bike & car model search",
+      "name": "Homepage hero & ride tools",
       "visible": true,
       "fields": [
         {
@@ -1972,6 +1972,30 @@
           "kind": "text",
           "label": "Search heading",
           "value": "Search your bike or car model."
+        },
+        {
+          "id": "index-home-eyebrow",
+          "label": "Location & dealer line",
+          "kind": "text",
+          "value": "Kushtia · Official dealer · 360°"
+        },
+        {
+          "id": "index-home-title",
+          "label": "Homepage headline",
+          "kind": "text",
+          "value": "Your Bike Our Solution"
+        },
+        {
+          "id": "index-home-intro",
+          "label": "Homepage introduction",
+          "kind": "text",
+          "value": "Genuine parts, engine oil, tyres and helmets on the shelf — and the bay behind the counter to fit them. Official dealer for every tyre and oil brand we sell, with one fixed price agreed before a single bolt moves."
+        },
+        {
+          "id": "index-home-search-help",
+          "label": "Ride finder introduction",
+          "kind": "text",
+          "value": "Type your model below. Save your ride, then find parts, book a service or set a reminder."
         }
       ]
     },
