@@ -731,7 +731,7 @@
      ===================================================================== */
   const FIT_KEY = 'mm.vehicle.v1';
   const SITE = 'https://ahmedmasum2000000.github.io/moto/';
-  const PHONE = '8801711154387';
+  const PHONE = (window.MM_CONTENT?.settings.whatsapp||'8801711154387').replace(/\D/g,'');
 
   function vehicleData() {
     const el = $('#vehicle-data');
@@ -1472,6 +1472,7 @@
      reference shows on every card, here only where the brand is genuine.
      ===================================================================== */
   function brandChips() {
+    if(window.MM_CONTENT)return;
     const MARKS = [['Liqui Moly','liqui-moly'],['Eurogrip','eurogrip'],['Castrol','castrol'],['Motorex','motorex'],
       ['Pirelli','pirelli'],['Maxima','maxima'],['Mobil','mobil'],['Motul','motul'],['Shell','shell'],
       ['Bajaj','bajaj'],['CEAT','ceat'],['MRF','mrf'],['CST','cst'],['BP','bp']];
@@ -1513,7 +1514,7 @@
   const CART_KEY = 'mm.cart.v1';
   const cart = {
     read() {
-      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      try {const items=JSON.parse(localStorage.getItem(CART_KEY))||[];if(!Array.isArray(items))return [];if(!window.MM_CONTENT)return items;return items.map(i=>window.MM_CART_LINE(window.MM_CONTENT.products.find(p=>p.id===i.id),i)).filter(Boolean); }
       catch { return []; }
     },
     write(items) {
@@ -1522,17 +1523,17 @@
     },
     add(item) {
       const items = cart.read();
-      const hit = items.find(i => i.id === item.id);
-      if (hit) hit.qty += 1; else items.push({ ...item, qty: 1 });
+      const hit = items.find(i => i.id === item.id && (i.colorId||'')===(item.colorId||''));
+      if (hit) hit.qty = Math.min(50,hit.qty+1); else items.push({ ...item, qty: 1 });
       cart.write(items);
       toast(`${item.name} added`);
     },
     bump(id, delta) {
       let items = cart.read();
-      const hit = items.find(i => i.id === id);
+      const hit = items.find(i => (i.lineKey||i.id) === id);
       if (!hit) return;
-      hit.qty += delta;
-      if (hit.qty <= 0) items = items.filter(i => i.id !== id);
+      hit.qty = Math.min(50,hit.qty+delta);
+      if (hit.qty <= 0) items = items.filter(i => (i.lineKey||i.id) !== id);
       cart.write(items);
     },
     total() { return cart.read().reduce((s, i) => s + i.price * i.qty, 0); },
@@ -1551,11 +1552,11 @@
           <div class="drawer__line">
             <div>
               <h4>${esc(i.name)}</h4>
-              <p class="label">${esc(i.cat)}</p>
+              <p class="label">${esc(i.cat)}${i.colorName?' · '+esc(i.colorName):''}</p>
               <div class="qty">
-                <button type="button" data-qty="-1" data-id="${esc(i.id)}" aria-label="Decrease quantity">−</button>
+                <button type="button" data-qty="-1" data-id="${esc(i.lineKey||i.id)}" aria-label="Decrease quantity">−</button>
                 <span>${i.qty}</span>
-                <button type="button" data-qty="1" data-id="${esc(i.id)}" aria-label="Increase quantity">+</button>
+                <button type="button" data-qty="1" data-id="${esc(i.lineKey||i.id)}" aria-label="Increase quantity">+</button>
               </div>
             </div>
             <div class="card__price">৳${(i.price * i.qty).toLocaleString('en-US')}</div>
@@ -1566,11 +1567,11 @@
       if (tot) tot.textContent = `৳${cart.total().toLocaleString('en-US')}`;
       const wa = $('[data-cart-wa]');
       if (wa) {
-        const lines = items.map(i => `• ${i.name} ×${i.qty} — ৳${i.price * i.qty}`).join('\n');
+        const lines = items.map(i => `• ${i.name}${i.colorName?' ('+i.colorName+')':''} ×${i.qty} — ৳${i.price * i.qty}`).join('\n');
         const text = items.length
           ? `Assalamu alaikum, Moto Market. I'd like to order:\n${lines}\n\nTotal: ৳${cart.total()}`
           : `Assalamu alaikum, Moto Market. I'd like to ask about a part.`;
-        wa.href = `https://wa.me/8801711154387?text=${encodeURIComponent(text)}`;
+        wa.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
       }
     }
   };
@@ -1588,8 +1589,8 @@
         try { list = JSON.parse(kit.dataset.kit); } catch {}
         const items = cart.read();
         list.forEach(it => {
-          const hit = items.find(i => i.id === it.id);
-          if (hit) hit.qty += 1; else items.push({ ...it, qty: 1 });
+          const hit = items.find(i => i.id === it.id&&(i.colorId||'')===(it.colorId||''));
+          if (hit) hit.qty=Math.min(50,hit.qty+1); else items.push({ ...it, qty: 1 });
         });
         cart.write(items);
         toast(`${list.length} items added`);
@@ -1602,7 +1603,8 @@
           id: add.dataset.add,
           name: add.dataset.name,
           cat: add.dataset.cat || '',
-          price: Number(add.dataset.price) || 0
+          price: Number(add.dataset.price) || 0,
+          colorId:add.dataset.colorId||'',colorName:add.dataset.colorName||'',lineKey:add.dataset.add+'::'+(add.dataset.colorId||'')
         });
         openDrawer(true);
         return;
@@ -1630,11 +1632,12 @@
     const mark = () => {
       const here = location.pathname.split('/').pop() || 'index.html';
       const cat = new URL(location.href).searchParams.get('cat');
+      const slug = new URL(location.href).searchParams.get('slug');
 
       const parts = a => {
         const url = new URL(a.getAttribute("href"), document.baseURI);
         return { file: url.pathname.split('/').pop() || 'index.html',
-                 cat: url.searchParams.get('cat'),
+                 cat: url.searchParams.get('cat'), slug: url.searchParams.get('slug'),
                  hash: url.hash };
       };
 
@@ -1642,7 +1645,7 @@
         const l = parts(a);
         // a link only counts as current when file, category and hash all agree;
         // a link without a hash is not current while the reader sits on one
-        const on = l.file === here &&
+        const on = l.file === here && l.slug === slug &&
                    (l.cat ? l.cat === cat : !cat) &&
                    (l.hash ? l.hash === location.hash : !location.hash);
         if (on) a.setAttribute('aria-current', 'page');
@@ -1654,7 +1657,7 @@
       if (!links.some(a => a.hasAttribute('aria-current'))) {
         links.forEach(a => {
           const l = parts(a);
-          if (l.file === here && !l.cat && !l.hash) a.setAttribute('aria-current', 'page');
+          if (l.file === here && l.slug === slug && !l.cat && !l.hash) a.setAttribute('aria-current', 'page');
         });
       }
     };
@@ -1882,6 +1885,7 @@ ${d.get('notes') || '—'}`;
     asciiPlayers();
     scramble();
     cartWiring();
+    if(window.MM_CONTENT)cart.write(cart.read());
     filters();
     bookingForm();
     magnetic();

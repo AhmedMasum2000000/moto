@@ -1,0 +1,25 @@
+{
+  "name": "moto-backend",
+  "version": "1.0.0",
+  "description": "Moto Market website and connected store control room",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "esbuild cms/backend.source.js --bundle --format=esm --minify --outfile=cms/backend.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "esbuild": "^0.28.2"
+  },
+  "private": true,
+  "type": "module"
+}
