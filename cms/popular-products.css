@@ -1,4 +1,4 @@
-.popular-products{padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(32px,5vw,64px)}
+.popular-products{padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(32px,5vw,64px);scroll-margin-top:var(--nav-h,76px)}
 .popular-products__heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-left:3px solid var(--red);padding-left:24px}
 .popular-products__heading .h-2{margin:10px 0;font-size:clamp(30px,4vw,52px)}
 .popular-products__intro{color:var(--paper-dim);font-size:14px;line-height:1.7;max-width:560px;margin:0}
@@ -21,6 +21,7 @@
 .popular-product .badge{z-index:4;top:26px;right:26px;font-size:8px}
 .popular-products__carousel .carousel__dots{flex-wrap:wrap;padding-inline:35px}
 .popular-products__carousel .carousel__dots button{flex:none}
+.popular-products__carousel .carousel__arrow{border-radius:0}
 @media(hover:none){.popular-product__preview{opacity:1;transform:none}.popular-product .cms-product-picture{padding-bottom:86px}.popular-product__description{-webkit-line-clamp:1}}
-@media(max-width:600px){.popular-products__heading{align-items:flex-start;flex-direction:column;gap:18px;padding-left:16px}.popular-products__meta{gap:12px}.popular-products__meta .label{font-size:8px;letter-spacing:.1em}.popular-products__carousel .carousel__track>.card{flex-basis:clamp(210px,66vw,250px);padding:14px}.popular-product .badge{top:22px;right:22px}}
+@media(max-width:600px){.popular-products__heading{align-items:flex-start;flex-direction:column;gap:18px;padding-left:16px}.popular-products__meta{gap:12px}.popular-products__meta .label{font-size:8px;letter-spacing:.1em}.popular-products__carousel .carousel__track>.card{flex-basis:clamp(210px,66vw,250px);padding:14px}.popular-products__carousel .carousel__dots{display:none}.popular-product .badge{top:22px;right:22px}.popular-product__preview{opacity:1;transform:none}.popular-product .cms-product-picture{padding-bottom:86px}.popular-product__description{-webkit-line-clamp:1}}
 @media(prefers-reduced-motion:reduce){.popular-product,.popular-product .cms-product-picture,.popular-product__preview{transition:none!important;transform:none!important}}
