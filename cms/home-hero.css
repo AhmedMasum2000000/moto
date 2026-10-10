@@ -6,7 +6,7 @@
 .home-hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(31,30,34,.83),rgba(31,30,34,.74) 46%,rgba(31,30,34,.32) 78%,rgba(31,30,34,.22)),linear-gradient(0deg,var(--ink),transparent 26%,rgba(31,30,34,.12) 90%)}
 .home-hero__inner{min-height:calc(100svh - 76px);grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);max-width:1240px;padding-block:clamp(3rem,6vw,5.5rem) 5rem;gap:clamp(2rem,5vw,5rem)}
 .home-hero__copy .h-1{max-width:680px;font-size:clamp(2.6rem,4vw,4.3rem);text-wrap:balance}
-.home-hero__copy .lede{max-width:620px;color:var(--paper-dim)}
+.home-hero__copy .lede{max-width:620px;color:var(--paper);text-shadow:0 1px 12px #0008}
 .home-hero .fit{width:100%;overflow:visible;box-shadow:0 20px 60px #0004}
 .home-hero .fit__scan{overflow:hidden}
 .home-hero .fit::before{display:none}
