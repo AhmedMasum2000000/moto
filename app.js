@@ -843,7 +843,8 @@
       const done = [state.type, state.brand, state.model].filter(Boolean).length;
       segs.forEach((s, i) => s.classList.toggle('is-on', i < done));
       stepNote.textContent = done >= 3 ? 'Locked in' : `Step ${done + 1} of 3`;
-      if (!state.model) setStatus(done ? 'scanning' : 'ready', done ? 'Scanning' : 'Ready');
+      if (!state.model) setStatus('ready', 'Ready');
+      q.placeholder = state.type === 'car' ? 'Search car model · Civic, Corolla, Vezel…' : state.type === 'bike' ? 'Search bike model · R15, Pulsar, Gixxer…' : 'Type your bike or car model…';
     }
 
     // a choice higher up the chain clears everything below it
@@ -866,7 +867,8 @@
     }
 
     function lock() {
-      const v = { type: state.type, brand: state.brand, model: state.model, savedAt: Date.now() };
+      const record = window.MM_CONTENT?.vehicles.find(v => v.type === state.type && v.brand === state.brand && v.name === state.model);
+      const v = { id: record?.id, type: state.type, brand: state.brand, model: state.model, savedAt: Date.now() };
       saveVehicle(v);
       setStatus('scanning', 'Scanning');
       root.classList.add('is-scanning');
@@ -879,34 +881,31 @@
       }, reduced() ? 0 : 680);
     }
 
+    const serviceId = name => window.MM_CONTENT?.services.find(s => s.name.toLowerCase().includes(name.toLowerCase()))?.id || window.MM_CONTENT?.services[0]?.id || name;
     function actionsFor(v) {
-      const name = `${v.brand} ${v.model}`;
-      const book = s => `book.html?service=${encodeURIComponent(s)}&vehicle=${encodeURIComponent(name)}`;
-      // the catalogue is motorcycle stock, so a car never gets sent to it
-      if (v.type === 'car') return {
-        primary: { href: book('Servicing'), label: `Book a service for my ${v.model}` },
-        tiles: [
-          { i: 'chat',  t: 'Ask about parts', s: 'WhatsApp the bay', ext: 1,
-            href: wa(`Assalamu alaikum, Moto Market. I drive a ${name}. Which parts and engine oil can you get for it?`) },
-          { i: 'wash',  t: 'Wash it',         s: 'Foam wash & detail',   href: book('Washing') },
-          { i: 'spray', t: 'Paint work',      s: 'Panel or full respray', href: book('Painting') },
-          { i: 'bell',  t: 'Service reminder', s: 'Add it to your calendar', remind: 1 },
-          { i: 'phone', t: 'Call the bay',    s: '+880 1711-154387', href: 'tel:+8801711154387' },
-          { i: 'pin',   t: 'Directions',      s: 'R.A. Khan Chowdhury Rd', ext: 1,
-            href: 'https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000' },
-        ],
-      };
+      const name = v.brand + ' ' + v.model;
+      const id = v.id || window.MM_CONTENT?.vehicles.find(x => x.type === v.type && x.brand === v.brand && x.name === v.model)?.id;
+      const query = id ? '&vehicle=' + encodeURIComponent(id) : '';
+      const book = service => 'book.html?service=' + encodeURIComponent(serviceId(service)) + '&vehicle=' + encodeURIComponent(name);
+      const stock = (category, icon, title, description) => window.MM_CONTENT?.categories.some(c => c.id === category)
+        ? {i: icon, t: title, s: description, href: 'shop.html?cat=' + category + query} : null;
       return {
-        primary: { href: wa(`Assalamu alaikum, Moto Market. I ride a ${name}. Can you confirm which parts fit it?`),
-                   label: `Check what fits my ${v.model}`, ext: 1 },
-        tiles: [
-          { i: 'drop',   t: 'Engine oil',      s: 'Dealer brands, sealed',  href: 'shop.html?cat=oil' },
-          { i: 'tyre',   t: 'Tyres',           s: 'Fitted while you wait',  href: 'shop.html?cat=tyres' },
-          { i: 'wrench', t: 'Book a service',  s: 'Price agreed first',     href: book('Servicing') },
-          { i: 'wrench', t: 'Spare parts',     s: 'Genuine & aftermarket', href: 'shop.html?cat=parts' },
-          { i: 'helmet', t: 'Riding gear',     s: 'Certified lids only',    href: 'shop.html?cat=helmets' },
-          { i: 'bell',   t: 'Service reminder', s: 'Add it to your calendar', remind: 1 },
-        ],
+        primary: {href: 'shop.html' + (id ? '?vehicle=' + encodeURIComponent(id) : ''), label: 'Check what fits my ' + v.model},
+        tiles: v.type === 'car' ? [
+          stock('parts', 'wrench', 'Car parts', 'Browse by your model'),
+          {i: 'wash', t: 'Wash it', s: 'Foam wash & detail', href: book('Washing')},
+          {i: 'spray', t: 'Paint work', s: 'Panel or full respray', href: book('Painting')},
+          {i: 'bell', t: 'Service reminder', s: 'Add it to your calendar', remind: 1},
+          {i: 'phone', t: 'Call the bay', s: window.MM_CONTENT?.settings.phone || '+880 1711-154387', href: 'tel:' + (window.MM_CONTENT?.settings.phone || '+8801711154387').replace(/\s/g, '')},
+          {i: 'pin', t: 'Directions', s: 'Find our workshop', href: window.MM_CONTENT?.settings.map || 'https://maps.google.com/?q=Moto+Market+Kushtia', ext: 1}
+        ].filter(Boolean) : [
+          stock('oil', 'drop', 'Engine oil', 'Dealer brands, sealed'),
+          stock('tyres', 'tyre', 'Tyres', 'Fitted while you wait'),
+          {i: 'wrench', t: 'Book a service', s: 'Price agreed first', href: book('Servicing')},
+          stock('parts', 'wrench', 'Spare parts', 'Genuine & aftermarket'),
+          stock('helmets', 'helmet', 'Riding gear', 'Certified lids only'),
+          {i: 'bell', t: 'Service reminder', s: 'Add it to your calendar', remind: 1}
+        ].filter(Boolean)
       };
     }
 
@@ -982,10 +981,10 @@
       const name = `${v.brand} ${v.model}`;
       const day = addMonths(n);
       const next = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1);
-      const bookUrl = `${SITE}book.html?service=Servicing&vehicle=${encodeURIComponent(name)}`;
+      const bookUrl = `${SITE}book.html?service=${encodeURIComponent(serviceId('Servicing'))}&vehicle=${encodeURIComponent(name)}`;
       const title = `Service my ${name} - Moto Market`;
-      const details = `Time to service your ${name}.\nBook a slot: ${bookUrl}\nCall: +880 1711-154387`;
-      const place = 'Moto Market, R.A. Khan Chowdhury Road, Kushtia 7000';
+      const details = `Time to service your ${name}.\nBook a slot: ${bookUrl}\nCall: ${window.MM_CONTENT?.settings.phone || '+880 1711-154387'}`;
+      const place = (window.MM_CONTENT?.settings.name || 'Moto Market') + ', ' + (window.MM_CONTENT?.settings.address || 'R.A. Khan Chowdhury Road, Kushtia 7000');
 
       $$('[data-remind-months]', remind).forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.remindMonths) === n)));
       $('[data-remind-date]', remind).textContent =
@@ -1142,7 +1141,7 @@
       if (e.target.closest('[data-fit-change]')) {
         backToPicker(current || readVehicle());
         say('Pick a different model, or start over with bike or car.');
-        const first = $('.fit__chip', modelsEl) || $('[data-fit-type]', root);
+        const first = q;
         if (first) first.focus({ preventScroll: true });
         return;
       }

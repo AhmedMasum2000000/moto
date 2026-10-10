@@ -1,4 +1,5 @@
 import {catalogFinder} from './finder.js';
+import {homeBackground} from './home-hero.js';
 const finderStyles=document.createElement('link');finderStyles.rel='stylesheet';finderStyles.href='cms/finder.css';document.head.append(finderStyles);
 import {cartLine} from './catalog.mjs';
 import {live,admin,request,watchLive} from './backend.js';
@@ -38,6 +39,7 @@ function hydrate(){
  const vehicles={bike:{},car:{}};for(const v of content.vehicles)(vehicles[v.type][v.brand]||=[]).push(v.name);const vehicleData=$('#vehicle-data');if(vehicleData)vehicleData.textContent=JSON.stringify(vehicles);
  window.MM_SEARCH=[...content.products.map(p=>({t:p.name,k:catName(p.category),u:'shop.html?cat='+p.category+'&product='+p.id,g:'Shop',p:p.sale||p.price})),...content.services.map(s=>({t:s.name,k:s.description,u:'book.html?service='+s.id,g:'Service'})),...content.pages.map(p=>({t:p.name,k:p.description,u:path('page:'+p.id),g:'Page'})),...(content.posts||[]).map(p=>({t:p.name,k:p.excerpt,u:path('post:'+p.id),g:'Post'}))];
  const pageId=(location.pathname.split('/').pop()||'index.html').replace('.html','');const page=content.pages.find(p=>p.id===pageId);if(page)metadata(page.title,page.description,img(page.shareImage));
+ homeBackground($('.home-hero'),content.banners,img);
  catalogFinder(content);publicPages();booking();cartRequest();
  if(draft){const notice=document.createElement('div');notice.className='cms-preview-notice';notice.textContent='PRIVATE DRAFT PREVIEW · Only signed-in staff can view this version';document.body.prepend(notice);$$('a[href]').forEach(a=>{const u=new URL(a.href);if(u.origin===location.origin&&/\.html$/.test(u.pathname)){u.searchParams.set('preview','draft');a.href=u.href;}});}
 }

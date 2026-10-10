@@ -18,6 +18,7 @@
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="cms/home-hero.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -327,7 +328,38 @@
 
 <main>
 
-<section class="wrap cms-model-section" id="fitment" data-cms-section="index-fitment"><div class="cms-model-finder" data-model-search=""><div class="cms-model-heading"><p class="label label--red" data-cms-text="index-finder-label">FIND YOUR FIT</p><h1 class="h-2" data-cms-text="index-finder-title">Search your bike or car model.</h1></div><div class="cms-model-types" role="group" aria-label="Vehicle type"><button class="fit__type" type="button" data-model-type="bike" aria-pressed="true"><span class="fit__art"><svg class="fit__vehicle fit__vehicle--bike" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<section class="home-hero" id="fitment" data-cms-section="index-fitment">
+<div class="home-hero__backdrop" data-hero-backdrop aria-hidden="true"><picture data-hero-frame class="is-active"><img src="assets/banners/rcb-brake-master.webp" alt="" fetchpriority="high"></picture><picture data-hero-frame></picture></div>
+<div class="shop-hero wrap home-hero__inner">
+  <div class="home-hero__copy">
+    <p class="label label--red" data-reveal="" data-cms-text="index-home-eyebrow">Kushtia · Official dealer · 360°</p>
+    <h1 class="h-1" style="margin:.75rem 0 1rem" data-cms-text="index-home-title">Your Bike Our Solution</h1>
+    <p class="lede" data-reveal="" style="--d:140ms" data-cms-text="index-home-intro">
+      Genuine parts, engine oil, tyres and helmets on the shelf — and the bay behind the counter to fit them. Official dealer for every tyre and oil brand we sell, with one fixed price agreed before a single bolt moves.
+    </p>
+  </div>
+
+<div class="fit" data-fitment="" data-reveal="scale">
+    <div class="fit__scan" aria-hidden="true"></div>
+
+    <div class="fit__head">
+      <p class="fit__eyebrow">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"></path></svg>
+        <span data-cms-text="index-finder-label">Fitment scanner</span>
+      </p>
+      <p class="fit__status" data-fit-status="" data-state="ready"><i aria-hidden="true"></i><span>Ready</span></p>
+    </div>
+
+    <!-- picker: type it, or tap through three steps -->
+    <div class="fit__picker" data-fit-picker="">
+      <h2 class="fit__title" data-cms-text="index-finder-title">Search your bike or car model.</h2>
+      <p class="fit__sub" data-cms-text="index-home-search-help">Type your model below. Save your ride, then find parts, book a service or set a reminder.</p>
+
+      <div class="fit__step" data-step="1">
+        <p class="fit__no"><b>01</b> Two wheels or four?</p>
+        <div class="fit__types" role="group" aria-label="Vehicle type">
+          <button type="button" class="fit__type" data-fit-type="bike" aria-pressed="false">
+            <svg class="fit__vehicle fit__vehicle--bike" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <g class="fit__motion"><path d="M4 16h32M10 24h20M2 48h16"></path><path d="M8 68h51m12 0h15m12 0h38"></path></g>
               <g class="fit__machine">
                 <path class="fit__body" d="m18 30 28 3 18-16 22 2 14 11-10 23H58L42 44 21 40 12 33z"></path>
@@ -337,7 +369,11 @@
                 <g class="fit__wheel"><circle cx="30" cy="55" r="14"></circle><circle cx="30" cy="55" r="5"></circle><path d="M30 42v8m12 12-7-4m-17 4 7-4"></path></g>
                 <g class="fit__wheel"><circle cx="112" cy="55" r="14"></circle><circle cx="112" cy="55" r="5"></circle><path d="M112 42v8m12 12-7-4m-17 4 7-4"></path></g>
               </g>
-            </svg></span><strong>BIKE</strong><span>Two wheels. Your way.</span></button><button class="fit__type" type="button" data-model-type="car" aria-pressed="false"><span class="fit__art"><svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            </svg>
+            <span><b>Bike</b><small data-type-count="bike">&nbsp;</small></span>
+          </button>
+          <button type="button" class="fit__type" data-fit-type="car" aria-pressed="false">
+            <svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <g class="fit__motion"><path d="M4 18h30M9 26h20M2 43h14"></path><path d="M8 68h49m13 0h17m10 0h40"></path></g>
               <g class="fit__machine">
                 <path class="fit__body" d="m9 47 5-16 21-4 18-13h33l22 15 24 7 4 17h-13a15 15 0 0 0-30 0H51a15 15 0 0 0-30 0H9z"></path>
@@ -347,61 +383,90 @@
                 <g class="fit__wheel"><circle cx="36" cy="55" r="11"></circle><circle cx="36" cy="55" r="4"></circle><path d="M36 44v7m10 10-6-3m-14 3 6-3"></path></g>
                 <g class="fit__wheel"><circle cx="108" cy="55" r="11"></circle><circle cx="108" cy="55" r="4"></circle><path d="M108 44v7m10 10-6-3m-14 3 6-3"></path></g>
               </g>
-            </svg></span><strong>CAR</strong><span>Four wheels. Perfect fit.</span></button></div><div class="cms-model-input"><label class="label" for="model-search">YOUR MODEL</label><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 6 6"></path></svg><input id="model-search" type="search" role="combobox" aria-autocomplete="list" aria-controls="model-results" aria-expanded="false" autocomplete="off" placeholder="Search bike model · R15, Gixxer, Pulsar…"><button class="btn btn--ghost btn--sm" type="button" data-model-clear="" hidden="">Clear</button></div><div id="model-results" role="listbox" aria-label="Matching models" hidden=""></div></div><p class="cms-model-status" data-model-status="" role="status"></p></div></section>
+            </svg>
+            <span><b>Car</b><small data-type-count="car">&nbsp;</small></span>
+          </button>
+        </div>
+      </div><div class="fit__search">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+        <input type="text" data-fit-q="" role="combobox" aria-expanded="false" aria-controls="fit-suggest" aria-autocomplete="list" autocomplete="off" spellcheck="false" aria-label="Type your bike or car model" placeholder="Type your model · R15, Pulsar, Civic…">
+        <ul class="fit__suggest" id="fit-suggest" role="listbox" aria-label="Matching models" data-fit-suggest="" hidden=""></ul>
+      </div>
 
-<section class="hero-slider" aria-label="Brands we carry" data-cms-section="index-section-1">
-  <div class="carousel carousel--hero" data-carousel="" data-autoplay="6500">
-    <button class="carousel__arrow carousel__arrow--prev" type="button" data-car="-1" aria-label="Previous banner" hidden="">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 2L4 8l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    </button>
-    <div class="carousel__track" tabindex="0" role="group" aria-label="Brand banners">
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/rcb-brake-master.webp" alt="RCB brake master cylinder" width="1920" height="960" loading="eager" fetchpriority="high" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/frando-brakes.webp" alt="Frando high performance brake systems" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/adelin-master.webp" alt="Adelin premium motorcycle master cylinder" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=parts">
-          <img src="assets/banners/rpd-disc.webp" alt="RPD performance brake disc" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=parts">
-          <img src="assets/banners/faito-brake.webp" alt="Faito Street Sport brake pads and hoses" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=parts">
-          <img src="assets/banners/jomthai-chain.webp" alt="Jomthai chain and sprocket sets" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=parts">
-          <img src="assets/banners/tobaki-ignition.webp" alt="Tobaki Racing plug coils and spark plugs" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/nlk-ecu.webp" alt="NLK Performance racing throttle body and ECU" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/fnm-lights.webp" alt="FNM plug and play LED lights" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
-        <a class="slide" href="shop.html?cat=after">
-          <img src="assets/banners/fakie-footrest.webp" alt="Fakie CNC machined footrest set" width="1920" height="960" loading="lazy" decoding="async">
-        </a>
+      <p class="fit__or" hidden=""><span>or pick it in three taps</span></p>
+
+      <div class="fit__progress" aria-hidden="true" hidden=""><i data-fit-seg=""></i><i data-fit-seg=""></i><i data-fit-seg=""></i></div>
+      <p class="fit__stepcount" data-fit-stepcount="" hidden="">Step 1 of 3</p>
+
+
+
+      <div class="fit__step" data-step="2" data-locked="" hidden="">
+        <p class="fit__no"><b>02</b> Pick the badge</p>
+        <div class="fit__chips" role="group" aria-label="Brand" data-fit-brands="" data-placeholder="Choose bike or car first"></div>
+      </div>
+
+      <div class="fit__step" data-step="3" data-locked="" hidden="">
+        <p class="fit__no"><b>03</b> Lock in your model</p>
+        <div class="fit__chips" role="group" aria-label="Model" data-fit-models="" data-placeholder="Pick a brand to see its models"></div>
+      </div>
+
+      <div class="fit__quick">
+        <span class="fit__quick-l">Quick picks</span>
+        <div class="fit__quick-row" data-fit-quick=""></div>
+      </div>
     </div>
-    <button class="carousel__arrow carousel__arrow--next" type="button" data-car="1" aria-label="Next banner" hidden="">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    </button>
-    <div class="carousel__dots" data-car-dots="" aria-hidden="true"></div>
-  </div>
-</section>
 
-<div class="marquee" data-speed="0.5" data-dir="rtl" aria-hidden="true" data-cms-section="index-section-2">
-  <div class="marquee__track">
-    <span class="marquee__item"><span data-cms-text="index-t4">official dealer</span></span>
-    <span class="marquee__item"><span data-cms-text="index-t5">sealed boxes</span></span>
-    <span class="marquee__item"><span data-cms-text="index-t6">fitted in the bay</span></span>
-    <span class="marquee__item"><span data-cms-text="index-t7">reserve online</span></span>
+    <!-- result: the saved ride, and everything we can do for it -->
+    <div class="fit__result" data-fit-result="" tabindex="-1" hidden="">
+      <div class="fit__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+      </div>
+      <p class="fit__welcome" data-fit-welcome="">Locked in</p>
+      <h2 class="fit__ride"><span data-fit-ride-brand=""></span><b data-fit-ride-model=""></b></h2>
+      <p class="fit__saved">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3.5L7 20z"></path></svg>
+        Saved to your garage. The shop and booking form already know it.
+      </p>
+      <a class="btn btn--red btn--block fit__cta" data-fit-primary="" href="shop.html?cat=parts"><span data-fit-primary-l="">Shop parts</span> <span class="btn__arrow">→</span></a>
+      <div class="fit__actions" data-fit-actions=""></div>
+
+      <div class="fit__remind" id="fit-remind" data-fit-remind="" hidden="">
+        <p class="fit__remind-q">Nudge me to service my <b data-remind-name=""></b> in</p>
+        <div class="fit__seg" role="group" aria-label="Reminder interval">
+          <button type="button" data-remind-months="1" aria-pressed="false">1 month</button>
+          <button type="button" data-remind-months="2" aria-pressed="true">2 months</button>
+          <button type="button" data-remind-months="3" aria-pressed="false">3 months</button>
+        </div>
+        <p class="fit__remind-date">Reminder on <b data-remind-date=""></b></p>
+        <div class="fit__remind-acts">
+          <a class="btn btn--red btn--sm" data-remind-google="" target="_blank" rel="noopener" href="#">Google Calendar</a>
+          <a class="btn btn--ghost btn--sm" data-remind-ics="" href="#" download="moto-market-service-reminder.ics">Apple / Outlook (.ics)</a>
+        </div>
+      </div>
+
+      <div class="fit__again">
+        <button type="button" class="fit__link" data-fit-change="">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>
+          Change ride
+        </button>
+        <button type="button" class="fit__link fit__link--quiet" data-fit-forget="">Forget it</button>
+      </div>
+    </div>
+
+    <noscript><p class="fit__sub">The scanner needs JavaScript. Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> with your model and we will tell you what fits.</p></noscript>
+
+    <div class="fit__foot">
+      <span data-fit-count="">&nbsp;</span>
+      <span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+        Fit confirmed at the counter — before you pay
+      </span>
+    </div>
+    <p class="sr-only" aria-live="polite" data-fit-live=""></p>
   </div>
 </div>
-
+<div class="home-hero__controls" data-hero-controls hidden><span data-hero-count aria-hidden="true"></span><button type="button" data-hero-pause aria-label="Pause banner slideshow" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><button type="button" data-hero-next aria-label="Next banner background"><span aria-hidden="true">→</span></button></div>
+</section>
 
 <section class="section section--tight wrap" aria-label="Why riders choose Moto Market" data-cms-section="index-section-3">
 <div class="trust">
