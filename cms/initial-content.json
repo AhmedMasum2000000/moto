@@ -1088,10 +1088,122 @@
   ],
   "blocks": [
     {
+      "id": "oil",
+      "name": "Oil & Lubricants",
+      "image": "assets/icons/engine-oil.png",
+      "description": "Keep your engine running smoothly. Explore oils and everyday lubricants.",
+      "included": [
+        "Full synthetic and semi-synthetic grades",
+        "10W-40, 20W-50 and gear oil",
+        "Matching oil filters on the shelf",
+        "Sealed containers, shown before pouring",
+        "Fitted in the bay while you wait"
+      ],
+      "target": "oil",
+      "kind": "category",
+      "button": "Explore",
+      "visible": true,
+      "previewImage": "",
+      "subcategories": []
+    },
+    {
+      "id": "parts",
+      "name": "Spare Parts",
+      "image": "assets/icons/spare-parts.png",
+      "description": "Brakes, chains and the everyday parts that keep your ride on the road.",
+      "included": [
+        "Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner",
+        "Brake, clutch and chain components",
+        "Filters, plugs, cables and bulbs",
+        "Batteries and electricals",
+        "Sealed and boxed, shown on request",
+        "Sourced within days if not in stock"
+      ],
+      "target": "parts",
+      "kind": "category",
+      "button": "Explore",
+      "visible": true,
+      "previewImage": "",
+      "subcategories": []
+    },
+    {
+      "id": "after-card",
+      "kind": "category",
+      "target": "after",
+      "name": "Aftermarket Parts",
+      "image": "assets/icons/modifications.png",
+      "description": "Make it your own. Explore performance parts, lighting and upgrades.",
+      "previewImage": "",
+      "subcategories": [],
+      "button": "Explore",
+      "included": [],
+      "visible": true
+    },
+    {
+      "id": "gear-card",
+      "kind": "category",
+      "target": "helmets",
+      "name": "Riding Gear",
+      "image": "assets/icons/riding-gear.png",
+      "previewImage": "",
+      "description": "Get ready for the ride with gloves, jackets and protective essentials.",
+      "subcategories": [
+        "Hand Gloves",
+        "Rider Jacket",
+        "Raincoat",
+        "Intercom",
+        "Windbreaker",
+        "Safety Item"
+      ],
+      "button": "Explore",
+      "included": [],
+      "visible": true
+    },
+    {
+      "id": "tyres",
+      "name": "Tyre",
+      "image": "assets/icons/tyres.png",
+      "description": "Find your next set of tyres. Ask our team to confirm the right size.",
+      "included": [
+        "MRF, CEAT, Pirelli, CST and Eurogrip",
+        "Front and rear sizes for common bikes",
+        "Tubes and valves",
+        "Fitting and balancing in the bay",
+        "Fitted while you wait"
+      ],
+      "target": "tyres",
+      "kind": "category",
+      "button": "Explore",
+      "visible": true,
+      "previewImage": "",
+      "subcategories": []
+    },
+    {
+      "id": "helmets",
+      "name": "Helmet",
+      "image": "assets/icons/helmets.png",
+      "description": "Find a lid that suits your ride. Check the fit and certification before you buy.",
+      "included": [
+        "DOT and ECE 22.06 certified only",
+        "AGV, SMK and MT",
+        "Full face and open face",
+        "Visors and spares",
+        "Riding gloves and gear"
+      ],
+      "target": "helmets",
+      "kind": "category",
+      "button": "Explore",
+      "visible": true,
+      "previewImage": "",
+      "subcategories": [
+        "Helmets"
+      ]
+    },
+    {
       "id": "servicing",
       "name": "Bike Servicing",
       "image": "assets/icons/servicing.png",
-      "description": "Full mechanical service. We put the bike on the stand, go through it front to back, and show you what we found before we touch a bolt. Same day for most machines.",
+      "description": "A little care. A better ride. Mechanical checks, maintenance and tuning.",
       "included": [
         "Engine oil and filter change",
         "Chain, sprocket and brake inspection",
@@ -1103,13 +1215,14 @@
       "target": "servicing",
       "kind": "service",
       "button": "Book free →",
-      "visible": true
+      "visible": true,
+      "previewImage": ""
     },
     {
       "id": "modifications",
-      "name": "Modifications",
+      "name": "Modification",
       "image": "assets/icons/modifications.png",
-      "description": "Exhaust, lighting, seat, cosmetics, performance. We tell you straight what will actually work on your machine and what will only cost you money.",
+      "description": "Your bike, your way. Talk upgrades, comfort and custom details.",
       "included": [
         "Slip-on and full exhaust systems",
         "Lighting and electrical upgrades",
@@ -1121,13 +1234,14 @@
       "target": "modifications",
       "kind": "service",
       "button": "Plan my build →",
-      "visible": true
+      "visible": true,
+      "previewImage": ""
     },
     {
       "id": "painting",
       "name": "Painting",
       "image": "assets/icons/painting.png",
-      "description": "Panel respray and full colour changes. Prep is 80% of a paint job — that is where our time goes, and it is why ours does not peel after one monsoon.",
+      "description": "Fresh colour. Fresh attitude. Panel resprays and full colour changes.",
       "included": [
         "Single panel respray",
         "Full colour change",
@@ -1139,13 +1253,14 @@
       "target": "painting",
       "kind": "service",
       "button": "Get my quote →",
-      "visible": true
+      "visible": true,
+      "previewImage": ""
     },
     {
       "id": "washing",
       "name": "Washing",
       "image": "assets/icons/washing.png",
-      "description": "Foam wash, chain clean and lube, detail finish. In and out in under an hour — and free with every service we do.",
+      "description": "Give your ride a fresh start with a wash and finishing care.",
       "included": [
         "Foam wash, full body",
         "Chain clean and re-lube",
@@ -1156,76 +1271,8 @@
       "target": "washing",
       "kind": "service",
       "button": "Book a wash →",
-      "visible": true
-    },
-    {
-      "id": "oil",
-      "name": "Engine Oil",
-      "image": "assets/icons/engine-oil.png",
-      "description": "Official dealer for Mobil, BP, Castrol, Shell, Bajaj, Motul, Liqui Moly, Maxima Pro and Motorex. Full synthetic and semi-synthetic, sealed and bought direct.",
-      "included": [
-        "Full synthetic and semi-synthetic grades",
-        "10W-40, 20W-50 and gear oil",
-        "Matching oil filters on the shelf",
-        "Sealed containers, shown before pouring",
-        "Fitted in the bay while you wait"
-      ],
-      "target": "oil",
-      "kind": "category",
-      "button": "Browse oil →",
-      "visible": true
-    },
-    {
-      "id": "parts",
-      "name": "Spare Parts",
-      "image": "assets/icons/spare-parts.png",
-      "description": "Genuine components for the lineups on Bangladeshi roads. If it is not real, it is not on our shelf.",
-      "included": [
-        "Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner",
-        "Brake, clutch and chain components",
-        "Filters, plugs, cables and bulbs",
-        "Batteries and electricals",
-        "Sealed and boxed, shown on request",
-        "Sourced within days if not in stock"
-      ],
-      "target": "parts",
-      "kind": "category",
-      "button": "Browse parts →",
-      "visible": true
-    },
-    {
-      "id": "tyres",
-      "name": "Tyres",
-      "image": "assets/icons/tyres.png",
-      "description": "Official dealer for MRF, CEAT, Pirelli, CST and Eurogrip. Grip is the only thing between you and the road, so we fit and balance it here in the bay.",
-      "included": [
-        "MRF, CEAT, Pirelli, CST and Eurogrip",
-        "Front and rear sizes for common bikes",
-        "Tubes and valves",
-        "Fitting and balancing in the bay",
-        "Fitted while you wait"
-      ],
-      "target": "tyres",
-      "kind": "category",
-      "button": "Browse tyres →",
-      "visible": true
-    },
-    {
-      "id": "helmets",
-      "name": "Helmets",
-      "image": "assets/icons/helmets.png",
-      "description": "Certified lids only. We would rather lose the sale than sell you a shell that will not hold when it matters.",
-      "included": [
-        "DOT and ECE 22.06 certified only",
-        "AGV, SMK and MT",
-        "Full face and open face",
-        "Visors and spares",
-        "Riding gloves and gear"
-      ],
-      "target": "helmets",
-      "kind": "category",
-      "button": "Browse helmets →",
-      "visible": true
+      "visible": true,
+      "previewImage": ""
     }
   ],
   "kits": [
@@ -1997,7 +2044,8 @@
           "kind": "text",
           "value": "Type your model below. Save your ride, then find parts, book a service or set a reminder."
         }
-      ]
+      ],
+      "order": 0
     },
     {
       "id": "index-section-2",
@@ -2082,270 +2130,58 @@
     {
       "id": "index-brands",
       "page": "index",
-      "name": "Performance brands",
+      "name": "Homepage categories",
       "visible": true,
       "fields": [
         {
-          "id": "index-t16",
+          "id": "home-category-label",
           "kind": "text",
-          "label": "Text",
-          "value": "Performance lines"
+          "label": "Small label",
+          "value": "SHOP BY CATEGORY"
         },
         {
-          "id": "index-t17",
+          "id": "home-category-title",
           "kind": "text",
           "label": "Heading",
-          "value": "The brands we build with"
+          "value": "Category"
         },
         {
-          "id": "index-t18",
+          "id": "home-category-intro",
           "kind": "text",
-          "label": "Description",
-          "value": "Ten performance lines we fit and sell out of the Kushtia bay. Tap one to see what we stock for it — or send us your model and we will tell you what fits."
-        },
-        {
-          "id": "index-t19",
-          "kind": "text",
-          "label": "Text",
-          "value": "RCB"
-        },
-        {
-          "id": "index-t20",
-          "kind": "text",
-          "label": "Text",
-          "value": "Brake master cylinder"
-        },
-        {
-          "id": "index-t21",
-          "kind": "text",
-          "label": "Text",
-          "value": "Frando"
-        },
-        {
-          "id": "index-t22",
-          "kind": "text",
-          "label": "Text",
-          "value": "High-performance brake systems"
-        },
-        {
-          "id": "index-t23",
-          "kind": "text",
-          "label": "Text",
-          "value": "Adelin"
-        },
-        {
-          "id": "index-t24",
-          "kind": "text",
-          "label": "Text",
-          "value": "Master cylinder, CNC machined"
-        },
-        {
-          "id": "index-t25",
-          "kind": "text",
-          "label": "Text",
-          "value": "NLK Performance"
-        },
-        {
-          "id": "index-t26",
-          "kind": "text",
-          "label": "Text",
-          "value": "Racing throttle body & ECU"
-        },
-        {
-          "id": "index-t27",
-          "kind": "text",
-          "label": "Text",
-          "value": "FNM"
-        },
-        {
-          "id": "index-t28",
-          "kind": "text",
-          "label": "Text",
-          "value": "Plug & play LED lighting"
-        },
-        {
-          "id": "index-t29",
-          "kind": "text",
-          "label": "Text",
-          "value": "Fakie"
-        },
-        {
-          "id": "index-t30",
-          "kind": "text",
-          "label": "Text",
-          "value": "Adjustable footrest sets"
-        },
-        {
-          "id": "index-t31",
-          "kind": "text",
-          "label": "Text",
-          "value": "RPD"
-        },
-        {
-          "id": "index-t32",
-          "kind": "text",
-          "label": "Text",
-          "value": "Performance brake discs"
-        },
-        {
-          "id": "index-t33",
-          "kind": "text",
-          "label": "Text",
-          "value": "Faito"
-        },
-        {
-          "id": "index-t34",
-          "kind": "text",
-          "label": "Text",
-          "value": "Street Sport pads & hoses"
-        },
-        {
-          "id": "index-t35",
-          "kind": "text",
-          "label": "Text",
-          "value": "Jomthai"
-        },
-        {
-          "id": "index-t36",
-          "kind": "text",
-          "label": "Text",
-          "value": "Chain & sprocket sets"
-        },
-        {
-          "id": "index-t37",
-          "kind": "text",
-          "label": "Text",
-          "value": "Tobaki Racing"
-        },
-        {
-          "id": "index-t38",
-          "kind": "text",
-          "label": "Text",
-          "value": "Plug coils & spark plugs"
-        },
-        {
-          "id": "index-i39",
-          "kind": "image",
-          "label": "RCB — Brake master cylinder",
-          "value": "assets/banners/rcb-brake-master.webp"
-        },
-        {
-          "id": "index-i40",
-          "kind": "image",
-          "label": "Frando — High-performance brake systems",
-          "value": "assets/banners/frando-brakes.webp"
-        },
-        {
-          "id": "index-i41",
-          "kind": "image",
-          "label": "Adelin — Master cylinder, CNC machined",
-          "value": "assets/banners/adelin-master.webp"
-        },
-        {
-          "id": "index-i42",
-          "kind": "image",
-          "label": "NLK Performance — Racing throttle body and ECU",
-          "value": "assets/banners/nlk-ecu.webp"
-        },
-        {
-          "id": "index-i43",
-          "kind": "image",
-          "label": "FNM — Plug and play LED lighting",
-          "value": "assets/banners/fnm-lights.webp"
-        },
-        {
-          "id": "index-i44",
-          "kind": "image",
-          "label": "Fakie — Adjustable footrest sets",
-          "value": "assets/banners/fakie-footrest.webp"
-        },
-        {
-          "id": "index-i45",
-          "kind": "image",
-          "label": "RPD — Performance brake discs",
-          "value": "assets/banners/rpd-disc.webp"
-        },
-        {
-          "id": "index-i46",
-          "kind": "image",
-          "label": "Faito — Street Sport pads and hoses",
-          "value": "assets/banners/faito-brake.webp"
-        },
-        {
-          "id": "index-i47",
-          "kind": "image",
-          "label": "Jomthai — Chain and sprocket sets",
-          "value": "assets/banners/jomthai-chain.webp"
-        },
-        {
-          "id": "index-i48",
-          "kind": "image",
-          "label": "Tobaki Racing — Plug coils and spark plugs",
-          "value": "assets/banners/tobaki-ignition.webp"
-        },
-        {
-          "id": "index-l49",
-          "kind": "link",
-          "label": "Destination: RCBBrake master cylinder",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l50",
-          "kind": "link",
-          "label": "Destination: FrandoHigh-performance brake systems",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l51",
-          "kind": "link",
-          "label": "Destination: AdelinMaster cylinder, CNC machined",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l52",
-          "kind": "link",
-          "label": "Destination: NLK PerformanceRacing throttle body & ECU",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l53",
-          "kind": "link",
-          "label": "Destination: FNMPlug & play LED lighting",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l54",
-          "kind": "link",
-          "label": "Destination: FakieAdjustable footrest sets",
-          "value": "shop.html?cat=after"
-        },
-        {
-          "id": "index-l55",
-          "kind": "link",
-          "label": "Destination: RPDPerformance brake discs",
-          "value": "shop.html?cat=parts"
-        },
-        {
-          "id": "index-l56",
-          "kind": "link",
-          "label": "Destination: FaitoStreet Sport pads & hoses",
-          "value": "shop.html?cat=parts"
-        },
-        {
-          "id": "index-l57",
-          "kind": "link",
-          "label": "Destination: JomthaiChain & sprocket sets",
-          "value": "shop.html?cat=parts"
-        },
-        {
-          "id": "index-l58",
-          "kind": "link",
-          "label": "Destination: Tobaki RacingPlug coils & spark plugs",
-          "value": "shop.html?cat=parts"
+          "label": "Introduction",
+          "value": "Your next upgrade starts here. Hover for a closer look, or tap to explore."
         }
       ],
       "hint": "43 editable text, picture and link fields",
       "order": 3
+    },
+    {
+      "id": "index-services",
+      "page": "index",
+      "name": "Homepage servicing",
+      "visible": true,
+      "fields": [
+        {
+          "id": "home-service-label",
+          "kind": "text",
+          "label": "Small label",
+          "value": "TAKE CARE OF YOUR RIDE"
+        },
+        {
+          "id": "home-service-title",
+          "kind": "text",
+          "label": "Heading",
+          "value": "Servicing"
+        },
+        {
+          "id": "home-service-intro",
+          "kind": "text",
+          "label": "Introduction",
+          "value": "From everyday care to a fresh new look. Choose a service to see what is included."
+        }
+      ],
+      "hint": "12 editable text, picture and link fields",
+      "order": 4
     },
     {
       "id": "index-dealer",
@@ -2427,745 +2263,7 @@
         }
       ],
       "hint": "12 editable text, picture and link fields",
-      "order": 4
-    },
-    {
-      "id": "index-services",
-      "page": "index",
-      "name": "Services & shop introduction",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t71",
-          "kind": "text",
-          "label": "Text",
-          "value": "Services & shop"
-        },
-        {
-          "id": "index-t72",
-          "kind": "text",
-          "label": "Heading",
-          "value": "everything your bike needs, one address"
-        },
-        {
-          "id": "index-t73",
-          "kind": "text",
-          "label": "Description",
-          "value": "Book the work, buy the parts, same counter, same people, same standard.\n      Motorcycle servicing, painting, washing and custom builds — with genuine oil,\n      spares, tyres and certified helmets on the shelf behind you while you wait."
-        },
-        {
-          "id": "index-t74",
-          "kind": "text",
-          "label": "Text",
-          "value": "Machines we service"
-        },
-        {
-          "id": "index-t75",
-          "kind": "text",
-          "label": "Text",
-          "value": "Yamaha"
-        },
-        {
-          "id": "index-t76",
-          "kind": "text",
-          "label": "Text",
-          "value": "Honda"
-        },
-        {
-          "id": "index-t77",
-          "kind": "text",
-          "label": "Text",
-          "value": "Bajaj"
-        },
-        {
-          "id": "index-t78",
-          "kind": "text",
-          "label": "Text",
-          "value": "Suzuki"
-        },
-        {
-          "id": "index-t79",
-          "kind": "text",
-          "label": "Text",
-          "value": "TVS"
-        },
-        {
-          "id": "index-t80",
-          "kind": "text",
-          "label": "Text",
-          "value": "Hero"
-        },
-        {
-          "id": "index-t81",
-          "kind": "text",
-          "label": "Text",
-          "value": "Runner"
-        },
-        {
-          "id": "index-t82",
-          "kind": "text",
-          "label": "Text",
-          "value": "Lifan"
-        }
-      ],
-      "hint": "12 editable text, picture and link fields",
       "order": 5
-    },
-    {
-      "id": "index-pricing",
-      "page": "index",
-      "name": "Service packages",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t83",
-          "kind": "text",
-          "label": "Text",
-          "value": "What it costs"
-        },
-        {
-          "id": "index-t84",
-          "kind": "text",
-          "label": "Heading",
-          "value": "no surprise at the counter"
-        },
-        {
-          "id": "index-t85",
-          "kind": "text",
-          "label": "Description",
-          "value": "Every job is inspected and quoted before it starts. These are the packages riders\n    ask for most — your exact price is confirmed in writing once we've seen the bike."
-        },
-        {
-          "id": "index-t86",
-          "kind": "text",
-          "label": "Heading",
-          "value": "quick wash"
-        },
-        {
-          "id": "index-t87",
-          "kind": "text",
-          "label": "Text",
-          "value": "Under 1 hour"
-        },
-        {
-          "id": "index-t88",
-          "kind": "text",
-          "label": "Text",
-          "value": "Same day, walk-in welcome"
-        },
-        {
-          "id": "index-t89",
-          "kind": "text",
-          "label": "Text",
-          "value": "Foam wash, full body"
-        },
-        {
-          "id": "index-t90",
-          "kind": "text",
-          "label": "Text",
-          "value": "Chain clean and re-lube"
-        },
-        {
-          "id": "index-t91",
-          "kind": "text",
-          "label": "Text",
-          "value": "Detail finish and dry"
-        },
-        {
-          "id": "index-t92",
-          "kind": "text",
-          "label": "Text",
-          "value": "Free with any service"
-        },
-        {
-          "id": "index-t93",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Book a wash"
-        },
-        {
-          "id": "index-t94",
-          "kind": "text",
-          "label": "Heading",
-          "value": "full service"
-        },
-        {
-          "id": "index-t95",
-          "kind": "text",
-          "label": "Text",
-          "value": "Same day"
-        },
-        {
-          "id": "index-t96",
-          "kind": "text",
-          "label": "Text",
-          "value": "Quoted before work starts"
-        },
-        {
-          "id": "index-t97",
-          "kind": "text",
-          "label": "Text",
-          "value": "Engine oil and filter change"
-        },
-        {
-          "id": "index-t98",
-          "kind": "text",
-          "label": "Text",
-          "value": "Chain, sprocket and brake check"
-        },
-        {
-          "id": "index-t99",
-          "kind": "text",
-          "label": "Text",
-          "value": "Valve clearance and tuning"
-        },
-        {
-          "id": "index-t100",
-          "kind": "text",
-          "label": "Text",
-          "value": "Free wash on handover"
-        },
-        {
-          "id": "index-t101",
-          "kind": "text",
-          "label": "Text",
-          "value": "Old parts returned on request"
-        },
-        {
-          "id": "index-t102",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Book my service"
-        },
-        {
-          "id": "index-t103",
-          "kind": "text",
-          "label": "Heading",
-          "value": "paint & build"
-        },
-        {
-          "id": "index-t104",
-          "kind": "text",
-          "label": "Text",
-          "value": "By quote"
-        },
-        {
-          "id": "index-t105",
-          "kind": "text",
-          "label": "Text",
-          "value": "Completion date agreed up front"
-        },
-        {
-          "id": "index-t106",
-          "kind": "text",
-          "label": "Text",
-          "value": "Panel respray or full colour change"
-        },
-        {
-          "id": "index-t107",
-          "kind": "text",
-          "label": "Text",
-          "value": "Exhaust, lighting and cosmetics"
-        },
-        {
-          "id": "index-t108",
-          "kind": "text",
-          "label": "Text",
-          "value": "Performance and comfort parts"
-        },
-        {
-          "id": "index-t109",
-          "kind": "text",
-          "label": "Text",
-          "value": "Honest advice on what's worth it"
-        },
-        {
-          "id": "index-t110",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Plan my build"
-        },
-        {
-          "id": "index-t111",
-          "kind": "text",
-          "label": "Text",
-          "value": "Not sure what your bike needs? Bring it in or send a voice note on"
-        },
-        {
-          "id": "index-t112",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "WhatsApp"
-        },
-        {
-          "id": "index-t113",
-          "kind": "text",
-          "label": "Description",
-          "value": "—\n    diagnosis and a quote cost you nothing, and you're free to walk away after hearing it."
-        },
-        {
-          "id": "index-l114",
-          "kind": "link",
-          "label": "Destination: Book a wash",
-          "value": "book.html?service=Washing"
-        },
-        {
-          "id": "index-l115",
-          "kind": "link",
-          "label": "Destination: Book my service →",
-          "value": "book.html?service=Servicing"
-        },
-        {
-          "id": "index-l116",
-          "kind": "link",
-          "label": "Destination: Plan my build",
-          "value": "book.html?service=Modifications"
-        }
-      ],
-      "hint": "34 editable text, picture and link fields",
-      "order": 6
-    },
-    {
-      "id": "index-process",
-      "page": "index",
-      "name": "How it works",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t117",
-          "kind": "text",
-          "label": "Text",
-          "value": "How it works"
-        },
-        {
-          "id": "index-t118",
-          "kind": "text",
-          "label": "Heading",
-          "value": "five steps, nothing skipped"
-        },
-        {
-          "id": "index-t119",
-          "kind": "text",
-          "label": "Text",
-          "value": "Step 01"
-        },
-        {
-          "id": "index-t120",
-          "kind": "text",
-          "label": "Description",
-          "value": "Call, WhatsApp, or roll in. We listen to the bike and to you — what you felt matters as much as what we measure."
-        },
-        {
-          "id": "index-t121",
-          "kind": "text",
-          "label": "Heading",
-          "value": "tell us"
-        },
-        {
-          "id": "index-t122",
-          "kind": "text",
-          "label": "Text",
-          "value": "Step 02"
-        },
-        {
-          "id": "index-t123",
-          "kind": "text",
-          "label": "Description",
-          "value": "On the stand, front to back. We show you what we found before we touch a single bolt. No invisible work, ever."
-        },
-        {
-          "id": "index-t124",
-          "kind": "text",
-          "label": "Heading",
-          "value": "we look"
-        },
-        {
-          "id": "index-t125",
-          "kind": "text",
-          "label": "Text",
-          "value": "Step 03"
-        },
-        {
-          "id": "index-t126",
-          "kind": "text",
-          "label": "Description",
-          "value": "One written number, agreed before we start. Parts listed by brand and name, so you know exactly what's going in."
-        },
-        {
-          "id": "index-t127",
-          "kind": "text",
-          "label": "Heading",
-          "value": "you approve"
-        },
-        {
-          "id": "index-t128",
-          "kind": "text",
-          "label": "Text",
-          "value": "Step 04"
-        },
-        {
-          "id": "index-t129",
-          "kind": "text",
-          "label": "Description",
-          "value": "Genuine parts, correct torque, clean bay. Your old parts come back to you in a bag if you ask for them."
-        },
-        {
-          "id": "index-t130",
-          "kind": "text",
-          "label": "Heading",
-          "value": "we work"
-        },
-        {
-          "id": "index-t131",
-          "kind": "text",
-          "label": "Text",
-          "value": "Step 05"
-        },
-        {
-          "id": "index-t132",
-          "kind": "text",
-          "label": "Description",
-          "value": "Road test, free wash, handover. Then we check in after a week — because a service isn't finished at the gate."
-        },
-        {
-          "id": "index-t133",
-          "kind": "text",
-          "label": "Heading",
-          "value": "you ride"
-        },
-        {
-          "id": "index-t134",
-          "kind": "text",
-          "label": "Text",
-          "value": "Your turn"
-        },
-        {
-          "id": "index-t135",
-          "kind": "text",
-          "label": "Description",
-          "value": "Booking costs nothing and holds your slot. Thursday and Friday fill first — pick your day while it's open."
-        },
-        {
-          "id": "index-t136",
-          "kind": "text",
-          "label": "Heading",
-          "value": "book it →"
-        },
-        {
-          "id": "index-t137",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Reserve free"
-        },
-        {
-          "id": "index-l138",
-          "kind": "link",
-          "label": "Destination: Reserve free",
-          "value": "book.html"
-        }
-      ],
-      "hint": "22 editable text, picture and link fields",
-      "order": 7
-    },
-    {
-      "id": "index-section-4",
-      "page": "index",
-      "name": "the boring promises",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t139",
-          "kind": "text",
-          "label": "Text",
-          "value": "Our promise"
-        },
-        {
-          "id": "index-t140",
-          "kind": "text",
-          "label": "Heading",
-          "value": "the boring promises"
-        },
-        {
-          "id": "index-t141",
-          "kind": "text",
-          "label": "Description",
-          "value": "Nothing here is clever. It's just what every workshop should do, written down\n        so you can hold us to it."
-        },
-        {
-          "id": "index-t142",
-          "kind": "text",
-          "label": "Description",
-          "value": "The price you're quoted is the price you pay. If it changes, we call first — always before, never after."
-        },
-        {
-          "id": "index-t143",
-          "kind": "text",
-          "label": "Description",
-          "value": "Genuine parts, sealed, with the box. Ask to see it and we'll put it in your hand."
-        },
-        {
-          "id": "index-t144",
-          "kind": "text",
-          "label": "Description",
-          "value": "Old parts returned on request. You paid for the replacement; you get the proof."
-        },
-        {
-          "id": "index-t145",
-          "kind": "text",
-          "label": "Text",
-          "value": "Your bike leaves cleaner than it arrived. Every single time, no charge."
-        },
-        {
-          "id": "index-t146",
-          "kind": "text",
-          "label": "Description",
-          "value": "If something we touched fails, bring it straight back. We fix it, and we don't argue about it."
-        },
-        {
-          "id": "index-t147",
-          "kind": "text",
-          "label": "Text",
-          "value": "Booking is free and holds your slot. No deposit, no card, no catch."
-        }
-      ],
-      "hint": "9 editable text, picture and link fields",
-      "order": 8
-    },
-    {
-      "id": "index-faq",
-      "page": "index",
-      "name": "Questions & answers",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t148",
-          "kind": "text",
-          "label": "Text",
-          "value": "Straight answers"
-        },
-        {
-          "id": "index-t149",
-          "kind": "text",
-          "label": "Heading",
-          "value": "questions riders actually ask"
-        },
-        {
-          "id": "index-t150",
-          "kind": "text",
-          "label": "Text",
-          "value": "How much does a bike service cost in Kushtia?"
-        },
-        {
-          "id": "index-t151",
-          "kind": "text",
-          "label": "Description",
-          "value": "It depends on the machine and what it needs — anyone who quotes you before seeing the bike is guessing. We inspect it first, then give you one written price before any work starts. That price is what you pay. If something changes mid-job we call you before touching it, never after."
-        },
-        {
-          "id": "index-t152",
-          "kind": "text",
-          "label": "Text",
-          "value": "Are your parts genuine?"
-        },
-        {
-          "id": "index-t153",
-          "kind": "text",
-          "label": "Description",
-          "value": "Yes. Every part we fit arrives sealed and in its box, and you're welcome to ask to see the box before it goes on the bike. We also hand back your old parts on request, so you can see exactly what was replaced and why."
-        },
-        {
-          "id": "index-t154",
-          "kind": "text",
-          "label": "Text",
-          "value": "How long will my bike be with you?"
-        },
-        {
-          "id": "index-t155",
-          "kind": "text",
-          "label": "Description",
-          "value": "Most standard services are same-day. A wash is under an hour. Paint and bigger modification work gets a completion date agreed up front, so you can plan around it instead of waiting on a phone call."
-        },
-        {
-          "id": "index-t156",
-          "kind": "text",
-          "label": "Text",
-          "value": "Do I have to pay a deposit to book?"
-        },
-        {
-          "id": "index-t157",
-          "kind": "text",
-          "label": "Description",
-          "value": "No. Booking costs nothing and we hold the slot on your word. You pay after the work is done and you've seen it. No card, no advance, no catch."
-        },
-        {
-          "id": "index-t158",
-          "kind": "text",
-          "label": "Text",
-          "value": "Which bikes do you work on?"
-        },
-        {
-          "id": "index-t159",
-          "kind": "text",
-          "label": "Description",
-          "value": "All the common lineups on Bangladeshi roads — Yamaha, Honda, Bajaj, Suzuki, TVS, Hero, Runner, Lifan — plus imported machines. We service cars as well, which is why the sign says 360°."
-        },
-        {
-          "id": "index-t160",
-          "kind": "text",
-          "label": "Text",
-          "value": "What if something goes wrong after the service?"
-        },
-        {
-          "id": "index-t161",
-          "kind": "text",
-          "label": "Description",
-          "value": "Bring it straight back. If it's something we touched, we fix it and we don't argue about it. We also check in about a week after a service to make sure it's still riding the way it should."
-        },
-        {
-          "id": "index-t162",
-          "kind": "text",
-          "label": "Text",
-          "value": "Can I get parts without booking a service?"
-        },
-        {
-          "id": "index-t163",
-          "kind": "text",
-          "label": "Text",
-          "value": "Of course. Reserve anything from the"
-        },
-        {
-          "id": "index-t164",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "shop"
-        },
-        {
-          "id": "index-t165",
-          "kind": "text",
-          "label": "Description",
-          "value": "and collect it at the counter, or have us fit it in the bay while you wait. Don't see your model listed? Call us — most parts are in the back or here within a couple of days."
-        },
-        {
-          "id": "index-l166",
-          "kind": "link",
-          "label": "Destination: shop",
-          "value": "shop.html"
-        }
-      ],
-      "hint": "19 editable text, picture and link fields",
-      "order": 9
-    },
-    {
-      "id": "index-contact",
-      "page": "index",
-      "name": "Contact details",
-      "visible": true,
-      "fields": [
-        {
-          "id": "index-t167",
-          "kind": "text",
-          "label": "Text",
-          "value": "Find us"
-        },
-        {
-          "id": "index-t168",
-          "kind": "text",
-          "label": "Heading",
-          "value": "come by the bay"
-        },
-        {
-          "id": "index-t169",
-          "kind": "text",
-          "label": "Text",
-          "value": "Call or WhatsApp"
-        },
-        {
-          "id": "index-t170",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "+880 1711-154387"
-        },
-        {
-          "id": "index-t171",
-          "kind": "text",
-          "label": "Text",
-          "value": "Email"
-        },
-        {
-          "id": "index-t172",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "motolubebangladesh@gmail.com"
-        },
-        {
-          "id": "index-t173",
-          "kind": "text",
-          "label": "Text",
-          "value": "Workshop"
-        },
-        {
-          "id": "index-t174",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "R.A. Khan Chowdhury Road"
-        },
-        {
-          "id": "index-t175",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Kushtia 7000, Khulna Division"
-        },
-        {
-          "id": "index-t176",
-          "kind": "text",
-          "label": "Text",
-          "value": "Social"
-        },
-        {
-          "id": "index-t177",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Facebook →"
-        },
-        {
-          "id": "index-t178",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "Book my slot free"
-        },
-        {
-          "id": "index-t179",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "WhatsApp us"
-        },
-        {
-          "id": "index-t180",
-          "kind": "text",
-          "label": "Description",
-          "value": "Serving riders across Kushtia, Jhenaidah, Meherpur and Chuadanga.\n    Bike servicing, motorcycle repair, engine oil, genuine spare parts, tyres,\n    helmets, painting, washing and custom modifications — all under one roof."
-        },
-        {
-          "id": "index-l181",
-          "kind": "link",
-          "label": "Destination: R.A. Khan Chowdhury RoadKushtia 7000, Khulna Divis",
-          "value": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
-        },
-        {
-          "id": "index-l182",
-          "kind": "link",
-          "label": "Destination: Facebook →",
-          "value": "https://www.facebook.com/share/1MLq6PjxjY/"
-        },
-        {
-          "id": "index-l183",
-          "kind": "link",
-          "label": "Destination: Book my slot free →",
-          "value": "book.html"
-        }
-      ],
-      "hint": "17 editable text, picture and link fields",
-      "order": 10
     },
     {
       "id": "index-section-5",
@@ -3243,7 +2341,7 @@
           "id": "index-t195",
           "kind": "text",
           "label": "Button or link label",
-          "value": "Pricing"
+          "value": "Book a service"
         },
         {
           "id": "index-t196",
@@ -3276,12 +2374,6 @@
           "value": "Journal"
         },
         {
-          "id": "index-t201",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "FAQ"
-        },
-        {
           "id": "index-t202",
           "kind": "text",
           "label": "Button or link label",
@@ -3291,7 +2383,7 @@
           "id": "index-t203",
           "kind": "text",
           "label": "Text",
-          "value": "Come by the bay"
+          "value": "Contact"
         },
         {
           "id": "index-t204",
@@ -3399,7 +2491,7 @@
           "id": "index-l221",
           "kind": "link",
           "label": "Destination: Pricing",
-          "value": "index.html#pricing"
+          "value": "book.html"
         },
         {
           "id": "index-l222",
@@ -3426,12 +2518,6 @@
           "value": "blog.html"
         },
         {
-          "id": "index-l226",
-          "kind": "link",
-          "label": "Destination: FAQ",
-          "value": "index.html#faq"
-        },
-        {
           "id": "index-l227",
           "kind": "link",
           "label": "Destination: Contact",
@@ -3451,7 +2537,7 @@
         }
       ],
       "hint": "46 editable text, picture and link fields",
-      "order": 11
+      "order": 6
     },
     {
       "id": "shop-section-1",
@@ -3545,7 +2631,7 @@
         }
       ],
       "hint": "14 editable text, picture and link fields",
-      "order": 12
+      "order": 7
     },
     {
       "id": "shop-finder",
@@ -3565,7 +2651,8 @@
           "label": "Search heading",
           "value": "Search your bike or car model."
         }
-      ]
+      ],
+      "order": 8
     },
     {
       "id": "shop-section-2",
@@ -3643,7 +2730,7 @@
           "id": "shop-t26",
           "kind": "text",
           "label": "Button or link label",
-          "value": "Pricing"
+          "value": "Book a service"
         },
         {
           "id": "shop-t27",
@@ -3674,12 +2761,6 @@
           "kind": "text",
           "label": "Button or link label",
           "value": "Journal"
-        },
-        {
-          "id": "shop-t32",
-          "kind": "text",
-          "label": "Button or link label",
-          "value": "FAQ"
         },
         {
           "id": "shop-t33",
@@ -3799,7 +2880,7 @@
           "id": "shop-l52",
           "kind": "link",
           "label": "Destination: Pricing",
-          "value": "index.html#pricing"
+          "value": "book.html"
         },
         {
           "id": "shop-l53",
@@ -3826,12 +2907,6 @@
           "value": "blog.html"
         },
         {
-          "id": "shop-l57",
-          "kind": "link",
-          "label": "Destination: FAQ",
-          "value": "index.html#faq"
-        },
-        {
           "id": "shop-l58",
           "kind": "link",
           "label": "Destination: Contact",
@@ -3851,7 +2926,7 @@
         }
       ],
       "hint": "46 editable text, picture and link fields",
-      "order": 13
+      "order": 9
     },
     {
       "id": "book-section-1",
@@ -3879,7 +2954,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 14
+      "order": 10
     },
     {
       "id": "book-section-2",
@@ -4063,7 +3138,7 @@
         }
       ],
       "hint": "29 editable text, picture and link fields",
-      "order": 15
+      "order": 11
     },
     {
       "id": "book-section-3",
@@ -4091,7 +3166,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 16
+      "order": 12
     },
     {
       "id": "index-cookie-consent",
@@ -4123,7 +3198,8 @@
           "label": "Biker mascot",
           "value": "assets/mascot/cookie-rider.webp"
         }
-      ]
+      ],
+      "order": 13
     }
   ],
   "pages": [
