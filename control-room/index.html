@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1f1e22">
+  <title>Moto Control — Store workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="signed-out">
+  <a class="skip" href="#main">Skip to workspace</a>
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <a class="wordmark" href="#home" aria-label="Moto Control home"><img src="assets/logo.webp" alt="Moto Market"><span>CONTROL ROOM</span></a>
+    <div class="store-label"><i></i><div>Moto Market <small>Kushtia, Bangladesh</small></div><span class="owner-label">OWNER</span></div>
+    <div class="nav-label">YOUR WORKSPACE</div>
+    <nav id="navigation"></nav>
+    <div class="sidebar-bottom"><button class="help-card" data-action="help"><span class="help-icon">?</span><span>First time here?<small>Take a 1-minute tour ↗</small></span></button><a href="../CONTROL_ROOM_PLAN.md" class="plan-link">Read the store guide ↗</a><button class="profile" data-route="settings"><span class="avatar">MM</span><span><span class="profile-name">Store owner</span><small>English workspace</small></span><span>⌄</span></button></div>
+  </aside>
+  <div class="workspace">
+    <div class="demo-bar"><span><b>CONNECTING</b> Loading your saved workspace…</span><button data-action="signout">Sign out</button></div>
+    <header class="topbar"><div class="crumb"><button class="mobile-menu icon-button" data-action="menu" aria-label="Toggle navigation">☰</button><span>Moto Control</span><span class="crumb-slash">/</span><b id="crumb-title">Home</b></div><div class="top-actions"><button class="search-trigger" data-action="search" aria-label="Search control panel"><span data-icon="search"></span><span>Find anything…</span><kbd>/</kbd></button><button class="btn ghost preview-button" data-action="preview" aria-label="Preview website"><span data-icon="eye"></span><span>Preview website</span></button><button class="btn primary publish-button" data-action="review"><span data-icon="upload"></span><span>Review & publish</span><b id="change-count">0</b></button></div></header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="workspace-footer"><span><span class="tiny-square"></span> Designed for your everyday work.</span><span>Need help? <button data-action="help">Show me how ↗</button></span></footer>
+  </div>
+  <dialog id="editor" class="editor" aria-labelledby="editor-title"><form id="editor-form" method="dialog"><div class="sheet-heading"><div><span class="eyebrow" id="editor-kicker">EDIT PRODUCT</span><h2 id="editor-title"></h2></div><button type="button" class="icon-button close" data-action="close-editor" aria-label="Close editor">✕</button></div><div id="editor-body" class="sheet-body"></div><div class="sheet-footer"><span>Save to keep your draft. Publish when ready.</span><div><button type="button" class="btn ghost" data-action="close-editor">Cancel</button><button type="submit" class="btn primary">Save draft <span>→</span></button></div></div></form></dialog>
+  <dialog id="modal" class="modal" aria-labelledby="modal-title"><div class="modal-head"><span class="eyebrow" id="modal-kicker">MOTO CONTROL</span><button class="icon-button" data-action="close-modal" aria-label="Close dialog">✕</button></div><div id="modal-body"></div></dialog>
+  <input type="file" id="image-upload" accept="image/jpeg,image/png,image/webp" hidden>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <section id="login-screen" class="login-screen"><div class="login-brand"><img src="assets/logo.webp" alt="Moto Market"><span class="eyebrow red">YOUR STORE. YOUR CONTROL.</span><h1>Good to<br>have you back.</h1><p>Every product. Every picture. Every little detail.<br>Take care of your website from one simple place.</p></div><form id="login-form" class="login-card"><span class="eyebrow red">STAFF SIGN-IN</span><h2>Let’s get to work.</h2><p>Use the details given to you by the store owner.</p><label for="login-username">Username</label><input id="login-username" name="username" autocomplete="username" required autofocus><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required><p id="login-message" role="alert"></p><button class="btn primary" type="submit">Open control room →</button><a href="../index.html">Visit the website ↗</a><small>Need access? Ask your store owner.</small></form></section><script type="module" src="app.js"></script>
+</body>
+</html>

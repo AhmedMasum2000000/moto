@@ -1,67 +1,39 @@
-# Moto Market — motomarket.com.bd
+# Moto Market
 
-Marketing + booking + parts-catalogue site for **Moto Market**, Kushtia.
-*More than a service center · 360°*
+The English control room and branded storefront share one Supabase backend. GitHub Pages hosts the website. Supabase hosts staff sign-in, content, pictures, revisions and customer requests. The existing /admin/ address opens /control-room/.
 
-## What it is
+- Website: https://ahmedmasum2000000.github.io/moto/
+- Staff workspace: https://ahmedmasum2000000.github.io/moto/control-room/
+- Staff guide: CONTROL_ROOM_PLAN.md
 
-Three static pages, zero build step, zero dependencies.
+## Editing and live updates
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | The guided journey — hero, story chapters, services, process rail, trust, contact |
-| `shop.html` | Catalogue across five sub-categories with filters and a persistent cart |
-| `book.html` | Service booking that turns into a pre-written WhatsApp / email message |
-| `styles.css` | The whole design system |
-| `app.js` | The motion engine |
+Choose a task, save the draft, preview it and publish. Products, prices, discounts, colours, model compatibility, categories, services, menus, banners, logos, contact details, text, HTML/CSS pages and template posts are editable. A publication sends a small revision signal to open storefronts. A 30-second check catches reconnects. A customer filling a form gets a refresh prompt to preserve their typing.
 
-## Running it
+Products assigned to a selected model appear in that model's search results. Universal products explicitly specify bikes, cars or both. Unassigned products remain in the general catalogue. Colour options have names, swatches, individual pictures and availability. Selected colours remain separate cart lines and are checked by the server.
 
-It's plain HTML. Open `index.html`, or serve the folder:
+## Staff permissions
 
-```sh
-python3 -m http.server 8000
-```
+Administrators have full content, publishing, restore, request and staff-management access. Content Managers edit website content and may publish only when enabled by an Administrator. Service Coordinators manage customer requests.
 
-Deploys as-is to Netlify, Vercel, GitHub Pages, or any shared host — just upload the folder.
+Staff can change their own password. Only Administrators can create staff, change another person's role, reset their password or disable access. Credentials live in Supabase Auth. Website files contain no staff passwords or GitHub tokens. The former Studio credential vault is retired; its passwords cannot be transferred. Use connected staff access.
 
-## Design
+## Requests
 
-Near-black `#0a0a0b`, off-white `#f4f2ef`, one red `#e11d2e` taken from the logo.
-Type carries the page; the red is only ever an accent. Both fonts (Inter, IBM Plex Mono)
-load from Google Fonts and fall back to system stacks if they don't.
+Orders and bookings are saved with a receipt. Server checks recalculate prices and colour availability. Retrying an unchanged request produces the same receipt. Requests are not online payments, inventory reservations or guaranteed service slots; staff contact the customer before confirming.
 
-## Motion
+## Development and deployment
 
-Everything runs off a single shared `requestAnimationFrame` loop and `IntersectionObserver` —
-no scroll-jacking, no libraries.
+Use Node 22 or newer. Run npm ci, npm test and npm run build. The generated browser client is committed so GitHub Pages needs no application server. A local preview can run at http://127.0.0.1:8781.
 
-- **ASCII field** — the hero is a live canvas of monospace glyphs driven by a spinning-wheel
-  field function; it drifts toward the pointer.
-- **ASCII frame players** — hand-drawn art cycled frame by frame in the story panels.
-- **Reveals** — word-by-word headline splits, clip-path wipes, staggered fades.
-- **Rail** — the process section scrolls sideways as you scroll down (falls back to a
-  swipeable carousel under 860px).
-- **Marquees** — speed reacts to scroll velocity and direction.
-- Count-ups, text scramble, magnetic cursor, scroll progress bar, auto-hiding nav.
+Apply the Supabase migrations in order and deploy the two Edge Functions with their schema module. moto-admin requires a staff JWT plus a current active role. moto-request uses custom publishable-key authentication and exposes only validated guest request submission. Service credentials exist only in the Edge Function environment.
 
-`prefers-reduced-motion: reduce` disables all of it and the page still reads correctly.
+main is the source branch. Publish its tree to gh-pages with .nojekyll; the Pages workflow runs from that permitted branch. Content publishing changes the database directly and requires no Git commit. Recheck branch heads before deploying source changes.
 
-## Commerce
+The integration check is scripts/verify-backend.mjs. Supply MOTO_USERNAME and MOTO_PASSWORD privately as environment variables. It makes reversible QA edits, exercises permissions, images and requests, and restores the original content. Never commit those credentials.
 
-The cart is `localStorage`-backed (`mm.cart.v1`) and shared across pages. There is **no
-payment backend** — checkout composes an itemised WhatsApp message to +880 1711-154387.
-Same pattern for bookings. Swapping in a real checkout means replacing that one handler
-in `app.js`.
+## Limits
 
-Product data lives inline in `shop.html`. To add an item, copy an `article.card` block and
-set `data-cat`, `data-add`, `data-name`, `data-cat` and `data-price` on its Add button.
+Coded pages accept sandboxed HTML/CSS; scripts and forms are disabled. Social crawlers that do not execute JavaScript may see static fallback sharing metadata. Pictures accept JPG, PNG or WebP, up to 5 MB. Staff see the latest 200 requests and 30 revisions.
 
-## Business details
-
-- **Phone** +880 1711-154387
-- **Email** motolubebangladesh@gmail.com
-- **Workshop** R.A. Khan Chowdhury Road, Kushtia 7000, Khulna Division
-- **Facebook** https://www.facebook.com/share/1MLq6PjxjY/
-
-Prices in the catalogue are placeholders — confirm them before going live.
+Enable project-level leaked-password protection when available on the organization's plan: https://supabase.com/docs/guides/auth/password-security. Change temporary preview credentials before staff handover.
