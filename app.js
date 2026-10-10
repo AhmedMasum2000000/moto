@@ -1663,6 +1663,65 @@
     window.addEventListener('popstate', mark);
   }
 
+  /* The menu has its own moving highlight; pointer and keyboard share it. */
+  function navMotion() {
+    const menu = $('.nav__menu');
+    if (!menu) return;
+    const links = $$('.nav__link', menu);
+    if (!links.length) return;
+    const marker = document.createElement('span');
+    marker.className = 'nav__highlight';
+    marker.setAttribute('aria-hidden', 'true');
+    menu.prepend(marker);
+    let hovered = null;
+
+    const sync = () => {
+      const focused = links.find(link => link === document.activeElement);
+      const link = hovered || focused || links.find(link => link.getAttribute('aria-current') === 'page');
+      if (!link || !menu.getClientRects().length) {
+        marker.classList.remove('is-on');
+        return;
+      }
+      const box = link.getBoundingClientRect();
+      const parent = menu.getBoundingClientRect();
+      marker.style.setProperty('--highlight-x', `${box.left - parent.left}px`);
+      marker.style.width = `${box.width}px`;
+      marker.style.height = `${box.height}px`;
+      marker.style.top = `${box.top - parent.top}px`;
+      marker.classList.add('is-on');
+    };
+
+    links.forEach((link, i) => {
+      const signal = document.createElement('span');
+      signal.className = 'nav__signal';
+      signal.setAttribute('aria-hidden', 'true');
+      link.prepend(signal);
+      link.style.setProperty('--nav-delay', `${i * 75}ms`);
+      link.style.setProperty('--signal-delay', `${i * -0.65}s`);
+      link.classList.add('nav__enter');
+      link.addEventListener('animationend', e => {
+        if (e.target === link) link.classList.remove('nav__enter');
+      });
+      link.addEventListener('pointerenter', () => { hovered = link; sync(); });
+      link.addEventListener('pointermove', e => {
+        if (reduced()) return;
+        const box = link.getBoundingClientRect();
+        link.style.setProperty('--pointer-x', `${((e.clientX - box.left) / box.width) * 100}%`);
+      }, { passive: true });
+      link.addEventListener('focus', sync);
+      link.addEventListener('blur', () => requestAnimationFrame(sync));
+    });
+    menu.addEventListener('pointerleave', () => { hovered = null; sync(); });
+    window.addEventListener('mm:urlchange', sync);
+    window.addEventListener('popstate', sync);
+    window.addEventListener('resize', sync, { passive: true });
+    if (document.fonts?.ready) document.fonts.ready.then(sync);
+    const pause = () => menu.classList.toggle('is-paused', document.hidden);
+    document.addEventListener('visibilitychange', pause);
+    pause();
+    sync();
+  }
+
   function mobileMenu() {
     const menu = $('[data-menu]');
     if (!menu) return;
@@ -1831,6 +1890,7 @@ ${d.get('notes') || '—'}`;
     scrollFocus();
     search();
     currentNav();
+    navMotion();
     mobileMenu();
     brandChips();
     sorting();
