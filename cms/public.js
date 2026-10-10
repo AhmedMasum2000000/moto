@@ -1,5 +1,5 @@
 import {catalogFinder} from './finder.js?v=cookie-cover-1';
-import {cookieCard} from './cookies.js';
+import {cookieCard} from './cookies.js?v=cookie-cover-2';
 import {ridePreferences} from './preferences.mjs';
 import {homeBackground} from './home-hero.js';
 const finderStyles=document.createElement('link');finderStyles.rel='stylesheet';finderStyles.href='cms/finder.css';document.head.append(finderStyles);
@@ -57,7 +57,7 @@ document.addEventListener('click',e=>{const p=e.target.closest('[data-product]')
 try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=r.draft.content;revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs');content=publicDocument(content);}else{const r=await live();content=r.content;revision=r.revision;}hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
 cookieCard(content,img);
 // Load the existing motion, fitment and shopping interactions after content is in place.
-const script=document.createElement('script');script.src='app.js?v=cookie-cover-1';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
+const script=document.createElement('script');script.src='app.js?v=cookie-cover-2';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
 if(content&&!draft){
  const stop=watchLive(revision,()=>{
   if(document.activeElement?.matches('input,textarea,select')||$$('form input:not([type=checkbox]):not([type=radio]),form textarea').some(el=>el.value&&el.value!==el.defaultValue)){
