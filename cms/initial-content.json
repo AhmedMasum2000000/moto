@@ -2034,62 +2034,50 @@
       "order": 1
     },
     {
-      "id": "index-section-3",
+      "id": "index-popular",
+      "name": "Popular Product",
       "page": "index",
-      "name": "Extra website text",
+      "order": 2,
       "visible": true,
+      "hint": "Heading and introduction. Products and pictures come from Products; featured products appear first.",
       "fields": [
         {
-          "id": "index-t8",
+          "id": "index-popular-label",
           "kind": "text",
-          "label": "Text",
-          "value": "Fixed price, in writing"
+          "label": "Small label",
+          "value": "THE MOTO SELECTION"
         },
         {
-          "id": "index-t9",
+          "id": "index-popular-title",
           "kind": "text",
-          "label": "Text",
-          "value": "You see the number before we start. It does not move later."
+          "label": "Heading",
+          "value": "Popular Product"
         },
         {
-          "id": "index-t10",
+          "id": "index-popular-description",
           "kind": "text",
-          "label": "Text",
-          "value": "100% genuine parts"
+          "label": "Introduction",
+          "value": "Oil, tyres, parts and riding gear. Explore the whole shelf."
         },
         {
-          "id": "index-t11",
+          "id": "index-popular-hint",
           "kind": "text",
-          "label": "Text",
-          "value": "Sealed, boxed, and shown to you on request. Old parts returned."
+          "label": "Browsing hint",
+          "value": "Hover to explore · swipe for more"
         },
         {
-          "id": "index-t12",
+          "id": "index-popular-shop-label",
           "kind": "text",
-          "label": "Text",
-          "value": "৳0 to book"
+          "label": "Shop button label",
+          "value": "View all products →"
         },
         {
-          "id": "index-t13",
-          "kind": "text",
-          "label": "Text",
-          "value": "No deposit, no card. Reserve your slot on your word alone."
-        },
-        {
-          "id": "index-t14",
-          "kind": "text",
-          "label": "Text",
-          "value": "Free wash, every service"
-        },
-        {
-          "id": "index-t15",
-          "kind": "text",
-          "label": "Text",
-          "value": "Your bike leaves cleaner than it came in. Always."
+          "id": "index-popular-shop-link",
+          "kind": "link",
+          "label": "Shop button destination",
+          "value": "shop.html"
         }
-      ],
-      "hint": "8 editable text, picture and link fields",
-      "order": 2
+      ]
     },
     {
       "id": "index-brands",
