@@ -47,12 +47,18 @@ export function brandPartners(brands, imageUrl) {
   const observer = new ResizeObserver(layout);
   observer.observe(window); layout();
   const button = section.querySelector('[data-partner-pause]');
-  button.addEventListener('click', () => {
-    const paused = section.dataset.paused !== 'true';
+  const setPaused = paused => {
     section.dataset.paused = String(paused);
     button.setAttribute('aria-pressed', String(paused));
     button.setAttribute('aria-label', paused ? 'Resume brand scrolling' : 'Pause brand scrolling');
     button.querySelector('span').textContent = paused ? 'Play' : 'Pause';
+  };
+  // Reduced-motion visitors can choose to start the loop without changing device settings.
+  setPaused(matchMedia('(prefers-reduced-motion: reduce)').matches);
+  button.addEventListener('click', () => {
+    const paused = section.dataset.paused !== 'true';
+    section.dataset.motionEnabled = String(!paused);
+    setPaused(paused);
   });
   addEventListener('pagehide', () => observer.disconnect(), {once: true});
 }
