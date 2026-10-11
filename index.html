@@ -265,6 +265,7 @@
 <link rel="stylesheet" href="cms/public.css">
 <link rel="stylesheet" href="cms/popular-products.css?v=popular-2">
 <link rel="stylesheet" href="cms/home-cards.css?v=1">
+<link rel="stylesheet" href="cms/brand-partners.css?v=1">
 </head>
 <body>
 
@@ -561,6 +562,17 @@
 <!-- ═══════════════════════════ CONTACT ════════════════════════════════ -->
 
 
+<section class="wrap brand-partners" id="brand-partners" data-cms-section="index-brand-partners" data-brand-partners aria-labelledby="partner-title">
+  <div class="brand-partners__head">
+    <h2 id="partner-title" data-cms-text="home-partner-title">Our Brand Partners</h2>
+    <button class="brand-partners__pause" type="button" data-partner-pause aria-label="Pause brand scrolling" aria-pressed="false" aria-controls="partner-track">
+      <svg class="brand-partners__stop" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>
+      <svg class="brand-partners__play" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>
+      <span>Pause</span>
+    </button>
+  </div>
+  <div class="brand-partners__window"><div class="brand-partners__track" id="partner-track"></div></div>
+</section>
 </main>
 
 <footer id="contact" class="footer" data-cms-section="index-section-5">
@@ -666,4 +678,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=category-services-2"></script></body></html>
+<script type="module" src="cms/public.js?v=brand-partners-1"></script></body></html>
