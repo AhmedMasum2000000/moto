@@ -1522,11 +1522,11 @@
   const CART_KEY = 'mm.cart.v1';
   const cart = {
     read() {
-      try {const items=JSON.parse(localStorage.getItem(CART_KEY))||[];if(!Array.isArray(items))return [];if(!window.MM_CONTENT)return items;return items.map(i=>window.MM_CART_LINE(window.MM_CONTENT.products.find(p=>p.id===i.id),i)).filter(Boolean); }
+      try {const items=JSON.parse(localStorage.getItem(CART_KEY))||[];if(!Array.isArray(items))return [];if(!window.MM_CONTENT)return items;return window.MM_CART_ITEMS?window.MM_CART_ITEMS(window.MM_CONTENT.products,items):items.map(i=>window.MM_CART_LINE(window.MM_CONTENT.products.find(p=>p.id===i.id),i)).filter(Boolean); }
       catch { return []; }
     },
     write(items) {
-      try { localStorage.setItem(CART_KEY, JSON.stringify(items)); } catch {}
+      try { localStorage.setItem(CART_KEY, JSON.stringify(window.MM_CONTENT&&window.MM_CART_ITEMS?window.MM_CART_ITEMS(window.MM_CONTENT.products,items):items)); } catch {}
       cart.render();
     },
     add(item) {
@@ -1560,7 +1560,7 @@
           <div class="drawer__line">
             <div>
               <h4>${esc(i.name)}</h4>
-              <p class="label">${esc(i.cat)}${i.colorName?' · '+esc(i.colorName):''}</p>
+              <p class="label">${esc(i.cat)}${i.colorName?' · '+esc(i.colorName):''}${i.unit?' · '+esc(i.unit):''}</p>
               <div class="qty">
                 <button type="button" data-qty="-1" data-id="${esc(i.lineKey||i.id)}" aria-label="Decrease quantity">−</button>
                 <span>${i.qty}</span>

@@ -57,7 +57,7 @@ export function brandPartners(brands, imageUrl) {
   setPaused(matchMedia('(prefers-reduced-motion: reduce)').matches);
   button.addEventListener('click', () => {
     const paused = section.dataset.paused !== 'true';
-    section.dataset.motionEnabled = String(!paused);
+    if (!paused) { section.dataset.motionEnabled = 'true'; window.scrollLeft = 0; }
     setPaused(paused);
   });
   addEventListener('pagehide', () => observer.disconnect(), {once: true});
