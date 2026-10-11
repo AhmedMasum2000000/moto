@@ -2266,6 +2266,22 @@
       "order": 5
     },
     {
+      "id": "index-brand-partners",
+      "name": "Our Brand Partners",
+      "page": "index",
+      "visible": true,
+      "hint": "Edit the heading here. Add, replace, hide or reorder the logos under Website → Brand logos.",
+      "fields": [
+        {
+          "id": "home-partner-title",
+          "kind": "text",
+          "label": "Heading",
+          "value": "Our Brand Partners"
+        }
+      ],
+      "order": 6
+    },
+    {
       "id": "index-section-5",
       "page": "index",
       "name": "Footer",
@@ -2537,7 +2553,7 @@
         }
       ],
       "hint": "46 editable text, picture and link fields",
-      "order": 6
+      "order": 7
     },
     {
       "id": "shop-section-1",
@@ -2631,7 +2647,7 @@
         }
       ],
       "hint": "14 editable text, picture and link fields",
-      "order": 7
+      "order": 8
     },
     {
       "id": "shop-finder",
@@ -2652,7 +2668,7 @@
           "value": "Search your bike or car model."
         }
       ],
-      "order": 8
+      "order": 9
     },
     {
       "id": "shop-section-2",
@@ -2926,7 +2942,7 @@
         }
       ],
       "hint": "46 editable text, picture and link fields",
-      "order": 9
+      "order": 10
     },
     {
       "id": "book-section-1",
@@ -2954,7 +2970,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 10
+      "order": 11
     },
     {
       "id": "book-section-2",
@@ -3138,7 +3154,7 @@
         }
       ],
       "hint": "29 editable text, picture and link fields",
-      "order": 11
+      "order": 12
     },
     {
       "id": "book-section-3",
@@ -3166,7 +3182,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 12
+      "order": 13
     },
     {
       "id": "index-cookie-consent",
@@ -3199,7 +3215,7 @@
           "value": "assets/mascot/cookie-rider.webp"
         }
       ],
-      "order": 13
+      "order": 14
     }
   ],
   "pages": [
