@@ -9,9 +9,9 @@
 .brand-partners__track{animation:brand-partners-scroll var(--partner-duration,80s) linear infinite;will-change:transform}
 .brand-partners__list{gap:28px;padding:0 28px 0 0;margin:0;list-style:none}
 .brand-partners__tile{display:grid;place-items:center;width:160px;height:136px;flex-shrink:0;padding:22px;background:var(--plate);border:1px solid #dedde1;border-radius:0}
-.brand-partners__tile img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .25s}
+.brand-partners__tile img{display:block;width:100%;height:90px;min-width:0;min-height:0;object-fit:contain;transition:transform .25s}
 .brand-partners__tile:hover img{transform:scale(1.08)}
 .brand-partners[data-paused=true] .brand-partners__track,.brand-partners__window:hover .brand-partners__track{animation-play-state:paused}
 @keyframes brand-partners-scroll{to{transform:translateX(calc(-1 * var(--partner-distance,2632px)))}}
-@media(max-width:700px){.brand-partners__head{display:flex;justify-content:space-between;gap:16px;margin-bottom:24px}.brand-partners__head h2{text-align:left;font-size:1.35rem;max-width:220px}.brand-partners__pause{font-size:9px;padding:9px;flex-shrink:0}.brand-partners__list{gap:16px;padding-right:16px}.brand-partners__tile{width:120px;height:112px;padding:18px}.brand-partners__window{mask-image:linear-gradient(to right,transparent,#000 12px,#000 calc(100% - 12px),transparent)}}
+@media(max-width:700px){.brand-partners__head{display:flex;justify-content:space-between;gap:16px;margin-bottom:24px}.brand-partners__head h2{text-align:left;font-size:1.35rem;max-width:220px}.brand-partners__pause{font-size:9px;padding:9px;flex-shrink:0}.brand-partners__list{gap:16px;padding-right:16px}.brand-partners__tile{width:120px;height:112px;padding:18px}.brand-partners__tile img{height:74px}.brand-partners__window{mask-image:linear-gradient(to right,transparent,#000 12px,#000 calc(100% - 12px),transparent)}}
 @media(prefers-reduced-motion:reduce){.brand-partners__track{animation:none;transform:none;will-change:auto}.brand-partners__group[aria-hidden],.brand-partners__list[aria-hidden],.brand-partners__pause{display:none}.brand-partners__window{overflow-x:auto;mask-image:none}.brand-partners__tile img{transition:none}}
