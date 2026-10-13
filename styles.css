@@ -210,16 +210,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   align-items: center;
   gap: 1rem;
   padding: .85rem var(--gut);
-  transition: background .4s var(--ease), backdrop-filter .4s var(--ease),
-              transform .5s var(--ease), border-color .4s var(--ease);
+  transition: background .2s ease, border-color .2s ease;
   border-bottom: 1px solid transparent;
 }
 .nav.is-stuck {
-  background: rgba(31, 30, 34, 0.82);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(31, 30, 34, 0.97);
   border-bottom-color: var(--ink-line);
 }
-.nav.is-hidden { transform: translateY(-102%); }
 
 .nav__brand { display: flex; align-items: center; gap: .625rem; }
 .nav__brand img { height: 34px; width: auto; }

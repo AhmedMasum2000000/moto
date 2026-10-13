@@ -40,27 +40,28 @@
   }
 
   /* =======================================================================
-     Nav: stick + hide on scroll down
+     Nav: stay fixed while scrolling
      ===================================================================== */
   function navBehaviour() {
     const nav = $('.nav');
     if (!nav) return;
-    let last = window.scrollY;
+    // Hero spacing and the shop rail use this height. Changing it during
+    // scroll shifts the page and can feed back into the next scroll event.
+    const setOffset = () => document.documentElement.style.setProperty(
+      '--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
+    setOffset();
+    window.addEventListener('resize', setOffset, { passive: true });
 
-    // Anything else that sticks to the top (the shop's category rail) has to
-    // sit below the nav while it is showing, and take its place once it hides.
-    const setOffset = hidden => document.documentElement.style.setProperty(
-      '--nav-h', hidden ? '0px' : Math.round(nav.getBoundingClientRect().height) + 'px');
-    setOffset(false);
-    window.addEventListener('resize', () => setOffset(nav.classList.contains('is-hidden')), { passive: true });
-
+    let pending = false;
+    const sync = () => {
+      nav.classList.toggle('is-stuck', window.scrollY > 24);
+      pending = false;
+    };
+    sync();
     window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      nav.classList.toggle('is-stuck', y > 24);
-      const hide = y > 400 && y > last && !document.body.classList.contains('is-locked');
-      nav.classList.toggle('is-hidden', hide);
-      setOffset(hide);
-      last = y;
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(sync);
     }, { passive: true });
   }
 
