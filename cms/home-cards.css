@@ -16,6 +16,7 @@
 @media(prefers-reduced-motion:reduce){.home-category,.home-category__icon,.home-category__preview,.home-category__count>span{transition:none}.home-category:hover .home-category__icon,.home-category:focus-visible .home-category__icon{transform:none}}
 
 .home-services .svc{min-height:320px}.home-services .svc__desc{font-size:12px;line-height:1.6;margin:0 0 16px;max-width:none;color:#aaa8b1}.home-services .svc[aria-selected=true] .svc__desc,.home-services .svc:hover .svc__desc{color:#fff}
+.home-services a.svc{text-decoration:none}.home-services a.svc:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 
 /* Compact mobile cards keep every description readable without tall tiles. */
 @media(max-width:700px){
