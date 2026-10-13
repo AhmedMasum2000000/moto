@@ -17,6 +17,9 @@
 
 .home-services .svc{min-height:320px}.home-services .svc__desc{font-size:12px;line-height:1.6;margin:0 0 16px;max-width:none;color:#aaa8b1}.home-services .svc[aria-selected=true] .svc__desc,.home-services .svc:hover .svc__desc{color:#fff}
 .home-services a.svc{text-decoration:none}.home-services a.svc:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#dealer .dealer{grid-template-columns:1fr;gap:0}
+#dealer{padding-block:32px}
+#dealer .dealer__group:first-child{margin-top:0}
 
 /* Compact mobile cards keep every description readable without tall tiles. */
 @media(max-width:700px){
