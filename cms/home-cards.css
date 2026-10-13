@@ -16,3 +16,18 @@
 @media(prefers-reduced-motion:reduce){.home-category,.home-category__icon,.home-category__preview,.home-category__count>span{transition:none}.home-category:hover .home-category__icon,.home-category:focus-visible .home-category__icon{transform:none}}
 
 .home-services .svc{min-height:320px}.home-services .svc__desc{font-size:12px;line-height:1.6;margin:0 0 16px;max-width:none;color:#aaa8b1}.home-services .svc[aria-selected=true] .svc__desc,.home-services .svc:hover .svc__desc{color:#fff}
+
+/* Compact mobile cards keep every description readable without tall tiles. */
+@media(max-width:700px){
+ .home-category-grid{gap:8px}
+ .home-category{min-height:0;padding:12px}
+ .home-category__icon{width:48px;height:48px;margin:10px 0}
+ .home-category h3{font-size:.95rem;line-height:1.2}
+ .home-category__hint{margin-top:6px}
+ .home-category__preview{margin-top:8px}
+ .home-category__preview>span{display:block;font-size:12px;line-height:1.4}
+ .home-services .svc{min-height:0;padding:12px}
+ .home-services .svc__icon{height:56px;margin:10px 0 12px}
+ .home-services .svc__title{font-size:1rem;margin-bottom:8px}
+ .home-services .svc__desc{line-height:1.4;margin-bottom:12px}
+}
