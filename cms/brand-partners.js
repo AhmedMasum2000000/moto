@@ -11,7 +11,7 @@ export function brandPartners(brands, imageUrl) {
   group.className = 'brand-partners__group';
   const list = document.createElement('ul');
   list.className = 'brand-partners__list';
-  list.setAttribute('aria-label', 'Brand partners');
+  list.setAttribute('aria-label', 'Brands we carry');
   for (const brand of visible) {
     const item = document.createElement('li');
     item.className = 'brand-partners__tile';
