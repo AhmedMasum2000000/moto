@@ -21,6 +21,22 @@
 #dealer{padding-block:32px}
 #dealer .dealer__group:first-child{margin-top:0}
 
+/* Keep contact information and legal controls together in a short footer. */
+#contact.footer{padding-block:20px 16px}
+#contact .footcols{padding-bottom:12px;gap:12px}
+#contact .footcols ul{margin-top:8px;gap:6px}
+#contact .footcols a{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+#contact .footer__word{max-width:220px;margin:0 0 10px}
+#contact .footer__bar{gap:8px;padding-top:10px}
+#contact .footer__bar .label{font-size:9px;letter-spacing:.1em;line-height:1.5}
+#contact .cookie-settings{padding:4px 0}
+@media(max-width:700px){
+ #contact .footer__bar{flex-direction:column;align-items:flex-start;gap:4px}
+ #contact .footer__word{max-width:180px}
+ .brand-partners{padding-block:20px}
+ .brand-partners__head{margin-bottom:16px}
+}
+
 /* Compact mobile cards keep every description readable without tall tiles. */
 @media(max-width:700px){
  .home-cards-section{padding-block:20px}
