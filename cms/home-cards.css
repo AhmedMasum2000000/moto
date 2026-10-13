@@ -16,3 +16,42 @@
 @media(prefers-reduced-motion:reduce){.home-category,.home-category__icon,.home-category__preview,.home-category__count>span{transition:none}.home-category:hover .home-category__icon,.home-category:focus-visible .home-category__icon{transform:none}}
 
 .home-services .svc{min-height:320px}.home-services .svc__desc{font-size:12px;line-height:1.6;margin:0 0 16px;max-width:none;color:#aaa8b1}.home-services .svc[aria-selected=true] .svc__desc,.home-services .svc:hover .svc__desc{color:#fff}
+.home-services a.svc{text-decoration:none}.home-services a.svc:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#dealer .dealer{grid-template-columns:1fr;gap:0}
+#dealer{padding-block:32px}
+#dealer .dealer__group:first-child{margin-top:0}
+
+/* Keep contact information and legal controls together in a short footer. */
+#contact.footer{padding-block:20px 16px}
+#contact .footcols{padding-bottom:12px;gap:12px}
+#contact .footcols ul{margin-top:8px;gap:6px}
+#contact .footcols a{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+#contact .footer__word{max-width:220px;margin:0 0 10px}
+#contact .footer__bar{gap:8px;padding-top:10px}
+#contact .footer__bar .label{font-size:9px;letter-spacing:.1em;line-height:1.5}
+#contact .cookie-settings{padding:4px 0}
+@media(max-width:700px){
+ #contact .footer__bar{flex-direction:column;align-items:flex-start;gap:4px}
+ #contact .footer__word{max-width:180px}
+ .brand-partners{padding-block:20px}
+ .brand-partners__head{margin-bottom:16px}
+}
+
+/* Compact mobile cards keep every description readable without tall tiles. */
+@media(max-width:700px){
+ .home-cards-section{padding-block:20px}
+ #brands.home-cards-section{padding-bottom:0}
+ .home-cards-heading{margin-bottom:16px}
+ .home-cards-heading>.lede{margin-top:10px;line-height:1.4}
+ .home-category-grid{gap:8px}
+ .home-category{min-height:0;padding:12px}
+ .home-category__icon{width:48px;height:48px;margin:10px 0}
+ .home-category h3{font-size:.95rem;line-height:1.2}
+ .home-category__hint{margin-top:6px}
+ .home-category__preview{margin-top:8px}
+ .home-category__preview>span{display:block;font-size:12px;line-height:1.4}
+ .home-services .svc{min-height:0;padding:12px}
+ .home-services .svc__icon{height:56px;margin:10px 0 12px}
+ .home-services .svc__title{font-size:1rem;margin-bottom:8px}
+ .home-services .svc__desc{line-height:1.4;margin-bottom:12px}
+}
