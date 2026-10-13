@@ -2267,7 +2267,7 @@
     },
     {
       "id": "index-brand-partners",
-      "name": "Our Brand Partners",
+      "name": "Brands We Carry",
       "page": "index",
       "visible": true,
       "hint": "Edit the heading here. Add, replace, hide or reorder the logos under Website → Brand logos.",
@@ -2276,7 +2276,7 @@
           "id": "home-partner-title",
           "kind": "text",
           "label": "Heading",
-          "value": "Our Brand Partners"
+          "value": "Brands We Carry"
         }
       ],
       "order": 6

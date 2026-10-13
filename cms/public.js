@@ -1,4 +1,4 @@
-import {brandPartners} from './brand-partners.js?v=3';
+import {brandPartners} from './brand-partners.js?v=client-feedback-1';
 import {homeCards,homeServices} from './home-cards.js?v=client-feedback-1';
 import {catalogFinder} from './finder.js?v=category-services-1';
 import {cookieCard} from './cookies.js?v=cookie-cover-2';
@@ -22,7 +22,7 @@ function card(p,popular=false){const brand=content.brands.find(b=>b.name.toLower
 function hydrate(){
  window.MM_CONTENT=content;window.MM_CART_LINE=cartLine;window.MM_CART_ITEMS=cartInventory;
  // All values enter the DOM as text, attributes, or escaped markup. Custom code is sandboxed below.
- for(const section of content.content||[])for(const f of section.fields){const attr=f.kind==='text'?'text':f.kind==='image'?'image':'link';$$(`[data-cms-${attr}="${CSS.escape(f.id)}"]`).forEach(el=>{if(f.kind==='text')el.textContent=f.value;else el.setAttribute(f.kind==='image'?'src':'href',f.kind==='image'?img(f.value):f.value);});}
+ for(const section of content.content||[])for(const f of section.fields){const attr=f.kind==='text'?'text':f.kind==='image'?'image':'link';$$(`[data-cms-${attr}="${CSS.escape(f.id)}"]`).forEach(el=>{if(f.kind==='text')el.textContent=f.id==='home-partner-title'&&/^our brand partners$/i.test(f.value)?'Brands We Carry':f.id==='home-service-intro'&&f.value==='From everyday care to a fresh new look. Choose a service to see what is included.'?'From everyday care to a fresh new look. Tap a service to book.':f.value;else el.setAttribute(f.kind==='image'?'src':'href',f.kind==='image'?img(f.value):f.value);});}
  const known=new Set((content.content||[]).map(s=>s.id));$$('[data-cms-section]').forEach(el=>{if(!known.has(el.dataset.cmsSection)&&el.querySelector('[data-cms-text],[data-cms-image],[data-cms-link]'))el.hidden=true;});
  // Only reorder sections amongst the existing CMS slots in the same parent.
  const parents=new Set($$('[data-cms-section]').map(el=>el.parentElement));for(const parent of parents){const children=[...parent.children].filter(el=>known.has(el.dataset.cmsSection));if(children.length<2)continue;const placeholders=children.map(el=>{const mark=document.createComment('cms section');el.replaceWith(mark);return mark;});children.sort((a,b)=>content.content.findIndex(s=>s.id===a.dataset.cmsSection)-content.content.findIndex(s=>s.id===b.dataset.cmsSection));placeholders.forEach((mark,i)=>mark.replaceWith(children[i]));}
@@ -64,7 +64,7 @@ document.addEventListener('click',e=>{const p=e.target.closest('[data-product]')
 try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=r.draft.content;revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs');content=publicDocument(content);}else{const r=await live();content=r.content;revision=r.revision;}hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
 cookieCard(content,img);
 // Load the existing motion, fitment and shopping interactions after content is in place.
-const script=document.createElement('script');script.src='app.js?v=inventory-motion-1';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
+const script=document.createElement('script');script.src='app.js?v=client-feedback-1';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
 if(content)websiteMotion();
 if(content&&!draft){
  const stop=watchLive(revision,()=>{

@@ -11,9 +11,9 @@ export function addPartnerSection(content) {
   if (content.content.some(s => s.id === 'index-brand-partners')) return;
   const footer = content.content.findIndex(s => s.id === 'index-section-5');
   content.content.splice(footer < 0 ? content.content.length : footer, 0, {
-    id: 'index-brand-partners', name: 'Our Brand Partners', page: 'index', visible: true,
+    id: 'index-brand-partners', name: 'Brands We Carry', page: 'index', visible: true,
     hint: 'Edit the heading here. Add, replace, hide or reorder the logos under Website → Brand logos.',
-    fields: [{id: 'home-partner-title', kind: 'text', label: 'Heading', value: 'Our Brand Partners'}]
+    fields: [{id: 'home-partner-title', kind: 'text', label: 'Heading', value: 'Brands We Carry'}]
   });
   content.content.forEach((section, order) => { section.order = order; });
 }
