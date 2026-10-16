@@ -39,4 +39,10 @@ jobs:
             **/.git*
             **/.git*/**
             .github/**
-            README.md
+            *.md
+            node_modules/**
+            supabase/**
+            tests/**
+            scripts/**
+            package.json
+            package-lock.json

@@ -730,7 +730,7 @@
      The chosen vehicle is remembered and shown on the shop page. We never
      claim a part fits: the page narrows it down, the counter confirms it.
      ===================================================================== */
-  const SITE = 'https://ahmedmasum2000000.github.io/moto/';
+  const SITE = 'https://motolubebangladesh.com/';
   const PHONE = (window.MM_CONTENT?.settings.whatsapp||'8801711154387').replace(/\D/g,'');
 
   function vehicleData() {

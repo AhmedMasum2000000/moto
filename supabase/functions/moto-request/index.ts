@@ -1,7 +1,7 @@
 import {createClient} from 'npm:@supabase/supabase-js@2.117.3';
 import {validateRequest} from '../moto-admin/schema.mjs';
 const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,{auth:{persistSession:false}});
-const origins=new Set(['https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
+const origins=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
 Deno.serve(async req=>{
  const origin=req.headers.get('origin')||'';
  const headers={'Access-Control-Allow-Origin':origins.has(origin)?origin:'https://ahmedmasum2000000.github.io','Access-Control-Allow-Headers':'authorization,apikey,content-type,x-client-info','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin','Content-Type':'application/json','Cache-Control':'no-store'};

@@ -2,7 +2,7 @@ import { createClient } from 'npm:@supabase/supabase-js@2.117.3';
 import { validateContent,publicDocument,mediaReferences,resolveMedia,UUID,assert } from './schema.mjs';
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const db=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
-const allowed=new Set(['https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
+const allowed=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
 const cors=(origin:string)=>({'Access-Control-Allow-Origin':allowed.has(origin)?origin:'https://ahmedmasum2000000.github.io','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'});
 async function result(query:any){const {data,error}=await query;if(error)throw new Error(error.message);return data;}
 Deno.serve(async req=>{
