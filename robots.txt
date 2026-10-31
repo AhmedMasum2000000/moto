@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /control-room/
 
 Sitemap: https://motolubebangladesh.com/sitemap.xml

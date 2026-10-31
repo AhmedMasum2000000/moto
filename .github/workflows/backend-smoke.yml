@@ -1,0 +1,29 @@
+name: Backend smoke test
+
+# Manual check that the Supabase functions boot and accept the site's domains.
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      FN: https://ttpzdsecwhufzahtoyrp.supabase.co/functions/v1
+      KEY: sb_publishable_141k4D83ArkGTNdoqWdUSg_vAdQsyNd
+    steps:
+      - name: Functions accept motolubebangladesh.com (preflight)
+        run: |
+          for fn in moto-admin moto-request; do
+            for origin in https://motolubebangladesh.com http://motolubebangladesh.com https://ahmedmasum2000000.github.io; do
+              code=$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS "$FN/$fn" -H "Origin: $origin" -H "apikey: $KEY" -H "Access-Control-Request-Method: POST")
+              echo "$fn from $origin -> $code"; [ "$code" = "200" ] || exit 1
+            done
+          done
+      - name: Unknown origins are refused
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS "$FN/moto-request" -H "Origin: https://evil.example" -H "apikey: $KEY")
+          echo "moto-request from evil.example -> $code"; [ "$code" = "403" ] || exit 1
+      - name: Request function loads its validation code
+        run: |
+          body=$(curl -s -X POST "$FN/moto-request" -H "Origin: https://motolubebangladesh.com" -H "apikey: $KEY" -H "Content-Type: application/json" -d '{}')
+          echo "$body"; echo "$body" | grep -q 'Refresh the page and try again' || exit 1
