@@ -42,7 +42,7 @@ jobs:
             *.md
             docs/**
             node_modules/**
-            supabase/**
+            supabase/migrations/**
             tests/**
             scripts/**
             package.json
