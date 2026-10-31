@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /control-room/
 
-Sitemap: https://ahmedmasum2000000.github.io/moto/sitemap.xml
+Sitemap: https://motolubebangladesh.com/sitemap.xml

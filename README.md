@@ -2,8 +2,8 @@
 
 The English control room and branded storefront share one Supabase backend. GitHub Pages hosts the website. Supabase hosts staff sign-in, content, pictures, revisions and customer requests. The existing /admin/ address opens /control-room/.
 
-- Website: https://ahmedmasum2000000.github.io/moto/
-- Staff workspace: https://ahmedmasum2000000.github.io/moto/control-room/
+- Website: https://motolubebangladesh.com/
+- Staff workspace: https://motolubebangladesh.com/control-room/
 - Staff guide: CONTROL_ROOM_PLAN.md
 
 ## Editing and live updates
