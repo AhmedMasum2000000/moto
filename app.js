@@ -1195,6 +1195,11 @@
 
     // returning visitor: open straight onto their saved ride
     const saved = readVehicle();
+    const record = saved && saved.id && window.MM_CONTENT?.vehicles?.find(v => v.id === saved.id && v.visible !== false);
+    if (record && (record.brand !== saved.brand || record.name !== saved.model)) {
+      Object.assign(saved, { type: record.type, brand: record.brand, model: record.name });
+      saveVehicle(saved);
+    }
     if (saved && has(saved.type, saved.brand, saved.model)) {
       Object.assign(state, { type: saved.type, brand: saved.brand, model: saved.model });
       render();
@@ -1533,9 +1538,10 @@
     add(item) {
       const items = cart.read();
       const hit = items.find(i => i.id === item.id && (i.colorId||'')===(item.colorId||''));
+      const before = cart.count();
       if (hit) hit.qty = Math.min(50,hit.qty+1); else items.push({ ...item, qty: 1 });
       cart.write(items);
-      toast(`${item.name} added`);
+      toast(cart.count() > before ? `${item.name} added` : `No more ${item.name} in stock`);
     },
     bump(id, delta) {
       let items = cart.read();
@@ -1545,6 +1551,7 @@
       if (hit.qty <= 0) items = items.filter(i => (i.lineKey||i.id) !== id);
       cart.write(items);
     },
+    clear() { cart.write([]); },
     total() { return cart.read().reduce((s, i) => s + i.price * i.qty, 0); },
     count() { return cart.read().reduce((s, i) => s + i.qty, 0); },
     render() {
@@ -1590,6 +1597,7 @@
 
   function cartWiring() {
     cart.render();
+    window.addEventListener('mm:cart-clear', () => cart.clear());
 
     document.addEventListener('click', e => {
       const kit = e.target.closest('[data-kit]');
@@ -1601,8 +1609,10 @@
           const hit = items.find(i => i.id === it.id&&(i.colorId||'')===(it.colorId||''));
           if (hit) hit.qty=Math.min(50,hit.qty+1); else items.push({ ...it, qty: 1 });
         });
+        const before = cart.count();
         cart.write(items);
-        toast(`${list.length} items added`);
+        const added = cart.count() - before;
+        toast(added === list.length ? `${list.length} items added` : added ? `${added} of ${list.length} items added — the rest are out of stock` : 'Those items are out of stock');
         openDrawer(true);
         return;
       }

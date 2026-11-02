@@ -17,10 +17,13 @@ Deno.serve(async req=>{
   const {data:live,error}=await db.from('moto_live').select('content').single();if(error)throw new Error('Please try again in a moment.');
   const validated=validateRequest(body,live.content);
   // Rate-limit by the platform-provided IP hash and independently by phone in SQL.
-  const source=(req.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim();
+  // The client can prepend anything to X-Forwarded-For, so trust the platform's own header or the last hop it appended.
+  const forwarded=(req.headers.get('x-forwarded-for')||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const source=req.headers.get('cf-connecting-ip')||forwarded[forwarded.length-1]||req.headers.get('x-real-ip')||'';
+  if(!source)throw new Error('Please try again in a moment.');
   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(source)))].map(b=>b.toString(16).padStart(2,'0')).join('');
   const {data:receipt,error:saveError}=await db.rpc('moto_submit_request',{p_key:body.key,p_rate_key:hash,p_kind:validated.kind,p_name:validated.name,p_phone:validated.phone,p_details:validated.details});
-  if(saveError)throw new Error(saveError.message.includes('RATE_LIMIT')?'Too many requests. Please contact the store or try again later.':'Your request was not saved. Please try again.');
+  if(saveError)throw new Error(saveError.message.includes('RATE_LIMIT')?'Too many requests. Please contact the store or try again later.':saveError.message.includes('REQUEST_CHANGED')?'We already received your earlier request. Send again to make a new one.':'Your request was not saved. Please try again.');
   return new Response(JSON.stringify({receipt,message:'Request received. The team will contact you to confirm availability and price.'}),{headers});
  }catch(e){return new Response(JSON.stringify({error:e instanceof Error?e.message:'Unable to save request.'}),{status:400,headers});}
 });
