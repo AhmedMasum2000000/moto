@@ -16,3 +16,11 @@
 @keyframes brand-partners-scroll{to{transform:translateX(calc(-1 * var(--partner-distance,2632px)))}}
 @media(max-width:700px){.brand-partners__head{display:flex;justify-content:space-between;gap:16px;margin-bottom:24px}.brand-partners__head h2{text-align:left;font-size:1.35rem;max-width:220px}.brand-partners__pause{font-size:9px;padding:9px;flex-shrink:0}.brand-partners__list{gap:16px;padding-right:16px}.brand-partners__tile{width:120px;height:112px;padding:18px}.brand-partners__tile img{height:74px}.brand-partners__window{mask-image:linear-gradient(to right,transparent,#000 12px,#000 calc(100% - 12px),transparent)}}
 @media(prefers-reduced-motion:reduce){.brand-partners:not([data-motion-enabled=true]) .brand-partners__track{animation:none;transform:none;will-change:auto}.brand-partners:not([data-motion-enabled=true]) .brand-partners__group[aria-hidden],.brand-partners:not([data-motion-enabled=true]) .brand-partners__list[aria-hidden]{display:none}.brand-partners:not([data-motion-enabled=true]) .brand-partners__window{overflow-x:auto;mask-image:none}.brand-partners__tile img{transition:none}}
+
+/* Compact strip: transparent logos straight on the page, no white plates. */
+.brand-partners{padding-top:clamp(1.75rem,3.5vw,3rem);padding-bottom:clamp(1.75rem,3.5vw,3rem)}
+.brand-partners__head{margin-bottom:18px}
+.brand-partners__list{gap:36px;padding:0 36px 0 0;align-items:center}
+.brand-partners__tile{width:auto;height:56px;padding:0 4px;background:transparent;border:0}
+.brand-partners__tile img{width:auto;height:auto;max-width:132px;max-height:40px}
+@media(max-width:700px){.brand-partners__list{gap:26px;padding-right:26px}.brand-partners__tile{height:44px}.brand-partners__tile img{max-width:100px;max-height:30px}}
