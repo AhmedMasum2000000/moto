@@ -1,13 +1,13 @@
 import {brandPartners} from './brand-partners.js?v=client-feedback-1';
 import {homeCards,homeServices} from './home-cards.js?v=client-feedback-1';
-import {catalogFinder} from './finder.js?v=category-services-1';
+import {catalogFinder} from './finder.js?v=sweep-1';
 import {cookieCard} from './cookies.js?v=cookie-cover-2';
 import {ridePreferences} from './preferences.mjs';
 import {homeBackground} from './home-hero.js';
 const finderStyles=document.createElement('link');finderStyles.rel='stylesheet';finderStyles.href='cms/finder.css';document.head.append(finderStyles);
 import {cartLine,cartInventory} from './catalog.mjs?v=inventory-1';
 import {stockLabel,stockStatus} from '../supabase/functions/_shared/inventory.mjs';
-import {websiteMotion} from './motion.js?v=1';
+import {websiteMotion} from './motion.js?v=sweep-1';
 import {live,admin,request,watchLive} from './backend.js';
 // Size a logo by its shape: the same visual area whether it is a long wordmark or a square badge.
 function balanceLogo(im){const fit=()=>{const r=im.naturalWidth/im.naturalHeight;if(!r)return;im.style.height=Math.round(Math.max(14,Math.min(38,Math.sqrt(1500/r))))+'px';};if(im.complete&&im.naturalWidth)fit();else im.addEventListener('load',fit,{once:true});}
@@ -66,7 +66,7 @@ document.addEventListener('click',e=>{const p=e.target.closest('[data-product]')
 try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=r.draft.content;revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs');content=publicDocument(content);}else{const r=await live();content=r.content;revision=r.revision;}hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
 cookieCard(content,img);
 // Load the existing motion, fitment and shopping interactions after content is in place.
-const script=document.createElement('script');script.src='app.js?v=client-feedback-1';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
+const script=document.createElement('script');script.src='app.js?v=sweep-1';script.onload=()=>{const id=query.get('product');if(id&&content)productDetails(id);};document.body.append(script);
 if(content)websiteMotion();
 if(content&&!draft){
  const stop=watchLive(revision,()=>{
