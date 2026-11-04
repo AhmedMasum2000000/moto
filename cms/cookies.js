@@ -15,7 +15,7 @@ export function cookieCard(content,imageUrl){
  const section=content?.content?.find(s=>s.id===cookieSection.id);
  const values=new Map((section?.fields||cookieSection.fields).map(f=>[f.id,f.value]));
  const value=id=>values.get(id)??cookieSection.fields.find(f=>f.id===id)?.value??'';
- const style=document.createElement('link');style.rel='stylesheet';style.href='cms/cookies.css?v=mob-1104';
+ const style=document.createElement('link');style.rel='stylesheet';style.href='cms/cookies.css?v=mob2-1104';
  document.head.append(style);
  const panel=document.createElement('aside');panel.className='cookie-card';panel.hidden=true;
  panel.setAttribute('aria-labelledby','cookie-joke');panel.setAttribute('aria-describedby','cookie-help');
