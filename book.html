@@ -81,10 +81,7 @@
 <section class="section section--tight wrap" style="padding-top:clamp(7rem,14vw,10rem)" data-cms-section="book-section-1">
   <p class="label label--red" data-reveal=""><span data-cms-text="book-t1">Booking</span></p>
   <h1 class="h-1" data-split="" style="margin:.75rem 0 1.25rem"><span data-cms-text="book-t2">pick your day. the bay is yours.</span></h1>
-  <p class="lede" data-reveal="" style="--d:160ms"><span data-cms-text="book-t3">
-    Fill this in and it turns into a message you send us in one tap. We reply with
-    a confirmation and a price before anything is touched.
-  </span></p>
+  <p class="lede" data-reveal="" style="--d:160ms"><span data-cms-text="book-t3">Fill this in and send it. We call you back to confirm the slot and price before anything is touched.</span></p>
 </section>
 
 <section class="section wrap" style="padding-top:0" data-cms-section="book-section-2">
@@ -110,7 +107,7 @@
         </div>
         <div class="field">
           <label for="f-phone"><span data-cms-text="book-t12">Phone</span></label>
-          <input id="f-phone" name="phone" type="tel" required="" autocomplete="tel" placeholder="01XXXXXXXXX">
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" required="" autocomplete="tel" placeholder="01XXXXXXXXX">
         </div>
         <div class="field field--wide">
           <label for="f-vehicle"><span data-cms-text="book-t13">Bike or car — make &amp; model</span></label>
@@ -186,11 +183,16 @@
       </svg>
     <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
     <div class="footer__bar">
-      <p class="label"><span data-cms-text="book-t33">© </span><span class="yr">2026</span><span data-cms-text="book-t34"> Moto Market · Kushtia, Bangladesh</span></p>
+      <p class="label"><span data-cms-text="book-t33">©</span> <span class="yr">2026</span> <span data-cms-text="book-t34">Moto Market · Kushtia, Bangladesh</span></p>
       <p class="label"><a href="mailto:motolubebangladesh@gmail.com"><span data-cms-text="book-t35">motolubebangladesh@gmail.com</span></a></p>
     </div>
   </div>
 </footer>
+
+<nav class="actionbar" aria-label="Quick actions" style="grid-template-columns:1fr 1fr">
+  <a href="tel:+8801711154387"><b>Call</b>Talk now</a>
+  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b>WhatsApp</b>Send a note</a>
+</nav>
 
 <script>document.querySelectorAll('.yr').forEach(e => { e.textContent = new Date().getFullYear(); });</script>
 <div class="searchbox" data-search="" hidden="">
@@ -202,7 +204,7 @@
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
       <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
-      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">Esc</button>
+      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
     <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>

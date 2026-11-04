@@ -1548,13 +1548,17 @@
       try { localStorage.setItem(CART_KEY, JSON.stringify(window.MM_CONTENT&&window.MM_CART_ITEMS?window.MM_CART_ITEMS(window.MM_CONTENT.products,items):items)); } catch {}
       cart.render();
     },
-    add(item) {
+    // quiet: the caller opens the cart drawer, which already shows the new line,
+    // so only the "no more in stock" case needs a toast.
+    add(item, quiet = false) {
       const items = cart.read();
       const hit = items.find(i => i.id === item.id && (i.colorId||'')===(item.colorId||''));
       const before = cart.count();
       if (hit) hit.qty = Math.min(50,hit.qty+1); else items.push({ ...item, qty: 1 });
       cart.write(items);
-      toast(cart.count() > before ? `${item.name} added` : `No more ${item.name} in stock`);
+      const added = cart.count() > before;
+      if (!added) toast(`No more ${item.name} in stock`);
+      else if (!quiet) toast(`${item.name} added`);
     },
     bump(id, delta) {
       let items = cart.read();
@@ -1625,7 +1629,7 @@
         const before = cart.count();
         cart.write(items);
         const added = cart.count() - before;
-        toast(added === list.length ? `${list.length} items added` : added ? `${added} of ${list.length} items added — the rest are out of stock` : 'Those items are out of stock');
+        if (added !== list.length || !$('.drawer')) toast(added === list.length ? `${list.length} items added` : added ? `${added} of ${list.length} items added — the rest are out of stock` : 'Those items are out of stock');
         openDrawer(true);
         return;
       }
@@ -1637,7 +1641,7 @@
           cat: add.dataset.cat || '',
           price: Number(add.dataset.price) || 0,
           colorId:add.dataset.colorId||'',colorName:add.dataset.colorName||'',lineKey:add.dataset.add+'::'+(add.dataset.colorId||'')
-        });
+        }, !!$('.drawer'));
         openDrawer(true);
         return;
       }

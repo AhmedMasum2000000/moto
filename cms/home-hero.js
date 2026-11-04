@@ -10,8 +10,12 @@ export function homeBackground(root, banners, imageUrl = value => value) {
   if (!banners.length) { backdrop.hidden = true; controls.hidden = true; return; }
   controls.hidden = banners.length < 2;
   let current = 0, cursor = 0, front = 0, timer = null, busy = false, visible = true, disposed = false;
-  // Banners always rotate on their own; reduced-motion only removes the fade (see CSS).
-  let paused = false;
+  // Banners rotate on their own; reduced-motion only removes the fade (see CSS).
+  // On Data Saver or a 2G/3G connection, start paused so extra banners are not
+  // downloaded unasked; the visitor can still press play or next.
+  const connection = navigator.connection;
+  const slow = !!(connection && (connection.saveData || /2g|3g/.test(connection.effectiveType || '')));
+  let paused = slow;
   const paint = (frame, index) => {
     const banner = banners[index];
     const picture = frames[frame];
