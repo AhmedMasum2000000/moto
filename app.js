@@ -1311,7 +1311,13 @@
       }
 
       let html = '', group = null;
+      const typed = input.value.trim();
+      const products = q ? hits.filter(h => h.g === 'Shop').length : 0;
+      if (products) {
+        html += `<a class="searchbox__hit searchbox__all" href="shop.html?q=${encodeURIComponent(typed)}"><b>See all products for “${esc(typed)}”</b><span>→</span></a>`;
+      }
       hits.forEach((h, i) => {
+        if (h.g === 'Shop' && q && h.id) h = { ...h, u: `shop.html?q=${encodeURIComponent(typed)}&product=${encodeURIComponent(h.id)}` };
         if (h.g !== group) { group = h.g; html += `<p class="searchbox__group">${esc(group)}</p>`; }
         html += `<a class="searchbox__hit${i === 0 ? ' is-active' : ''}" role="option" href="${esc(h.u)}" data-hit="${i}">` +
                 `<b>${mark(h.t, q)}</b><span>${esc(h.p ? '৳' + h.p.toLocaleString('en-US') : h.k)}</span></a>`;
@@ -1337,6 +1343,7 @@
       else if (e.key === 'Enter') {
         const node = $$('[data-hit]', list)[active];
         if (node) { e.preventDefault(); window.location.href = node.getAttribute('href'); }
+        else if (input.value.trim()) { e.preventDefault(); window.location.href = `shop.html?q=${encodeURIComponent(input.value.trim())}`; }
       }
     });
 
