@@ -54,5 +54,7 @@ async function notifyStore(store:any,invoice:any){
   if(!res.ok)throw new Error('Resend '+res.status);return;
  }
  const res=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',signal,headers:{'Content-Type':'application/json',Accept:'application/json',Origin:'https://motolubebangladesh.com',Referer:'https://motolubebangladesh.com/'},body:JSON.stringify({_subject:subject,_template:'box',_captcha:'false',Order:invoice.receipt,Name:invoice.name,Phone:invoice.phone,Address:invoice.address,Items:lines,Delivery:`${invoice.delivery} ${money(invoice.deliveryMinor)}`,Total:money(invoice.totalMinor),Time:new Date(invoice.createdAt).toLocaleString('en-GB',{timeZone:'Asia/Dhaka'})})});
- if(!res.ok)throw new Error('FormSubmit '+res.status);
+ // FormSubmit answers 200 with success:"false" when it did not send (e.g. address not yet activated).
+ const reply=await res.json().catch(()=>({}));
+ if(!res.ok||String(reply.success)!=='true')throw new Error('FormSubmit '+res.status+' '+String(reply.message||''));
 }

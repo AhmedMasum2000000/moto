@@ -3,7 +3,7 @@
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = minor => '৳' + (Number(minor || 0) / 100).toLocaleString('en-BD', {maximumFractionDigits: 2});
 
-export function invoiceHtml({receipt, createdAt, name, phone, address, items = [], totalMinor, deliveryMinor = 0, delivery = '', store = {}}) {
+export function invoiceHtml({receipt, createdAt, name, phone, address, items = [], totalMinor, deliveryMinor = 0, delivery = '', store = {}, embedded = false}) {
   const date = new Date(createdAt || Date.now());
   const when = Number.isNaN(date.getTime()) ? '' : date.toLocaleString('en-GB', {timeZone: 'Asia/Dhaka', dateStyle: 'medium', timeStyle: 'short'});
   const subtotal = items.reduce((sum, i) => sum + i.unitPriceMinor * i.quantity, 0);
@@ -17,6 +17,8 @@ table{width:100%;border-collapse:collapse;margin:24px 0}th,td{padding:8px;border
 .total td{font-weight:700;font-size:16px;border-bottom:0}.cols{display:flex;justify-content:space-between;gap:24px;margin-top:20px}
 .note{margin-top:24px;font-size:12px;color:#5a5862}.actions{text-align:center;margin:24px 0}button{background:#dc1238;color:#fff;border:0;padding:12px 24px;font:inherit;cursor:pointer}
 @media print{.actions{display:none}body{padding:0}}
+td.r,th.r{white-space:nowrap}
+@media(max-width:520px){body{padding:12px}.head{flex-direction:column;gap:12px}.head .r{text-align:left}h1{font-size:22px}th,td{padding:6px 3px;font-size:12px}th{letter-spacing:0}}
 </style></head><body><div class="inv">
 <div class="head"><div><h1>${esc(store.name || 'Moto Market')}</h1><div class="muted">A sister concern of Motolube Bangladesh</div><div class="muted">${esc(store.address || '')}</div><div class="muted">${esc(store.phone || '')}${store.email ? ' · ' + esc(store.email) : ''}</div></div>
 <div class="r"><h1>INVOICE</h1><div><b>${esc(receipt)}</b></div><div class="muted">${esc(when)}</div></div></div>
@@ -24,7 +26,7 @@ table{width:100%;border-collapse:collapse;margin:24px 0}th,td{padding:8px;border
 <table><thead><tr><th>#</th><th>Item</th><th class="r">Qty</th><th class="r">Unit price</th><th class="r">Amount</th></tr></thead><tbody>${rows}</tbody>
 <tfoot>${deliveryMinor ? `<tr><td colspan="4" class="r">Products</td><td class="r">${money(subtotal)}</td></tr><tr><td colspan="4" class="r">Delivery charge${delivery ? ' (' + esc(delivery) + ')' : ''}</td><td class="r">${money(deliveryMinor)}</td></tr>` : ''}<tr class="total"><td colspan="4" class="r">Total payable</td><td class="r">${money(total)}</td></tr></tfoot></table>
 <p class="note">Our team will call to confirm stock and price before delivery. Payment: Cash · bKash · Nagad.</p>
-<div class="actions"><button type="button" onclick="print()">Print / Save as PDF</button></div>
+${embedded ? '' : '<div class="actions"><button type="button" onclick="print()">Print / Save as PDF</button></div>'}
 </div></body></html>`;
 }
 

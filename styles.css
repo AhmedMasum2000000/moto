@@ -222,8 +222,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-bottom-color: var(--ink-line);
 }
 
-.nav__brand { display: flex; align-items: center; gap: .625rem; }
-.nav__brand img { height: 34px; width: auto; }
+.nav__brand { display: flex; align-items: center; gap: .625rem; flex-shrink: 0; }
+.nav__brand img { height: 34px; width: auto; flex-shrink: 0; object-fit: contain; }
 
 /* the menu sits centred between the mark and the utilities */
 .nav__menu {
