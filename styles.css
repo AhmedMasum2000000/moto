@@ -2415,7 +2415,10 @@ body.is-locked .toast:not(.is-up) { transform: translate(-50%, calc(-100% - 6rem
 /* compact sticky filter rail */
 @media (max-width: 700px) {
   .catrail__inner { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: .5rem; padding-block: .5rem; }
-  .catrail__right { display: grid; grid-template-columns: 1fr 1fr auto; gap: .5rem; align-items: center; }
+  /* subcategory, sort and colour share one row; the item count keeps its natural width */
+  .catrail__right { display: flex; gap: .5rem; align-items: center; }
+  .catrail__right > * { flex: 1 1 0; min-width: 0; }
+  .catrail__right > .label { flex: none; }
   .catrail__right .sortby > .label { display: none; }
   .catrail__right .sortby, .catrail__right .sortby select { width: 100%; }
   .catrail__right select.cms-subcategory { width: 100%; max-width: none; margin: 0; }
@@ -2425,6 +2428,11 @@ body.is-locked .toast:not(.is-up) { transform: translate(-50%, calc(-100% - 6rem
   .catrail__inner > select.cms-subcategory { width: 100%; max-width: none; margin: 0; }
 }
 .sortby select, select.cms-subcategory { min-height: 40px; font-size: 14px; }
+@media (max-width: 420px) {
+  /* very narrow phones: the three filters need the whole row */
+  .catrail__right > .label { display: none !important; }
+  .catrail__right select { padding-inline: .5rem; }
+}
 
 /* chip row shows that it scrolls sideways */
 .catrail .filters {

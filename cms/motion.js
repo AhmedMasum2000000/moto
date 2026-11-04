@@ -1,5 +1,5 @@
 export function websiteMotion(){
- const style=document.createElement('link');style.rel='stylesheet';style.href='cms/motion.css?v=sweep-1';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='cms/motion.css?v=mob-1104';document.head.append(style);
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window))return;
  const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;entry.target.classList.add('motion-visible');observer.unobserve(entry.target);}}, {threshold:.12});
  document.querySelectorAll('.home-category,.home-services .svc,.popular-products__heading,.brand-partners__head').forEach((element,index)=>{
