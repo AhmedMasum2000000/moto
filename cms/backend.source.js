@@ -27,3 +27,10 @@ export async function upload(file){
  const {error:uploadError}=await db.storage.from('moto-media').upload(path,file,{contentType:file.type,upsert:false});if(uploadError)throw uploadError;
  return admin('register-media',{path,name:file.name,width,height});
 }
+export async function uploadDocument(file){
+ if(file.type!=='application/pdf'||file.size>10485760)throw new Error('Choose a PDF data sheet smaller than 10 MB.');
+ const {data:{user},error}=await db.auth.getUser();if(error||!user)throw new Error('Please sign in again.');
+ const path=user.id+'/'+crypto.randomUUID()+'.pdf';
+ const {error:uploadError}=await db.storage.from('moto-media').upload(path,file,{contentType:'application/pdf',upsert:false});if(uploadError)throw uploadError;
+ return admin('register-media',{path,name:file.name,width:1,height:1});
+}

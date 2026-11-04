@@ -1269,7 +1269,7 @@
     if (!box || !input || !list) return;
 
     const INDEX = window.MM_SEARCH || [];
-    let hits = [], active = -1, lastFocus = null;
+    let hits = [], active = -1, lastFocus = null, chosen = false;
 
     const open = () => {
       lastFocus = document.activeElement;
@@ -1299,10 +1299,13 @@
 
     const render = () => {
       const q = input.value.trim().toLowerCase();
+      // Every typed word must start a word in the name or details ("mt" finds "MT Stinger", not "Smt").
+      const words = q.split(/\s+/).filter(Boolean).map(w => new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
       hits = !q ? INDEX.filter(e => e.g === 'Page' || e.g === 'Service')
-                : INDEX.filter(e => (e.t + ' ' + e.k).toLowerCase().includes(q));
+                : INDEX.filter(e => { const hay = (e.t + ' ' + e.k).toLowerCase(); return words.every(w => w.test(hay)); });
       hits = hits.slice(0, 24);
       active = hits.length ? 0 : -1;
+      chosen = false;
 
       if (!hits.length) {
         list.innerHTML = `<p class="searchbox__empty">Nothing matched “${esc(input.value.trim())}”. ` +
@@ -1311,7 +1314,13 @@
       }
 
       let html = '', group = null;
+      const typed = input.value.trim();
+      const products = q ? hits.filter(h => h.g === 'Shop').length : 0;
+      if (products) {
+        html += `<a class="searchbox__hit searchbox__all" href="shop.html?q=${encodeURIComponent(typed)}"><b>See all products for “${esc(typed)}”</b><span>→</span></a>`;
+      }
       hits.forEach((h, i) => {
+        if (h.g === 'Shop' && q && h.id) h = { ...h, u: `shop.html?q=${encodeURIComponent(typed)}&product=${encodeURIComponent(h.id)}` };
         if (h.g !== group) { group = h.g; html += `<p class="searchbox__group">${esc(group)}</p>`; }
         html += `<a class="searchbox__hit${i === 0 ? ' is-active' : ''}" role="option" href="${esc(h.u)}" data-hit="${i}">` +
                 `<b>${mark(h.t, q)}</b><span>${esc(h.p ? '৳' + h.p.toLocaleString('en-US') : h.k)}</span></a>`;
@@ -1323,6 +1332,7 @@
       const nodes = $$('[data-hit]', list);
       if (!nodes.length) return;
       active = (active + step + nodes.length) % nodes.length;
+      chosen = true;
       nodes.forEach((n, i) => n.classList.toggle('is-active', i === active));
       nodes[active].scrollIntoView({ block: 'nearest' });
     };
@@ -1335,8 +1345,11 @@
       if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
       else if (e.key === 'Enter') {
+        const typed = input.value.trim();
         const node = $$('[data-hit]', list)[active];
-        if (node) { e.preventDefault(); window.location.href = node.getAttribute('href'); }
+        // Enter on a search shows every matching product; arrow keys pick one result instead.
+        if (typed && (!chosen || !node) && hits.some(h => h.g === 'Shop')) { e.preventDefault(); window.location.href = `shop.html?q=${encodeURIComponent(typed)}`; }
+        else if (node) { e.preventDefault(); window.location.href = node.getAttribute('href'); }
       }
     });
 
@@ -1585,7 +1598,7 @@
       if (wa) {
         const lines = items.map(i => `• ${i.name}${i.colorName?' ('+i.colorName+')':''} ×${i.qty} — ৳${i.price * i.qty}`).join('\n');
         const text = items.length
-          ? `Assalamu alaikum, Moto Market. I'd like to order:\n${lines}\n\nTotal: ৳${cart.total()}`
+          ? `Assalamu alaikum, Moto Market. I'd like to order:\n${lines}\n\nProducts total: ৳${cart.total()} + delivery charge (৳120 inside Kushtia / ৳150 outside Kushtia)`
           : `Assalamu alaikum, Moto Market. I'd like to ask about a part.`;
         wa.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
       }

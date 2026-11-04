@@ -1,5 +1,6 @@
 import {createClient} from 'npm:@supabase/supabase-js@2.117.3';
 import {validateRequest} from '../moto-admin/schema.mjs';
+import {invoiceHtml} from '../_shared/invoice.mjs';
 const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,{auth:{persistSession:false}});
 const origins=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','http://motolubebangladesh.com','http://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
 Deno.serve(async req=>{
@@ -24,6 +25,36 @@ Deno.serve(async req=>{
   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(source)))].map(b=>b.toString(16).padStart(2,'0')).join('');
   const {data:receipt,error:saveError}=await db.rpc('moto_submit_request',{p_key:body.key,p_rate_key:hash,p_kind:validated.kind,p_name:validated.name,p_phone:validated.phone,p_details:validated.details});
   if(saveError)throw new Error(saveError.message.includes('RATE_LIMIT')?'Too many requests. Please contact the store or try again later.':saveError.message.includes('REQUEST_CHANGED')?'We already received your earlier request. The team will contact you to confirm.':'Your request was not saved. Please try again.');
-  return new Response(JSON.stringify({receipt,message:'Request received. The team will contact you to confirm availability and price.'}),{headers});
+  const {data:saved}=await db.from('moto_requests').select('id,created_at').eq('receipt',receipt).maybeSingle();
+  const createdAt=saved?.created_at||new Date().toISOString();
+  const invoice=validated.kind==='order'?{receipt,createdAt,name:validated.name,phone:validated.phone,address:validated.details.address,items:validated.details.items,delivery:validated.details.delivery,deliveryMinor:validated.details.deliveryMinor,totalMinor:validated.details.totalMinor}:null;
+  // Email the store about each new order. A failed email never loses the saved order.
+  // Exactly one call claims the email (also under double submits); a failed email is released so a retry sends it.
+  if(invoice&&saved){
+   const {data:claimed}=await db.from('moto_requests').update({notified_at:new Date().toISOString()}).eq('id',saved.id).is('notified_at',null).select('id').maybeSingle();
+   if(claimed)try{await notifyStore(live.content.settings||{},invoice);}catch(e){console.error('Order email failed:',e instanceof Error?e.message:e);await db.from('moto_requests').update({notified_at:null}).eq('id',saved.id);}
+  }
+  return new Response(JSON.stringify({receipt,invoice,message:'Request received. The team will contact you to confirm availability and price.'}),{headers});
  }catch(e){return new Response(JSON.stringify({error:e instanceof Error?e.message:'Unable to save request.'}),{status:400,headers});}
 });
+
+// Sends the order and its invoice to the store's email address (Website → Store settings → Email).
+// With RESEND_API_KEY and ORDER_EMAIL_FROM secrets the email goes through Resend; otherwise through FormSubmit,
+// which asks the store to confirm the address once with the first email it sends.
+async function notifyStore(store:any,invoice:any){
+ const to=String(store.email||'').trim();if(!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(to))return;
+ const money=(m:number)=>'BDT '+(m/100).toLocaleString('en-BD');
+ const lines=invoice.items.map((i:any)=>`${i.name}${i.colorName?' ('+i.colorName+')':''} x ${i.quantity} = ${money(i.unitPriceMinor*i.quantity)}`).join('\n');
+ const subject=`New order ${invoice.receipt} from ${invoice.name}`;
+ const signal=AbortSignal.timeout(8000);
+ const key=Deno.env.get('RESEND_API_KEY'),from=Deno.env.get('ORDER_EMAIL_FROM');
+ // Resend needs a verified sender address; without one it falls through to FormSubmit.
+ if(key&&from){
+  const res=await fetch('https://api.resend.com/emails',{method:'POST',signal,headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({from,to:[to],subject,html:invoiceHtml({...invoice,store})})});
+  if(!res.ok)throw new Error('Resend '+res.status);return;
+ }
+ const res=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',signal,headers:{'Content-Type':'application/json',Accept:'application/json',Origin:'https://motolubebangladesh.com',Referer:'https://motolubebangladesh.com/'},body:JSON.stringify({_subject:subject,_template:'box',_captcha:'false',Order:invoice.receipt,Name:invoice.name,Phone:invoice.phone,Address:invoice.address,Items:lines,Delivery:`${invoice.delivery} ${money(invoice.deliveryMinor)}`,Total:money(invoice.totalMinor),Time:new Date(invoice.createdAt).toLocaleString('en-GB',{timeZone:'Asia/Dhaka'})})});
+ // FormSubmit answers 200 with success:"false" when it did not send (e.g. address not yet activated).
+ const reply=await res.json().catch(()=>({}));
+ if(!res.ok||String(reply.success)!=='true')throw new Error('FormSubmit '+res.status+' '+String(reply.message||''));
+}

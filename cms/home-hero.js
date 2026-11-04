@@ -10,7 +10,8 @@ export function homeBackground(root, banners, imageUrl = value => value) {
   if (!banners.length) { backdrop.hidden = true; controls.hidden = true; return; }
   controls.hidden = banners.length < 2;
   let current = 0, cursor = 0, front = 0, timer = null, busy = false, visible = true, disposed = false;
-  let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Banners always rotate on their own; reduced-motion only removes the fade (see CSS).
+  let paused = false;
   const paint = (frame, index) => {
     const banner = banners[index];
     const picture = frames[frame];
@@ -34,8 +35,8 @@ export function homeBackground(root, banners, imageUrl = value => value) {
   };
   const stop = () => { clearInterval(timer); timer = null; };
   const start = () => {
-    if (!timer && !paused && visible && !document.hidden && !root.querySelector('.fit')?.contains(document.activeElement) && banners.length > 1 && !disposed)
-      timer = setInterval(advance, 6500);
+    if (!timer && !paused && visible && !document.hidden && !(root.contains(document.activeElement) && typing(document.activeElement)) && banners.length > 1 && !disposed)
+      timer = setInterval(advance, 5000);
   };
   async function advance() {
     if (busy || disposed || banners.length < 2) return;
@@ -54,8 +55,10 @@ export function homeBackground(root, banners, imageUrl = value => value) {
   pause.addEventListener('click', () => { paused = !paused; paused ? stop() : start(); sync(); });
   next.addEventListener('click', () => { stop(); advance(); start(); });
   // Typing and reading the tools never compete with a background transition.
-  root.addEventListener('focusin', stop);
-  root.addEventListener('focusout', event => { if (!root.contains(event.relatedTarget)) start(); });
+  // Pause only while the visitor is typing in the model search, then carry on.
+  const typing = target => target?.matches?.('input,textarea,select');
+  root.addEventListener('focusin', event => { if (typing(event.target)) stop(); });
+  root.addEventListener('focusout', event => { if (!typing(event.relatedTarget) || !root.contains(event.relatedTarget)) start(); });
   const visibility = () => document.hidden ? stop() : start();
   document.addEventListener('visibilitychange', visibility);
   const observer = new IntersectionObserver(entries => {

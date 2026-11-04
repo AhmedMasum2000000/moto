@@ -1,0 +1,51 @@
+/* Day mode. Night (the brand's dark ground) stays the default; a visitor's
+   choice is remembered and applied before first paint by the inline script
+   in each page head. Only tokens change, so every component follows. */
+:root[data-theme="light"] {
+  --ink:        #f5f4f7;
+  --ink-soft:   #ffffff;
+  --ink-line:   #d9d7df;
+  --paper:      #1f1e22;
+  --paper-dim:  #4a4852;
+  --paper-mute: #6c6a74;
+  --ink-rgb: 245 244 247;
+  --ink-deep-rgb: 236 235 240;
+  --ink-deep:   #ecebf0;
+  color-scheme: light;
+}
+:root[data-theme="light"] body { background: var(--ink); color: var(--paper); }
+/* Logos ship as white lettering; give them a dark plate in day mode. */
+:root[data-theme="light"] .nav__brand img,
+:root[data-theme="light"] .menu__top img,
+:root[data-theme="light"] a[class*="brand"] > img[src*="logo"] {
+  background: #1f1e22; padding: 4px 6px; box-sizing: content-box;
+}
+:root[data-theme="light"] .btn--red:hover { color: #fff; }
+:root[data-theme="light"] .home-hero__controls button { background: #1f1e22cc; color: #f4f3f6; }
+:root[data-theme="light"] .btn--red::before { background: #1f1e22; }
+/* Home category/service cards keep their dark plate, so their text stays light. */
+:root[data-theme="light"] .home-services .svc,
+:root[data-theme="light"] .home-services .svc__title,
+:root[data-theme="light"] .home-category { color: #f6f5f7; }
+:root[data-theme="light"] .card:has([data-add]:not([disabled])) .cms-stock { color: var(--paper-dim); }
+/* Brand artwork with white lettering needs a dark tile on the light page. */
+:root[data-theme="light"] .brandmarks span,
+:root[data-theme="light"] .brand-partners__tile { background: #1f1e22 !important; }
+
+.theme-toggle {
+  display: inline-grid; place-items: center;
+  width: 2.25rem; height: 2.25rem; padding: 0;
+  border: 1px solid var(--ink-line); background: transparent; color: var(--paper);
+  cursor: pointer; font-size: 1rem; line-height: 1;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--red); outline: none; }
+.theme-toggle svg { width: 1.05rem; height: 1.05rem; }
+.theme-toggle .theme-toggle__sun { display: none; }
+:root[data-theme="light"] .theme-toggle .theme-toggle__sun { display: block; }
+:root[data-theme="light"] .theme-toggle .theme-toggle__moon { display: none; }
+
+/* Product data sheet and invoice */
+.cms-datasheet { display: inline-flex; margin-top: .75rem; }
+.cms-invoice-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.footer__sister { margin: 1.5rem 0 0; color: var(--paper-dim); font: 500 15px/1.5 var(--sans); }
+.footer__sister b { color: var(--paper); font-weight: 600; }
