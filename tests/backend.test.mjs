@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateContent,publicDocument,validateRequest,mediaReferences,resolveMedia,safeLink} from '../supabase/functions/moto-admin/schema.mjs';
 const seed=()=>JSON.parse(fs.readFileSync(new URL('../cms/initial-content.json',import.meta.url)));
-const requestBase=()=>({key:crypto.randomUUID(),name:'Delivery test',phone:'01700000000',address:'R.A. Khan Chowdhury Road, Kushtia',kind:'order',items:[{id:'oil-motul-7100',qty:2}],expectedTotalMinor:270000});
+const requestBase=()=>({key:crypto.randomUUID(),name:'Delivery test',phone:'01700000000',address:'R.A. Khan Chowdhury Road, Kushtia',delivery:'inside',kind:'order',items:[{id:'oil-motul-7100',qty:2}],expectedTotalMinor:270000});
 test('existing catalogue migrates with its prices and six category and four service cards',()=>{const d=validateContent(seed());assert.equal(d.products.length,38);assert.equal(d.posts.length,1);assert.equal(d.blocks.length,10);assert.equal(d.vehicles.length,81);});
 test('sale price must be lower; category and submenu references must exist',()=>{for(const change of [p=>p.sale=p.price,p=>p.price=-1,p=>p.category='missing',p=>p.subcategory='missing']){const d=seed();change(d.products[0]);assert.throws(()=>validateContent(d));}});
 test('unpublished records and their dependent links do not leak',()=>{const d=seed();d.categories[0].visible=false;d.services[0].visible=false;d.content[0].visible=false;d.photos=[{secret:'private'}];const p=publicDocument(d);assert(!p.categories.some(c=>c.id===d.categories[0].id));assert(!p.products.some(c=>c.category===d.categories[0].id));assert(!p.blocks.some(b=>b.target===d.services[0].id));assert(!p.menu.some(m=>m.target===d.categories[0].id));assert(!p.content.some(c=>c.id===d.content[0].id));assert(!('photos'in p));});
-test('public prices are recalculated and mismatches rejected',()=>{const live=publicDocument(seed()),body=requestBase(),r=validateRequest(body,live);assert.equal(r.details.totalMinor,270000);body.expectedTotalMinor=2;assert.throws(()=>validateRequest(body,live),/Prices changed/);body.expectedTotalMinor=270000;live.products[0].stock='Out of stock';assert.throws(()=>validateRequest(body,live),/unavailable/);});
+test('public prices are recalculated and mismatches rejected',()=>{const live=publicDocument(seed()),body=requestBase(),r=validateRequest(body,live);assert.equal(r.details.subtotalMinor,270000);body.expectedTotalMinor=2;assert.throws(()=>validateRequest(body,live),/Prices changed/);body.expectedTotalMinor=270000;live.products[0].stock='Out of stock';assert.throws(()=>validateRequest(body,live),/unavailable/);});
 test('invalid quantities, duplicates, empty bookings and past dates fail',()=>{const d=publicDocument(seed());for(const qty of [0,-1,1.2,51])assert.throws(()=>validateRequest({...requestBase(),items:[{id:d.products[0].id,qty}]},d));assert.throws(()=>validateRequest({...requestBase(),items:[...requestBase().items,...requestBase().items]},d));assert.throws(()=>validateRequest({...requestBase(),kind:'booking',services:[]},d));assert.throws(()=>validateRequest({...requestBase(),kind:'booking',services:[d.services[0].id],date:'2020-01-01'},d));});
 test('private media references must all be resolved for publication',()=>{const id=crypto.randomUUID(),doc={image:'media:'+id,nested:[{picture:'media:'+id}]};assert.equal(mediaReferences(doc).size,1);assert.throws(()=>resolveMedia(doc,{}));assert.equal(resolveMedia(doc,{[id]:'https://example.com/photo.png'}).nested[0].picture,'https://example.com/photo.png');});
 test('unsafe destinations and duplicate page addresses are rejected',()=>{assert(!safeLink('javascript:alert(1)'));assert(!safeLink('data:text/html,x'));const d=seed();d.pages.push({id:'new',custom:true,name:'Test',title:'Test',description:'',shareImage:d.settings.logo,slug:'test',html:'<h1>Test</h1>',css:''});d.posts=[{id:'post',name:'Test',slug:'test',body:'Story',image:d.settings.logo,date:'2026-10-10',author:'Store'}];assert.throws(()=>validateContent(d),/unique address/);});
@@ -29,4 +29,13 @@ test('invoices escape customer text and total the lines',async()=>{
   const html=invoiceHtml({receipt:'MM-ABC',createdAt:'2026-11-04T10:00:00Z',name:'<b>x</b>',phone:'017',address:'Kushtia',items:[{name:'Oil',quantity:2,unitPriceMinor:140000}],store:{name:'Moto Market'}});
   assert.ok(html.includes('&lt;b&gt;x&lt;/b&gt;')&&!html.includes('<b>x</b>'));
   assert.ok(html.includes('৳2,800'));
+});
+test('order bills add the chosen delivery charge to the product prices',()=>{
+  const live=publicDocument(JSON.parse(fs.readFileSync(new URL('../cms/initial-content.json',import.meta.url))));
+  const inside=validateRequest(requestBase(),live).details;
+  assert.equal(inside.subtotalMinor,270000);assert.equal(inside.deliveryMinor,12000);assert.equal(inside.totalMinor,282000);
+  const outside=validateRequest({...requestBase(),delivery:'outside'},live).details;
+  assert.equal(outside.deliveryMinor,15000);assert.equal(outside.totalMinor,285000);
+  assert.throws(()=>validateRequest({...requestBase(),delivery:''},live),/delivery/i);
+  assert.throws(()=>validateRequest({...requestBase(),delivery:'free'},live),/delivery/i);
 });

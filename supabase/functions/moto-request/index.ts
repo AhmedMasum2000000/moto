@@ -27,7 +27,7 @@ Deno.serve(async req=>{
   const {data:receipt,error:saveError}=await db.rpc('moto_submit_request',{p_key:body.key,p_rate_key:hash,p_kind:validated.kind,p_name:validated.name,p_phone:validated.phone,p_details:validated.details});
   if(saveError)throw new Error(saveError.message.includes('RATE_LIMIT')?'Too many requests. Please contact the store or try again later.':saveError.message.includes('REQUEST_CHANGED')?'We already received your earlier request. The team will contact you to confirm.':'Your request was not saved. Please try again.');
   const createdAt=earlier?.created_at||new Date().toISOString();
-  const invoice=validated.kind==='order'?{receipt,createdAt,name:validated.name,phone:validated.phone,address:validated.details.address,items:validated.details.items,totalMinor:validated.details.totalMinor}:null;
+  const invoice=validated.kind==='order'?{receipt,createdAt,name:validated.name,phone:validated.phone,address:validated.details.address,items:validated.details.items,delivery:validated.details.delivery,deliveryMinor:validated.details.deliveryMinor,totalMinor:validated.details.totalMinor}:null;
   // Email the store about each new order. A failed email never loses the saved order.
   if(invoice&&!earlier)await notifyStore(live.content.settings||{},invoice).catch(e=>console.error('Order email failed:',e instanceof Error?e.message:e));
   return new Response(JSON.stringify({receipt,invoice,message:'Request received. The team will contact you to confirm availability and price.'}),{headers});
@@ -48,6 +48,6 @@ async function notifyStore(store:any,invoice:any){
   const res=await fetch('https://api.resend.com/emails',{method:'POST',signal,headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({from:Deno.env.get('ORDER_EMAIL_FROM')||'Moto Market <onboarding@resend.dev>',to:[to],subject,html:invoiceHtml({...invoice,store})})});
   if(!res.ok)throw new Error('Resend '+res.status);return;
  }
- const res=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',signal,headers:{'Content-Type':'application/json',Accept:'application/json',Origin:'https://motolubebangladesh.com',Referer:'https://motolubebangladesh.com/'},body:JSON.stringify({_subject:subject,_template:'box',_captcha:'false',Order:invoice.receipt,Name:invoice.name,Phone:invoice.phone,Address:invoice.address,Items:lines,Total:money(invoice.totalMinor),Time:new Date(invoice.createdAt).toLocaleString('en-GB',{timeZone:'Asia/Dhaka'})})});
+ const res=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',signal,headers:{'Content-Type':'application/json',Accept:'application/json',Origin:'https://motolubebangladesh.com',Referer:'https://motolubebangladesh.com/'},body:JSON.stringify({_subject:subject,_template:'box',_captcha:'false',Order:invoice.receipt,Name:invoice.name,Phone:invoice.phone,Address:invoice.address,Items:lines,Delivery:`${invoice.delivery} ${money(invoice.deliveryMinor)}`,Total:money(invoice.totalMinor),Time:new Date(invoice.createdAt).toLocaleString('en-GB',{timeZone:'Asia/Dhaka'})})});
  if(!res.ok)throw new Error('FormSubmit '+res.status);
 }

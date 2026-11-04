@@ -21,7 +21,7 @@ test('cart quantities obey colour counts and the total stock across variants',()
 test('server rejects invalid stock counts and excess stock across colours',()=>{
  const d=seed(),p=d.products[0];p.quantity=-1;assert.throws(()=>validateContent(d),/quantity/i);p.quantity=1.5;assert.throws(()=>validateContent(d),/quantity/i);p.quantity=4;p.unit='unsafe';assert.throws(()=>validateContent(d),/unit/i);p.unit='piece';
  p.colors=[{id:'red',name:'Red',stock:'In stock',hex:'#dc1238',quantity:3,image:''},{id:'blue',name:'Blue',stock:'In stock',hex:'#0000ff',quantity:3,image:''}];validateContent(d);
- const b={key:crypto.randomUUID(),name:'Stock test',phone:'01700000000',address:'Kushtia 7000',kind:'order',items:[{id:p.id,colorId:'red',qty:3},{id:p.id,colorId:'blue',qty:2}],expectedTotalMinor:5*(p.sale||p.price)*100};
+ const b={key:crypto.randomUUID(),name:'Stock test',phone:'01700000000',address:'Kushtia 7000',delivery:'inside',kind:'order',items:[{id:p.id,colorId:'red',qty:3},{id:p.id,colorId:'blue',qty:2}],expectedTotalMinor:5*(p.sale||p.price)*100};
  assert.throws(()=>validateRequest(b,publicDocument(d)),/stock/i);b.items[1].qty=1;b.expectedTotalMinor=4*(p.sale||p.price)*100;assert.equal(validateRequest(b,publicDocument(d)).details.items[0].unit,'piece');
  b.items=[{id:p.id,colorId:'red',qty:4}];assert.throws(()=>validateRequest(b,publicDocument(d)),/stock/i);p.quantity=0;assert.equal(publicDocument(d).products[0].stock,'Out of stock');
 });
