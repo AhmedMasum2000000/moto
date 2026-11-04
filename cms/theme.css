@@ -20,6 +20,7 @@
   background: #1f1e22; padding: 4px 6px; box-sizing: content-box;
 }
 :root[data-theme="light"] .btn--red:hover { color: #fff; }
+:root[data-theme="light"] .home-hero__controls button { background: #1f1e22cc; color: #f4f3f6; }
 :root[data-theme="light"] .btn--red::before { background: #1f1e22; }
 
 .theme-toggle {
