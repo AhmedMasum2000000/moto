@@ -10,9 +10,19 @@
 <script>try{var t=localStorage.getItem('mm.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=fb-1104">
-<link rel="stylesheet" href="cms/theme.css?v=fb-1104">
-<link rel="stylesheet" href="cms/public.css?v=fb-1104"></head>
+<link rel="stylesheet" href="styles.css?v=mob-1104">
+<link rel="stylesheet" href="cms/theme.css?v=mob-1104">
+<link rel="stylesheet" href="cms/public.css?v=mob-1104">
+<link rel="preconnect" href="https://ttpzdsecwhufzahtoyrp.supabase.co" crossorigin="">
+<link rel="preload" href="assets/fonts/IBMPlexMono-500.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="modulepreload" href="cms/public.js?v=mob-1104">
+<link rel="modulepreload" href="cms/finder.js?v=mob-1104">
+<link rel="modulepreload" href="cms/home-cards.js?v=mob-1104">
+<link rel="modulepreload" href="cms/home-cards.mjs">
+<link rel="modulepreload" href="cms/brand-partners.js?v=client-feedback-1">
+<link rel="modulepreload" href="cms/brand-partners.mjs">
+<link rel="modulepreload" href="cms/catalog.mjs?v=inventory-1">
+</head>
 <body>
 
 <div class="progress" aria-hidden="true"></div>
@@ -84,12 +94,12 @@
   <div class="shophead__row">
     <div>
       <h1 class="h-1" data-split=""><span data-cms-text="shop-t4">Shop</span></h1>
-      <p class="lede" data-reveal="" style="--d:120ms;margin-top:.75rem"><span data-cms-text="shop-t5">
+      <p class="lede" style="margin-top:.75rem"><span data-cms-text="shop-t5">
         36 genuine products across oil, tyres, parts, upgrades and riding gear.
         Reserve online, pay at the counter — nothing is charged until you have seen it.
       </span></p>
     </div>
-    <ul class="valuebar" data-reveal="" style="--d:200ms">
+    <ul class="valuebar">
       <li><b><span data-cms-text="shop-t6">Official dealer</span></b><span><span data-cms-text="shop-t7">Every tyre &amp; oil brand on the shelf</span></span></li>
       <li><b><span data-cms-text="shop-t8">Sealed &amp; genuine</span></b><span><span data-cms-text="shop-t9">Shown to you before it is fitted</span></span></li>
       <li><b><span data-cms-text="shop-t10">Fitted in the bay</span></b><span><span data-cms-text="shop-t11">While you wait, quoted first</span></span></li>
@@ -147,59 +157,6 @@
 </div>
 
 <div class="wrap">
-  <section class="kits" aria-labelledby="kits-h">
-    <div class="band__head">
-      <div><p class="label label--red">Complete the job</p><h2 class="band__title" id="kits-h">Kits riders buy together</h2></div>
-      <p class="label">Add a whole job in one tap</p>
-    </div>
-    <div class="kits__grid">
-      <article class="kit" data-reveal="">
-        <p class="label label--red">2 items · one visit</p>
-        <h3 class="kit__title">Oil change kit</h3>
-        <p class="kit__sub">Everything for a proper oil service on a commuter bike.</p>
-        <ul class="kit__list"><li><span>Motul 7100 4T 10W-40 · 1L</span><b>৳1,350</b></li><li><span>Oil Filter · OEM fit</span><b>৳280</b></li></ul>
-        <div class="kit__foot">
-          <p class="kit__total"><small>Kit total</small>৳1,630</p>
-          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;oil-motul-7100&quot;, &quot;name&quot;: &quot;Motul 7100 4T 10W-40 \u00b7 1L&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 1350}, {&quot;id&quot;: &quot;oil-filter&quot;, &quot;name&quot;: &quot;Oil Filter \u00b7 OEM fit&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 280}]">Add all 2</button>
-        </div>
-        <p class="kit__save">You save ৳150 on offer prices</p>
-      </article>
-      <article class="kit" data-reveal="">
-        <p class="label label--red">3 items · one visit</p>
-        <h3 class="kit__title">Stop-right kit</h3>
-        <p class="kit__sub">Pads, a fresh cable and plugs — the parts that decide how you stop.</p>
-        <ul class="kit__list"><li><span>Brake Pads · Front Set</span><b>৳750</b></li><li><span>Clutch &amp; Throttle Cable</span><b>৳290</b></li><li><span>NGK Spark Plug · Iridium</span><b>৳540</b></li></ul>
-        <div class="kit__foot">
-          <p class="kit__total"><small>Kit total</small>৳1,580</p>
-          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;part-brake-pad&quot;, &quot;name&quot;: &quot;Brake Pads \u00b7 Front Set&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 750}, {&quot;id&quot;: &quot;part-cable&quot;, &quot;name&quot;: &quot;Clutch &amp; Throttle Cable&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 290}, {&quot;id&quot;: &quot;part-spark&quot;, &quot;name&quot;: &quot;NGK Spark Plug \u00b7 Iridium&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 540}]">Add all 3</button>
-        </div>
-
-      </article>
-      <article class="kit" data-reveal="">
-        <p class="label label--red">2 items · one visit</p>
-        <h3 class="kit__title">Drive kit</h3>
-        <p class="kit__sub">Chain, sprockets and a gear-oil top-up, done in one visit.</p>
-        <ul class="kit__list"><li><span>D.I.D Chain &amp; Sprocket Kit</span><b>৳4,200</b></li><li><span>Gear Oil 80W-90 · 500ml</span><b>৳320</b></li></ul>
-        <div class="kit__foot">
-          <p class="kit__total"><small>Kit total</small>৳4,520</p>
-          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;part-chain-did&quot;, &quot;name&quot;: &quot;D.I.D Chain &amp; Sprocket Kit&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 4200}, {&quot;id&quot;: &quot;oil-gear&quot;, &quot;name&quot;: &quot;Gear Oil 80W-90 \u00b7 500ml&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 320}]">Add all 2</button>
-        </div>
-        <p class="kit__save">You save ৳600 on offer prices</p>
-      </article>
-      <article class="kit" data-reveal="">
-        <p class="label label--red">2 items · one visit</p>
-        <h3 class="kit__title">Ride-out kit</h3>
-        <p class="kit__sub">A certified lid and gloves before the first long ride.</p>
-        <ul class="kit__list"><li><span>SMK Twister · Full Face</span><b>৳7,900</b></li><li><span>Riding Gloves · Knuckle Guard</span><b>৳1,800</b></li></ul>
-        <div class="kit__foot">
-          <p class="kit__total"><small>Kit total</small>৳9,700</p>
-          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;hel-smk&quot;, &quot;name&quot;: &quot;SMK Twister \u00b7 Full Face&quot;, &quot;cat&quot;: &quot;Helmets&quot;, &quot;price&quot;: 7900}, {&quot;id&quot;: &quot;hel-gloves&quot;, &quot;name&quot;: &quot;Riding Gloves \u00b7 Knuckle Guard&quot;, &quot;cat&quot;: &quot;Helmets&quot;, &quot;price&quot;: 1800}]">Add all 2</button>
-        </div>
-        <p class="kit__save">You save ৳700 on offer prices</p>
-      </article>
-    </div>
-  </section>
-
   <div class="grid-products" data-grid="">
       <article class="card" data-tilt="" data-cat="oil" data-price="1350" data-save="10" data-dealer="1">
         <span class="badge badge--off">−10%</span>
@@ -699,6 +656,59 @@
   </div>
 
   <p class="empty" data-catalog-empty="" hidden="">Nothing in this category right now. Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> — if it exists, we can get it.</p>
+
+  <section class="kits" aria-labelledby="kits-h" style="margin-top:clamp(2.5rem,6vw,4rem)">
+    <div class="band__head">
+      <div><p class="label label--red">Complete the job</p><h2 class="band__title" id="kits-h">Kits riders buy together</h2></div>
+      <p class="label">Add a whole job in one tap</p>
+    </div>
+    <div class="kits__grid">
+      <article class="kit" data-reveal="">
+        <p class="label label--red">2 items · one visit</p>
+        <h3 class="kit__title">Oil change kit</h3>
+        <p class="kit__sub">Everything for a proper oil service on a commuter bike.</p>
+        <ul class="kit__list"><li><span>Motul 7100 4T 10W-40 · 1L</span><b>৳1,350</b></li><li><span>Oil Filter · OEM fit</span><b>৳280</b></li></ul>
+        <div class="kit__foot">
+          <p class="kit__total"><small>Kit total</small>৳1,630</p>
+          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;oil-motul-7100&quot;, &quot;name&quot;: &quot;Motul 7100 4T 10W-40 \u00b7 1L&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 1350}, {&quot;id&quot;: &quot;oil-filter&quot;, &quot;name&quot;: &quot;Oil Filter \u00b7 OEM fit&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 280}]">Add all 2</button>
+        </div>
+        <p class="kit__save">You save ৳150 on offer prices</p>
+      </article>
+      <article class="kit" data-reveal="">
+        <p class="label label--red">3 items · one visit</p>
+        <h3 class="kit__title">Stop-right kit</h3>
+        <p class="kit__sub">Pads, a fresh cable and plugs — the parts that decide how you stop.</p>
+        <ul class="kit__list"><li><span>Brake Pads · Front Set</span><b>৳750</b></li><li><span>Clutch &amp; Throttle Cable</span><b>৳290</b></li><li><span>NGK Spark Plug · Iridium</span><b>৳540</b></li></ul>
+        <div class="kit__foot">
+          <p class="kit__total"><small>Kit total</small>৳1,580</p>
+          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;part-brake-pad&quot;, &quot;name&quot;: &quot;Brake Pads \u00b7 Front Set&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 750}, {&quot;id&quot;: &quot;part-cable&quot;, &quot;name&quot;: &quot;Clutch &amp; Throttle Cable&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 290}, {&quot;id&quot;: &quot;part-spark&quot;, &quot;name&quot;: &quot;NGK Spark Plug \u00b7 Iridium&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 540}]">Add all 3</button>
+        </div>
+
+      </article>
+      <article class="kit" data-reveal="">
+        <p class="label label--red">2 items · one visit</p>
+        <h3 class="kit__title">Drive kit</h3>
+        <p class="kit__sub">Chain, sprockets and a gear-oil top-up, done in one visit.</p>
+        <ul class="kit__list"><li><span>D.I.D Chain &amp; Sprocket Kit</span><b>৳4,200</b></li><li><span>Gear Oil 80W-90 · 500ml</span><b>৳320</b></li></ul>
+        <div class="kit__foot">
+          <p class="kit__total"><small>Kit total</small>৳4,520</p>
+          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;part-chain-did&quot;, &quot;name&quot;: &quot;D.I.D Chain &amp; Sprocket Kit&quot;, &quot;cat&quot;: &quot;Spare Parts&quot;, &quot;price&quot;: 4200}, {&quot;id&quot;: &quot;oil-gear&quot;, &quot;name&quot;: &quot;Gear Oil 80W-90 \u00b7 500ml&quot;, &quot;cat&quot;: &quot;Engine Oil&quot;, &quot;price&quot;: 320}]">Add all 2</button>
+        </div>
+        <p class="kit__save">You save ৳600 on offer prices</p>
+      </article>
+      <article class="kit" data-reveal="">
+        <p class="label label--red">2 items · one visit</p>
+        <h3 class="kit__title">Ride-out kit</h3>
+        <p class="kit__sub">A certified lid and gloves before the first long ride.</p>
+        <ul class="kit__list"><li><span>SMK Twister · Full Face</span><b>৳7,900</b></li><li><span>Riding Gloves · Knuckle Guard</span><b>৳1,800</b></li></ul>
+        <div class="kit__foot">
+          <p class="kit__total"><small>Kit total</small>৳9,700</p>
+          <button class="btn btn--red btn--sm" type="button" data-kit="[{&quot;id&quot;: &quot;hel-smk&quot;, &quot;name&quot;: &quot;SMK Twister \u00b7 Full Face&quot;, &quot;cat&quot;: &quot;Helmets&quot;, &quot;price&quot;: 7900}, {&quot;id&quot;: &quot;hel-gloves&quot;, &quot;name&quot;: &quot;Riding Gloves \u00b7 Knuckle Guard&quot;, &quot;cat&quot;: &quot;Helmets&quot;, &quot;price&quot;: 1800}]">Add all 2</button>
+        </div>
+        <p class="kit__save">You save ৳700 on offer prices</p>
+      </article>
+    </div>
+  </section>
   <section class="partners">
     <p class="label label--red" data-reveal="">Brand partners</p>
     <h2 class="h-2" data-split="" style="margin:.6rem 0 1.75rem">The names on our shelf</h2>
@@ -734,7 +744,7 @@
     </svg>
     <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
     <div class="footer__bar">
-      <p class="label"><span data-cms-text="shop-t40">© </span><span class="yr">2026</span><span data-cms-text="shop-t41"> Moto Market · Kushtia, Bangladesh</span></p>
+      <p class="label"><span data-cms-text="shop-t40">©</span> <span class="yr">2026</span> <span data-cms-text="shop-t41">Moto Market · Kushtia, Bangladesh</span></p>
       <p class="label"><span data-cms-text="shop-t42">Cash · bKash · Nagad</span></p>
     </div>
   </div>
@@ -777,7 +787,7 @@
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
       <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
-      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">Esc</button>
+      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
     <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
@@ -788,4 +798,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=fb-1104"></script></body></html>
+<script type="module" src="cms/public.js?v=mob-1104"></script></body></html>

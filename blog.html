@@ -10,9 +10,9 @@
 <script>try{var t=localStorage.getItem('mm.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=fb-1104">
-<link rel="stylesheet" href="cms/theme.css?v=fb-1104">
-<link rel="stylesheet" href="cms/public.css?v=fb-1104"></head>
+<link rel="stylesheet" href="styles.css?v=mob-1104">
+<link rel="stylesheet" href="cms/theme.css?v=mob-1104">
+<link rel="stylesheet" href="cms/public.css?v=mob-1104"></head>
 <body>
 
 <div class="progress" aria-hidden="true"></div>
@@ -78,18 +78,36 @@
 
 <main><div id="cms-page" data-type="posts"></div></main>
 
-<footer class="footer" data-cms-section="book-section-3">
+<footer class="footer">
   <div class="wrap">
-      <svg class="footer__word" viewBox="0 0 640 200" role="img" aria-label="Book it" data-reveal="fade">
-        <text x="0" y="158">BOOK IT</text>
-      </svg>
+    <div class="footcols">
+      <div>
+        <p class="label label--red"><span data-cms-text="index-t203">Come by the bay</span></p>
+        <ul>
+          <li><a href="tel:+8801711154387"><span data-cms-text="index-t204">+880 1711-154387</span></a></li>
+          <li><a href="https://wa.me/8801711154387" target="_blank" rel="noopener">WhatsApp →</a></li>
+          <li><a href="mailto:motolubebangladesh@gmail.com"><span data-cms-text="index-t205">motolubebangladesh@gmail.com</span></a></li>
+          <li><a href="https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000" target="_blank" rel="noopener"><span data-cms-text="index-t206">R.A. Khan Chowdhury Road</span><br><span data-cms-text="index-t207">Kushtia 7000, Khulna</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <svg class="footer__word" viewBox="0 0 760 200" role="img" aria-label="Journal" data-reveal="fade">
+      <text x="0" y="158">JOURNAL</text>
+    </svg>
     <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
     <div class="footer__bar">
-      <p class="label"><span data-cms-text="book-t33">© </span><span class="yr">2026</span><span data-cms-text="book-t34"> Moto Market · Kushtia, Bangladesh</span></p>
-      <p class="label"><a href="mailto:motolubebangladesh@gmail.com"><span data-cms-text="book-t35">motolubebangladesh@gmail.com</span></a></p>
+      <p class="label"><span data-cms-text="journal-footer-t1">©</span> <span class="yr">2026</span> <span data-cms-text="journal-footer-t2">Moto Market · Kushtia, Bangladesh</span></p>
+      <p class="label"><a href="mailto:motolubebangladesh@gmail.com"><span data-cms-text="journal-footer-t3">motolubebangladesh@gmail.com</span></a></p>
     </div>
   </div>
 </footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a href="tel:+8801711154387"><b>Call</b>Talk now</a>
+  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b>WhatsApp</b>Send a note</a>
+  <a class="is-primary" href="book.html"><b>Book</b>Free slot</a>
+</nav>
 
 <script>document.querySelectorAll('.yr').forEach(e => { e.textContent = new Date().getFullYear(); });</script>
 <div class="searchbox" data-search="" hidden="">
@@ -101,7 +119,7 @@
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
       <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
-      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">Esc</button>
+      <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
     <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>

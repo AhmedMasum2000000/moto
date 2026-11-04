@@ -277,7 +277,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nav__util { grid-column: 3; justify-self: end; }
   .nav__burger { display: flex; }
 }
-@media (max-width: 560px) { .nav__book { display: none; } }
+/* .nav prefix: .btn (declared later) sets display:inline-flex at equal
+   specificity, which used to keep BOOK visible and crush the logo */
+@media (max-width: 560px) { .nav .nav__book { display: none; } }
 
 /* mobile menu */
 .menu { position: fixed; inset: 0; z-index: 105; }
@@ -343,16 +345,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: translateY(101%);
   transition: transform .45s var(--ease);
 }
-.btn:hover { color: #fff; border-color: var(--red); }
-.btn:hover::before { transform: translateY(0); }
 .btn__arrow { transition: transform .45s var(--ease); }
-.btn:hover .btn__arrow { transform: translateX(4px); }
+/* hover fills only where a real pointer hovers: on touch the emulated
+   :hover sticks after a tap and makes the button look stuck "on" */
+@media (hover: hover) {
+  .btn:hover { color: #fff; border-color: var(--red); }
+  .btn:hover::before { transform: translateY(0); }
+  .btn:hover .btn__arrow { transform: translateX(4px); }
+}
 
 .btn--ghost { --btn-fg: var(--paper); --btn-bg: transparent; border-color: var(--ink-line); }
 .btn--ghost:hover { border-color: var(--red); }
 .btn--red { --btn-fg: #fff; --btn-bg: var(--red); border-color: var(--red); }
 .btn--red::before { background: var(--paper); }
-.btn--red:hover { color: var(--ink); border-color: var(--paper); }
+@media (hover: hover) {
+  .btn--red:hover { color: var(--ink); border-color: var(--paper); }
+}
 .btn--sm { padding: .7rem 1.1rem; font-size: .6875rem; }
 .btn--block { display: flex; width: 100%; justify-content: center; }
 
@@ -2319,3 +2327,154 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .dealer .brandmarks { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: .9rem 1rem; align-items: center; justify-items: center; width: 100%; max-width: 760px; }
 .dealer .brandmarks span { width: 100%; height: 48px; padding: 0; display: grid; place-items: center; }
 .dealer .brandmarks img { width: auto; height: 34px; max-width: 100%; max-height: 48px; object-fit: contain; }
+
+/* =========================================================================
+   Mobile pass: global chrome (header, buttons, reveal, footer, layout)
+   ========================================================================= */
+html { -webkit-tap-highlight-color: transparent; }
+
+/* the logo never gets squeezed below a legible width */
+.nav__brand { flex-shrink: 0; }
+.nav__brand img { width: auto; min-width: 88px; }
+
+/* first-screen content never waits on JS to become visible */
+.home-hero [data-reveal], .shophead [data-reveal] {
+  opacity: 1; transform: none; clip-path: none; transition: none;
+}
+/* fail-safe: if app.js never boots (stalled CMS fetch, script error), show
+   every reveal after 2.5s instead of leaving the page blank. Scoped to
+   html:not(.js-ready) so scroll reveals still play once the app is up. */
+@keyframes reveal-failsafe { to { opacity: 1; transform: none; clip-path: none; } }
+html:not(.js-ready) [data-reveal]:not(.is-in) { animation: reveal-failsafe .01s 2.5s forwards; }
+
+/* footer stays at the bottom while CMS content streams in (no jump / CLS) */
+body { min-height: 100dvh; display: flex; flex-direction: column; }
+main { flex: 1 0 auto; }
+
+/* disabled buttons read as disabled, and never take the hover fill */
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; filter: saturate(.4); }
+@media (hover: hover) {
+  .btn:is(:disabled, [aria-disabled="true"]):hover { color: var(--btn-fg); border-color: var(--btn-bg); }
+  .btn--ghost:is(:disabled, [aria-disabled="true"]):hover { border-color: var(--ink-line); }
+  .btn:is(:disabled, [aria-disabled="true"]):hover::before { transform: translateY(101%); }
+  .btn:is(:disabled, [aria-disabled="true"]):hover .btn__arrow { transform: none; }
+}
+
+/* tap targets */
+@media (pointer: coarse) {
+  .nav__icon, .nav__burger, .nav .theme-toggle { width: 40px; height: 40px; }
+  .searchbox__esc { min-width: 44px; min-height: 44px; font-size: .875rem; }
+}
+.menu__top button, .drawer__head button {
+  min-height: 44px; min-width: 44px; padding: 0 .75rem;
+  color: var(--paper-dim); font-size: .8125rem;
+}
+.qty button { width: 40px; height: 40px; font-size: 1rem; }
+.footcols li a { display: inline-block; padding-block: .6rem; }
+.footcols ul { gap: 0; }
+
+/* slimmer fixed chrome on phones */
+@media (max-width: 560px) {
+  .nav { padding: .5rem var(--gut); }
+  .nav.is-stuck { padding-block: .4rem; }
+}
+.actionbar a { padding: .6rem .5rem; gap: .2rem; font-size: .6875rem; letter-spacing: .08em; }
+@media (max-width: 860px) {
+  body { padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px)); }
+  .footer__bar .label { font-size: .75rem; color: var(--paper-dim); letter-spacing: .12em; }
+}
+
+/* footer + search legibility */
+.searchbox__hit span { font-size: .75rem; color: var(--paper-dim); }
+.footer__bar .yr { margin-inline: .45em; }
+
+/* the "Added" toast drops to the top while the cart drawer / menu is open,
+   so it never sits over the bill and the WhatsApp button */
+body.is-locked .toast { bottom: auto; top: 4.5rem; }
+body.is-locked .toast:not(.is-up) { transform: translate(-50%, calc(-100% - 6rem)); }
+
+/* =========================================================================
+   Mobile pass: shop grid, filter rail, booking form
+   ========================================================================= */
+
+/* two products per row on phones */
+@media (max-width: 600px) {
+  .grid-products { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1rem; }
+  .grid-products .card { padding: .7rem; gap: .45rem; }
+  .grid-products .card__perk { display: none; }
+  .grid-products .cms-product-picture { padding: 10px; }
+  .grid-products .card__name { font-size: .8125rem; line-height: 1.25; }
+  .grid-products .card__row { flex-direction: column; align-items: stretch; gap: .45rem; }
+  .grid-products .card__row .btn { justify-content: center; min-height: 44px; padding-inline: .5rem; }
+  .grid-products .badge { top: .7rem; right: .7rem; }
+  .grid-products .badge--off { left: .7rem; right: auto; }
+  .grid-products .card .badge--off ~ .badge { right: .7rem; left: auto; }
+  .grid-products .card__brand { height: 20px; left: .35rem; bottom: .35rem; }
+}
+
+/* compact sticky filter rail */
+@media (max-width: 700px) {
+  .catrail__inner { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: .5rem; padding-block: .5rem; }
+  /* subcategory, sort and colour share one row; the item count keeps its natural width */
+  .catrail__right { display: flex; gap: .5rem; align-items: center; }
+  .catrail__right > * { flex: 1 1 0; min-width: 0; }
+  .catrail__right > .label { flex: none; }
+  .catrail__right .sortby > .label { display: none; }
+  .catrail__right .sortby, .catrail__right .sortby select { width: 100%; }
+  .catrail__right select.cms-subcategory { width: 100%; max-width: none; margin: 0; }
+  .catrail__right > .label { white-space: nowrap; }
+  /* colour filter, wherever finder.js puts it, stays a full-width row
+     without the extra 10px margins */
+  .catrail__inner > select.cms-subcategory { width: 100%; max-width: none; margin: 0; }
+}
+.sortby select, select.cms-subcategory { min-height: 40px; font-size: 14px; }
+@media (max-width: 420px) {
+  /* very narrow phones: the three filters need the whole row */
+  .catrail__right > .label { display: none !important; }
+  .catrail__right select { padding-inline: .5rem; }
+}
+
+/* chip row shows that it scrolls sideways */
+.catrail .filters {
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, #000 85%, transparent);
+  padding-right: 2rem; scroll-snap-type: x proximity;
+}
+.catrail .chip { min-height: 40px; scroll-snap-align: start; }
+
+/* trust tiles become a swipe row instead of a tall stack */
+@media (max-width: 700px) {
+  .shophead .valuebar {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 70%;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .shophead .valuebar::-webkit-scrollbar { display: none; }
+  .shophead .valuebar li { scroll-snap-align: start; }
+}
+
+/* small labels: larger and higher contrast */
+.card__cat { font-size: .6875rem; color: var(--paper-dim); }
+.badge { font-size: .625rem; }
+.kit__total small { font-size: .625rem; }
+.catrail .label, .crumbs { color: var(--paper-dim); }
+
+/* booking form */
+.field label { font-size: .75rem; letter-spacing: .12em; color: var(--paper-dim); }
+.field input, .field select, .field textarea { font-size: 1rem; min-height: 48px; border-bottom-color: var(--paper-mute); }
+.field input::placeholder, .field textarea::placeholder { color: var(--paper-mute); opacity: 1; }
+.field:has([required]) label::after { content: " *"; color: var(--red); }
+@media (max-width: 600px) {
+  .field input, .field select, .field textarea {
+    border: 1px solid var(--paper-mute); padding: .75rem .85rem; background: var(--ink-soft);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--red); }
+}
+
+.pick span { padding: .85rem 1rem; font-size: .75rem; min-height: 44px; display: flex; align-items: center; }
+@media (max-width: 600px) {
+  .picks { display: grid; grid-template-columns: 1fr 1fr; }
+  .pick span { justify-content: center; text-align: center; height: 100%; }
+  form [type="submit"] { width: 100%; justify-content: center; }
+  .sticky-col .ascii-panel { display: none; }
+}
+aside a[href^="tel:"] { display: inline-block; padding: .5rem 0; min-height: 44px; }
