@@ -28,3 +28,114 @@
 .settings-hint{margin:-12px 0 20px}
 @media(max-width:720px){.delivery-row{grid-template-columns:minmax(0,1fr) auto auto;gap:10px}.delivery-row .delivery-name{grid-column:1/-1}}
 #orders-settings-form>h2+p,#invoice-settings-form>h2+p{margin-bottom:16px}
+
+/* ── Flagship integration (Wave 2): heading tools, editor footer, toast popover, home widgets ── */
+.heading-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
+.heading-actions .io-buttons{display:flex;flex-wrap:wrap;gap:8px}
+.sheet-heading__tools{display:flex;align-items:center;gap:8px;flex:none}
+.sheet-heading__tools .tour-explain{min-height:32px;padding-right:10px;font-size:10px}
+.sheet-heading__tools .tour-explain .mascot{width:24px;height:24px}
+.sheet-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.sheet-footer>.sheet-actions{display:flex;justify-content:space-between;gap:8px}
+.sheet-actions__left,.sheet-actions__right{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sheet-actions__right{flex:1;justify-content:flex-end}
+.sheet-footer .sheet-actions .primary{flex:0 1 auto;min-width:130px}
+.sheet-actions .btn[disabled]{opacity:.45;cursor:not-allowed}
+.editor.is-demo .sheet-footer{background:#221a20}
+.editor-error{display:flex;gap:10px;align-items:flex-start;border-left:2px solid var(--red);background:var(--red-soft);padding:9px 11px;margin:0 0 12px;font-size:11px;line-height:1.45;color:var(--white)}
+.editor-error[hidden]{display:none}
+.editor-error .mascot{width:30px;height:30px}
+.editor-error b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#ff8aa1;margin-bottom:2px}
+.field-error{outline:2px solid var(--red);outline-offset:4px}
+.editor-jump{position:sticky;top:-25px;z-index:3;display:flex;gap:6px;overflow-x:auto;margin:-25px -27px 18px;padding:12px 27px;background:var(--bg);border-bottom:1px solid var(--line);scrollbar-width:none}
+.editor-jump::-webkit-scrollbar{display:none}
+.editor-jump a{flex:none;font-size:10px;font-weight:600;padding:7px 10px;border:1px solid var(--line);color:var(--muted);text-decoration:none;white-space:nowrap}
+.editor-jump a:hover,.editor-jump a:focus-visible{color:var(--white);border-color:#625563}
+.ed-section{border:1px solid var(--line);margin-bottom:14px;scroll-margin-top:60px;padding:0;color:var(--white);font-size:inherit}
+.ed-section .field{margin:0 0 20px}
+.ed-section .ed-section__body>.field:first-child,.ed-section .ed-section__body>.image-editor:first-child{margin-top:14px}
+.ed-section .model-adder{padding:14px 0}
+.ed-section .model-adder .field{margin:12px 0 0}
+.ed-section>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:13px 15px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:#232227}
+.ed-section>summary::-webkit-details-marker{display:none}
+.ed-section>summary:after{content:'+';color:var(--muted);font-size:14px}
+.ed-section[open]>summary:after{content:'–'}
+.ed-section__body{padding:4px 15px 15px}
+.ed-section__body>h3:first-child{margin-top:10px}
+.website-boxes{border:1px solid var(--line);padding:12px 14px 6px;margin:18px 0 6px}
+.website-boxes legend{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:0 6px;color:var(--muted)}
+.website-box{display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:12px;border-top:1px solid var(--line)}
+.website-box:first-of-type{border-top:0}
+.website-box input{width:18px;height:18px;min-height:0;margin-top:1px;accent-color:var(--red);flex:none}
+.website-box small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.website-box.is-done{opacity:.6}
+.toast{display:flex;align-items:center;gap:12px;top:auto;right:auto;margin:0;border:0;overflow:visible}
+.toast[popover]:not(:popover-open){display:none}
+.toast.show{pointer-events:auto}
+.toast #toast-text{flex:1;min-width:0}
+.toast__undo{font-weight:800;color:var(--red);text-decoration:underline;text-underline-offset:3px;font-size:12px;padding:4px 6px;min-height:0;flex:none}
+.toast__undo[hidden]{display:none}
+.toast__x{color:var(--bg);opacity:.6;font-size:12px;padding:2px 4px;min-height:0;flex:none}
+.toast__x:hover{opacity:1}
+.modal-mascot{float:right;margin:0 0 8px 12px}
+.mascot-empty{align-items:center}
+.history-list .section-row{margin-bottom:0}
+.home-structure-row{align-items:start}
+.lay-outline ol{margin-top:10px}
+.low-stock .panel-head{gap:12px}
+.low-stock__chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px}
+.low-stock__chips .btn{margin:0}
+.low-stock__list{list-style:none;padding:0;margin:8px 0 0}
+.low-stock__list li{border-top:1px solid var(--line)}
+.low-stock__list button{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:9px 0;font-size:12px}
+.low-stock__list img{width:38px;height:38px;object-fit:contain;background:#1b1a1e;flex:none}
+.low-stock__list small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.plan-link{display:block;text-align:left;width:100%}
+.settings-footer .btn{margin-left:0}
+@media(max-width:720px){
+ .page-heading{flex-wrap:wrap}
+ .heading-actions{justify-content:flex-start;width:100%;gap:6px}
+ .heading-actions .tour-explain{order:-1}
+ .heading-actions .btn{margin:0}
+ .heading-actions .io-buttons{order:2;width:100%;gap:6px}
+ .heading-actions .io-buttons .btn{flex:1 1 auto;min-height:36px;padding:7px 9px}
+ .sheet-actions__right{width:100%}
+ .sheet-actions__right .primary{flex:1;min-width:0}
+ .sheet-actions .btn{min-height:40px}
+ .editor-jump{top:-18px;margin:-18px -16px 16px;padding:10px 16px}
+ .sheet-heading__tools .tour-explain span{display:none}
+ .sheet-heading__tools .tour-explain{padding:3px 4px}
+ .toast{gap:8px}
+}
+/* Subcategory rows inside the narrow editor sheet: two lines, so the name gets the full width. */
+.editor .sub-row{grid-template-columns:28px 44px minmax(0,1fr) auto;grid-template-areas:"drag thumb name menu" "drag thumb vis arrows" "drag thumb count count";row-gap:4px;column-gap:8px;padding:8px}
+.editor .sub-row .drag-handle{grid-area:drag;width:26px;align-self:center}.editor .sub-row__thumb{grid-area:thumb;align-self:start}.editor .sub-row__name{grid-area:name}.editor .sub-row .row-menu{grid-area:menu;justify-self:end}
+.editor .sub-row__vis{grid-area:vis}.editor .sub-row__count{grid-area:count;font-size:9px}.editor .sub-row__arrows{grid-area:arrows;justify-self:end}
+.editor .sub-row__confirm{grid-area:auto;grid-column:1/-1}
+.editor .sub-row__name input{min-height:38px;font-size:13px}
+/* Phone top bar: menu, page name, then Search, Preview, Publish and the mascot "?" (icons only where space is short). */
+@media(max-width:720px){
+ .topbar{gap:6px}
+ .crumb{min-width:0;flex:1}
+ .crumb b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+ .top-actions{gap:6px;flex:none}
+ .search-trigger{display:inline-flex;width:36px;height:36px;margin:0;justify-content:center;border:1px solid var(--line);color:var(--white)}
+ .search-trigger>span:not([data-icon]),.search-trigger kbd{display:none}
+ .preview-button:not([hidden]){display:inline-flex;width:36px;min-height:36px;padding:0;gap:0}
+ .preview-button>span:not([data-icon]){display:none}
+ .publish-button{padding:6px 9px;gap:6px}
+ .tour-trigger.icon-button{width:36px;height:36px}
+ .tour-trigger .mascot{width:28px;height:28px}
+}
+@media(max-width:400px){
+ .publish-button>span:not([data-icon]){font-size:0}
+ .publish-button>span:not([data-icon])::after{content:'Publish';font-size:10px}
+}
+/* Editor footer: Delete / Duplicate on the first line, Cancel and the save buttons on the second. */
+.sheet-actions__left:empty{display:none}
+.sheet-actions__right{flex:1 1 100%;flex-wrap:nowrap}
+.sheet-actions__right .primary{flex:1 1 auto;min-width:0}
+.sheet-actions__left .btn{min-height:34px;padding:6px 12px}
+.drawer-tour{display:none}
+@media(max-width:720px){.drawer-tour{display:flex;align-items:center;gap:10px;margin:14px 12px 0;padding:10px 12px;border:1px solid var(--line);text-align:left;font-size:12px;font-weight:600;width:calc(100% - 24px)}.drawer-tour small{display:block;font-weight:400;font-size:10px;color:var(--muted);margin-top:2px}.drawer-tour .mascot{width:30px;height:30px}}
+@media(max-width:720px){#editor .toast{bottom:150px}}

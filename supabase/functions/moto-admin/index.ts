@@ -1,5 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.117.3';
 import { validateContent,publicDocument,mediaReferences,resolveMedia,UUID,assert } from './schema.mjs';
+import { mediaAction } from './media.mjs';
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const db=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const allowed=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','http://motolubebangladesh.com','http://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
@@ -40,6 +41,18 @@ Deno.serve(async req=>{
   if(action==='restore'){assert(owner,'Only the store owner can restore a version.');assert(UUID.test(body.revision),'Choose a version.');const saved=await result(db.rpc('moto_restore',{p_actor:staff.user_id,p_expected:body.version,p_revision:body.revision}));return new Response(JSON.stringify(saved),{headers});}
   if(action==='register-media'){
    assert(editor,'Picture uploads are not enabled for this account.');assert(typeof body.path==='string'&&body.path.startsWith(staff.user_id+'/')&&/^[a-zA-Z0-9/_.-]+$/.test(body.path)&&!body.path.includes('..'),'Invalid upload path.');const blob=await result(db.storage.from('moto-media').download(body.path));const bytes=new Uint8Array(await blob.arrayBuffer());const pdf=new TextDecoder().decode(bytes.slice(0,5))==='%PDF-';assert(bytes.length>0&&bytes.length<=(pdf?10485760:5242880),pdf?'Choose a PDF smaller than 10 MB.':'Choose a picture smaller than 5 MB.');let mime=pdf?'application/pdf':'';if(bytes[0]===137&&bytes[1]===80&&bytes[2]===78&&bytes[3]===71)mime='image/png';if(bytes[0]===255&&bytes[1]===216&&bytes[2]===255)mime='image/jpeg';if(new TextDecoder().decode(bytes.slice(0,4))==='RIFF'&&new TextDecoder().decode(bytes.slice(8,12))==='WEBP')mime='image/webp';assert(mime,'Choose a JPG, PNG or WebP image, or a PDF data sheet.');assert(typeof body.name==='string'&&body.name.length<200,'Choose a shorter photo name.');const item=await result(db.from('moto_media').insert({path:body.path,name:body.name,mime_type:mime,size_bytes:bytes.length,width:pdf?1:body.width,height:pdf?1:body.height,created_by:staff.user_id}).select().single());const signed=await result(db.storage.from('moto-media').createSignedUrl(item.path,3600));return new Response(JSON.stringify({media:item,url:signed.signedUrl}),{headers});
+  }
+  if(action==='media-update'||action==='media-delete'){
+   // Photo library details and deletion (rules and the "still in use" check live in media.mjs).
+   const store={
+    getMedia:(id:string)=>result(db.from('moto_media').select('*').eq('id',id).maybeSingle()),
+    updateMedia:(id:string,patch:any)=>result(db.from('moto_media').update(patch).eq('id',id).select().single()),
+    documents:async()=>{const [draft,live,revisions]=await Promise.all([result(db.from('moto_draft').select('content').single()),result(db.from('moto_live').select('content').single()),result(db.from('moto_revisions').select('content,public_content,created_at').order('created_at',{ascending:false}).limit(10))]);return {draft,live,revisions};},
+    deleteMedia:(id:string)=>result(db.from('moto_media').delete().eq('id',id)),
+    removeObject:async(path:string,media:any)=>{const {error}=await db.storage.from('moto-media').remove([path]);if(error)return false;const ext=media?.mime_type==='application/pdf'?'pdf':media?.mime_type==='image/jpeg'?'jpg':media?.mime_type==='image/png'?'png':'webp';const pub=await db.storage.from('moto-public').remove([String(media?.id||'').toLowerCase()+'.'+ext]);return !pub.error;},
+    audit:(name:string,details:any)=>db.from('moto_audit').insert({actor:staff.user_id,action:name,details}),
+   };
+   const r=await mediaAction(action,body,{staff,store});return new Response(JSON.stringify(r.body),{status:r.status,headers});
   }
   if(action==='request-update'){assert(UUID.test(body.id),'Choose a request.');const version=await result(db.rpc('moto_update_request',{p_actor:staff.user_id,p_id:body.id,p_expected:body.version,p_status:body.status,p_notes:String(body.notes||'')}));return new Response(JSON.stringify({version}),{headers});}
   if(action==='staff-list'){assert(owner,'Only the owner can manage staff.');return new Response(JSON.stringify({staff:await result(db.from('moto_staff').select('user_id,username,display_name,role,can_publish,active,created_at').order('created_at'))}),{headers});}

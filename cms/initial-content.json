@@ -1432,6 +1432,25 @@
       "alt": "Shell"
     }
   ],
+  "brandGroups": [
+    {
+      "id": "tyres",
+      "name": "Tyres",
+      "visible": true,
+      "shopTarget": "tyres"
+    },
+    {
+      "id": "oil",
+      "name": "Engine oil",
+      "visible": true,
+      "shopTarget": "oil"
+    },
+    {
+      "id": "parts",
+      "name": "Spare parts",
+      "visible": true
+    }
+  ],
   "vehicles": [
     {
       "id": "bike-yamaha-0",
@@ -2671,6 +2690,33 @@
       "order": 9
     },
     {
+      "id": "shop-catalog",
+      "page": "shop",
+      "name": "Shop · all products",
+      "visible": true,
+      "hint": "The product grid with its filters and sorting.",
+      "fields": [],
+      "order": 10
+    },
+    {
+      "id": "shop-kits",
+      "page": "shop",
+      "name": "Shop · bundles",
+      "visible": true,
+      "hint": "Kits riders buy together.",
+      "fields": [],
+      "order": 11
+    },
+    {
+      "id": "shop-partners",
+      "page": "shop",
+      "name": "Shop · brand partners",
+      "visible": true,
+      "hint": "The strip of brand logos under the products.",
+      "fields": [],
+      "order": 12
+    },
+    {
       "id": "shop-section-2",
       "page": "shop",
       "name": "Footer",
@@ -2942,7 +2988,7 @@
         }
       ],
       "hint": "46 editable text, picture and link fields",
-      "order": 10
+      "order": 13
     },
     {
       "id": "book-section-1",
@@ -2970,7 +3016,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 11
+      "order": 14
     },
     {
       "id": "book-section-2",
@@ -3154,7 +3200,7 @@
         }
       ],
       "hint": "29 editable text, picture and link fields",
-      "order": 12
+      "order": 15
     },
     {
       "id": "book-section-3",
@@ -3182,7 +3228,7 @@
         }
       ],
       "hint": "3 editable text, picture and link fields",
-      "order": 13
+      "order": 16
     },
     {
       "id": "index-cookie-consent",
@@ -3215,7 +3261,7 @@
           "value": "assets/mascot/cookie-rider.webp"
         }
       ],
-      "order": 14
+      "order": 17
     }
   ],
   "pages": [
@@ -3349,5 +3395,20 @@
       "Evening · 4:00 – 8:00"
     ],
     "whatsappGreeting": "Assalamu alaikum"
+  },
+  "sections": [],
+  "layout": {
+    "index": [
+      "builtin:index-popular",
+      "builtin:index-brands",
+      "builtin:index-services",
+      "builtin:index-dealer",
+      "builtin:index-brand-partners"
+    ],
+    "shop": [
+      "builtin:shop-catalog",
+      "builtin:shop-kits",
+      "builtin:shop-partners"
+    ]
   }
 }

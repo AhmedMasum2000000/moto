@@ -26,3 +26,15 @@ export function cartInventory(products,items){
  }
  return result;
 }
+// Subcategories are objects {id,name,visible} (old documents: plain names). A ?sub= value is matched by id
+// first, then by name (case-insensitive), so links shared before subcategories had ids keep working.
+const childList=category=>(category?.children||[]).map(c=>typeof c==='string'?{id:c,name:c,visible:true}:c).filter(c=>c&&c.visible!==false);
+export function findSubcategory(category,value){
+ const v=String(value??'').trim();if(!v)return null;
+ const kids=childList(category);return kids.find(c=>c.id===v)||kids.find(c=>String(c.name).trim().toLowerCase()===v.toLowerCase())||null;
+}
+// The display name of a product's subcategory ('' when it has none or it is hidden).
+export function subcategoryName(categories,product){
+ const category=(categories||[]).find(c=>c.id===product?.category);
+ return findSubcategory(category,product?.subcategory)?.name||'';
+}

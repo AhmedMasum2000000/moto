@@ -1,0 +1,58 @@
+/* Control-room polish (loaded last): readable text sizes, 40-44px tap targets on phones, a toast that
+   stays clear of the open editor sheet, the subcategory add bar and the hidden-copy badge. */
+
+/* ── readable text, every width ─────────────────────────────────────────────────────────────── */
+.page-heading p{font-size:14px;line-height:1.55}
+.field-hint{font-size:12px;line-height:1.6}
+.section-row p,.rl-text small,.history-row small,.review-row small{font-size:12px}
+.nav-label{font-size:11px}
+.workspace-footer,.workspace-footer button{font-size:12px}
+.demo-bar,.demo-bar button{font-size:12px}
+.mini-switch{font-size:11px}
+.sheet-body small,.cr-dialog small,.modal small{font-size:max(12px,1em)}
+.eyebrow{font-size:11px}
+
+@media(max-width:760px){
+  .page-heading p{font-size:14px}
+  .section-row p,.field-hint,.rl-text small,.workspace-footer,.workspace-footer button,.demo-bar,.demo-bar button{font-size:12px}
+  main small,.sheet small,.modal small,.cr-dialog small,.sidebar small,.plan-link{font-size:12px}
+  .btn,.btn.tiny,.btn.small,.lay-chip{font-size:12px}
+  .mini-switch,.pl-row .mini-switch{font-size:11px}
+
+  /* ── tap targets ── */
+  .topbar button,.mobile-menu,.tour-trigger,.publish-button{min-width:44px;min-height:44px}
+  .mobile-menu{width:44px;height:44px}
+  .btn.tiny,.btn.small{min-height:40px}
+  .icon-button,summary.icon-button,.drag-handle,.lay-handle,.lay-arrow{min-width:40px;min-height:40px}
+  label.mini-switch,.lay-switch{min-height:40px;padding-block:10px}
+  .pl-chip{min-height:44px}
+  .pl-chip select,[data-pl-sort],.plist select{min-height:42px}
+  [data-action="signout"],[data-tour-start="hub"]:not(.btn):not(.tour-trigger),.workspace-footer button,.text-link{min-height:44px;padding:12px 8px}
+  .demo-bar button{min-height:40px}
+
+  /* Category / record rows: let names and counts wrap to two lines instead of "STOC…". */
+  .rl-text b,.rl-text small{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+
+  /* The "+ Add subcategory" bar scrolls with the rows on a phone (it covered them when sticky). */
+  .subs__add{position:static}
+}
+
+/* Desktop: the sticky add bar sits flush with the bottom of the scroll area and covers the rows under it. */
+@media(min-width:761px){
+  .subs__add{border-top:1px solid var(--line);box-shadow:0 12px 0 var(--bg),0 -1px 0 var(--bg);z-index:1}
+}
+
+/* ── toast while the editor sheet is open: inside the sheet column, above its footer ─────────── */
+@media(min-width:721px){
+  body:has(#editor[open]) .toast{left:auto;right:0;width:min(530px,100vw);max-width:min(530px,100vw);bottom:86px;transform:translate(0,20px)}
+  body:has(#editor[open]) .toast.show{transform:translate(0,0)}
+}
+@media(max-width:720px){
+  body:has(#editor[open]) .toast{top:12px;bottom:auto;transform:translate(-50%,-20px)}
+  body:has(#editor[open]) .toast.show{transform:translate(-50%,0)}
+}
+
+/* ── a duplicated record says it is a hidden copy, also on a phone (the kicker and note are hidden there) ── */
+@media(max-width:720px){
+  #editor[data-copy] .sheet-heading h2::after{content:'Hidden copy';display:inline-block;margin-left:8px;padding:3px 7px;vertical-align:middle;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--red)}
+}

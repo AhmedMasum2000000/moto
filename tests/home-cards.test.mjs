@@ -38,3 +38,10 @@ test('homepage content update preserves products, campaign banners and staff-add
   const d=seed(),prices=d.products.map(p=>p.price),banners=structuredClone(d.banners);d.blocks.push({id:'staff-card',kind:'category',target:'oil',name:'Staff choice',image:'assets/icons/engine-oil.png',visible:true});
   updateHomepage(d);assert.deepEqual(d.products.map(p=>p.price),prices);assert.deepEqual(d.banners,banners);assert(d.blocks.some(b=>b.id==='staff-card'));assert.equal(d.blocks.filter(b=>b.id==='gear-card').length,1);
 });
+test('homepage cards filter by subcategory id once the document is normalised',async()=>{
+  const {normalise}=await import('../cms/content-model.mjs');const d=normalise(seed()),helmet=d.blocks.find(b=>b.id==='helmets'),gear=d.blocks.find(b=>b.id==='gear-card');
+  const helmetsId=d.categories.find(c=>c.id==='helmets').children.find(c=>c.name==='Helmets').id;
+  assert.deepEqual(helmet.subcategories,[helmetsId]);
+  assert.deepEqual(d.products.filter(p=>categoryMatches(p,helmet)).map(p=>p.id),seed().products.filter(p=>p.category==='helmets'&&p.subcategory==='Helmets').map(p=>p.id));
+  assert.deepEqual(d.products.filter(p=>categoryMatches(p,gear)).map(p=>p.id),['hel-gloves']);
+});
