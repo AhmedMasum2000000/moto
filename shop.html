@@ -10,14 +10,14 @@
 <script>try{var t=localStorage.getItem('mm.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=mob-1104">
-<link rel="stylesheet" href="cms/theme.css?v=mob-1104">
-<link rel="stylesheet" href="cms/public.css?v=mob2-1104">
+<link rel="stylesheet" href="styles.css?v=dyn-2">
+<link rel="stylesheet" href="cms/theme.css?v=dyn-2">
+<link rel="stylesheet" href="cms/public.css?v=dyn-2">
 <link rel="preconnect" href="https://ttpzdsecwhufzahtoyrp.supabase.co" crossorigin="">
 <link rel="preload" href="assets/fonts/IBMPlexMono-500.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="modulepreload" href="cms/public.js?v=mob-1104">
-<link rel="modulepreload" href="cms/finder.js?v=mob-1104">
-<link rel="modulepreload" href="cms/home-cards.js?v=mob-1104">
+<link rel="modulepreload" href="cms/public.js?v=dyn-2">
+<link rel="modulepreload" href="cms/finder.js?v=dyn-2">
+<link rel="modulepreload" href="cms/home-cards.js?v=dyn-2">
 <link rel="modulepreload" href="cms/home-cards.mjs">
 <link rel="modulepreload" href="cms/brand-partners.js?v=client-feedback-1">
 <link rel="modulepreload" href="cms/brand-partners.mjs">
@@ -116,7 +116,7 @@
                 <g class="fit__wheel"><circle cx="30" cy="55" r="14"></circle><circle cx="30" cy="55" r="5"></circle><path d="M30 42v8m12 12-7-4m-17 4 7-4"></path></g>
                 <g class="fit__wheel"><circle cx="112" cy="55" r="14"></circle><circle cx="112" cy="55" r="5"></circle><path d="M112 42v8m12 12-7-4m-17 4 7-4"></path></g>
               </g>
-            </svg></span><strong>BIKE</strong><span>Two wheels. Your way.</span></button><button class="fit__type" type="button" data-model-type="car" aria-pressed="false"><span class="fit__art"><svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            </svg></span><strong data-cms-text="finder-bike-title">BIKE</strong><span data-cms-text="finder-bike-sub">Two wheels. Your way.</span></button><button class="fit__type" type="button" data-model-type="car" aria-pressed="false"><span class="fit__art"><svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <g class="fit__motion"><path d="M4 18h30M9 26h20M2 43h14"></path><path d="M8 68h49m13 0h17m10 0h40"></path></g>
               <g class="fit__machine">
                 <path class="fit__body" d="m9 47 5-16 21-4 18-13h33l22 15 24 7 4 17h-13a15 15 0 0 0-30 0H51a15 15 0 0 0-30 0H9z"></path>
@@ -126,7 +126,7 @@
                 <g class="fit__wheel"><circle cx="36" cy="55" r="11"></circle><circle cx="36" cy="55" r="4"></circle><path d="M36 44v7m10 10-6-3m-14 3 6-3"></path></g>
                 <g class="fit__wheel"><circle cx="108" cy="55" r="11"></circle><circle cx="108" cy="55" r="4"></circle><path d="M108 44v7m10 10-6-3m-14 3 6-3"></path></g>
               </g>
-            </svg></span><strong>CAR</strong><span>Four wheels. Perfect fit.</span></button></div><div class="cms-model-input"><label class="label" for="model-search">YOUR MODEL</label><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 6 6"></path></svg><input id="model-search" type="search" role="combobox" aria-autocomplete="list" aria-controls="model-results" aria-expanded="false" autocomplete="off" placeholder="Search bike model · R15, Gixxer, Pulsar…"><button class="btn btn--ghost btn--sm" type="button" data-model-clear="" hidden="">Clear</button></div><div id="model-results" role="listbox" aria-label="Matching models" hidden=""></div></div><p class="cms-model-status" data-model-status="" role="status"></p></div></section>
+            </svg></span><strong data-cms-text="finder-car-title">CAR</strong><span data-cms-text="finder-car-sub">Four wheels. Perfect fit.</span></button></div><div class="cms-model-input"><label class="label" for="model-search" data-cms-text="finder-model-label">YOUR MODEL</label><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 6 6"></path></svg><input id="model-search" type="search" role="combobox" aria-autocomplete="list" aria-controls="model-results" aria-expanded="false" autocomplete="off" placeholder="Search bike model · R15, Gixxer, Pulsar…"><button class="btn btn--ghost btn--sm" type="button" data-model-clear="" hidden="" data-cms-text="finder-clear-button">Clear</button></div><div id="model-results" role="listbox" aria-label="Matching models" hidden=""></div></div><p class="cms-model-status" data-model-status="" role="status"></p></div></section>
 
 <div class="wrap"></div>
 
@@ -655,12 +655,12 @@
       </article>
   </div>
 
-  <p class="empty" data-catalog-empty="" hidden="">Nothing in this category right now. Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> — if it exists, we can get it.</p>
+  <p class="empty" data-catalog-empty="" hidden=""><span data-cms-text="shop-empty">Nothing in this category right now. Call</span> <a class="red" href="tel:+8801711154387">+880 1711-154387</a> <span data-cms-text="shop-empty-after">— if it exists, we can get it.</span></p>
 
   <section class="kits" aria-labelledby="kits-h" style="margin-top:clamp(2.5rem,6vw,4rem)">
     <div class="band__head">
-      <div><p class="label label--red">Complete the job</p><h2 class="band__title" id="kits-h">Kits riders buy together</h2></div>
-      <p class="label">Add a whole job in one tap</p>
+      <div><p class="label label--red" data-cms-text="shop-kits-label">Complete the job</p><h2 class="band__title" id="kits-h" data-cms-text="shop-kits-title">Kits riders buy together</h2></div>
+      <p class="label" data-cms-text="shop-kits-intro">Add a whole job in one tap</p>
     </div>
     <div class="kits__grid">
       <article class="kit" data-reveal="">
@@ -710,15 +710,13 @@
     </div>
   </section>
   <section class="partners">
-    <p class="label label--red" data-reveal="">Brand partners</p>
-    <h2 class="h-2" data-split="" style="margin:.6rem 0 1.75rem">The names on our shelf</h2>
+    <p class="label label--red" data-reveal="" data-cms-text="shop-partners-label">Brand partners</p>
+    <h2 class="h-2" data-split="" style="margin:.6rem 0 1.75rem"><span data-cms-text="shop-partners-title">The names on our shelf</span></h2>
     <div class="partners__row" data-reveal=""><span><img src="assets/brands/mrf.webp" alt="MRF" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/ceat.webp" alt="𝖼𝖾𝖺𝗍" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/pirelli.webp" alt="Pirelli" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/cst.webp" alt="CST" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/eurogrip.webp" alt="Eurogrip" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/mobil.webp" alt="Mobil" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/bp.webp" alt="BP" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/castrol.webp" alt="Castrol" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/shell.webp" alt="Shell" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/bajaj.webp" alt="Bajaj" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/motul.webp" alt="Motul" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/liqui-moly.webp" alt="Liqui Moly" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/maxima.webp" alt="Maxima Pro" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/motorex.webp" alt="Motorex" width="130" height="130" loading="lazy" decoding="async"></span></div>
   </section>
 
   <p class="note" style="margin-top:2.5rem" data-reveal="">
-    Prices are indicative and include VAT. Fitting is charged separately and quoted before work starts.
-    Don't see your model? Call <a href="tel:+8801711154387" class="red">+880 1711-154387</a> — most parts
-    are in the back or here within 48 hours.
+    <span data-cms-text="shop-note">Prices are indicative and include VAT. Fitting is charged separately and quoted before work starts. Don't see your model? Call</span> <a href="tel:+8801711154387" class="red">+880 1711-154387</a> <span data-cms-text="shop-note-after">— most parts are in the back or here within 48 hours.</span>
   </p>
 </div>
 
@@ -740,9 +738,9 @@
     </div>
 
     <svg class="footer__word" viewBox="0 0 1120 200" role="img" aria-label="Moto Market" data-reveal="fade">
-      <text x="0" y="158">MOTO MARKET</text>
+      <text x="0" y="158" data-cms-text="wordmark-store">MOTO MARKET</text>
     </svg>
-    <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
+    <p class="footer__sister">Moto Market — a sister concern of <b data-cms-setting="parentCompany">Motolube Bangladesh</b></p>
     <div class="footer__bar">
       <p class="label"><span data-cms-text="shop-t40">©</span> <span class="yr">2026</span> <span data-cms-text="shop-t41">Moto Market · Kushtia, Bangladesh</span></p>
       <p class="label"><span data-cms-text="shop-t42">Cash · bKash · Nagad</span></p>
@@ -751,22 +749,22 @@
 </footer>
 
 <nav class="actionbar" aria-label="Quick actions">
-  <a href="tel:+8801711154387"><b>Call</b>Talk now</a>
-  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b>WhatsApp</b>Send a note</a>
-  <a class="is-primary" href="book.html"><b>Book</b>Free slot</a>
+  <a href="tel:+8801711154387"><b data-cms-text="actionbar-call">Call</b><span data-cms-text="actionbar-call-sub">Talk now</span></a>
+  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b data-cms-text="actionbar-wa">WhatsApp</b><span data-cms-text="actionbar-wa-sub">Send a note</span></a>
+  <a class="is-primary" href="book.html"><b data-cms-text="actionbar-book">Book</b><span data-cms-text="actionbar-book-sub">Free slot</span></a>
 </nav>
 
 
 <div class="scrim" data-drawer-close=""></div>
 <aside class="drawer" aria-hidden="true" aria-label="Your cart">
   <div class="drawer__head">
-    <p class="label">Your cart</p>
-    <button class="label" type="button" data-drawer-close="" aria-label="Close cart">Close ✕</button>
+    <p class="label" data-cms-text="cart-title">Your cart</p>
+    <button class="label" type="button" data-drawer-close="" aria-label="Close cart" data-cms-text="cart-close">Close ✕</button>
   </div>
   <div class="drawer__body" data-cart-body=""></div>
   <div class="drawer__foot">
     <div style="display:flex;justify-content:space-between;align-items:baseline">
-      <p class="label">Total</p>
+      <p class="label" data-cms-text="cart-total-label">Total</p>
       <p class="card__price" data-cart-total="">৳0</p>
     </div>
     <a class="btn btn--red btn--block" data-magnetic="" data-cart-wa="" target="_blank" rel="noopener" href="https://wa.me/8801711154387">
@@ -786,11 +784,11 @@
         <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"></circle>
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
-      <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
+      <input type="search" data-search-input="" data-cms-placeholder="search-placeholder" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
       <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
-    <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
+    <p class="searchbox__hint" data-cms-text="search-hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
   </div>
 </div>
 
@@ -798,4 +796,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=mob-1104"></script></body></html>
+<script type="module" src="cms/public.js?v=dyn-2"></script></body></html>

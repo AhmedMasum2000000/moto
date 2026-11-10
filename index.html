@@ -20,18 +20,18 @@
 <script>try{var t=localStorage.getItem('mm.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=mob-1104">
-<link rel="stylesheet" href="cms/theme.css?v=mob-1104">
-<link rel="stylesheet" href="cms/home-hero.css?v=mob-1104">
-<link rel="stylesheet" href="cms/public.css?v=mob2-1104">
-<link rel="stylesheet" href="cms/popular-products.css?v=mob-1104">
-<link rel="stylesheet" href="cms/home-cards.css?v=mob-1104">
+<link rel="stylesheet" href="styles.css?v=dyn-2">
+<link rel="stylesheet" href="cms/theme.css?v=dyn-2">
+<link rel="stylesheet" href="cms/home-hero.css?v=dyn-2">
+<link rel="stylesheet" href="cms/public.css?v=dyn-2">
+<link rel="stylesheet" href="cms/popular-products.css?v=dyn-2">
+<link rel="stylesheet" href="cms/home-cards.css?v=dyn-2">
 <link rel="stylesheet" href="cms/brand-partners.css?v=compact-1">
 <link rel="preconnect" href="https://ttpzdsecwhufzahtoyrp.supabase.co" crossorigin="">
 <link rel="preload" href="assets/fonts/IBMPlexMono-500.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="modulepreload" href="cms/public.js?v=mob-1104">
-<link rel="modulepreload" href="cms/finder.js?v=mob-1104">
-<link rel="modulepreload" href="cms/home-cards.js?v=mob-1104">
+<link rel="modulepreload" href="cms/public.js?v=dyn-2">
+<link rel="modulepreload" href="cms/finder.js?v=dyn-2">
+<link rel="modulepreload" href="cms/home-cards.js?v=dyn-2">
 <link rel="modulepreload" href="cms/home-cards.mjs">
 <link rel="modulepreload" href="cms/brand-partners.js?v=client-feedback-1">
 <link rel="modulepreload" href="cms/brand-partners.mjs">
@@ -390,7 +390,7 @@
       <p class="fit__sub" data-cms-text="index-home-search-help">Type your model below. Save your ride, then find parts, book a service or set a reminder.</p>
 
       <div class="fit__step" data-step="1">
-        <p class="fit__no"><b>01</b> Two wheels or four?</p>
+        <p class="fit__no"><b>01</b> <span data-cms-text="fitment-step1">Two wheels or four?</span></p>
         <div class="fit__types" role="group" aria-label="Vehicle type">
           <button type="button" class="fit__type" data-fit-type="bike" aria-pressed="false">
             <svg class="fit__vehicle fit__vehicle--bike" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -404,7 +404,7 @@
                 <g class="fit__wheel"><circle cx="112" cy="55" r="14"></circle><circle cx="112" cy="55" r="5"></circle><path d="M112 42v8m12 12-7-4m-17 4 7-4"></path></g>
               </g>
             </svg>
-            <span><b>Bike</b><small data-type-count="bike">&nbsp;</small></span>
+            <span><b data-cms-text="fitment-bike">Bike</b><small data-type-count="bike">&nbsp;</small></span>
           </button>
           <button type="button" class="fit__type" data-fit-type="car" aria-pressed="false">
             <svg class="fit__vehicle fit__vehicle--car" viewBox="0 0 144 76" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -418,7 +418,7 @@
                 <g class="fit__wheel"><circle cx="108" cy="55" r="11"></circle><circle cx="108" cy="55" r="4"></circle><path d="M108 44v7m10 10-6-3m-14 3 6-3"></path></g>
               </g>
             </svg>
-            <span><b>Car</b><small data-type-count="car">&nbsp;</small></span>
+            <span><b data-cms-text="fitment-car">Car</b><small data-type-count="car">&nbsp;</small></span>
           </button>
         </div>
       </div><div class="fit__search">
@@ -427,7 +427,7 @@
         <ul class="fit__suggest" id="fit-suggest" role="listbox" aria-label="Matching models" data-fit-suggest="" hidden=""></ul>
       </div>
 
-      <p class="fit__or" hidden=""><span>or pick it in three taps</span></p>
+      <p class="fit__or" hidden=""><span data-cms-text="fitment-or">or pick it in three taps</span></p>
 
       <div class="fit__progress" aria-hidden="true" hidden=""><i data-fit-seg=""></i><i data-fit-seg=""></i><i data-fit-seg=""></i></div>
       <p class="fit__stepcount" data-fit-stepcount="" hidden="">Step 1 of 3</p>
@@ -435,17 +435,17 @@
 
 
       <div class="fit__step" data-step="2" data-locked="" hidden="">
-        <p class="fit__no"><b>02</b> Pick the badge</p>
+        <p class="fit__no"><b>02</b> <span data-cms-text="fitment-step2">Pick the badge</span></p>
         <div class="fit__chips" role="group" aria-label="Brand" data-fit-brands="" data-placeholder="Choose bike or car first"></div>
       </div>
 
       <div class="fit__step" data-step="3" data-locked="" hidden="">
-        <p class="fit__no"><b>03</b> Lock in your model</p>
+        <p class="fit__no"><b>03</b> <span data-cms-text="fitment-step3">Lock in your model</span></p>
         <div class="fit__chips" role="group" aria-label="Model" data-fit-models="" data-placeholder="Pick a brand to see its models"></div>
       </div>
 
       <div class="fit__quick">
-        <span class="fit__quick-l">Quick picks</span>
+        <span class="fit__quick-l" data-cms-text="fitment-quick-label">Quick picks</span>
         <div class="fit__quick-row" data-fit-quick=""></div>
       </div>
     </div>
@@ -465,25 +465,25 @@
       <div class="fit__actions" data-fit-actions=""></div>
 
       <div class="fit__remind" id="fit-remind" data-fit-remind="" hidden="">
-        <p class="fit__remind-q">Nudge me to service my <b data-remind-name=""></b> in</p>
+        <p class="fit__remind-q"><span data-cms-text="fitment-remind-lead">Nudge me to service my</span> <b data-remind-name=""></b> <span data-cms-text="fitment-remind-in">in</span></p>
         <div class="fit__seg" role="group" aria-label="Reminder interval">
-          <button type="button" data-remind-months="1" aria-pressed="false">1 month</button>
-          <button type="button" data-remind-months="2" aria-pressed="true">2 months</button>
-          <button type="button" data-remind-months="3" aria-pressed="false">3 months</button>
+          <button type="button" data-remind-months="1" aria-pressed="false" data-cms-text="fitment-remind-1">1 month</button>
+          <button type="button" data-remind-months="2" aria-pressed="true" data-cms-text="fitment-remind-2">2 months</button>
+          <button type="button" data-remind-months="3" aria-pressed="false" data-cms-text="fitment-remind-3">3 months</button>
         </div>
-        <p class="fit__remind-date">Reminder on <b data-remind-date=""></b></p>
+        <p class="fit__remind-date"><span data-cms-text="fitment-remind-date">Reminder on</span> <b data-remind-date=""></b></p>
         <div class="fit__remind-acts">
-          <a class="btn btn--red btn--sm" data-remind-google="" target="_blank" rel="noopener" href="#">Google Calendar</a>
-          <a class="btn btn--ghost btn--sm" data-remind-ics="" href="#" download="moto-market-service-reminder.ics">Apple / Outlook (.ics)</a>
+          <a class="btn btn--red btn--sm" data-remind-google="" target="_blank" rel="noopener" href="#" data-cms-text="fitment-remind-google">Google Calendar</a>
+          <a class="btn btn--ghost btn--sm" data-remind-ics="" href="#" download="moto-market-service-reminder.ics" data-cms-text="fitment-remind-ics">Apple / Outlook (.ics)</a>
         </div>
       </div>
 
       <div class="fit__again">
         <button type="button" class="fit__link" data-fit-change="">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>
-          Change ride
+          <span data-cms-text="fitment-change">Change ride</span>
         </button>
-        <button type="button" class="fit__link fit__link--quiet" data-fit-forget="">Forget it</button>
+        <button type="button" class="fit__link fit__link--quiet" data-fit-forget="" data-cms-text="fitment-forget">Forget it</button>
       </div>
     </div>
 
@@ -493,7 +493,7 @@
       <span data-fit-count="">&nbsp;</span>
       <span>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
-        Fit confirmed at the counter — before you pay
+        <span data-cms-text="fitment-trust">Fit confirmed at the counter — before you pay</span>
       </span>
     </div>
     <p class="sr-only" aria-live="polite" data-fit-live=""></p>
@@ -549,7 +549,7 @@
       </div>
 
       <div class="dealer__group" data-brand-group="parts" data-reveal="" style="--d:290ms" hidden>
-        <p class="label"><span>Spare parts</span></p>
+        <p class="label"><span data-cms-text="index-dealer-parts-label">Spare parts</span></p>
         <div class="brandmarks"></div>
       </div>
 
@@ -612,9 +612,9 @@
     </div>
 
     <svg class="footer__word" viewBox="0 0 1120 200" role="img" aria-label="Moto Market" data-reveal="fade">
-      <text x="0" y="158">MOTO MARKET</text>
+      <text x="0" y="158" data-cms-text="wordmark-store">MOTO MARKET</text>
     </svg>
-    <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
+    <p class="footer__sister">Moto Market — a sister concern of <b data-cms-setting="parentCompany">Motolube Bangladesh</b></p>
     <div class="footer__bar">
       <p class="label"><span data-cms-text="index-t209">©</span> <span class="yr">2026</span> <span data-cms-text="index-t210">Moto Market · Kushtia, Bangladesh</span></p>
       <p class="label"><span data-cms-text="index-t211">Cash · bKash · Nagad</span></p>
@@ -623,22 +623,22 @@
 </footer>
 
 <nav class="actionbar" aria-label="Quick actions">
-  <a href="tel:+8801711154387"><b>Call</b>Talk now</a>
-  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b>WhatsApp</b>Send a note</a>
-  <a class="is-primary" href="book.html"><b>Book</b>Free slot</a>
+  <a href="tel:+8801711154387"><b data-cms-text="actionbar-call">Call</b><span data-cms-text="actionbar-call-sub">Talk now</span></a>
+  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b data-cms-text="actionbar-wa">WhatsApp</b><span data-cms-text="actionbar-wa-sub">Send a note</span></a>
+  <a class="is-primary" href="book.html"><b data-cms-text="actionbar-book">Book</b><span data-cms-text="actionbar-book-sub">Free slot</span></a>
 </nav>
 
 
 <div class="scrim" data-drawer-close=""></div>
 <aside class="drawer" aria-hidden="true" aria-label="Your cart">
   <div class="drawer__head">
-    <p class="label">Your cart</p>
-    <button class="label" type="button" data-drawer-close="" aria-label="Close cart">Close ✕</button>
+    <p class="label" data-cms-text="cart-title">Your cart</p>
+    <button class="label" type="button" data-drawer-close="" aria-label="Close cart" data-cms-text="cart-close">Close ✕</button>
   </div>
   <div class="drawer__body" data-cart-body=""></div>
   <div class="drawer__foot">
     <div style="display:flex;justify-content:space-between;align-items:baseline">
-      <p class="label">Total</p>
+      <p class="label" data-cms-text="cart-total-label">Total</p>
       <p class="card__price" data-cart-total="">৳0</p>
     </div>
     <a class="btn btn--red btn--block" data-magnetic="" data-cart-wa="" target="_blank" rel="noopener" href="https://wa.me/8801711154387">
@@ -658,11 +658,11 @@
         <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"></circle>
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
-      <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
+      <input type="search" data-search-input="" data-cms-placeholder="search-placeholder" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
       <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
-    <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
+    <p class="searchbox__hint" data-cms-text="search-hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
   </div>
 </div>
 
@@ -670,4 +670,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=mob-1104"></script></body></html>
+<script type="module" src="cms/public.js?v=dyn-2"></script></body></html>

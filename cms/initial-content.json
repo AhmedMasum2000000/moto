@@ -3323,6 +3323,31 @@
     "logo": "assets/logo.png",
     "favicon": "assets/logo.png",
     "facebook": "https://www.facebook.com/share/1MLq6PjxjY/",
-    "map": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000"
+    "map": "https://maps.google.com/?q=R.A.+Khan+Chowdhury+Road+Kushtia+7000",
+    "delivery": [
+      {
+        "id": "inside",
+        "label": "Inside Kushtia",
+        "fee": 120,
+        "visible": true
+      },
+      {
+        "id": "outside",
+        "label": "Outside Kushtia",
+        "fee": 150,
+        "visible": true
+      }
+    ],
+    "orderEmail": "",
+    "parentCompany": "Motolube Bangladesh",
+    "invoiceNote": "Our team will call to confirm stock and price before delivery.",
+    "paymentMethods": "Cash · bKash · Nagad",
+    "requestReceived": "Request received. The team will contact you to confirm availability and price.",
+    "bookingSlots": [
+      "Morning · 9:00 – 12:00",
+      "Afternoon · 12:00 – 4:00",
+      "Evening · 4:00 – 8:00"
+    ],
+    "whatsappGreeting": "Assalamu alaikum"
   }
 }
