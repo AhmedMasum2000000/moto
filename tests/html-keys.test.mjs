@@ -99,3 +99,17 @@ test('no new data-cms-section ids were added to the pages', () => {
     $('[data-cms-section]').each((_, el) => assert.ok(sectionIds.has($(el).attr('data-cms-section')), `${file} ${$(el).attr('data-cms-section')}`));
   }
 });
+
+test('every built-in layout section exists on its page and each page has a generated-sections mount', async () => {
+  const {BUILTINS, isPinned} = await import('../cms/content-model.mjs');
+  for (const [page, ids] of Object.entries(BUILTINS)) {
+    const $ = load(page + '.html');
+    assert.equal($(`main [data-cms-sections="${page}"]`).length, 1, `${page} mount`);
+    for (const id of ids) {
+      const el = $(`[data-cms-section="${id}"]`);
+      assert.equal(el.length, 1, `${page}: ${id}`);
+      // movable parts are direct children of <main>, so the layout pass can reorder them
+      if (!isPinned(id)) assert.equal(el.parent().prop('tagName'), 'MAIN', `${page}: ${id} sits directly in main`);
+    }
+  }
+});

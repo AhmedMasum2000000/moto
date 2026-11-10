@@ -21,3 +21,8 @@
 .grid-products>.card{content-visibility:auto;contain-intrinsic-size:auto 320px}.kits>.kit{content-visibility:auto;contain-intrinsic-size:auto 340px}
 @media(max-width:860px){.cms-product-dialog:not(.cms-invoice-dialog){width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:16px 16px 0;border:0}.cms-detail-image{height:clamp(160px,32vh,220px)}.cms-product-details [data-colour-add],.cms-product-details [data-add]{position:sticky;bottom:0;width:calc(100% + 32px);margin:16px -16px 0!important;justify-content:center;padding-bottom:calc(1rem + env(safe-area-inset-bottom));z-index:1}.cms-invoice-dialog{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;display:flex;flex-direction:column}.cms-invoice-frame{flex:1;height:auto}.cms-invoice-bar .btn{flex:1;justify-content:center}.menu__panel .cms-nav-item{border-bottom:1px solid var(--ink-line)}.menu__panel .cms-nav-item>.menu__link{border-bottom:0}.menu__panel .cms-submenu a{font-size:14px;padding:12px 14px}}
 .cms-form-status a{text-decoration:underline}:root[data-theme=light] .cms-form-status.is-err{color:#b0102f}body:has(.cms-post) #cms-page,#cms-page[data-type=post]{min-height:100vh}
+
+/* The private draft-preview strip sits at the bottom, so it never covers the fixed site header. */
+.cms-preview-notice:not(#cms-update-notice){position:fixed;left:0;right:0;bottom:0;z-index:200;padding:9px 16px;box-shadow:0 -8px 24px #0006}
+body:has(>.cms-preview-notice:not(#cms-update-notice)){padding-bottom:44px}
+body:has(>.cms-preview-notice:not(#cms-update-notice)) .cookie-card{bottom:68px}

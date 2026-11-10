@@ -85,3 +85,69 @@ test('booking time stays free text',()=>{
   assert.equal(validateRequest({...base,slot:'Old cached slot'},live).details.slot,'Old cached slot');
   assert.throws(()=>validateRequest({...base,slot:'x'.repeat(101)},live));
 });
+
+// ── photo library: media-update and media-delete (supabase/functions/moto-admin/media.mjs) ──
+import {mediaAction,validateMediaUpdate,mediaUsedIn,mediaDocuments,canManageMedia} from '../supabase/functions/moto-admin/media.mjs';
+const mediaId='123e4567-e89b-12d3-a456-426614174000';
+const fakeStore=(over={})=>{const calls=[];const row={id:mediaId,path:'u/x.webp',name:'x.webp',alt:null,hidden:false};const docs={draft:{content:seed()},live:{content:publicDocument(seed())},revisions:[]};return {calls,row,docs,store:{
+  getMedia:async id=>{calls.push(['get',id]);return over.missing?null:row;},
+  updateMedia:async(id,patch)=>{calls.push(['update',id,patch]);return {...row,...patch};},
+  documents:async()=>{calls.push(['documents']);return docs;},
+  deleteMedia:async id=>{calls.push(['delete',id]);},
+  removeObject:async path=>{calls.push(['remove',path]);return true;},
+  audit:async(action,details)=>{calls.push(['audit',action,details]);},
+}};};
+const owner={user_id:'o',role:'owner',active:true},editor={user_id:'e',role:'editor',active:true},service={user_id:'s',role:'service',active:true};
+test('media-update: owner and editor only; validated name, alt and hidden; audited',async()=>{
+  assert(canManageMedia(owner)&&canManageMedia(editor)&&!canManageMedia(service)&&!canManageMedia(null)&&!canManageMedia({...owner,active:false}));
+  const f=fakeStore();
+  let r=await mediaAction('media-update',{id:mediaId,name:'  Castrol 4T  ',alt:'Castrol oil bottle',hidden:true},{staff:editor,store:f.store});
+  assert.equal(r.status,200);assert.equal(r.body.media.name,'Castrol 4T');assert.equal(r.body.media.alt,'Castrol oil bottle');assert.equal(r.body.media.hidden,true);
+  assert(f.calls.some(c=>c[0]==='audit'&&c[1]==='media_updated'));
+  const s=fakeStore();r=await mediaAction('media-update',{id:mediaId,name:'x'},{staff:service,store:s.store});
+  assert.equal(r.status,400);assert.match(r.body.error,/owner or a content manager/);assert.equal(s.calls.length,0);
+  for(const bad of [{id:'nope',name:'x'},{id:mediaId},{id:mediaId,name:''},{id:mediaId,name:'x'.repeat(121)},{id:mediaId,alt:'x'.repeat(151)},{id:mediaId,hidden:'yes'},{id:mediaId,name:5}])assert.throws(()=>validateMediaUpdate(bad),undefined,JSON.stringify(bad));
+  assert.deepEqual(validateMediaUpdate({id:mediaId,alt:''}).patch,{alt:null});
+  r=await mediaAction('media-update',{id:mediaId,name:'x'},{staff:owner,store:fakeStore({missing:true}).store});assert.equal(r.status,400);
+});
+test('media-delete refuses while the draft, live site or a recent version uses the file',async()=>{
+  const inDraft=fakeStore();inDraft.docs.draft.content.products[0].image='media:'+mediaId;
+  let r=await mediaAction('media-delete',{id:mediaId},{staff:owner,store:inDraft.store});
+  assert.equal(r.status,409);assert.equal(r.body.code,'MEDIA_IN_USE');assert.deepEqual(r.body.usedIn,['Saved draft']);assert(!inDraft.calls.some(c=>c[0]==='delete'||c[0]==='remove'));
+  const inLive=fakeStore();inLive.docs.live.content.banners[0].image=`https://x.supabase.co/storage/v1/object/public/moto-public/${mediaId}.webp`;
+  r=await mediaAction('media-delete',{id:mediaId},{staff:editor,store:inLive.store});assert.equal(r.status,409);assert.deepEqual(r.body.usedIn,['Live website']);
+  const inRevision=fakeStore();inRevision.docs.revisions=[{created_at:'2026-11-01T10:00:00Z',content:{logo:'media:'+mediaId},public_content:{}}];
+  r=await mediaAction('media-delete',{id:mediaId},{staff:owner,store:inRevision.store});assert.equal(r.status,409);assert.match(r.body.usedIn[0],/Earlier version of 2026-11-01/);
+  const old=fakeStore();old.docs.revisions=[...Array.from({length:10},()=>({content:{},public_content:{}})),{content:{logo:'media:'+mediaId}}];
+  assert.equal(mediaUsedIn(mediaId,mediaDocuments(old.docs)).length,0,'only the last 10 versions are checked');
+});
+test('media-delete removes an unused file and its row, audited; service staff cannot delete',async()=>{
+  const f=fakeStore();let r=await mediaAction('media-delete',{id:mediaId.toUpperCase()},{staff:editor,store:f.store});
+  assert.equal(r.status,200);assert.equal(r.body.deleted,true);
+  assert(f.calls.some(c=>c[0]==='delete'&&c[1]===mediaId));assert(f.calls.some(c=>c[0]==='remove'&&c[1]==='u/x.webp'));assert(f.calls.some(c=>c[0]==='audit'&&c[1]==='media_deleted'));
+  const s=fakeStore();r=await mediaAction('media-delete',{id:mediaId},{staff:service,store:s.store});assert.equal(r.status,400);assert.equal(s.calls.length,0);
+  r=await mediaAction('media-delete',{id:'../etc'},{staff:owner,store:fakeStore().store});assert.equal(r.status,400);
+  r=await mediaAction('media-wipe',{id:mediaId},{staff:owner,store:fakeStore().store});assert.equal(r.status,400);
+});
+test('moto-admin routes media-update and media-delete through mediaAction',()=>{
+  const src=fs.readFileSync(new URL('../supabase/functions/moto-admin/index.ts',import.meta.url),'utf8');
+  assert.match(src,/action==='media-update'\|\|action==='media-delete'/);assert.match(src,/mediaAction\(action,body,\{staff,store\}\)/);assert.match(src,/limit\(10\)/);
+  const sql=fs.readFileSync(new URL('../supabase/migrations/202611100006_media_meta.sql',import.meta.url),'utf8');
+  for(const col of ['name text','alt text','hidden boolean not null default false'])assert(sql.includes('add column if not exists '+col));
+});
+
+test('media-delete removes the stored files before the library row and keeps the row when removal fails', async () => {
+  const {mediaAction} = await import('../supabase/functions/moto-admin/media.mjs');
+  const owner = {user_id: 'u1', role: 'owner', active: true};
+  const f = fakeStore();
+  f.docs.draft = {content: seed()}; f.docs.live = {content: publicDocument(seed())};
+  let r = await mediaAction('media-delete', {id: mediaId}, {staff: owner, store: f.store});
+  assert.equal(r.status, 200);
+  const order = f.calls.map(c => c[0]).filter(c => c === 'remove' || c === 'delete');
+  assert.deepEqual(order, ['remove', 'delete']);
+  const g = fakeStore();
+  g.store.removeObject = async () => false;
+  r = await mediaAction('media-delete', {id: mediaId}, {staff: owner, store: g.store});
+  assert.equal(r.status, 500);
+  assert(!g.calls.some(c => c[0] === 'delete'), 'the row stays when the file could not be removed');
+});

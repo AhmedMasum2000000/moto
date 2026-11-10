@@ -25,3 +25,13 @@ test('scrolling leaves header height and page spacing stable without layout read
   assert.equal(classes.get('is-stuck'),true);
   height=76;events.get('resize')();assert.deepEqual(offsets.at(-1),['--nav-h','76px']);
 });
+
+test('menus, the finder and search use subcategory ids and names from child records', () => {
+  const pub = fs.readFileSync(new URL('../cms/public.js', import.meta.url), 'utf8');
+  const finder = fs.readFileSync(new URL('../cms/finder.js', import.meta.url), 'utf8');
+  assert.match(pub, /visibleChildren\(category\)\.map\(c=>\(\{name:c\.name,url:path\(m\.target\)\+'&sub='\+encodeURIComponent\(c\.id\)\}\)\)/, 'submenu links carry the child id');
+  assert.doesNotMatch(pub, /\[data-band\]/, 'the retired category band code is gone');
+  assert.match(finder, /subcategory=findSubcategory\(cat,subcategory\)\?\.id\|\|''/, '?sub= accepts an id or a name');
+  assert.match(finder, /<option value="\$\{esc\(c\.id\)\}"/, 'the subcategory select submits ids');
+  assert.match(finder, /\$\$\('\[data-grid\] \.card\[data-product-id\]'\)/, 'filters only touch the product grid, not generated sections');
+});

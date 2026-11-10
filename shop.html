@@ -12,16 +12,19 @@
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="stylesheet" href="styles.css?v=dyn-2">
 <link rel="stylesheet" href="cms/theme.css?v=dyn-2">
-<link rel="stylesheet" href="cms/public.css?v=dyn-2">
+<link rel="stylesheet" href="cms/public.css?v=fb-1110">
+<link rel="stylesheet" href="cms/sections.css?v=fb-1110">
 <link rel="preconnect" href="https://ttpzdsecwhufzahtoyrp.supabase.co" crossorigin="">
 <link rel="preload" href="assets/fonts/IBMPlexMono-500.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="modulepreload" href="cms/public.js?v=dyn-2">
-<link rel="modulepreload" href="cms/finder.js?v=dyn-2">
-<link rel="modulepreload" href="cms/home-cards.js?v=dyn-2">
+<link rel="modulepreload" href="cms/public.js?v=fb-1110">
+<link rel="modulepreload" href="cms/finder.js?v=fb-1110">
+<link rel="modulepreload" href="cms/home-cards.js?v=fb-1110">
 <link rel="modulepreload" href="cms/home-cards.mjs">
-<link rel="modulepreload" href="cms/brand-partners.js?v=client-feedback-1">
+<link rel="modulepreload" href="cms/brand-partners.js?v=fb-1110">
 <link rel="modulepreload" href="cms/brand-partners.mjs">
-<link rel="modulepreload" href="cms/catalog.mjs?v=inventory-1">
+<link rel="modulepreload" href="cms/catalog.mjs?v=fb-1110">
+<link rel="modulepreload" href="cms/content-model.mjs?v=fb-1110">
+<link rel="modulepreload" href="cms/sections.mjs?v=fb-1110">
 </head>
 <body>
 
@@ -156,7 +159,7 @@
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap" data-cms-section="shop-catalog">
   <div class="grid-products" data-grid="">
       <article class="card" data-tilt="" data-cat="oil" data-price="1350" data-save="10" data-dealer="1">
         <span class="badge badge--off">−10%</span>
@@ -656,7 +659,9 @@
   </div>
 
   <p class="empty" data-catalog-empty="" hidden=""><span data-cms-text="shop-empty">Nothing in this category right now. Call</span> <a class="red" href="tel:+8801711154387">+880 1711-154387</a> <span data-cms-text="shop-empty-after">— if it exists, we can get it.</span></p>
+</div>
 
+<div class="wrap" data-cms-section="shop-kits">
   <section class="kits" aria-labelledby="kits-h" style="margin-top:clamp(2.5rem,6vw,4rem)">
     <div class="band__head">
       <div><p class="label label--red" data-cms-text="shop-kits-label">Complete the job</p><h2 class="band__title" id="kits-h" data-cms-text="shop-kits-title">Kits riders buy together</h2></div>
@@ -709,17 +714,22 @@
       </article>
     </div>
   </section>
+</div>
+
+<div class="wrap" data-cms-section="shop-partners">
   <section class="partners">
     <p class="label label--red" data-reveal="" data-cms-text="shop-partners-label">Brand partners</p>
     <h2 class="h-2" data-split="" style="margin:.6rem 0 1.75rem"><span data-cms-text="shop-partners-title">The names on our shelf</span></h2>
     <div class="partners__row" data-reveal=""><span><img src="assets/brands/mrf.webp" alt="MRF" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/ceat.webp" alt="𝖼𝖾𝖺𝗍" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/pirelli.webp" alt="Pirelli" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/cst.webp" alt="CST" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/eurogrip.webp" alt="Eurogrip" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/mobil.webp" alt="Mobil" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/bp.webp" alt="BP" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/castrol.webp" alt="Castrol" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/shell.webp" alt="Shell" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/bajaj.webp" alt="Bajaj" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/motul.webp" alt="Motul" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/liqui-moly.webp" alt="Liqui Moly" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/maxima.webp" alt="Maxima Pro" width="130" height="130" loading="lazy" decoding="async"></span><span><img src="assets/brands/motorex.webp" alt="Motorex" width="130" height="130" loading="lazy" decoding="async"></span></div>
   </section>
+</div>
 
+<div class="wrap">
   <p class="note" style="margin-top:2.5rem" data-reveal="">
     <span data-cms-text="shop-note">Prices are indicative and include VAT. Fitting is charged separately and quoted before work starts. Don't see your model? Call</span> <a href="tel:+8801711154387" class="red">+880 1711-154387</a> <span data-cms-text="shop-note-after">— most parts are in the back or here within 48 hours.</span>
   </p>
 </div>
-
+<div data-cms-sections="shop" hidden></div>
 
 </main>
 
@@ -796,4 +806,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=dyn-2"></script></body></html>
+<script type="module" src="cms/public.js?v=fb-1110"></script></body></html>
