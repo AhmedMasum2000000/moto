@@ -10,9 +10,9 @@
 <script>try{var t=localStorage.getItem('mm.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=mob-1104">
-<link rel="stylesheet" href="cms/theme.css?v=mob-1104">
-<link rel="stylesheet" href="cms/public.css?v=mob2-1104"></head>
+<link rel="stylesheet" href="styles.css?v=dyn-2">
+<link rel="stylesheet" href="cms/theme.css?v=dyn-2">
+<link rel="stylesheet" href="cms/public.css?v=dyn-2"></head>
 <body>
 
 <div class="progress" aria-hidden="true"></div>
@@ -103,7 +103,7 @@
       <div class="form-grid">
         <div class="field">
           <label for="f-name"><span data-cms-text="book-t11">Your name</span></label>
-          <input id="f-name" name="name" type="text" required="" autocomplete="name" placeholder="Full name">
+          <input id="f-name" name="name" type="text" required="" autocomplete="name" data-cms-placeholder="book-name-placeholder" placeholder="Full name">
         </div>
         <div class="field">
           <label for="f-phone"><span data-cms-text="book-t12">Phone</span></label>
@@ -111,7 +111,7 @@
         </div>
         <div class="field field--wide">
           <label for="f-vehicle"><span data-cms-text="book-t13">Bike or car — make &amp; model</span></label>
-          <input id="f-vehicle" name="vehicle" type="text" placeholder="e.g. Yamaha FZS V3, 2022">
+          <input id="f-vehicle" name="vehicle" type="text" data-cms-placeholder="book-vehicle-placeholder" placeholder="e.g. Yamaha FZS V3, 2022">
         </div>
         <div class="field">
           <label for="f-date"><span data-cms-text="book-t14">Preferred date</span></label>
@@ -128,7 +128,7 @@
         </div>
         <div class="field field--wide">
           <label for="f-notes"><span data-cms-text="book-t16">What's it doing? (the more detail, the better the quote)</span></label>
-          <textarea id="f-notes" name="notes" placeholder="Noise when I pull the clutch, worse when cold…"></textarea>
+          <textarea id="f-notes" name="notes" data-cms-placeholder="book-notes-placeholder" placeholder="Noise when I pull the clutch, worse when cold…"></textarea>
         </div>
       </div>
 
@@ -179,9 +179,9 @@
 <footer class="footer" data-cms-section="book-section-3">
   <div class="wrap">
       <svg class="footer__word" viewBox="0 0 640 200" role="img" aria-label="Book it" data-reveal="fade">
-        <text x="0" y="158">BOOK IT</text>
+        <text x="0" y="158" data-cms-text="wordmark-book">BOOK IT</text>
       </svg>
-    <p class="footer__sister">Moto Market — a sister concern of <b>Motolube Bangladesh</b></p>
+    <p class="footer__sister">Moto Market — a sister concern of <b data-cms-setting="parentCompany">Motolube Bangladesh</b></p>
     <div class="footer__bar">
       <p class="label"><span data-cms-text="book-t33">©</span> <span class="yr">2026</span> <span data-cms-text="book-t34">Moto Market · Kushtia, Bangladesh</span></p>
       <p class="label"><a href="mailto:motolubebangladesh@gmail.com"><span data-cms-text="book-t35">motolubebangladesh@gmail.com</span></a></p>
@@ -190,8 +190,8 @@
 </footer>
 
 <nav class="actionbar" aria-label="Quick actions" style="grid-template-columns:1fr 1fr">
-  <a href="tel:+8801711154387"><b>Call</b>Talk now</a>
-  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b>WhatsApp</b>Send a note</a>
+  <a href="tel:+8801711154387"><b data-cms-text="actionbar-call">Call</b><span data-cms-text="actionbar-call-sub">Talk now</span></a>
+  <a href="https://wa.me/8801711154387" target="_blank" rel="noopener"><b data-cms-text="actionbar-wa">WhatsApp</b><span data-cms-text="actionbar-wa-sub">Send a note</span></a>
 </nav>
 
 <script>document.querySelectorAll('.yr').forEach(e => { e.textContent = new Date().getFullYear(); });</script>
@@ -203,11 +203,11 @@
         <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"></circle>
         <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
-      <input type="search" data-search-input="" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
+      <input type="search" data-search-input="" data-cms-placeholder="search-placeholder" placeholder="Search parts, oil, tyres, services…" autocomplete="off" spellcheck="false" aria-label="Search">
       <button class="searchbox__esc" type="button" data-search-close="" aria-label="Close search">✕</button>
     </div>
     <div class="searchbox__results" data-search-results="" role="listbox" aria-label="Search results"></div>
-    <p class="searchbox__hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
+    <p class="searchbox__hint" data-cms-text="search-hint">Try “brake pads”, “Castrol”, “helmet”, “wash”</p>
   </div>
 </div>
 
@@ -215,4 +215,4 @@
 
 
 
-<script type="module" src="cms/public.js?v=mob-1104"></script></body></html>
+<script type="module" src="cms/public.js?v=dyn-2"></script></body></html>

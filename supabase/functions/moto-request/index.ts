@@ -1,5 +1,6 @@
 import {createClient} from 'npm:@supabase/supabase-js@2.117.3';
-import {validateRequest} from '../moto-admin/schema.mjs';
+import {validateRequest,EMAIL} from '../moto-admin/schema.mjs';
+import {storeSettings} from '../_shared/store-defaults.mjs';
 import {invoiceHtml} from '../_shared/invoice.mjs';
 const db=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,{auth:{persistSession:false}});
 const origins=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','http://motolubebangladesh.com','http://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
@@ -27,22 +28,37 @@ Deno.serve(async req=>{
   if(saveError)throw new Error(saveError.message.includes('RATE_LIMIT')?'Too many requests. Please contact the store or try again later.':saveError.message.includes('REQUEST_CHANGED')?'We already received your earlier request. The team will contact you to confirm.':'Your request was not saved. Please try again.');
   const {data:saved}=await db.from('moto_requests').select('id,created_at').eq('receipt',receipt).maybeSingle();
   const createdAt=saved?.created_at||new Date().toISOString();
+  const settings=live.content.settings||{};
   const invoice=validated.kind==='order'?{receipt,createdAt,name:validated.name,phone:validated.phone,address:validated.details.address,items:validated.details.items,delivery:validated.details.delivery,deliveryMinor:validated.details.deliveryMinor,totalMinor:validated.details.totalMinor}:null;
   // Email the store about each new order. A failed email never loses the saved order.
   // Exactly one call claims the email (also under double submits); a failed email is released so a retry sends it.
   if(invoice&&saved){
    const {data:claimed}=await db.from('moto_requests').update({notified_at:new Date().toISOString()}).eq('id',saved.id).is('notified_at',null).select('id').maybeSingle();
-   if(claimed)try{await notifyStore(live.content.settings||{},invoice);}catch(e){console.error('Order email failed:',e instanceof Error?e.message:e);await db.from('moto_requests').update({notified_at:null}).eq('id',saved.id);}
+   if(claimed)try{await notifyStore(settings,await orderRecipient(settings),invoice);}catch(e){console.error('Order email failed:',e instanceof Error?e.message:e);await db.from('moto_requests').update({notified_at:null}).eq('id',saved.id);}
   }
-  return new Response(JSON.stringify({receipt,invoice,message:'Request received. The team will contact you to confirm availability and price.'}),{headers});
+  // The customer's copy of the invoice carries the public store details only (never the private order email).
+  const store=Object.fromEntries(['name','address','phone','email','parentCompany','invoiceNote','paymentMethods'].filter(k=>settings[k]!==undefined).map(k=>[k,settings[k]]));
+  return new Response(JSON.stringify({receipt,invoice:invoice&&{...invoice,store},message:storeSettings(settings).requestReceived}),{headers});
  }catch(e){return new Response(JSON.stringify({error:e instanceof Error?e.message:'Unable to save request.'}),{status:400,headers});}
 });
 
-// Sends the order and its invoice to the store's email address (Website → Store settings → Email).
+// Where new-order emails go: the private "Send new-order emails to" address (Store settings → orderEmail),
+// which lives only in the draft because publishing strips it from the public moto_live document.
+// Falls back to the public store email. A recipient change therefore takes effect on Save, not Publish.
+async function orderRecipient(settings:any){
+ try{
+  const {data}=await db.from('moto_draft').select('content->settings->>orderEmail').single();
+  const private_=String((data as any)?.orderEmail||'').trim();
+  if(EMAIL.test(private_))return private_;
+ }catch(e){console.error('Order email lookup failed:',e instanceof Error?e.message:e);}
+ return String(settings.email||'').trim();
+}
+
+// Sends the order and its invoice to the store's order address (see orderRecipient).
 // With RESEND_API_KEY and ORDER_EMAIL_FROM secrets the email goes through Resend; otherwise through FormSubmit,
 // which asks the store to confirm the address once with the first email it sends.
-async function notifyStore(store:any,invoice:any){
- const to=String(store.email||'').trim();if(!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(to))return;
+async function notifyStore(store:any,to:string,invoice:any){
+ if(!EMAIL.test(to))return;
  const money=(m:number)=>'BDT '+(m/100).toLocaleString('en-BD');
  const lines=invoice.items.map((i:any)=>`${i.name}${i.colorName?' ('+i.colorName+')':''} x ${i.quantity} = ${money(i.unitPriceMinor*i.quantity)}`).join('\n');
  const subject=`New order ${invoice.receipt} from ${invoice.name}`;

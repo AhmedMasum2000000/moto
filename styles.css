@@ -2478,3 +2478,7 @@ body.is-locked .toast:not(.is-up) { transform: translate(-50%, calc(-100% - 6rem
   .sticky-col .ascii-panel { display: none; }
 }
 aside a[href^="tel:"] { display: inline-block; padding: .5rem 0; min-height: 44px; }
+
+/* a long option (e.g. a booking time slot) stays inside its box instead of widening the page */
+.field { min-width: 0; }
+.field select { max-width: 100%; min-width: 0; }

@@ -570,9 +570,14 @@
   function actionBar() {
     const bar = $('.actionbar');
     if (!bar) return;
-    window.addEventListener('scroll', () => {
-      bar.classList.toggle('is-up', window.scrollY > window.innerHeight * 0.75);
-    }, { passive: true });
+    const update = () => {
+      const short = document.documentElement.scrollHeight - window.innerHeight < window.innerHeight * 0.75;
+      bar.classList.toggle('is-up', short || window.scrollY > window.innerHeight * 0.75);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    window.addEventListener('load', update);
+    update();
   }
 
   /* =======================================================================
@@ -1071,7 +1076,7 @@
             `<li class="fit__opt" role="option" id="fit-opt-${i}" aria-selected="false" data-hit="${i}">` +
             `<span class="fit__opt-tag">${h.type}</span><span>${esc(h.brand)} <b>${markIn(h.model, n)}</b></span></li>`).join('')
         : `<li class="fit__opt fit__opt--none" role="option" aria-selected="false" aria-disabled="true">` +
-            `<a href="${esc(wa(`Assalamu alaikum, Moto Market. I ride a ${q.value.trim()}. Can you check parts for it?`))}" target="_blank" rel="noopener">` +
+            `<a href="${esc(wa(window.MM_WHATSAPP ? window.MM_WHATSAPP.ride(q.value.trim()) : `Assalamu alaikum, Moto Market. I ride a ${q.value.trim()}. Can you check parts for it?`))}" target="_blank" rel="noopener">` +
             `Not listed? Send “${esc(q.value.trim())}” to the bay on <b>WhatsApp →</b></a></li>`;
       suggest.hidden = false;
       q.setAttribute('aria-expanded', 'true');
@@ -1308,8 +1313,12 @@
       chosen = false;
 
       if (!hits.length) {
-        list.innerHTML = `<p class="searchbox__empty">Nothing matched “${esc(input.value.trim())}”. ` +
-          `Call <a class="red" href="tel:+8801711154387">+880 1711-154387</a> — if it exists, we can get it.</p>`;
+        // Store phone and wording come from the control room (Store settings, Shared texts).
+        const T = window.MM_TEXT, phone = window.MM_CONTENT ? String(window.MM_CONTENT.settings.phone || '').trim() : '+880 1711-154387';
+        const link = `<a class="red" href="tel:${esc(phone.replace(/[^\d+]/g, ''))}">${esc(phone)}</a>`;
+        const fill = (tpl, vars) => esc(tpl).replace(/\{(\w+)\}/g, (m, k) => k in vars ? vars[k] : m);
+        list.innerHTML = `<p class="searchbox__empty">${fill(T ? T('search-empty') : 'Nothing matched “{query}”.', {query: esc(input.value.trim())})}` +
+          (phone ? ' ' + fill(T ? T('search-empty-call') : 'Call {phone} — if it exists, we can get it.', {phone: link}) : '') + `</p>`;
         return;
       }
 
@@ -1594,14 +1603,14 @@
             </div>
             <div class="card__price">৳${(i.price * i.qty).toLocaleString('en-US')}</div>
           </div>`).join('')
-        : `<p class="lede" style="font-size:1rem">Your cart is empty. The table is waiting.</p>`;
+        : `<p class="lede" style="font-size:1rem">${esc(window.MM_TEXT ? window.MM_TEXT('cart-empty-text') : 'Your cart is empty. The table is waiting.')}</p>`;
 
       const tot = $('[data-cart-total]');
       if (tot) tot.textContent = `৳${cart.total().toLocaleString('en-US')}`;
       const wa = $('[data-cart-wa]');
       if (wa) {
         const lines = items.map(i => `• ${i.name}${i.colorName?' ('+i.colorName+')':''} ×${i.qty} — ৳${i.price * i.qty}`).join('\n');
-        const text = items.length
+        const text = window.MM_WHATSAPP ? window.MM_WHATSAPP.order(items, cart.total()) : items.length
           ? `Assalamu alaikum, Moto Market. I'd like to order:\n${lines}\n\nProducts total: ৳${cart.total()} + delivery charge (৳120 inside Kushtia / ৳150 outside Kushtia)`
           : `Assalamu alaikum, Moto Market. I'd like to ask about a part.`;
         wa.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
