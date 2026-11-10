@@ -30,7 +30,7 @@ test('every step targets a data-tour anchor, with short plain text', () => {
     assert.ok(s.body.length > 0 && s.body.length <= 280, s.id + ' body length ' + s.body.length);
     assert.doesNotMatch(s.title + s.body + (s.note || ''), /[<>]/, s.id + ' must be plain text');
     assert.ok(s.route, s.id + ' needs a route');
-    for (const v of [s.prepare, s.action]) if (v) assert.match(v, /^(openEditor:[a-zA-Z]+:new|openDrawer|selectFirstRow|filterOneCategory|chooseImage|click:.+)$/, s.id + ' prepare/action ' + v);
+    for (const v of [s.prepare, s.action]) if (v) assert.match(v, /^(openEditor:[a-zA-Z]+:new|openDrawer|selectFirstRow|filterOneCategory|chooseImage|openTeam|click:.+)$/, s.id + ' prepare/action ' + v);
   }
   assert.ok(STEPS.some(s => s.action), 'at least one "Do it for me" step');
 });
@@ -162,4 +162,17 @@ test('hub and helpers escape text', () => {
 test('the mascot is one file: guide.webp is a byte copy of cookie-rider.webp', () => {
   const a = readFileSync(root + 'assets/mascot/cookie-rider.webp'), b = readFileSync(root + 'control-room/assets/mascot/guide.webp');
   assert.ok(a.equals(b));
+});
+
+test('the team step awaits the staff list instead of a timed click, and late dialogs are tied to the run', () => {
+  const step = STEPS.find(s => s.id === 'set-team');
+  assert.equal(step.prepare, 'openTeam');
+  assert.match(read('control-room/app.js'), /openTeam:\(\)=>run\(team\)/);
+  const tour = read('control-room/tour/tour.mjs');
+  assert.match(tour, /function adoptLateDialogs\(\)/);
+  assert.doesNotMatch(tour, /\+\+n > 25/, 'no fixed-length dialog watch');
+});
+
+test('a route change resets the page scroll', () => {
+  assert.match(read("control-room/app.js"), /function go\([^)]*\)\{[\s\S]*?window\.scrollTo\(0,0\);\}/);
 });

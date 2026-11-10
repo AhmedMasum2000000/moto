@@ -85,6 +85,10 @@ export function createTour(ctx, opts = {}) {
   let layer = null, live = null, run = null, token = 0, lastNav = '', target = null, drawerByTour = false;
   const tourDialogs = new Set();
   let ro = null, rafId = 0, dialogObserver = null, hub = null, lastBefore = null, filteredByTour = false;
+  // A prepare may open its dialog late (the staff list waits for a request). pendingPrepare remembers which step
+  // asked for it, so the dialog joins that step when it is still showing, and is closed when the tour moved on.
+  let pendingPrepare = null, missingShown = false, lastGesture = 0;
+  const LATE_DIALOG_MS = 30000;
 
   const progress = () => readProgress(storage, staffId());
   const saveProgress = p => writeProgress(storage, staffId(), p);
@@ -124,10 +128,33 @@ export function createTour(ctx, opts = {}) {
   function watchDialogs() {
     if (dialogObserver) return;
     dialogObserver = new MutationObserver(muts => {
+      const dialogs = muts.some(m => m.target.tagName === 'DIALOG' && m.attributeName === 'open');
+      if (dialogs) adoptLateDialogs();
       if (!layer || (!run && !layer.dataset.mode)) return;
-      if (muts.some(m => m.target.tagName === 'DIALOG' && m.attributeName === 'open')) queueMicrotask(raise);
+      if (dialogs) queueMicrotask(raise);
     });
     dialogObserver.observe(document.documentElement, {subtree: true, attributes: true, attributeFilter: ['open']});
+    // A dialog that opens right after the person pressed something outside the tour is theirs, not the tour's.
+    const mark = e => { if (e.isTrusted && !layer?.contains(e.target)) lastGesture = Date.now(); };
+    document.addEventListener('pointerdown', mark, true);
+    document.addEventListener('keydown', mark, true);
+  }
+  function adoptLateDialogs() {
+    const p = pendingPrepare;
+    if (!p) return;
+    if (Date.now() - p.at > LATE_DIALOG_MS) { pendingPrepare = null; return; }
+    const userOpened = Date.now() - lastGesture < 1200;
+    for (const d of document.querySelectorAll('dialog[open]')) {
+      if (p.before.has(d) || d === hub || tourDialogs.has(d)) continue;
+      if (userOpened) { pendingPrepare = null; return; }
+      if (run && run === p.run && run.i === p.i) {
+        tourDialogs.add(d);
+        // the step said "not on your screen" while the request was loading: look again now the dialog is here
+        if (missingShown) queueMicrotask(() => { if (run && run === p.run && run.i === p.i && missingShown) show(run.i); });
+      } else {
+        try { d.close(); } catch { /* gone */ }
+      }
+    }
   }
 
   // ── geometry ───────────────────────────────────────────────────────────────────────────────────────────
@@ -255,6 +282,17 @@ export function createTour(ctx, opts = {}) {
     else document.querySelector('[data-tour="menu-button"], .mobile-menu')?.click();
     drawerByTour = open;
   }
+  let clickedByTour = false, openAtStart = new Set();
+  // A dialog the tour opened with a click can appear only after a slow request; sweep it shut too.
+  function sweepLateDialogs() {
+    if (!clickedByTour) return;
+    clickedByTour = false;
+    let n = 0;
+    const t = setInterval(() => {
+      for (const d of document.querySelectorAll('dialog[open]')) if (d !== hub && !openAtStart.has(d)) { try { d.close(); } catch { /* gone */ } }
+      if (++n >= 40) clearInterval(t);
+    }, 250);
+  }
   function closeTourDialogs() {
     for (const d of [...tourDialogs].reverse()) { try { if (d.open) d.close(); } catch { /* gone */ } }
     tourDialogs.clear();
@@ -293,20 +331,18 @@ export function createTour(ctx, opts = {}) {
       if (cat && first && !cat.value) { cat.value = first.value; cat.dispatchEvent(new Event('change', {bubbles: true})); filteredByTour = true; }
       const sort = document.querySelector('[data-pl-sort]');
       if (sort && sort.value !== 'manual' && [...sort.options].some(o => o.value === 'manual')) { sort.value = 'manual'; sort.dispatchEvent(new Event('change', {bubbles: true})); filteredByTour = true; }
-    } else if ((m = /^click:(.+)$/.exec(spec))) clickTarget(m[1]);
+    } else if (spec === 'openTeam') {
+      // waits for the staff list request, so the dialog exists when this returns
+      const p = pendingPrepare = {before, run, i: run?.i, at: Date.now()};
+      if (typeof ctx.openTeam === 'function') { try { await ctx.openTeam(); } catch { /* the step shows its missing note */ } }
+      else clickTarget('[data-action="staff"]');
+      if (pendingPrepare === p) adoptLateDialogs();
+    } else if ((m = /^click:(.+)$/.exec(spec))) { clickedByTour = true; clickTarget(m[1]); }
+    // Dialogs that open later still belong to this step (see adoptLateDialogs); the record lives with the run.
+    if (!pendingPrepare || pendingPrepare.before !== before) pendingPrepare = {before, run, i: run?.i, at: Date.now()};
     await raf();
     trackDialogs(before);
     lastBefore = before;
-    // Some dialogs open only after a request (the staff list). Keep noticing them for a few seconds,
-    // so finish() and stop() can close them; one that opens after the tour ended is closed at once.
-    let n = 0;
-    const iv = setInterval(() => {
-      for (const d of document.querySelectorAll('dialog[open]')) {
-        if (before.has(d) || d === hub || tourDialogs.has(d)) continue;
-        if (!run && layer?.dataset.mode !== 'step') { try { d.close(); } catch { /* gone */ } } else tourDialogs.add(d);
-      }
-      if (++n > 25) clearInterval(iv);
-    }, 160);
   }
   // Undo what filterOneCategory changed on the products list.
   function clearTourFilter() {
@@ -380,7 +416,9 @@ ${dots || ''}
       el = find(step);
       if (!el && step.prepare) {
         closeTourDialogs();
+        const early = setTimeout(() => { if (my === token && run) { target = null; paintStep(step, null, {waiting: true}); } }, 350);
         await perform(step.prepare);
+        clearTimeout(early);
         if (my !== token) return;
       }
     }
@@ -432,6 +470,7 @@ ${dots || ''}
   function paintStep(step, el, {waiting = false} = {}) {
     const n = run.steps.length, last = run.i === n - 1;
     const deskCard = !!el && isPhoneWidth() && step.desktopOnly;
+    missingShown = !el && !waiting;
     const missing = waiting ? 'Finding it on your screen…' : !el ? (step.action ? '' : MICROCOPY.missingTarget) : deskCard ? MICROCOPY.phoneOnlyCard : '';
     const buttons = [
       step.action && !el ? `<button type="button" class="btn ghost tiny tour-do" data-tour-btn="action">${esc(step.actionLabel || 'Do it for me')}</button>` : '',
@@ -449,7 +488,7 @@ ${dots || ''}
     if (hub?.open) hub.close();
     const fresh = !run;
     run = {chapter, steps, i: 0};
-    if (fresh) { lastNav = ''; listen(true); watchDialogs(); }
+    if (fresh) { lastNav = ''; openAtStart = new Set(document.querySelectorAll('dialog[open]')); listen(true); watchDialogs(); }
     ensureLayer();
     show(Math.min(Math.max(0, step | 0), steps.length - 1));
     return true;
@@ -458,6 +497,7 @@ ${dots || ''}
     token++;
     if (!keepSession) writeRun(session, null);
     closeTourDialogs();
+    sweepLateDialogs();
     clearTourFilter();
     lastBefore = null;
     if (drawerByTour) setDrawer(false);
@@ -486,6 +526,7 @@ ${dots || ''}
     saveProgress(markDone(progress(), ch.id));
     writeRun(session, null);
     closeTourDialogs();
+    sweepLateDialogs();
     clearTourFilter();
     lastBefore = null;
     if (drawerByTour) setDrawer(false);

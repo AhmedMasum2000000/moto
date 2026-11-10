@@ -20,7 +20,7 @@
 //   body ≤280 (plain text, escaped at render), note?, placement?, roles?, publish?, phoneOnly?,
 //   desktopOnly?, action?, actionLabel?}
 //   prepare / action: 'openEditor:<type>:new' (demo editor, cannot save) · 'openDrawer' ·
-//   'selectFirstRow' · 'chooseImage' · 'click:<anchor>' · 'click:<css selector>'. Neither ever saves.
+//   'selectFirstRow' · 'chooseImage' · 'openTeam' (awaits the staff list) · 'click:<anchor>' · 'click:<css selector>'. Neither ever saves.
 //   nth picks the n-th match of the target (0-based) when an anchor appears more than once.
 //   publish:true → only for the owner and staff allowed to publish. phoneOnly → skipped on desktop.
 
@@ -259,7 +259,7 @@ const RAW = [
       s('set-delivery', 'settings-delivery', 'Delivery & orders', 'Delivery charges, delivery times and where order emails go.', {roles: STAFF}),
       s('set-invoice', 'settings-invoice', 'Invoices & payment', 'What your invoices say and how customers can pay.', {roles: STAFF}),
       s('set-password', 'settings-password', 'Your password', 'Change your own password here. You can also reset this tour from this panel.'),
-      s('set-team', 'team-list', 'Your team', 'Add staff and choose what they can do: edit the website, publish, or handle requests.', {roles: OWNER, prepare: 'click:[data-action="staff"]'})
+      s('set-team', 'team-list', 'Your team', 'Add staff and choose what they can do: edit the website, publish, or handle requests.', {roles: OWNER, prepare: 'openTeam'})
     ]
   },
   {

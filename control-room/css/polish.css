@@ -11,6 +11,32 @@
 .mini-switch{font-size:11px}
 .sheet-body small,.cr-dialog small,.modal small{font-size:max(12px,1em)}
 .eyebrow{font-size:11px}
+/* Older rules with higher specificity (styles.css, catalog.css, structure.css) set these to 8-10px; match or beat
+   them here so no body or meta text drops below 12px and no label below 11px. */
+.pl-text small,.pl-price del,.pl-stock,.media-card small,.task-card small,.gallery__hint,.gallery__count,.brand-picker__muted,
+.small-note,.plist__meta,.bg-count,.sheet-footer>span,.sheet-footer span,.lay-text p,.store-label small,label small{font-size:12px}
+.editor-jump a,.ed-section>summary{font-size:11px}
+.plist__head,.plist__head span{font-size:11px}
+.demo-bar b{font-size:11px}
+label,.field>label,.field label{font-size:12px}
+.page-heading .btn,.io-buttons .btn,.heading-actions .btn,.heading-actions .io-buttons .btn,.image-edit-actions .btn{font-size:12px}
+/* meta and body text: 12px */
+.store-label small,.help-card small,.plan-link,.profile small,.empty-inline small,.product-main b,.product-main small,.product-row .category,
+.banner-card-body p,.menu-row small,.menu-row>.muted,.image-edit-actions small,.price-preview small,.price-preview span,.switch-row small,
+.search-result small,.category-box p,.service-card p,.site-card-foot,.site-card-foot button,.safe-note,.website-box small,.low-stock__list small,.drawer-tour small,
+.quick-card__hint,.subs__note,.sub-row__count,.editor .sub-row__count,.brand-picker__status,.gallery__add-btn small,.pp-row__name small,
+.lay-kind-card small,.lay-outline li small,.sec-pick-results small,.sec-picked small,.sec-pick-count,.io-table td small,.ph-usage small,
+.section-caption>span,.price del{font-size:12px}
+/* labels, badges, mono captions and small buttons: 11px */
+.owner-label,.nav-label,nav button .nav-meta,.avatar,.search-trigger kbd,.btn.tiny,.publish-button,.publish-button b,.welcome-tag,
+.overview-strip small,.overview-strip span,.edit-overlay,.panel-head>button,.guide-link b,.product-row.header,.status,.image-label,
+.card-actions .text-button,.category-tag,.photo-choice,.publish-steps,.category-box .text-button,.product-row .text-button,.editor-error b,
+.website-boxes legend,.cr-usage b,.quick-card__label,.quick-card__sub,.quick-card__thumb,.subs legend,.sub-row__vis,.gallery__main,
+.gallery__num,.gallery__alt-flag,.gallery__actions button,.product-picker__label,.pp-added,.mini-switch,.pl-row .mini-switch,.badge-hidden,
+.lay-badge,.lay-outline li:before,.sec-group legend,.sec-pick-added,.io-badge,.io-table th,.ph-progress li b,.ph-doc b,.ph-usage b,
+.tour-dots__count,.tour-trigger__q,.tour-hub__count,.sheet-heading__tools .tour-explain,.prototype-caption,.wordmark>span{font-size:11px}
+/* The mini website mock-ups (.mini-header, .mini-intro, .mini-blocks, .browser-chrome) stay scaled down on purpose;
+   they are aria-hidden pictures of the site, not text to read. */
 
 @media(max-width:760px){
   .page-heading p{font-size:14px}
