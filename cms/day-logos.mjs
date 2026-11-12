@@ -74,7 +74,7 @@ export function recolour(data, w, h) {
 }
 
 // Hand-made day versions win over the automatic one (the store logo keeps its white M on red).
-const MADE = [[/\/assets\/logo\.(png|webp)(\?.*)?$/, 'assets/logo-day.png?v=fb-1112b']];
+const MADE = [[/\/assets\/logo\.(png|webp)(\?.*)?$/, 'assets/logo-day.png?v=fb-1112c']];
 
 async function dayVersion(src) {
   for (const [test, file] of MADE) if (test.test(src)) return new URL(file, document.baseURI).href;

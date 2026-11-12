@@ -58,4 +58,4 @@
 .footer__sister { margin: 1.5rem 0 0; color: var(--paper-dim); font: 500 15px/1.5 var(--sans); }
 .footer__sister b { color: var(--paper); font-weight: 600; }
 /* The store logo switches to its day version at first paint (no flash of white lettering). */
-:root[data-theme="light"] img[src^="assets/logo.png"] { content: url("../assets/logo-day.png?v=fb-1112b"); }
+:root[data-theme="light"] img[src^="assets/logo.png"] { content: url("../assets/logo-day.png?v=fb-1112c"); }
