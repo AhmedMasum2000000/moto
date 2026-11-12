@@ -14,23 +14,31 @@
   color-scheme: light;
 }
 :root[data-theme="light"] body { background: var(--ink); color: var(--paper); }
-/* Logos ship as white lettering; give them a dark plate in day mode. */
-:root[data-theme="light"] .nav__brand img,
-:root[data-theme="light"] .menu__top img,
-:root[data-theme="light"] a[class*="brand"] > img[src*="logo"] {
-  background: #1f1e22; padding: 4px 6px; box-sizing: content-box;
-}
 :root[data-theme="light"] .btn--red:hover { color: #fff; }
 :root[data-theme="light"] .home-hero__controls button { background: #1f1e22cc; color: #f4f3f6; }
 :root[data-theme="light"] .btn--red::before { background: #1f1e22; }
-/* Home category/service cards keep their dark plate, so their text stays light. */
-:root[data-theme="light"] .home-services .svc,
-:root[data-theme="light"] .home-services .svc__title,
-:root[data-theme="light"] .home-category { color: #f6f5f7; }
 :root[data-theme="light"] .card:has([data-add]:not([disabled])) .cms-stock { color: var(--paper-dim); }
-/* Brand artwork with white lettering needs a dark tile on the light page. */
+/* Day mode: no dark plates behind logos or icons. Logos sit on clean white tiles;
+   white lettering is redrawn dark by cms/day-logos.mjs so it stays readable. */
 :root[data-theme="light"] .brandmarks span,
-:root[data-theme="light"] .brand-partners__tile { background: #1f1e22 !important; }
+:root[data-theme="light"] .partners__row span,
+:root[data-theme="light"] .brand-partners__tile { background: #fff !important; border-color: var(--ink-line) !important; }
+:root[data-theme="light"] .brandmarks span:hover { box-shadow: 0 8px 22px rgba(31,30,34,.12); }
+@media (max-width: 700px) {
+  :root[data-theme="light"] .brand-partners__tile { background: transparent !important; border-color: transparent !important; }
+}
+/* Home category and service cards: light cards with dark text in day mode. */
+:root[data-theme="light"] .home-category,
+:root[data-theme="light"] .home-services .svc { background: #fff; border-color: var(--ink-line); color: var(--paper); }
+:root[data-theme="light"] .home-category:hover,
+:root[data-theme="light"] .home-category:focus-visible { background: #fff; border-color: #ed0044; }
+:root[data-theme="light"] .home-category__count { color: var(--paper-mute); }
+:root[data-theme="light"] .home-category__preview > span,
+:root[data-theme="light"] .home-services .svc__desc { color: var(--paper-dim); }
+:root[data-theme="light"] .home-services .svc__no { color: var(--paper-mute); }
+:root[data-theme="light"] .home-services .svc:is(:hover, [aria-selected="true"]) { background: #d9003d; border-color: #ed0044; color: #fff; }
+:root[data-theme="light"] .home-services .svc:is(:hover, [aria-selected="true"]) .svc__title { color: #fff; }
+:root[data-theme="light"] .home-services .svc:is(:hover, [aria-selected="true"]) :is(.svc__desc, .svc__no) { color: rgba(255,255,255,.86); }
 
 .theme-toggle {
   display: inline-grid; place-items: center;
@@ -49,3 +57,5 @@
 .cms-invoice-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
 .footer__sister { margin: 1.5rem 0 0; color: var(--paper-dim); font: 500 15px/1.5 var(--sans); }
 .footer__sister b { color: var(--paper); font-weight: 600; }
+/* The store logo switches to its day version at first paint (no flash of white lettering). */
+:root[data-theme="light"] img[src^="assets/logo.png"] { content: url("../assets/logo-day.png?v=fb-1112b"); }
