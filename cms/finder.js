@@ -1,7 +1,7 @@
 import {categoryMatches} from './home-cards.mjs';
-import {findVehicles,fitsVehicle,findSubcategory,subcategoryName} from './catalog.mjs?v=fb-1112';
+import {findVehicles,fitsVehicle,findSubcategory,subcategoryName} from './catalog.mjs?v=fb-1112b';
 import {ridePreferences} from './preferences.mjs';
-import {cmsText} from './content-defaults.mjs?v=fb-1112';
+import {cmsText} from './content-defaults.mjs?v=fb-1112b';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function catalogFinder(content,imageUrl=ref=>ref||''){
