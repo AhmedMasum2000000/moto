@@ -82,3 +82,11 @@ label,.field>label,.field label{font-size:12px}
 @media(max-width:720px){
   #editor[data-copy] .sheet-heading h2::after{content:'Hidden copy';display:inline-block;margin-left:8px;padding:3px 7px;vertical-align:middle;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--red)}
 }
+
+/* ── dropdown lists: the page is dark, so the browser must draw its open option lists dark too.
+   Without this, Windows Chrome/Edge show white option text on a white list. ── */
+:root{color-scheme:dark}
+select{background-color:var(--panel);color:var(--white)}
+select option,select optgroup{background-color:#27262b;color:#f4f3f6}
+select option:checked{background-color:var(--red);color:#fff}
+select option:disabled{color:#8d8b93}

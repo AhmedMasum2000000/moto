@@ -1,20 +1,20 @@
 import './theme.js?v=dyn-2';
-import {brandPartners} from './brand-partners.js?v=fb-1110';
-import {homeCards,homeServices} from './home-cards.js?v=fb-1110';
-import {catalogFinder} from './finder.js?v=fb-1110';
+import {brandPartners} from './brand-partners.js?v=fb-1112';
+import {homeCards,homeServices} from './home-cards.js?v=fb-1112';
+import {catalogFinder} from './finder.js?v=fb-1112';
 import {cookieCard} from './cookies.js?v=cookie-cover-2';
 import {ridePreferences} from './preferences.mjs';
 import {homeBackground} from './home-hero.js?v=dyn-2';
 const finderStyles=document.createElement('link');finderStyles.rel='stylesheet';finderStyles.href='cms/finder.css?v=dyn-2';document.head.append(finderStyles);
-import {cartLine,cartInventory,subcategoryName} from './catalog.mjs?v=fb-1110';
-import {normalise,resolveLayout} from './content-model.mjs?v=fb-1110';
-import {selectProducts,renderSection,kitHtml,markdown,visibleChildren} from './sections.mjs?v=fb-1110';
+import {cartLine,cartInventory,subcategoryName} from './catalog.mjs?v=fb-1112';
+import {normalise,resolveLayout} from './content-model.mjs?v=fb-1112';
+import {selectProducts,renderSection,kitHtml,markdown,visibleChildren} from './sections.mjs?v=fb-1112';
 
 import {stockLabel,stockStatus} from '../supabase/functions/_shared/inventory.mjs';
 import {openInvoice,invoiceHtml} from '../supabase/functions/_shared/invoice.mjs?v=dyn-2';
 import {deliveryAreas,deliveryOption} from '../supabase/functions/_shared/delivery.mjs?v=dyn-2';
 import {storeSettings} from '../supabase/functions/_shared/store-defaults.mjs';
-import {cmsText} from './content-defaults.mjs?v=fb-1110';
+import {cmsText} from './content-defaults.mjs?v=fb-1112';
 import {orderMessage,rideMessage} from './whatsapp.mjs?v=dyn-2';
 import {websiteMotion} from './motion.js?v=sweep-1';
 import {live,admin,request,watchLive} from './backend.js?v=dyn-2';
@@ -146,7 +146,7 @@ function productDetails(id,colorId='',tap=false){const p=content.products.find(p
 // Back (or a swipe back) closes the product pop-up; Forward onto a product entry opens it again.
 addEventListener('popstate',()=>{const d=$('#cms-product-dialog'),id=history.state?.mmProduct;if(id&&content){if(!d?.open)productDetails(id);}else if(d?.open)d.close();});
 document.addEventListener('click',e=>{const p=e.target.closest('[data-product]');if(p)productDetails(p.dataset.product,p.dataset.selectedColor,true);const toggle=e.target.closest('.cms-sub-toggle');if(toggle){const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));toggle.parentElement.classList.toggle('cms-expanded',!open);if(open)toggle.blur();}});
-try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=prepare(r.draft.content);revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs?v=fb-1110');content=publicDocument(content);try{content=normalise(content);}catch{}}else{const r=await Promise.race([live(),new Promise((_,fail)=>setTimeout(()=>fail(new Error('The store content took too long to load.')),8000))]);content=prepare(r.content);revision=r.revision;}hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
+try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=prepare(r.draft.content);revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs?v=fb-1112');content=publicDocument(content);try{content=normalise(content);}catch{}}else{const r=await Promise.race([live(),new Promise((_,fail)=>setTimeout(()=>fail(new Error('The store content took too long to load.')),8000))]);content=prepare(r.content);revision=r.revision;}hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
 // Nothing above may stop app.js (menu, cart, reveal) from loading.
 try{cookieCard(content,img);}catch(e){console.error('Cookie card could not load:',e.message);}
 // Load the existing motion, fitment and shopping interactions after content is in place.
