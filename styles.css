@@ -865,7 +865,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none; border-bottom-color: var(--red);
 }
-.field select option { background: var(--ink-soft); color: var(--fg); }
+.field select option, select option, select optgroup { background: var(--ink-soft); color: var(--fg); }
 .field--wide { grid-column: 1 / -1; }
 .field textarea { resize: vertical; min-height: 100px; }
 

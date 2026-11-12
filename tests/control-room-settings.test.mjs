@@ -93,7 +93,7 @@ test('drafts with plain-name subcategories keep the A-Z order the website shows 
 test('the control room wires the flagship modules, undo and the tour', () => {
   const html = fs.readFileSync(new URL('../control-room/index.html', import.meta.url), 'utf8');
   for (const css of ['css/catalog.css', 'css/structure.css', 'css/tour.css']) assert.ok(html.includes(`href="${css}?v=`), css + ' is linked');
-  assert.match(html, /src="app\.js\?v=fb-1110"/);
+  assert.match(html, /src="app\.js\?v=fb-1112"/);
   for (const m of ['./tour/tour.mjs', './ui/layout.mjs', './ui/product-list.mjs', './ui/confirm.mjs', './ui/photos.mjs', './ui/io.mjs', './lib/undo.mjs'])
     assert.ok(app.includes(`from '${m}'`), m + ' is imported');
   assert.match(app, /undo\.push\(label,before\)/, 'save() keeps the previous draft for Undo');
