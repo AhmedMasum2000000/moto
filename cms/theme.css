@@ -18,15 +18,16 @@
 :root[data-theme="light"] .home-hero__controls button { background: #1f1e22cc; color: #f4f3f6; }
 :root[data-theme="light"] .btn--red::before { background: #1f1e22; }
 :root[data-theme="light"] .card:has([data-add]:not([disabled])) .cms-stock { color: var(--paper-dim); }
-/* Day mode: no dark plates behind logos or icons. Logos sit on clean white tiles;
-   white lettering is redrawn dark by cms/day-logos.mjs so it stays readable. */
+/* Day mode: no plates behind logos at all. Tiles take the page colour, and any white
+   in a logo file (a white backdrop, white parts of a badge) blends into the page instead
+   of showing as a white box. White lettering on transparency is redrawn dark by
+   cms/day-logos.mjs so it stays readable. */
 :root[data-theme="light"] .brandmarks span,
 :root[data-theme="light"] .partners__row span,
-:root[data-theme="light"] .brand-partners__tile { background: #fff !important; border-color: var(--ink-line) !important; }
-:root[data-theme="light"] .brandmarks span:hover { box-shadow: 0 8px 22px rgba(31,30,34,.12); }
-@media (max-width: 700px) {
-  :root[data-theme="light"] .brand-partners__tile { background: transparent !important; border-color: transparent !important; }
-}
+:root[data-theme="light"] .brand-partners__tile { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
+:root[data-theme="light"] .brandmarks img,
+:root[data-theme="light"] .partners__row img,
+:root[data-theme="light"] .brand-partners__tile img { mix-blend-mode: multiply; }
 /* Home category and service cards: light cards with dark text in day mode. */
 :root[data-theme="light"] .home-category,
 :root[data-theme="light"] .home-services .svc { background: #fff; border-color: var(--ink-line); color: var(--paper); }
@@ -58,4 +59,4 @@
 .footer__sister { margin: 1.5rem 0 0; color: var(--paper-dim); font: 500 15px/1.5 var(--sans); }
 .footer__sister b { color: var(--paper); font-weight: 600; }
 /* The store logo switches to its day version at first paint (no flash of white lettering). */
-:root[data-theme="light"] img[src^="assets/logo.png"] { content: url("../assets/logo-day.png?v=fb-1112c"); }
+:root[data-theme="light"] img[src^="assets/logo.png"] { content: url("../assets/logo-day.png?v=fb-1112d"); }
