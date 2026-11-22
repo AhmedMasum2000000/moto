@@ -1,6 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.117.3';
 import { validateContent,publicDocument,mediaReferences,resolveMedia,UUID,assert } from './schema.mjs';
 import { mediaAction } from './media.mjs';
+import { publishMedia } from './publish-media.mjs';
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const db=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const allowed=new Set(['https://motolubebangladesh.com','https://www.motolubebangladesh.com','http://motolubebangladesh.com','http://www.motolubebangladesh.com','https://ahmedmasum2000000.github.io','http://127.0.0.1:8781','http://localhost:8781']);
@@ -35,7 +36,12 @@ Deno.serve(async req=>{
   if(action==='save'){assert(editor,'You can manage requests, but not website content.');validateContent(body.content);assert(Array.isArray(body.changes)&&body.changes.length<=1000,'Invalid change list.');const version=await result(db.rpc('moto_save_draft',{p_actor:staff.user_id,p_expected:body.version,p_content:body.content,p_changes:body.changes}));return new Response(JSON.stringify({version}),{headers});}
   if(action==='publish'){
    assert(owner||staff.can_publish,'Ask the store owner to publish these changes.');const draft=await result(db.from('moto_draft').select('*').single());assert(draft.version===body.version,'DRAFT_CONFLICT');validateContent(draft.content);let content=publicDocument(draft.content);const refs=[...mediaReferences(content)],mediaUrls:Record<string,string>={};
-   for(const id of refs){assert(UUID.test(id),'Invalid picture reference.');const media=await result(db.from('moto_media').select('*').eq('id',id).single());const blob=await result(db.storage.from('moto-media').download(media.path));const ext=media.mime_type==='application/pdf'?'pdf':media.mime_type==='image/jpeg'?'jpg':media.mime_type==='image/png'?'png':'webp',name=id+'.'+ext;const {error}=await db.storage.from('moto-public').upload(name,blob,{contentType:media.mime_type,cacheControl:'31536000',upsert:false});if(error&&!/already exists|duplicate/i.test(error.message))throw error;mediaUrls[id]=db.storage.from('moto-public').getPublicUrl(name).data.publicUrl;}
+   const {urls:published}=await publishMedia(refs,{
+    media:(ids:string[])=>result(db.from('moto_media').select('id,path,mime_type').in('id',ids)),
+    publicNames:async()=>{const names=new Set<string>();for(let offset=0;;offset+=1000){const page=await result(db.storage.from('moto-public').list('',{limit:1000,offset}));for(const f of page)names.add(f.name);if(page.length<1000)break;}return names;},
+    copy:async(row:any,name:string)=>{const blob=await result(db.storage.from('moto-media').download(row.path));const {error}=await db.storage.from('moto-public').upload(name,blob,{contentType:row.mime_type,cacheControl:'31536000',upsert:false});if(error&&!/already exists|duplicate/i.test(error.message))throw error;},
+    url:(name:string)=>db.storage.from('moto-public').getPublicUrl(name).data.publicUrl,
+   });Object.assign(mediaUrls,published);
    content=resolveMedia(content,mediaUrls);const saved=await result(db.rpc('moto_publish',{p_actor:staff.user_id,p_expected:body.version,p_public_content:content,p_summary:`${draft.changes.length} content changes published`}));return new Response(JSON.stringify(saved),{headers});
   }
   if(action==='restore'){assert(owner,'Only the store owner can restore a version.');assert(UUID.test(body.revision),'Choose a version.');const saved=await result(db.rpc('moto_restore',{p_actor:staff.user_id,p_expected:body.version,p_revision:body.revision}));return new Response(JSON.stringify(saved),{headers});}
