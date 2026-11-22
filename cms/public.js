@@ -1,23 +1,23 @@
-import './theme.js?v=fb-1112d';
-import {dayLogos} from './day-logos.mjs?v=fb-1112d';
-import {cleanImages} from './clean-images.mjs?v=fb-1112d';
-import {brandPartners} from './brand-partners.js?v=fb-1112d';
-import {homeCards,homeServices} from './home-cards.js?v=fb-1112d';
-import {catalogFinder} from './finder.js?v=fb-1112d';
+import './theme.js?v=fb-1122';
+import {dayLogos} from './day-logos.mjs?v=fb-1122';
+import {cleanImages} from './clean-images.mjs?v=fb-1122';
+import {brandPartners} from './brand-partners.js?v=fb-1122';
+import {homeCards,homeServices} from './home-cards.js?v=fb-1122';
+import {catalogFinder} from './finder.js?v=fb-1122';
 import {cookieCard} from './cookies.js?v=cookie-cover-2';
 import {ridePreferences} from './preferences.mjs';
 import {homeBackground} from './home-hero.js?v=dyn-2';
 dayLogos();
 const finderStyles=document.createElement('link');finderStyles.rel='stylesheet';finderStyles.href='cms/finder.css?v=dyn-2';document.head.append(finderStyles);
-import {cartLine,cartInventory,subcategoryName} from './catalog.mjs?v=fb-1112d';
-import {normalise,resolveLayout} from './content-model.mjs?v=fb-1112d';
-import {selectProducts,renderSection,kitHtml,markdown,visibleChildren} from './sections.mjs?v=fb-1112d';
+import {cartLine,cartInventory,subcategoryName} from './catalog.mjs?v=fb-1122';
+import {normalise,resolveLayout} from './content-model.mjs?v=fb-1122';
+import {selectProducts,renderSection,kitHtml,markdown,visibleChildren} from './sections.mjs?v=fb-1122';
 
 import {stockLabel,stockStatus} from '../supabase/functions/_shared/inventory.mjs';
 import {openInvoice,invoiceHtml} from '../supabase/functions/_shared/invoice.mjs?v=dyn-2';
 import {deliveryAreas,deliveryOption} from '../supabase/functions/_shared/delivery.mjs?v=dyn-2';
 import {storeSettings} from '../supabase/functions/_shared/store-defaults.mjs';
-import {cmsText} from './content-defaults.mjs?v=fb-1112d';
+import {cmsText} from './content-defaults.mjs?v=fb-1122';
 import {orderMessage,rideMessage} from './whatsapp.mjs?v=dyn-2';
 import {websiteMotion} from './motion.js?v=sweep-1';
 import {live,admin,request,watchLive} from './backend.js?v=dyn-2';
@@ -95,7 +95,7 @@ function hydrate(){const az=(a,b)=>String(a).localeCompare(String(b),'en',{sensi
  const carousel=$('.hero-slider .carousel__track');if(carousel){carousel.innerHTML=content.banners.map((b,i)=>`<a class="slide" href="${esc(path(b.destination))}"><picture>${b.mobileImage?`<source media="(max-width:600px)" srcset="${esc(img(b.mobileImage))}">`:''}<img src="${esc(img(b.image))}" alt="${esc(b.alt)}" width="1920" height="960" style="object-position:${Number(b.focalX??50)}% ${Number(b.focalY??50)}%" loading="${i?'lazy':'eager'}"></picture></a>`).join('');if(!content.banners.length)$('.hero-slider').hidden=true;}
  const grid=$('[data-grid]');if(grid)grid.innerHTML=content.products.map(p=>card(p)).join('');
  // Popular products: the section's chosen source (Control room → Website) when it has one; else every product, featured first.
- const popular=$('[data-popular-products]');if(popular){const entry=(content.content||[]).find(s=>s.id==='index-popular'),src=entry?.source;const products=src?.type?selectProducts(content,{source:src,sort:src.sort||entry.sort||'manual',limit:src.limit??entry.limit??16}):[...content.products].sort((a,b)=>Number(!!b.featured)-Number(!!a.featured));popular.innerHTML=products.map(p=>card(p,true)).join('');const count=$('[data-popular-count]');if(count)count.textContent=products.length+' products';}
+ const popular=$('[data-popular-products]');if(popular){const entry=(content.content||[]).find(s=>s.id==='index-popular'),src=entry?.source;const products=src?.type?selectProducts(content,{source:src,sort:src.sort||entry.sort||'manual',limit:src.limit??entry.limit??16}):[...content.products].sort((a,b)=>Number(!!b.featured)-Number(!!a.featured));const gen=String(Number(popular.dataset.gen||0)+1);popular.dataset.gen=gen;/* Draw the first cards now and the rest while the browser is idle: building every card at once blocked the page on phones. */const rest=products.slice(8);popular.innerHTML=products.slice(0,8).map(p=>card(p,true)).join('');const later=fn=>'requestIdleCallback' in window?requestIdleCallback(fn,{timeout:1200}):setTimeout(fn,120);const more=()=>{if(popular.dataset.gen!==gen||!rest.length)return;popular.insertAdjacentHTML('beforeend',rest.splice(0,8).map(p=>card(p,true)).join(''));popular.dispatchEvent(new Event('scroll'));if(rest.length)later(more);};if(rest.length)later(more);const count=$('[data-popular-count]');if(count)count.textContent=products.length+' products';}
 
  const kits=$('.kits__grid');if(kits){kits.innerHTML=content.kits.map(k=>kitHtml(k,content,esc)).join('');if(!content.kits.length)kits.closest('.kits').hidden=true;}
  for(const button of $$('[data-kit]')){let items=JSON.parse(button.dataset.kit);const variants=items.filter(i=>content.products.find(p=>p.id===i.id)?.colors?.length);if(!variants.length)continue;button.disabled=true;const root=button.closest('.kit');for(const item of variants){const p=content.products.find(p=>p.id===item.id);const label=document.createElement('label');label.className='cms-kit-colour';label.innerHTML=esc(p.name)+' · colour<select data-kit-colour="'+esc(p.id)+'"><option value="">Choose colour</option>'+p.colors.filter(c=>c.stock!=='Out of stock').map(c=>'<option value="'+esc(c.id)+'">'+esc(c.name)+'</option>').join('')+'</select>';root.insertBefore(label,$('.kit__foot',root));}root.addEventListener('change',()=>{const selections=$$('[data-kit-colour]',root);button.disabled=selections.some(s=>!s.value)||items.some(i=>content.products.find(p=>p.id===i.id)?.stock==='Out of stock');button.dataset.kit=JSON.stringify(items.map(i=>{const c=content.products.find(p=>p.id===i.id)?.colors?.find(c=>c.id===selections.find(s=>s.dataset.kitColour===i.id)?.value);return {...i,colorId:c?.id||'',colorName:c?.name||'',lineKey:i.id+'::'+(c?.id||'')};}));});}
@@ -149,11 +149,11 @@ function productDetails(id,colorId='',tap=false){const p=content.products.find(p
 // Back (or a swipe back) closes the product pop-up; Forward onto a product entry opens it again.
 addEventListener('popstate',()=>{const d=$('#cms-product-dialog'),id=history.state?.mmProduct;if(id&&content){if(!d?.open)productDetails(id);}else if(d?.open)d.close();});
 document.addEventListener('click',e=>{const p=e.target.closest('[data-product]');if(p)productDetails(p.dataset.product,p.dataset.selectedColor,true);const toggle=e.target.closest('.cms-sub-toggle');if(toggle){const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));toggle.parentElement.classList.toggle('cms-expanded',!open);if(open)toggle.blur();}});
-try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=prepare(r.draft.content);revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs?v=fb-1112d');content=publicDocument(content);try{content=normalise(content);}catch{}}else{const r=await Promise.race([live(),new Promise((_,fail)=>setTimeout(()=>fail(new Error('The store content took too long to load.')),8000))]);content=prepare(r.content);revision=r.revision;}content=cleanImages(content);hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
+try{if(draft){const r=await admin('load');if(!r.draft)throw new Error('This account cannot preview website drafts.');mediaUrls=r.mediaUrls;content=prepare(r.draft.content);revision='draft-'+r.draft.version;const {publicDocument}=await import('../supabase/functions/moto-admin/schema.mjs?v=fb-1122');content=publicDocument(content);try{content=normalise(content);}catch{}}else{const r=await Promise.race([live(),new Promise((_,fail)=>setTimeout(()=>fail(new Error('The store content took too long to load.')),8000))]);content=prepare(r.content);revision=r.revision;}content=cleanImages(content);hydrate();document.documentElement.dataset.cmsRevision=revision;}catch(e){const message=document.createElement('div');message.className='cms-preview-notice';message.setAttribute('role','alert');message.textContent=draft?'Sign in to the control room to view this draft.':'Live updates could not be loaded. Refresh before placing a request.';document.body.prepend(message);if(draft){$('main')?.replaceChildren(message.cloneNode(true));}console.error('Moto content could not load:',e.message);}
 // Nothing above may stop app.js (menu, cart, reveal) from loading.
 try{cookieCard(content,img);}catch(e){console.error('Cookie card could not load:',e.message);}
 // Load the existing motion, fitment and shopping interactions after content is in place.
-const script=document.createElement('script');script.src='app.js?v=dyn-2';script.onload=()=>{const id=query.get('product');if(id&&content){if(content.products.some(p=>p.id===id))productDetails(id);else{const note=document.createElement('div');note.className='cms-preview-notice';note.setAttribute('role','status');note.textContent=t('product-unavailable');document.body.prepend(note);}}};document.body.append(script);
+const script=document.createElement('script');script.src='app.js?v=fb-1122';script.onload=()=>{const id=query.get('product');if(id&&content){if(content.products.some(p=>p.id===id))productDetails(id);else{const note=document.createElement('div');note.className='cms-preview-notice';note.setAttribute('role','status');note.textContent=t('product-unavailable');document.body.prepend(note);}}};document.body.append(script);
 if(content)websiteMotion();
 if(content&&!draft){
  const stop=watchLive(revision,()=>{
