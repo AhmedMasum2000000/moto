@@ -12,17 +12,32 @@
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const lerp  = (a, b, t) => a + (b - a) * t;
 
-  /* --- one rAF loop shared by every scroll-driven effect ----------------- */
+  /* --- one rAF loop shared by every scroll-driven effect -----------------
+     The loop only runs while something is moving. Each subscriber returns
+     false once it has settled; when all have, the loop stops until the next
+     scroll, resize or pointer move wakes it. A loop that ran every frame for
+     as long as the page was open kept low-end phones busy and made the
+     whole site feel like it hung. */
   const frame = { subs: new Set(), running: false };
+  function wake() {
+    if (frame.running || !frame.subs.size || document.hidden) return;
+    frame.running = true;
+    requestAnimationFrame(tick);
+  }
   function onFrame(fn) {
     frame.subs.add(fn);
-    if (!frame.running) { frame.running = true; requestAnimationFrame(tick); }
+    wake();
     return () => frame.subs.delete(fn);
   }
   function tick(t) {
-    frame.subs.forEach(fn => fn(t));
-    requestAnimationFrame(tick);
+    let busy = false;
+    frame.subs.forEach(fn => { if (fn(t) !== false) busy = true; });
+    if (busy && !document.hidden) requestAnimationFrame(tick);
+    else frame.running = false;
   }
+  ['scroll', 'resize', 'wheel', 'touchmove', 'pointermove'].forEach(ev =>
+    window.addEventListener(ev, wake, { passive: true }));
+  document.addEventListener('visibilitychange', wake);
 
   /* =======================================================================
      Scroll progress bar
@@ -30,12 +45,20 @@
   function progressBar() {
     const el = $('.progress');
     if (!el) return;
-    let cur = 0;
+    let cur = -1, max = 0;
+    // Page height is measured when it changes, not on every frame:
+    // reading it each frame forced a full layout sixty times a second.
+    const measure = () => { max = document.documentElement.scrollHeight - window.innerHeight; };
+    measure();
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    window.addEventListener('resize', measure, { passive: true });
     onFrame(() => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
       const target = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
-      cur = lerp(cur, target, 0.14);
+      const next = cur < 0 ? target : lerp(cur, target, 0.14);
+      const settled = Math.abs(next - target) < 0.0005;
+      cur = settled ? target : next;
       el.style.transform = `scaleX(${cur})`;
+      return !settled;
     });
   }
 
@@ -83,6 +106,7 @@
     onFrame(() => {
       x = lerp(x, tx, 0.2); y = lerp(y, ty, 0.2);
       el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      return Math.abs(x - tx) > 0.3 || Math.abs(y - ty) > 0.3;
     });
   }
 
@@ -553,13 +577,15 @@
     onFrame(() => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const target = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
-      cur = lerp(cur, target, 0.12);
+      const settled = Math.abs(cur - target) < 0.0005;
+      cur = settled ? target : lerp(cur, target, 0.12);
       fill.style.transform = `scaleY(${cur.toFixed(4)})`;
       const vh = window.innerHeight;
       marks.forEach((m, i) => {
         const r = m.getBoundingClientRect();
         dots[i].classList.toggle('is-on', r.top < vh * 0.6 && r.bottom > 0);
       });
+      return !settled;
     });
   }
 
@@ -621,7 +647,11 @@
     const tilts = $$('[data-tilt]');
     if (!svcs.length && !tilts.length) return;
 
+    let lastY = NaN, lastH = NaN;
     onFrame(() => {
+      // Nothing to do until the page scrolls or the screen changes size.
+      if (window.scrollY === lastY && window.innerHeight === lastH) return false;
+      lastY = window.scrollY; lastH = window.innerHeight;
       const mid = window.innerHeight * 0.5;
 
       svcs.forEach(el => {
@@ -640,6 +670,7 @@
         const d = (r.top + r.height / 2 - mid) / window.innerHeight;  // -1..1
         el.style.transform = `translate3d(0, ${(d * -7).toFixed(2)}px, 0)`;
       });
+      return true;
     });
   }
 
